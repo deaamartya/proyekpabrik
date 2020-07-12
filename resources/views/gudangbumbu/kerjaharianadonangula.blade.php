@@ -107,19 +107,21 @@ Soyuz - Datatable
             <h2 class="page-title text-left pl-5">Kerja harian Adonan Gula</h2> 
             <div class="row">
                 <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1" >Tambah bahan</button><br>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1" style="transform: translate(140px, 0px);" >Tambah bahan</button><br>
+                <h5 style="text-align:center">Terima (Kg)</h5>
                 <input  class="form-control" type="text" name="terimakarung" id="terimakarung">
                 </div>
 
                 <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2" >Sisa bahan</button><br>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2" style="transform: translate(150px, 0px);" >Sisa bahan</button><br>
+                <h5 style="text-align:center">Sisa (Kg)</h5>    
                 <input class="form-control" type="text" name="terimakarung" id="terimakarung">
                 </div>
 
-                <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
+                {{-- <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal3" >Prive</button><br>
                 <input class="form-control" type="text" name="terimakarung" id="terimakarung">
-                </div>
+                </div> --}}
 
             </div>
 
@@ -143,7 +145,7 @@ Soyuz - Datatable
             </div>
         
             <div>
-
+                <h5 style="margin:5px 0px 5px 50px ">Hasil</h5>
                 <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
                     <div class="card m-b-20"  >
                         <div class="card-header">
@@ -188,19 +190,21 @@ Soyuz - Datatable
             <h2 class="page-title text-left pl-5">Kerja harian Adonan Gula + garam</h2> 
             <div class="row">
                 <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal4" >Tambah bahan</button><br>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal4" style="transform: translate(140px, 0px);" >Tambah bahan</button><br>
+                <h5 style="text-align:center">Terima (Kg)</h5>
                 <input class="form-control" type="text" name="terimakarung" id="terimakarung">
                 </div>
 
-                <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal5" >Sisa bahan</button><br>
+                <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px" >
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal5"  style="transform: translate(150px, 0px);">Sisa bahan</button><br>
+                <h5 style="text-align:center">Sisa (Kg)</h5>
                 <input class="form-control" type="text" name="terimakarung" id="terimakarung">
                 </div>
 
-                <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
+                {{-- <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal6" >Prive</button><br>
                 <input class="form-control" type="text" name="terimakarung" id="terimakarung">
-                </div>
+                </div> --}}
 
             </div>
             
@@ -228,7 +232,7 @@ Soyuz - Datatable
 
 
             <div >
-
+                <h5 style="margin:5px 0px 5px 50px ">Hasil</h5>
                 <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
                     <div class="card m-b-20"  >
                         <div class="card-header">
@@ -332,40 +336,83 @@ Soyuz - Datatable
                     <input class="form-control" type="text" name="terimakarung" id="terimakarung">
                 </div>
             </div>
-            <div >
+            
+            <div class="row">
+                {{--START HASIL --}}
+                <div>
+                    <h5 style="margin:5px 0px 5px 50px ">Hasil</h5>
+                    <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
+                        <div class="card m-b-20"  >
+                            <div class="card-header">
+                                <h5 class="card-title">Jumlah Masakan HC</h5>
+                            </div>
+                            <div class="card-body">
+                                <input class="form-control" type="text"  id="touchspin-vertical-btn6" name="touchspin-vertical-btn" value="0">
+                            </div>
+                        </div>
+                    </div>  
 
-                <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
-                    <div class="card m-b-20"  >
-                        <div class="card-header">
-                            <h5 class="card-title">HC</h5>
+                    <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
+                        <div class="card m-b-20"  >
+                            <div class="card-header">
+                                <h5 class="card-title">Jumlah Masakan SP</h5>
+                            </div>
+                            <div class="card-body">
+                                <input class="form-control" type="text"  id="touchspin-vertical-btn7" name="touchspin-vertical-btn" value="0">
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn6" name="touchspin-vertical-btn" value="0">
+                    </div>  
+                    
+                    <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
+                        <div class="card m-b-20"  >
+                            <div class="card-header">
+                                <h5 class="card-title">Jumlah Masakan GS</h5>
+                            </div>
+                            <div class="card-body">
+                                <input class="form-control" type="text"  id="touchspin-vertical-btn8" name="touchspin-vertical-btn" value="0">
+                            </div>
                         </div>
-                    </div>
-                </div>  
-
-                <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
-                    <div class="card m-b-20"  >
-                        <div class="card-header">
-                            <h5 class="card-title">SP</h5>
+                    </div> 
+                </div>
+                {{--END HASIL--}}
+                {{--START TERAMBIL --}}
+                <div>
+                    <h5 style="margin:5px 0px 5px 50px ">Terambil</h5>
+                    <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
+                        <div class="card m-b-20"  >
+                            <div class="card-header">
+                                <h5 class="card-title">Jumlah Masakan</h5>
+                            </div>
+                            <div class="card-body">
+                                <input class="form-control" type="text"  id="touchspin-vertical-btn6" name="touchspin-vertical-btn" value="0">
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn7" name="touchspin-vertical-btn" value="0">
+                    </div>  
+    
+                    <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
+                        <div class="card m-b-20"  >
+                            <div class="card-header">
+                                <h5 class="card-title">Jumlah Masakan</h5>
+                            </div>
+                            <div class="card-body">
+                                <input class="form-control" type="text"  id="touchspin-vertical-btn7" name="touchspin-vertical-btn" value="0">
+                            </div>
                         </div>
-                    </div>
-                </div>  
+                    </div>  
+                    
+                    <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
+                        <div class="card m-b-20"  >
+                            <div class="card-header">
+                                <h5 class="card-title">Jumlah Masakan</h5>
+                            </div>
+                            <div class="card-body">
+                                <input class="form-control" type="text"  id="touchspin-vertical-btn8" name="touchspin-vertical-btn" value="0">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                {{-- END TERAMBIL --}}
                 
-                <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
-                    <div class="card m-b-20"  >
-                        <div class="card-header">
-                            <h5 class="card-title">GS</h5>
-                        </div>
-                        <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn8" name="touchspin-vertical-btn" value="0">
-                        </div>
-                    </div>
-                </div>              
             </div>
             
 
