@@ -1,0 +1,40 @@
+.card-header {
+	background-color: #d1dafa;
+}
+
+table tbody tr:hover {
+    background-color: #E6E6FA;
+}
+
+table thead tr th, table tbody tr td {
+    /* font-size: 18px; */
+    color: black;
+}
+
+table thead {
+    background-color: #DCDCDC;
+}
+
+td.belum {
+    color: red;
+}
+
+td.ready {
+    color: rgb(64, 180, 64);
+}
+
+.tombol-ambil-tepung, .tombol-tambah-hasil-packing {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+thead tr, tbody tr {
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .tombol-ambil-tepung , .tombol-tambah-hasil-packing {
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+}
