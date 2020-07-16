@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\managerproduksi;
 
 use App\Managerproduksi\Penerimaan;
+use App\Managerproduksi\Supplier;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PDF;
@@ -94,6 +95,11 @@ class PenerimaanController extends Controller
         $pdf =  PDF::loadView('managerproduksi.penerimaan.cetak_barcode', compact('kode_penerimaan', 'no')); 
         $pdf->setPaper('a4',  'potrait'); 
         return $pdf->stream(); 
+    }
+
+    public  function getSupplier(){
+        $supplier = Supplier::all(); 
+        return view('managerproduksi.penerimaan.create_penerimaan' , ['supplier' => $supplier]);
     }
 
 

@@ -52,6 +52,41 @@ Surat Penerimaan Barang
                     <form>
                         <div class="form-row">
                             <div class="form-group col-md-6">
+                                <div class="form-group ml-3">
+                                    <div class="form-row">
+                                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                        <label for="inputSuratJalan" class="mr-4 ml-1">Jenis Penerimaan</label>
+                                    </div>
+                                    
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                          <input type="radio" id="penerimaan_supplier" name="customRadioInline1" class="custom-control-input" onclick="getSupplier();" >
+                                          <label class="custom-control-label" for="penerimaan_supplier">Penerimaan Supplier</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                          <input type="radio" id="pemindahan_bahan" name="customRadioInline1" class="custom-control-input" onclick="getSupplier();">
+                                          <label class="custom-control-label" for="pemindahan_bahan">Pemindahan Bahan</label>
+                                        </div>
+                                </div>
+                               
+                            </div>
+                            <div class="form-group col-md-6" >
+                                <div class="form-group col-md-8" id="supplier" style="display: none">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                    <label for="pilih_supplier">Supplier</label>
+                                    <select id="pilih_supplier" class="form-control">
+                                     <option disabled selected readonly>- Pilih Supplier -</option>
+                                      
+                                      <option value="Supplier gula">
+                                        
+                                      </option>
+                                   
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
                                 <div class="form-group col-md-8">
                                     <i class="fa fa-tags" aria-hidden="true"></i>
                                     <label for="inputSuratJalan">No. Surat Jalan</label>
@@ -211,7 +246,6 @@ Surat Penerimaan Barang
                                 </tbody>
                             </table>
                        
-                       
                     </div> 
                    
                     <div class="modal-footer">
@@ -227,6 +261,19 @@ Surat Penerimaan Barang
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
 <script>
+
+function getSupplier(){
+    var penerimaan_supplier = document.getElementById("penerimaan_supplier");
+    var supplier = document.getElementById("supplier");
+    if (penerimaan_supplier.checked) {
+         supplier.style.display =  "block";
+    }else{
+         supplier.style.display =  "none";
+    }
+   
+}
+
+
 $(document).ready(function(){
     $('#table-modal').DataTable();
    
