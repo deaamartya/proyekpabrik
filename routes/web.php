@@ -25,7 +25,6 @@ Route::get('/penerimaan/history_penerimaan', 'managerproduksi\PenerimaanControll
 Route::get('/penerimaan/create_penerimaan', 'managerproduksi\PenerimaanController@create');
 Route::get('/penerimaan/edit_penerimaan/{id}', 'managerproduksi\PenerimaanController@edit')->name('edit_penerimaan');
 Route::get('/penerimaan/cetak_barcode',  'managerproduksi\PenerimaanController@printBarcode');
-Route::get('/penerimaan/getSupplier',  'managerproduksi\PenerimaanController@getSupplier');
 
 // Manager Produksi | Order Masak
 Route::get('/manager-produksi/order-masak', 'managerproduksi\ManagerproduksiController@order_masak');

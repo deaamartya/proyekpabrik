@@ -74,11 +74,10 @@ Surat Penerimaan Barang
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                     <label for="pilih_supplier">Supplier</label>
                                     <select id="pilih_supplier" class="form-control">
-                                     <option disabled selected readonly>- Pilih Supplier -</option>
-                                      
-                                      <option value="Supplier gula">
-                                        
-                                      </option>
+                                        <option disabled selected readonly>- Pilih Supplier -</option>
+                                       @foreach($supplier as $s)
+                                        <option value="{{$s->id_supplier}}">{{ $s->nama }} </option>
+                                        @endforeach
                                    
                                     </select>
                                 </div>
@@ -115,8 +114,10 @@ Surat Penerimaan Barang
                                     <i class="fa fa-archive" aria-hidden="true"></i>
                                     <label for="inputGudangSimpan">Gudang Simpan</label>
                                     <select id="inputGudangSimpan" class="form-control">
-                                        <option selected>Pilih Salah Satu...</option>
-                                        <option>...</option>
+                                        <option disabled selected readonly>Pilih Salah Satu...</option>
+                                        @foreach($gudang as $g)
+                                        <option value="{{$g->id_gudang}}">{{ $g->nama }} </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

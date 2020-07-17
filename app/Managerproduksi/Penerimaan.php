@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Managerproduksi;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,5 +12,6 @@ class Penerimaan extends Model
     protected $table = "penerimaan";
     protected $fillable = ['id_penerimaan','timestamp', 'id_transaksi', 'id_jenis_penerimaan', 'id_gudang'];
     protected $primaryKey = 'id_penerimaan';
+    protected $keyType = 'string';
     
 }

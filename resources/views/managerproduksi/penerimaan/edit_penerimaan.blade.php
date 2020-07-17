@@ -13,6 +13,11 @@ Edit Surat Penerimaan Barang
 
 
 
+<style type="text/css">
+    tr {
+        cursor: pointer;
+    }
+</style>
 
 @endsection 
 @section('rightbar-content')
@@ -41,10 +46,44 @@ Edit Surat Penerimaan Barang
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
-                    <h5 class="card-title"> <input type="text" id="date" style="background:transparent; border: none;"readonly></h5>
+                    <h5 class="card-title" id="date"></h5>
                 </div>
                 <div class="card-body" style="padding-bottom: 80px;">
                     <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group ml-3">
+                                    <div class="form-row">
+                                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                        <label for="inputSuratJalan" class="mr-4 ml-1">Jenis Penerimaan</label>
+                                    </div>
+                                    
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                          <input type="radio" id="penerimaan_supplier" name="customRadioInline1" class="custom-control-input" onclick="getSupplier();" >
+                                          <label class="custom-control-label" for="penerimaan_supplier">Penerimaan Supplier</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                          <input type="radio" id="pemindahan_bahan" name="customRadioInline1" class="custom-control-input" onclick="getSupplier();">
+                                          <label class="custom-control-label" for="pemindahan_bahan">Pemindahan Bahan</label>
+                                        </div>
+                                </div>
+                               
+                            </div>
+                            <div class="form-group col-md-6" >
+                                <div class="form-group col-md-8" id="supplier" style="display: none">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                    <label for="pilih_supplier">Supplier</label>
+                                    <select id="pilih_supplier" class="form-control">
+                                        <option disabled selected readonly>- Pilih Supplier -</option>
+                                       @foreach($supplier as $s)
+                                        <option value="{{$s->id_supplier}}">{{ $s->nama }} </option>
+                                        @endforeach
+                                   
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="form-group col-md-8">
@@ -75,8 +114,10 @@ Edit Surat Penerimaan Barang
                                     <i class="fa fa-archive" aria-hidden="true"></i>
                                     <label for="inputGudangSimpan">Gudang Simpan</label>
                                     <select id="inputGudangSimpan" class="form-control">
-                                        <option selected>Pilih Salah Satu...</option>
-                                        <option>...</option>
+                                        <option disabled selected readonly>Pilih Salah Satu...</option>
+                                        @foreach($gudang as $g)
+                                        <option value="{{$g->id_gudang}}">{{ $g->nama }} </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -109,14 +150,14 @@ Edit Surat Penerimaan Barang
                                 <div class="form-group col-md-8">
                                     <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                     <label for="inputBSJ">Berat Surat Jalan (Kg)</label>
-                                    <input type="number" class="form-control" id="inputBSJ" placeholder="Masukkan Berat Surat Jalan">
+                                    <input type="number" class="form-control" id="berat_suratjalan" placeholder="Masukkan Berat Surat Jalan">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="form-group col-md-8">
                                     <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                     <label for="inputNetto">Berat Netto/Aktual (Kg)</label>
-                                    <input type="number" class="form-control" id="inputNetto" placeholder="Masukkan Berat Netto">
+                                    <input type="number" class="form-control" id="berat_netto" placeholder="Masukkan Berat Netto" oninput="hitungSusut();">
                                 </div>
                             </div>
                         </div>
@@ -126,36 +167,37 @@ Edit Surat Penerimaan Barang
                                 <div class="form-group col-md-8">
                                     <i class="fa fa-level-down" aria-hidden="true"></i>
                                     <label for="inputPKG">Penyusutan (Kg)</label>
-                                    <input type="number" class="form-control" id="inputPKG" placeholder="Masukkan Penyusutan">
+                                    <input type="number" class="form-control" id="penyusutan" placeholder="Masukkan Penyusutan" value="">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <div class="form-group col-md-8">
                                     <i class="fa fa-level-down" aria-hidden="true"></i>
                                     <label for="inputPersen">Penyusutan (%)</label>
-                                    <input type="number" class="form-control" id="inputPersen" placeholder="Masukkan Penyusutan">
+                                    <input type="number" class="form-control" id="percent_penyusutan" placeholder="Masukkan Penyusutan" value="">
                                 </div>
                             </div>
                         </div>
                         <br>
                         <br>
-                        <div class="form-row" style="padding-left: 25px;">
-                            <!-- style="position: absolute; transform: translateX(-50%); left: 50%;"   -->
-                            <br>
-                            <div style="margin-right: 20px;">
+                        
+                        <div class="form-row">
+                            <div class="widgetbar" align="center">
                                 <a href="" class="btn btn-light">Simpan Sementara</a>
-                            </div>
-                            <div style="margin-right: 20px;">
-                                <a href="" class="btn btn-primary">Cetak Barcode</a>
-                            </div>
-                            <div style="margin-right: 20px;">
-                                <button type="submit" class="btn btn-primary"> Selesai </button> 
-                            </div>
-                            <div style="">
-                                <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
-                            </div>
                             
+                                <button type="submit" class="btn btn-primary"> Selesai </button> 
+
+                                <a href="{{ url('/penerimaan/cetak_barcode/') }}" class="btn btn-primary">Cetak Barcode</a>
+                          
+                                <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
+                            </div>                        
                         </div>
+                       
+                          
+                                
+                      
+                            
+                    
                     </form>
                 </div>
             </div>
@@ -205,7 +247,6 @@ Edit Surat Penerimaan Barang
                                 </tbody>
                             </table>
                        
-                       
                     </div> 
                    
                     <div class="modal-footer">
@@ -221,11 +262,21 @@ Edit Surat Penerimaan Barang
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
 <script>
+
+function getSupplier(){
+    var penerimaan_supplier = document.getElementById("penerimaan_supplier");
+    var supplier = document.getElementById("supplier");
+    if (penerimaan_supplier.checked) {
+         supplier.style.display =  "block";
+    }else{
+         supplier.style.display =  "none";
+    }
+   
+}
+
+
 $(document).ready(function(){
     $('#table-modal').DataTable();
-    var table = document.getElementById('table-modal');
-
-    table.style.cursor="pointer";
    
     $(document).on('click', '#bahanbaku', function (e) {
         document.getElementById("kode-bahan").value = $(this).attr('data-kode');
@@ -247,8 +298,33 @@ $(document).ready(function(){
     if (day < 10) 
         day = "0" + day;
     var today = day + ' ' + month + ' ' + now.getFullYear() ;
-    $('#date').val(today);
+    document.getElementById('date').innerHTML = today;
 });
+
+
+  function hitungSusut(){
+
+    var berat_suratjalan = document.getElementById("berat_suratjalan").value;
+    var berat_netto = document.getElementById("berat_netto").value;
+
+    if (berat_suratjalan != "" && berat_netto != ""  ) {
+
+        var s = berat_suratjalan - berat_netto;
+        var susut = s.toFixed(2);
+        var ps = (susut / berat_suratjalan)* 100;
+        var percent_susut = ps.toFixed(2);
+
+        document.getElementById('penyusutan').value = susut;
+        document.getElementById('percent_penyusutan').value = percent_susut;
+
+    }
+
+    $(document).on('input', '#berat_suratjalan', function (e) {
+        hitungSusut();
+    });
+
+
+  }
 </script>
 
 

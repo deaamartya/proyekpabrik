@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\managerproduksi;
 
-use App\Managerproduksi\Penerimaan;
-use App\Managerproduksi\Supplier;
 use App\Http\Controllers\Controller;
+
+use App\Managerproduksi\Penerimaan;
+use App\Managerproduksi\Gudang;
+use App\Managerproduksi\Supplier;
+
 use Illuminate\Http\Request;
 use PDF;
 
@@ -29,8 +32,10 @@ class PenerimaanController extends Controller
      */
     public function create()
     {
-        
-        return view('managerproduksi.penerimaan.create_penerimaan');
+        $gudang = Gudang::all(); 
+        $supplier = Supplier::all(); 
+        return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier'));
+
     }
 
     /**
@@ -63,7 +68,9 @@ class PenerimaanController extends Controller
      */
     public function edit($id)
     {
-        return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id]);
+        $gudang = Gudang::all(); 
+        $supplier = Supplier::all(); 
+        return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id])->with(compact('gudang', 'supplier'));
     }
 
     /**
@@ -97,10 +104,7 @@ class PenerimaanController extends Controller
         return $pdf->stream(); 
     }
 
-    public  function getSupplier(){
-        $supplier = Supplier::all(); 
-        return view('managerproduksi.penerimaan.create_penerimaan' , ['supplier' => $supplier]);
-    }
+    
 
 
 }
