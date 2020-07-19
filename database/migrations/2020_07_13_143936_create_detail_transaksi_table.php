@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBeratIdealTable extends Migration
+class CreateDetailTransaksiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class CreateBeratIdealTable extends Migration
      */
     public function up()
     {
-        Schema::create('berat_ideal', function (Blueprint $table) {
-            $table->string('id_berat_ideal',4)->primary();
-            $table->double('berat_ideal_kg');
+        Schema::create('detail_transaksi', function (Blueprint $table) {
+            $table->string('id_detail_transaksi',11)->primary();
             $table->integer('id_satuan');
-            $table->integer('id_bahan_baku');
+            $table->double('jumlah',8,0);
+            $table->string('id_bahan_baku',11);
+            $table->integer('id_jenis_transaksi');
+            $table->timestamp('timestamp');
+            $table->boolean('flag');
             $table->foreign('id_satuan')->references('id_satuan')->on('satuan');
             $table->foreign('id_bahan_baku')->references('id_bahan_baku')->on('bahan_baku');
+            $table->foreign('id_jenis_transaksi')->references('id_jenis_transaksi')->on('jenis_transaksi');
         });
     }
 
@@ -30,6 +34,6 @@ class CreateBeratIdealTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('berat_ideal');
+        Schema::dropIfExists('detail_transaksi');
     }
 }

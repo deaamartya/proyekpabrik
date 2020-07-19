@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBeratIdealTable extends Migration
+class CreateStockTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class CreateBeratIdealTable extends Migration
      */
     public function up()
     {
-        Schema::create('berat_ideal', function (Blueprint $table) {
-            $table->string('id_berat_ideal',4)->primary();
-            $table->double('berat_ideal_kg');
-            $table->integer('id_satuan');
-            $table->integer('id_bahan_baku');
+        Schema::create('stock', function (Blueprint $table) {
+            $table->string('id_stock',13)->primary();
             $table->foreign('id_satuan')->references('id_satuan')->on('satuan');
             $table->foreign('id_bahan_baku')->references('id_bahan_baku')->on('bahan_baku');
+            $table->string('id_transaksi');
+            $table->timestamp('TIMESTAMP');
+            $table->string('keterangan',50);
+            $table->double('masuk');
+            $table->double('keluar');
+            $table->double('stock');
+            $table->foreign('id_gudang')->references('id_gudang')->on('gudang');
         });
     }
 
@@ -30,6 +34,6 @@ class CreateBeratIdealTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('berat_ideal');
+        Schema::dropIfExists('stock');
     }
 }

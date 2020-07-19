@@ -184,7 +184,7 @@
                         <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><span>Stock</span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{url('/gudang-bumbu/bahan')}}">Bahan</a></li>
-                            <li><a href="{{url('/gudang-bumbu/detailprive')}}">Detail Prive</a></li>
+                            
                             <li><a href="{{url('/gudang-bumbu/adonangula')}}">Adonan Gula</a></li>
                             <li><a href="{{url('/gudang-bumbu/adonangulagaram')}}">Adonan Gula + Garam</a></li>
                             <li><a href="{{url('/gudang-bumbu/bumbuready')}}">Bumbu Ready</a></li>

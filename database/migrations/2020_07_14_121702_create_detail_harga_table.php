@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRekapKerjaHarianGroupTable extends Migration
+class CreateDetailHargaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateRekapKerjaHarianGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('rekap_kerja_harian_group', function (Blueprint $table) {
-            $table->string('id_rekap_kerja_harian_group', 18)->primary();
-            $table->timestamps('timestamp');
+        Schema::create('detail_harga', function (Blueprint $table) {
+            $table->bigIncrements('id_detail_transaksi',);
+            $table->double('harga',10,2);
+            $table->double('subtotal',10,2);
+            $table->boolean('mata_uang');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateRekapKerjaHarianGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rekap_kerja_harian_group');
+        Schema::dropIfExists('detail_harga');
     }
 }

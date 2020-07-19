@@ -14,7 +14,7 @@ class CreateTipeBahanBakuTable extends Migration
     public function up()
     {
         Schema::create('tipe_bahan_baku', function (Blueprint $table) {
-            $table->bigIncrements('id_tipe_bahan_baku');
+            $table->Increments('id_tipe_bahan_baku');
             $table->string('nama',20);
             // $table->timestamps();
         });
