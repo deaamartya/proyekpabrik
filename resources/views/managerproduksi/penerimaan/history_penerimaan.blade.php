@@ -10,15 +10,12 @@ Penerimaan Barang
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
 
-
-
- 
-
 <style type="text/css">
     tr {
         cursor: pointer;
     }
 </style>
+
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    

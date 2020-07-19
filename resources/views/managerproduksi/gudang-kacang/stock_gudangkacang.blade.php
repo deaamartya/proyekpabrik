@@ -9,7 +9,8 @@ Stock Gudang Kacang
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
-
+<!-- Datepicker css -->
+<link href="{{ asset('assets/plugins/datepicker/datepicker.min.css') }}" rel="stylesheet" type="text/css">
 
 @endsection 
 @section('rightbar-content')
@@ -58,6 +59,39 @@ Stock Gudang Kacang
                                 <h5 class="card-title" style=" padding-left: 5px;">Kacang OB</h5>
                             </div>
                             <div class="card-body">
+                                <div class="form-row" style="margin-left: 4.5em;">
+                                    <div class="form-group col-md-4">
+                                            <label for="date1">Awal</label>
+                                            <div class="input-group" style="width: 80%"> 
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
+                                                  </div>                             
+                                                <input type="text" id="date1" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
+                                            </div>
+                                       
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                            <label for="date2">Akhir</label>
+                                            <div class="input-group" style="width: 80%"> 
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
+                                                  </div>                             
+                                                <input type="text" id="date2" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
+                                            </div>
+                                    </div>
+
+
+                                    <div class="form-group col-md-4">
+                                            <label for=""></label>
+                                            <div class="input-group mt-2"> 
+                                                <button class="btn btn-primary">Terapkan</button>
+                                            </div>
+                                    </div>
+                                </div>
+
+                                <br>
+
                                 <div class="table-responsive">
                                     <table id="datatable1" class="display table table-bordered table-striped table-manpro-hover datatable">
                                         <thead>
@@ -120,6 +154,38 @@ Stock Gudang Kacang
                                 <h5 class="card-title" style=" padding-left: 5px;">Kacang 7ML</h5>
                             </div>
                             <div class="card-body">
+                                <div class="form-row" style="margin-left: 4.5em;">
+                                    <div class="form-group col-md-4">
+                                            <label for="date3">Awal</label>
+                                            <div class="input-group" style="width: 80%"> 
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
+                                                  </div>                             
+                                                <input type="text" id="date3" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
+                                            </div>
+                                       
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                            <label for="date4">Akhir</label>
+                                            <div class="input-group" style="width: 80%"> 
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
+                                                  </div>                             
+                                                <input type="text" id="date4" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
+                                            </div>
+                                    </div>
+
+
+                                    <div class="form-group col-md-4">
+                                            <label for=""></label>
+                                            <div class="input-group mt-2"> 
+                                                <button class="btn btn-primary">Terapkan</button>
+                                            </div>
+                                    </div>
+                                </div>
+
+                                <br>
                                 <div class="table-responsive">
                                     <table id="datatable2" class="display table table-bordered table-striped table-manpro-hover datatable">
                                         <thead>
@@ -172,6 +238,38 @@ Stock Gudang Kacang
                                 <h5 class="card-title" style="padding-left: 5px;">Kacang 8ML</h5>
                             </div>
                             <div class="card-body">
+                                <div class="form-row" style="margin-left: 4.5em;">
+                                    <div class="form-group col-md-4">
+                                            <label for="date5">Awal</label>
+                                            <div class="input-group" style="width: 80%"> 
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
+                                                  </div>                             
+                                                <input type="text" id="date5" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
+                                            </div>
+                                       
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                            <label for="date6">Akhir</label>
+                                            <div class="input-group" style="width: 80%"> 
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
+                                                  </div>                             
+                                                <input type="text" id="date6" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
+                                            </div>
+                                    </div>
+
+
+                                    <div class="form-group col-md-4">
+                                            <label for=""></label>
+                                            <div class="input-group mt-2"> 
+                                                <button class="btn btn-primary">Terapkan</button>
+                                            </div>
+                                    </div>
+                                </div>
+
+                                <br>
                                 <div class="table-responsive">
                                     <table id="datatable3" class="display table table-bordered table-striped table-manpro-hover datatable">
                                         <thead>
@@ -222,6 +320,11 @@ Stock Gudang Kacang
 <!-- End Contentbar -->
 @endsection 
 @section('script')
+<!-- Datepicker JS -->
+<script src="{{ asset('assets/plugins/datepicker/datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datepicker/i18n/datepicker.en.js') }}"></script>
+
+
 <!-- Datatable js -->
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
@@ -233,23 +336,62 @@ Stock Gudang Kacang
             "searching" : false,
             responsive: true
         });
-    });
 
-    $(document).ready(function() {
         $('#datatable2').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
-    });
 
-    $(document).ready(function() {
-        $('#datatable3').DataTable( {
+         $('#datatable3').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
     });
+
+
+    $(document).ready(function(){
+        $('#date1').datepicker({
+            language: 'en',
+            autoClose: true,
+            dateFormat: 'dd/mm/yyyy',
+        });
+
+        $('#date2').datepicker({
+            language: 'en',
+            autoClose: true,
+            dateFormat: 'dd/mm/yyyy',
+        });
+
+        $('#date3').datepicker({
+            language: 'en',
+            autoClose: true,
+            dateFormat: 'dd/mm/yyyy',
+        });
+
+        $('#date4').datepicker({
+            language: 'en',
+            autoClose: true,
+            dateFormat: 'dd/mm/yyyy',
+        });
+
+        $('#date5').datepicker({
+            language: 'en',
+            autoClose: true,
+            dateFormat: 'dd/mm/yyyy',
+        });
+
+        $('#date6').datepicker({
+            language: 'en',
+            autoClose: true,
+            dateFormat: 'dd/mm/yyyy',
+        });
+
+
+    });
+
+  
 
 
 </script>

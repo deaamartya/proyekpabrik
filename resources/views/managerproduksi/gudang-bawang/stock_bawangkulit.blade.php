@@ -50,22 +50,22 @@ Stock Bawang Kulit
                     <div class="form-row" style="margin-left: 4.5em;">
                             <div class="form-group col-md-4">
                                     <label for="date1">Awal</label>
-                                    <div class="input-group" style="width: 90%"> 
+                                    <div class="input-group" style="width: 80%"> 
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                           </div>                             
-                                        <input type="text" id="autoclose-date" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
+                                        <input type="text" id="date1" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
                                     </div>
                                
                             </div>
 
                             <div class="form-group col-md-4">
                                     <label for="date2">Akhir</label>
-                                    <div class="input-group" style="width: 90%"> 
+                                    <div class="input-group" style="width: 80%"> 
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                           </div>                             
-                                        <input type="text" id="default-date" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
+                                        <input type="text" id="date2" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
                                     </div>
                             </div>
 
@@ -133,7 +133,7 @@ Stock Bawang Kulit
 <!-- Datepicker JS -->
 <script src="{{ asset('assets/plugins/datepicker/datepicker.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datepicker/i18n/datepicker.en.js') }}"></script>
-<script src="{{ asset('assets/js/custom/custom-form-datepicker.js') }}"></script>
+
 
 
 <!-- Datatable js -->
@@ -152,6 +152,21 @@ Stock Bawang Kulit
 
     });
 
+     $(document).ready(function(){
+        $('#date1').datepicker({
+            language: 'en',
+            autoClose: true,
+            dateFormat: 'dd/mm/yyyy',
+        });
+
+        $('#date2').datepicker({
+            language: 'en',
+            autoClose: true,
+            dateFormat: 'dd/mm/yyyy',
+        });
+
+
+    });
 
 </script>
 
