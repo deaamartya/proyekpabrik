@@ -7,14 +7,14 @@
 "use strict";
 $(document).ready(function() {
     /* -- Menu js -- */
-    // $(function() {
-    //     for (var a = window.location, abc = $(".horizontal-menu a").filter(function() {
-    //         return this.href == a;
-    //     }).addClass("active").parent().addClass("active"); ;) {
-    //         if (!abc.is("li")) break;
-    //         abc = abc.parent().addClass("in").parent().addClass("active");
-    //     }
-    // });
+    $(function() {
+        for (var a = window.location, abc = $(".horizontal-menu a").filter(function() {
+            return this.href == a;
+        }).addClass("active").parent().addClass("active"); ;) {
+            if (!abc.is("li")) break;
+            abc = abc.parent().addClass("in").parent().addClass("active");
+        }
+    });
     /* -- Infobar Setting Sidebar -- */
     $("#infobar-settings-open").on("click", function(e) {
         e.preventDefault();
