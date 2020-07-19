@@ -32,9 +32,12 @@ class PenerimaanController extends Controller
      */
     public function create()
     {
+        /*
         $gudang = Gudang::all(); 
         $supplier = Supplier::all(); 
         return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier'));
+        */
+        return view('managerproduksi.penerimaan.create_penerimaan');
 
     }
 
@@ -68,9 +71,12 @@ class PenerimaanController extends Controller
      */
     public function edit($id)
     {
+        /*
         $gudang = Gudang::all(); 
         $supplier = Supplier::all(); 
         return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id])->with(compact('gudang', 'supplier'));
+        */
+        return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id]);
     }
 
     /**

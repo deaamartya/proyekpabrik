@@ -62,7 +62,7 @@ Stock Gudang Kacang
                                 <div class="form-row" style="margin-left: 4.5em;">
                                     <div class="form-group col-md-4">
                                             <label for="date1">Awal</label>
-                                            <div class="input-group" style="width: 80%"> 
+                                            <div class="input-group" style="width: 90%"> 
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
@@ -73,7 +73,7 @@ Stock Gudang Kacang
 
                                     <div class="form-group col-md-4">
                                             <label for="date2">Akhir</label>
-                                            <div class="input-group" style="width: 80%"> 
+                                            <div class="input-group" style="width: 90%"> 
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
@@ -157,7 +157,7 @@ Stock Gudang Kacang
                                 <div class="form-row" style="margin-left: 4.5em;">
                                     <div class="form-group col-md-4">
                                             <label for="date3">Awal</label>
-                                            <div class="input-group" style="width: 80%"> 
+                                            <div class="input-group" style="width: 90%"> 
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
@@ -168,7 +168,7 @@ Stock Gudang Kacang
 
                                     <div class="form-group col-md-4">
                                             <label for="date4">Akhir</label>
-                                            <div class="input-group" style="width: 80%"> 
+                                            <div class="input-group" style="width: 90%"> 
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
@@ -241,7 +241,7 @@ Stock Gudang Kacang
                                 <div class="form-row" style="margin-left: 4.5em;">
                                     <div class="form-group col-md-4">
                                             <label for="date5">Awal</label>
-                                            <div class="input-group" style="width: 80%"> 
+                                            <div class="input-group" style="width: 90%"> 
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
@@ -252,7 +252,7 @@ Stock Gudang Kacang
 
                                     <div class="form-group col-md-4">
                                             <label for="date6">Akhir</label>
-                                            <div class="input-group" style="width: 80%"> 
+                                            <div class="input-group" style="width: 90%"> 
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                                   </div>                             

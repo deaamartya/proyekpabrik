@@ -75,9 +75,8 @@ Edit Surat Penerimaan Barang
                                     <label for="pilih_supplier">Supplier</label>
                                     <select id="pilih_supplier" class="form-control">
                                         <option disabled selected readonly>- Pilih Supplier -</option>
-                                       @foreach($supplier as $s)
-                                        <option value="{{$s->id_supplier}}">{{ $s->nama }} </option>
-                                        @endforeach
+                                        
+                                        <option value="">Supplier X </option>
                                    
                                     </select>
                                 </div>
@@ -115,9 +114,8 @@ Edit Surat Penerimaan Barang
                                     <label for="inputGudangSimpan">Gudang Simpan</label>
                                     <select id="inputGudangSimpan" class="form-control">
                                         <option disabled selected readonly>Pilih Salah Satu...</option>
-                                        @foreach($gudang as $g)
-                                        <option value="{{$g->id_gudang}}">{{ $g->nama }} </option>
-                                        @endforeach
+                                       
+                                        <option value="">Coolstorage I </option>
                                     </select>
                                 </div>
                             </div>
