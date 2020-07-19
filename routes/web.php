@@ -71,9 +71,7 @@ Route::get('/gudang-bumbu/bahan', function () {
     return view('gudangbumbu.bahan');
 });
 
-Route::get('/gudang-bumbu/detailprive', function () {
-    return view('gudangbumbu.detailprive');
-});
+
 
 Route::get('/gudang-bumbu/adonangula', function () {
     return view('gudangbumbu.adonangula');

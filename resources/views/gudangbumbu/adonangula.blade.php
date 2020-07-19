@@ -73,7 +73,7 @@ Soyuz - Datatable
                                 <!-- End col -->
                                 <!-- Start col -->
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-secondary btn-lg btn-block">Terapkan</button>
+                                    <button type="button" class="status btn btn-primary" style="width: 30% ; height:50px;margin: 5px 0px"> Terapkan </button>
                                 </div>
                                 <!-- End col -->
                             </div>
@@ -157,7 +157,7 @@ Soyuz - Datatable
                                 <!-- End col -->
                                 <!-- Start col -->
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-secondary btn-lg btn-block">Terapkan</button>
+                                    <button type="button" class="status btn btn-primary" style="width: 30% ; height:50px;margin: 5px 0px"> Terapkan </button>
                                 </div>
                                 <!-- End col -->
                             </div>
@@ -241,7 +241,7 @@ Soyuz - Datatable
                                 <!-- End col -->
                                 <!-- Start col -->
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-secondary btn-lg btn-block">Terapkan</button>
+                                    <button type="button" class="status btn btn-primary" style="width: 30% ; height:50px;margin: 5px 0px"> Terapkan </button>
                                 </div>
                                 <!-- End col -->
                             </div>
