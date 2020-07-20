@@ -24,6 +24,16 @@ class CreatePegawaiTable extends Migration
             $table->foreign('id_jabatan')->references('id_jabatan')->on('jabatan');
             $table->foreign('id_gudang')->references('id_gudang')->on('gudang');
         });
+        DB::unprepared("CREATE TRIGGER `auto_id_pegawai` BEFORE INSERT ON `pegawai`
+             FOR EACH ROW BEGIN
+                SELECT SUBSTRING((MAX(`id_pegawai`)),4,17) INTO @total FROM pegawai;
+                IF (@total >= 1) THEN
+                    SET new.id_pegawai = CONCAT('PEG',LPAD(@total+1,17,'0'));
+                ELSE
+                    SET new.id_pegawai = CONCAT('PEG',LPAD(1,17,'0'));
+                END IF;
+            SET NEW.status = 1;
+            END");
     }
 
     /**
@@ -33,6 +43,8 @@ class CreatePegawaiTable extends Migration
      */
     public function down()
     {
+        DB::unprepared('DROP TRIGGER `auto_id_pegawai`');
         Schema::dropIfExists('pegawai');
+
     }
 }
