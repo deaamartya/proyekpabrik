@@ -15,10 +15,10 @@ class CreateDetailTransaksiTable extends Migration
     {
         Schema::create('detail_transaksi', function (Blueprint $table) {
             $table->string('id_detail_transaksi',11)->primary();
-            $table->integer('id_satuan');
+            $table->unsignedInteger('id_satuan');
             $table->double('jumlah',8,0);
             $table->string('id_bahan_baku',11);
-            $table->integer('id_jenis_transaksi');
+            $table->unsignedInteger('id_jenis_transaksi');
             $table->timestamp('timestamp');
             $table->boolean('flag');
             $table->foreign('id_satuan')->references('id_satuan')->on('satuan');

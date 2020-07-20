@@ -17,6 +17,8 @@ class CreatePegawaiTable extends Migration
             $table->string('id_pegawai',20)->primary();
             $table->string('nama',50);
             $table->boolean('status');
+            $table->unsignedInteger('id_jabatan');
+            $table->unsignedInteger('id_gudang');
             $table->foreign('id_jabatan')->references('id_jabatan')->on('jabatan');
             $table->foreign('id_gudang')->references('id_gudang')->on('gudang');
         });

@@ -15,9 +15,9 @@ class CreateDetailRekapKerjaHarianGroupTable extends Migration
     {
         Schema::create('detail_rekap_kerja_harian_group', function (Blueprint $table) {
             $table->string('id_kerja_harian_group', 18);
-            $table->foreign('id_kerja_harian_group')->references('id_kerja_harian_group')->on('kerja_harian_group')->onUpdate('cascade')->onDelete('cascade');
             $table->string('id_rekap_kerja_harian_group', 18);
-            $table->foreign('id_rekap_kerja_harian_group')->references('id_rekap_kerja_harian_group')->on('rekap_kerja_harian_group')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_kerja_harian_group','id_kerja_harian_fk')->references('id_kerja_harian_group')->on('kerja_harian_group')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_rekap_kerja_harian_group','id_rekap_harian_fk')->references('id_rekap_kerja_harian_group')->on('rekap_kerja_harian_group')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

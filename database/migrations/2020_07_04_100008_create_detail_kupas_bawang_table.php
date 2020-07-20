@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderMasakTable extends Migration
+class CreateDetailKupasBawangTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateOrderMasakTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_masak', function (Blueprint $table) {
-            $table->string('id_order_masak')->primary();
-            $table->timestamps('timestamp_buat');
-            $table->date('tanggal_order_masak');
-            $table->boolean('status');
+        Schema::create('detail_kupas_bawang', function (Blueprint $table) {
+            $table->string('id_detail_transaksi',11);
+            $table->string('id_pegawai',20);
+            $table->foreign('id_detail_transaksi')->references('id_detail_transaksi')->on('detail_transaksi');
             $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawai');
+            $table->float('kulit', 10, 2);
         });
     }
 
@@ -29,6 +29,6 @@ class CreateOrderMasakTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_masak');
+        Schema::dropIfExists('detail_kupas_bawang');
     }
 }

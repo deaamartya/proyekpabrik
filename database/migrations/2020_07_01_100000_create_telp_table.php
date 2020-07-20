@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTipeBahanBakuTable extends Migration
+class CreateTelpTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateTipeBahanBakuTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipe_bahan_baku', function (Blueprint $table) {
-            $table->Increments('id_tipe_bahan_baku');
-            $table->string('nama',20);
-            // $table->timestamps();
+        Schema::create('telp', function (Blueprint $table) {
+            $table->increments('id_telp');
+            $table->string('nomor', 20);
+            $table->string('id_pemilik', 50);
+            $table->string('keterangan', 150);
+            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ class CreateTipeBahanBakuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipe_bahan_baku');
+        Schema::dropIfExists('provinsi');
     }
 }

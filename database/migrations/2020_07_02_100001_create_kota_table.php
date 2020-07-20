@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRekapKerjaHarianGroupTable extends Migration
+class CreateKotaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateRekapKerjaHarianGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('rekap_kerja_harian_group', function (Blueprint $table) {
-            $table->string('id_rekap_kerja_harian_group', 18)->primary();
-            $table->timestamps('timestamp');
+        Schema::create('kota', function (Blueprint $table) {
+            $table->increments('id_kota');
+            $table->string('nama', 50);
+            $table->unsignedInteger('id_provinsi');
+            $table->foreign('id_provinsi')->references('id_provinsi')->on('provinsi');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateRekapKerjaHarianGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rekap_kerja_harian_group');
+        //
     }
 }

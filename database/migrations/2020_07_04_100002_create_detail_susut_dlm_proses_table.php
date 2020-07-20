@@ -15,11 +15,11 @@ class CreateDetailSusutDlmProsesTable extends Migration
     {
         Schema::create('detail_susut_dlm_proses', function (Blueprint $table) {
             $table->increments('id_detail_susut_dlm_proses');
-            $table->foreign('id_susut_dml_proses')->references('id_detail_susut_dlm_proses')->on('susut_dlm_proses');
+            $table->string('id_susut_dlm_proses', 18);
             $table->string('nama', 50);
             $table->boolean('tipe');
             $table->double('nilai');
-            $table->timestamps();
+            $table->foreign('id_susut_dlm_proses','id_susut_fk')->references('id_susut_dlm_proses')->on('susut_dlm_proses');
         });
     }
 
