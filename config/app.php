@@ -164,7 +164,10 @@ return [
 
         /*
          * Package Service Providers...
+         * 
          */
+        // DOM Pdf
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -174,6 +177,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Reliese\Coders\CodersServiceProvider::class,
 
         // DOMPdf
         Barryvdh\DomPDF\ServiceProvider::class,
