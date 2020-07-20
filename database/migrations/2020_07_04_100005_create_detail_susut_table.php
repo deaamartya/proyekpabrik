@@ -19,6 +19,7 @@ class CreateDetailSusutTable extends Migration
             $table->double('berat_susut_kg');
             $table->double('berat_susut_persen');
             $table->double('berat_kirim');
+            $table->string('id_detail_transaksi',11);
             $table->foreign('id_detail_transaksi')->references('id_detail_transaksi')->on('detail_transaksi');
         });
     }

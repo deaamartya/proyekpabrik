@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Telp extends Migration
+class CreateRekapKerjaHarianGroupTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class Telp extends Migration
      */
     public function up()
     {
-        Schema::create('telp', function (Blueprint $table) {
-            $table->increments('id_telp');
-            $table->string('nomor', 20);
-            $table->string('id_pemilik', 50);
-            $table->string('keterangan', 150);
-            $table->timestamps();
+        Schema::create('rekap_kerja_harian_group', function (Blueprint $table) {
+            $table->string('id_rekap_kerja_harian_group', 18)->primary();
+            $table->timestamp('timestamp');
         });
     }
 
@@ -29,6 +26,6 @@ class Telp extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provinsi');
+        Schema::dropIfExists('rekap_kerja_harian_group');
     }
 }

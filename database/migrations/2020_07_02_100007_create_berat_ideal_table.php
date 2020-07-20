@@ -16,8 +16,8 @@ class CreateBeratIdealTable extends Migration
         Schema::create('berat_ideal', function (Blueprint $table) {
             $table->string('id_berat_ideal',4)->primary();
             $table->double('berat_ideal_kg');
-            $table->integer('id_satuan');
-            $table->integer('id_bahan_baku');
+            $table->unsignedInteger('id_satuan');
+            $table->string('id_bahan_baku',11);
             $table->foreign('id_satuan')->references('id_satuan')->on('satuan');
             $table->foreign('id_bahan_baku')->references('id_bahan_baku')->on('bahan_baku');
         });

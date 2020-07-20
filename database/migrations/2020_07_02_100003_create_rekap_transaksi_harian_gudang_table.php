@@ -16,7 +16,7 @@ class CreateRekapTransaksiHarianGudangTable extends Migration
         Schema::create('rekap_transaksi_harian_gudang', function (Blueprint $table) {
             $table->string('id_rekap_transaksi_gudang',18)->primary();
             $table->integer('id_gudang')->unsigned();
-            $table->foreign('id_gudang')->references('id_gudang')->on('gudang')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_gudang','id_gudang_fk')->references('id_gudang')->on('gudang')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('timestamp',0);
         });
     }

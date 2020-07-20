@@ -14,11 +14,11 @@ class CreateDetailOrderMasakTable extends Migration
     public function up()
     {
         Schema::create('detail_order_masak', function (Blueprint $table) {
-            $table->foreign('id_order_masak')->references('id_order_masak')->on('order_masak');
+            $table->string('id_order_masak', 13);
             $table->string('id_bahan_product', 50);
             $table->boolean('jenis_order');
             $table->integer('jumlah');
-            $table->timestamps();
+            $table->foreign('id_order_masak')->references('id_order_masak')->on('order_masak');
         });
     }
 
