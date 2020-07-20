@@ -24,6 +24,16 @@ class CreateSupplierTable extends Migration
             $table->foreign('id_kota')->references('id_kota')->on('kota')->onUpdate('cascade')->onDelete('cascade');
             
         });
+        DB::unprepared("CREATE TRIGGER `auto_id_supplier` BEFORE INSERT ON `supplier`
+             FOR EACH ROW BEGIN
+                SELECT SUBSTRING((MAX(`id_supplier`)),3,8) INTO @total FROM supplier;
+                IF (@total >= 1) THEN
+                    SET new.id_supplier = CONCAT('SP',LPAD(@total+1,8,'0'));
+                ELSE
+                    SET new.id_supplier = CONCAT('SP',LPAD(1,8,'0'));
+                END IF;
+            END");
+
     }
 
     /**
@@ -33,6 +43,7 @@ class CreateSupplierTable extends Migration
      */
     public function down()
     {
+        DB::unprepared('DROP TRIGGER `auto_id_supplier`');
         Schema::dropIfExists('supplier');
     }
 }

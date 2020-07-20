@@ -21,6 +21,15 @@ class CreateBeratIdealTable extends Migration
             $table->foreign('id_satuan')->references('id_satuan')->on('satuan');
             $table->foreign('id_bahan_baku')->references('id_bahan_baku')->on('bahan_baku');
         });
+        DB::unprepared("CREATE TRIGGER `auto_id_berat_ideal` BEFORE INSERT ON `berat_ideal`
+             FOR EACH ROW BEGIN
+                SELECT SUBSTRING((MAX(`id_berat_ideal`)),2,3) INTO @total FROM berat_ideal;
+                IF (@total >= 1) THEN
+                    SET new.id_berat_ideal = CONCAT('B',LPAD(@total+1,3,'0'));
+                ELSE
+                    SET new.id_berat_ideal = CONCAT('B',LPAD(1,3,'0'));
+                END IF;
+            END");
     }
 
     /**
@@ -30,6 +39,7 @@ class CreateBeratIdealTable extends Migration
      */
     public function down()
     {
+        DB::unprepared('DROP TRIGGER `auto_id_berat_ideal`');
         Schema::dropIfExists('berat_ideal');
     }
 }

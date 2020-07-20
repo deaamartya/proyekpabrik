@@ -25,6 +25,15 @@ class CreateDetailTransaksiTable extends Migration
             $table->foreign('id_bahan_baku')->references('id_bahan_baku')->on('bahan_baku');
             $table->foreign('id_jenis_transaksi')->references('id_jenis_transaksi')->on('jenis_transaksi');
         });
+        DB::unprepared("CREATE TRIGGER `auto_id_detail_transaksi` BEFORE INSERT ON `detail_transaksi`
+             FOR EACH ROW BEGIN
+                SELECT SUBSTRING((MAX(`id_detail_transaksi`)),3,9) INTO @total FROM detail_transaksi;
+                IF (@total >= 1) THEN
+                    SET new.id_detail_transaksi = CONCAT('DT',LPAD(@total+1,9,'0'));
+                ELSE
+                    SET new.id_detail_transaksi = CONCAT('DT',LPAD(1,9,'0'));
+                END IF;
+            END");
     }
 
     /**
@@ -34,6 +43,7 @@ class CreateDetailTransaksiTable extends Migration
      */
     public function down()
     {
+        DB::unprepared('DROP TRIGGER `auto_id_detail_transaksi`');
         Schema::dropIfExists('detail_transaksi');
     }
 }

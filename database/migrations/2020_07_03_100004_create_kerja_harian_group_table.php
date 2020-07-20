@@ -21,6 +21,15 @@ class CreateKerjaHarianGroupTable extends Migration
             $table->foreign('id_group_kerja')->references('id_group_kerja')->on('group_kerja');
             $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawai');
         });
+        DB::unprepared("CREATE TRIGGER `auto_id_kerja_harian_group` BEFORE INSERT ON `kerja_harian_group`
+             FOR EACH ROW BEGIN
+                SELECT SUBSTRING((MAX(`id_kerja_harian_group`)),4,15) INTO @total FROM kerja_harian_group;
+                IF (@total >= 1) THEN
+                    SET new.id_kerja_harian_group = CONCAT('KHG',LPAD(@total+1,15,'0'));
+                ELSE
+                    SET new.id_kerja_harian_group = CONCAT('KHG',LPAD(1,15,'0'));
+                END IF;
+            END");
     }
 
     /**
@@ -30,6 +39,7 @@ class CreateKerjaHarianGroupTable extends Migration
      */
     public function down()
     {
+        DB::unprepared('DROP TRIGGER `auto_id_kerja_harian_group`');
         Schema::dropIfExists('kerja_harian_group');
     }
 }

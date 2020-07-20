@@ -28,6 +28,15 @@ class CreateStockTable extends Migration
             $table->foreign('id_satuan')->references('id_satuan')->on('satuan');
             $table->foreign('id_bahan_baku')->references('id_bahan_baku')->on('bahan_baku');
         });
+        DB::unprepared("CREATE TRIGGER `auto_id_stock` BEFORE INSERT ON `stock`
+             FOR EACH ROW BEGIN
+                SELECT SUBSTRING((MAX(`id_stock`)),3,11) INTO @total FROM stock;
+                IF (@total >= 1) THEN
+                    SET new.id_stock = CONCAT('ST',LPAD(@total+1,11,'0'));
+                ELSE
+                    SET new.id_stock = CONCAT('ST',LPAD(1,11,'0'));
+                END IF;
+            END");
     }
 
     /**
@@ -37,6 +46,7 @@ class CreateStockTable extends Migration
      */
     public function down()
     {
+        DB::unprepared('DROP TRIGGER `auto_id_stock`');
         Schema::dropIfExists('stock');
     }
 }
