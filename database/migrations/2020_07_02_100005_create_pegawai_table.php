@@ -19,7 +19,7 @@ class CreatePegawaiTable extends Migration
             $table->string('username',20)->unique();
             $table->string('password');
             $table->unsignedInteger('id_jabatan');
-            $table->unsignedInteger('id_gudang');
+            $table->unsignedInteger('id_gudang')->nullable();
             $table->boolean('status');
             $table->foreign('id_jabatan')->references('id_jabatan')->on('jabatan');
             $table->foreign('id_gudang')->references('id_gudang')->on('gudang');
