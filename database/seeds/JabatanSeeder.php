@@ -11,7 +11,7 @@ class JabatanSeeder extends Seeder
      */
     public function run()
     {
-        $jabatans = ['Mandor Gudang','Tenaga Kupas Bawang','Manager Produksi'];
+        $jabatans = ['Mandor','Tenaga Kupas Bawang','Manager Produksi'];
 
     	foreach($jabatans as $j){
     		DB::table('jabatan')->insert([
