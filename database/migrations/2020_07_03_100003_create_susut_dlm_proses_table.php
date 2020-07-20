@@ -25,6 +25,17 @@ class CreateSusutDlmProsesTable extends Migration
             $table->foreign('id_rekap_kerja_harian_group','rekap_harian_grup_fk')->references('id_rekap_kerja_harian_group')->on('rekap_kerja_harian_group');
             $table->foreign('id_rekap_transaksi_harian_gudang','rekap_harian_gudang_fk')->references('id_rekap_transaksi_gudang')->on('rekap_transaksi_harian_gudang');
         });
+
+        DB::unprepared("CREATE TRIGGER `auto_id_susut_dlm_proses` BEFORE INSERT ON `susut_dlm_proses`
+             FOR EACH ROW BEGIN
+                SELECT SUBSTRING((MAX(`id_susut_dlm_proses`)),2,16) INTO @total FROM susut_dlm_proses;
+                IF (@total >= 1) THEN
+                    SET new.id_susut_dlm_proses = CONCAT('S',LPAD(@total+1,16,'0'));
+                ELSE
+                    SET new.id_susut_dlm_proses = CONCAT('S',LPAD(1,16,'0'));
+                END IF;
+          
+            END");
     }
 
     /**

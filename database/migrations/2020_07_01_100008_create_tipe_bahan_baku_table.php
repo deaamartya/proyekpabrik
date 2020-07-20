@@ -17,6 +17,8 @@ class CreateTipeBahanBakuTable extends Migration
             $table->increments('id_tipe_bahan_baku');
             $table->string('nama',20);
         });
+
+        
     }
 
     /**

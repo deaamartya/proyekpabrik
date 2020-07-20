@@ -14,10 +14,21 @@ class CreateProductTable extends Migration
     public function up()
     {
         Schema::create('product', function (Blueprint $table) {
-            $table->increments('id_product');
+            $table->string('id_product',13)->primary();
             $table->string('nama', 50);
-            $table->timestamps();
+           
         });
+
+         DB::unprepared("CREATE TRIGGER `auto_id_product` BEFORE INSERT ON `product`
+             FOR EACH ROW BEGIN
+                SELECT SUBSTRING((MAX(`id_product`)),3,11) INTO @total FROM product;
+                IF (@total >= 1) THEN
+                    SET new.id_product = CONCAT('PR',LPAD(@total+1,11,'0'));
+                ELSE
+                    SET new.id_product = CONCAT('PR',LPAD(1,11,'0'));
+                END IF;
+          
+            END");
     }
 
     /**

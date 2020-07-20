@@ -75,7 +75,7 @@ Surat Penerimaan Barang
                                     <label for="pilih_supplier">Supplier</label>
                                     <select id="pilih_supplier" class="form-control">
                                         <option disabled selected readonly>- Pilih Supplier -</option>
-                                      
+                                       
                                         <option value="">Supplier X </option>
                                     </select>
                                 </div>

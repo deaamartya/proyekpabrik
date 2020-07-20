@@ -19,6 +19,10 @@ class CreateDetailRekapKerjaHarianGroupTable extends Migration
             $table->foreign('id_kerja_harian_group','id_kerja_harian_fk')->references('id_kerja_harian_group')->on('kerja_harian_group')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_rekap_kerja_harian_group','id_rekap_harian_fk')->references('id_rekap_kerja_harian_group')->on('rekap_kerja_harian_group')->onUpdate('cascade')->onDelete('cascade');
         });
+
+      
+
+        
     }
 
     /**

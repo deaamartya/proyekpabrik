@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
-    // return redirect('/manager-produksi');
     return view('managerproduksi/auth/login');
 });
+
 Route::get('/manager-produksi', 'managerproduksi\ManagerproduksiController@dashboard')->name('dashboard-manager-produksi');
 
 //penerimaan
