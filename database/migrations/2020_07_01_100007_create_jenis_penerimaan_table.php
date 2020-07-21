@@ -16,7 +16,7 @@ class CreateJenisPenerimaanTable extends Migration
         Schema::create('jenis_penerimaan', function (Blueprint $table) {
             $table->increments('id_jenis_penerimaan');
             $table->string('nama_jenis_penerimaan');
-            $table->timestamps();
+            
         });
     }
 

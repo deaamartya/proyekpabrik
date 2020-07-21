@@ -17,8 +17,8 @@ class CreateTelpTable extends Migration
             $table->increments('id_telp');
             $table->string('nomor', 20);
             $table->string('id_pemilik', 20);
-            $table->string('keterangan', 150);
-            $table->timestamps();
+            $table->string('keterangan', 150) ;
+            
         });
     }
 

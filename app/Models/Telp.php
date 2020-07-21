@@ -25,6 +25,7 @@ class Telp extends Model
 {
 	protected $table = 'telp';
 	protected $primaryKey = 'id_telp';
+	public $timestamps = false;
 
 	protected $fillable = [
 		'nomor',

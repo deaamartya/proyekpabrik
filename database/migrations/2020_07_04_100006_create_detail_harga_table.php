@@ -14,7 +14,8 @@ class CreateDetailHargaTable extends Migration
     public function up()
     {
         Schema::create('detail_harga', function (Blueprint $table) {
-            $table->bigIncrements('id_detail_transaksi',);
+            $table->string('id_detail_transaksi')->primary();
+            $table->foreign('id_detail_transaksi')->references('id_detail_transaksi')->on('detail_transaksi')->onUpdate('cascade')->onDelete('cascade');
             $table->double('harga',10,2);
             $table->double('subtotal',10,2);
             $table->boolean('mata_uang');

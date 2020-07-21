@@ -23,6 +23,7 @@ class DetailHarga extends Model
 	protected $table = 'detail_harga';
 	protected $primaryKey = 'id_detail_transaksi';
 	public $timestamps = false;
+	public $incrementing = false;
 
 	protected $casts = [
 		'harga' => 'float',
