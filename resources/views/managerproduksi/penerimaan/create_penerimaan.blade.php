@@ -236,8 +236,8 @@ Surat Penerimaan Barang
                                     <tr id="bhn-baku" data-kode="{{$bb->id_bahan_baku}}" data-nama="{{$bb->nama}}" class="center" >
                                         <td><?php echo $nomor."."; ?></td>
                                         <td>{{$bb->id_bahan_baku}}</td>
-                                        <td>{{$bb->nama}}</td>
-                                        <td >{{$bb->id_tipe_bahan_baku}}</td>
+                                        <td>{{$bb->nama_bahan_baku}}</td>
+                                        <td >{{$bb->nama_tipe_bahan_baku}}</td>
                                     </tr>
 
                                     @endforeach

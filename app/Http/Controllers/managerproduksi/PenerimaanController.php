@@ -36,7 +36,11 @@ class PenerimaanController extends Controller
         
         $gudang = Gudang::all(); 
         $supplier = Supplier::all(); 
-        $bahanbaku = BahanBaku::all();
+        $bahanbaku = BahanBaku::select('bahan_baku.id_bahan_baku', 'bahan_baku.nama AS nama_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', 'tipe_bahan_baku.nama AS nama_tipe_bahan_baku')
+                    ->join('tipe_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', '=', 'tipe_bahan_baku.id_tipe_bahan_baku' )
+                    ->orderBy('id_bahan_baku', 'asc')
+                    ->get();
+       
         return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier', 'bahanbaku'));
         
         //return view('managerproduksi.penerimaan.create_penerimaan');
