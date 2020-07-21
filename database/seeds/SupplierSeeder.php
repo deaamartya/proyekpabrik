@@ -35,7 +35,7 @@ class SupplierSeeder extends Seeder
          // 3 digit keenam
          $digit_f = "000";
 
-         /**
+         /*
           Gabung semua digit
           Contoh hasil: 66.422.976.2-405.000
           */
@@ -44,15 +44,11 @@ class SupplierSeeder extends Seeder
           return $npwp;
      }
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-
-        $faker = Faker::create('id_ID');
+     /*
+     Generate id kota acak
+      */
+      public function generate_id_kota()
+      {
 
         $arr_id_kota = array(
             1101, 1102, 1103, 1104, 1105, 1106, 1107, 1108,
@@ -66,17 +62,35 @@ class SupplierSeeder extends Seeder
             1309, 1310, 1311, 1312, 1371, 1372, 1373, 1374,
             1375, 1376, 1377, 1401, 1402, 1403, 1404, 1405
         );
-        
+
+        // mengahasilkan random index dari array arr_id_kota
+        $index_idkota = array_rand($arr_id_kota);
+
+        // menghasilkan value dari index random yang telah didapat
+        $id_kota = $arr_id_kota[$index_idkota];
+
+        return $id_kota;
+
+      }
+
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        $faker = Faker::create('id_ID');
 
         for ($i=0; $i < 30; $i++) {
-
-            // mengahasilkan random index dari array arr_id_kota
-            $index_idkota = array_rand($arr_id_kota);
-            // menghasilkan value dari index random yang telah didapat
-            $id_kota = $arr_id_kota[$index_idkota];
+            // memanggil function generate_id_kota
+            $id_kota = $this->generate_id_kota();
+            
             // memanggil function generate_npwp
             $npwp = $this->generate_npwp();
 
+            // Insert data ke database
             DB::table('supplier')->insert([
                 'nama' => $faker->company,
                 'alamat' => $faker->streetAddress,
