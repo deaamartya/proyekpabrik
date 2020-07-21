@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Penerimaan;
 use App\Models\Gudang;
 use App\Models\Supplier;
+use App\Models\BahanBaku;
 
 use Illuminate\Http\Request;
 use PDF;
@@ -35,7 +36,8 @@ class PenerimaanController extends Controller
         
         $gudang = Gudang::all(); 
         $supplier = Supplier::all(); 
-        return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier'));
+        $bahanbaku = BahanBaku::all();
+        return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier', 'bahanbaku'));
         
         //return view('managerproduksi.penerimaan.create_penerimaan');
 

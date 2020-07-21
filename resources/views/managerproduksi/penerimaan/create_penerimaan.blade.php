@@ -75,8 +75,9 @@ Surat Penerimaan Barang
                                     <label for="pilih_supplier">Supplier</label>
                                     <select id="pilih_supplier" class="form-control">
                                         <option disabled selected readonly>- Pilih Supplier -</option>
-                                       
-                                        <option value="">Supplier X </option>
+                                        @foreach($supplier as $s)
+                                        <option value="{{ $s->id_supplier }}">{{ $s->nama }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -113,8 +114,9 @@ Surat Penerimaan Barang
                                     <label for="inputGudangSimpan">Gudang Simpan</label>
                                     <select id="inputGudangSimpan" class="form-control">
                                         <option disabled selected readonly>Pilih Salah Satu...</option>
-                                       
-                                        <option value="">Coolstorage I </option>
+                                        @foreach($gudang as $g)
+                                        <option value="{{ $g->id_gudang }}">{{ $g->nama }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -184,7 +186,7 @@ Surat Penerimaan Barang
                             
                                 <button type="submit" class="btn btn-primary"> Selesai </button> 
 
-                                <a href="{{ url('/penerimaan/cetak_barcode/') }}" class="btn btn-primary">Cetak Barcode</a>
+                                <a href="{{ url('/penerimaan/cetak_barcode') }}" class="btn btn-primary">Cetak Barcode</a>
                           
                                 <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
                             </div>                        
@@ -216,31 +218,32 @@ Surat Penerimaan Barang
                             <table width="100%" class="table table-hover" id="table-modal">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th>No.</th>
                                         <th>ID Bahan Baku</th>
                                         <th>Nama Bahan Baku</th>
                                         <th>Tipe Bahan Baku</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr id="bahanbaku" data-kode="BB001" data-nama="Garam" >
-                                        <td>1</td>
-                                        <td>BB001</td>
-                                        <td>Garam</td>
-                                        <td class="center">X</td>
+                                    <?php 
+                                        $nomor = 0;
+                                    ?>
+                                    @foreach($bahanbaku as $bb)
+                                    <?php
+                                        $nomor = $nomor+1;
+                                    ?>
+                                    
+                                    <tr id="bhn-baku" data-kode="{{$bb->id_bahan_baku}}" data-nama="{{$bb->nama}}" class="center" >
+                                        <td><?php echo $nomor."."; ?></td>
+                                        <td>{{$bb->id_bahan_baku}}</td>
+                                        <td>{{$bb->nama}}</td>
+                                        <td >{{$bb->id_tipe_bahan_baku}}</td>
                                     </tr>
-                                    <tr id="bahanbaku" data-kode="BB002" data-nama="Gula" >
-                                        <td>2</td>
-                                        <td>BB002</td>
-                                        <td>Gula</td>
-                                        <td class="center">XX</td>
-                                    </tr>
-                                    <tr id="bahanbaku" data-kode="BB003" data-nama="Minyak" >
-                                        <td>3</td>
-                                        <td>BB003</td>
-                                        <td>Minyak</td>
-                                        <td class="center">Y</td>
-                                    </tr>
+
+                                    @endforeach
+
+                                   
+
                                 </tbody>
                             </table>
                        
@@ -275,7 +278,7 @@ function getSupplier(){
 $(document).ready(function(){
     $('#table-modal').DataTable();
    
-    $(document).on('click', '#bahanbaku', function (e) {
+    $(document).on('click', '#bhn-baku', function (e) {
         document.getElementById("kode-bahan").value = $(this).attr('data-kode');
         document.getElementById("nama-bahan").value = $(this).attr('data-nama');
         $('#modal').modal('hide');
