@@ -156,7 +156,7 @@ Surat Penerimaan Barang
                                     <label for="inputNetto">Berat Netto/Aktual (Kg)</label>
                                     <input type="number" class="form-control" id="berat_netto" placeholder="Masukkan Berat Netto" oninput="hitungSusut();">
                                 </div>
-                            </div>
+                            </div> 
                         </div>
 
                         <div class="form-row">

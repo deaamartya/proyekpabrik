@@ -9,5 +9,6 @@ return array(
     'Sabberworm\\CSS' => array($vendorDir . '/sabberworm/php-css-parser/lib'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
+    'Milon\\Barcode' => array($vendorDir . '/milon/barcode/src'),
     'Flynsarmy\\CsvSeeder\\' => array($vendorDir . '/flynsarmy/csv-seeder/src'),
 );
