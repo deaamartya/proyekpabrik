@@ -75,7 +75,7 @@ Surat Penerimaan Barang
                                     <label for="pilih_supplier">Supplier</label>
                                     <select id="pilih_supplier" class="form-control">
                                         <option disabled selected readonly>- Pilih Supplier -</option>
-                                      
+                                       
                                         <option value="">Supplier X </option>
                                     </select>
                                 </div>
@@ -156,7 +156,7 @@ Surat Penerimaan Barang
                                     <label for="inputNetto">Berat Netto/Aktual (Kg)</label>
                                     <input type="number" class="form-control" id="berat_netto" placeholder="Masukkan Berat Netto" oninput="hitungSusut();">
                                 </div>
-                            </div>
+                            </div> 
                         </div>
 
                         <div class="form-row">

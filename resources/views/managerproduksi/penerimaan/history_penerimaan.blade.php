@@ -33,7 +33,7 @@ Penerimaan Barang
         <div class="col-md-4 col-lg-4">
             <div class="widgetbar">
                 <a class="btn btn-primary-rgba" href="{{url('/penerimaan/create_penerimaan')}}"><i class="feather icon-plus mr-2"></i>Penerimaan Baru</a>
-            </div>                        
+            </div>                         
         </div>
     </div>          
 </div>
