@@ -26,6 +26,7 @@ class JenisPenerimaan extends Model
 {
 	protected $table = 'jenis_penerimaan';
 	protected $primaryKey = 'id_jenis_penerimaan';
+	public $timestamps = false;
 
 	protected $fillable = [
 		'nama_jenis_penerimaan'

@@ -15,5 +15,15 @@ class DatabaseSeeder extends Seeder
         $this->call(GudangSeeder::class);
         $this->call(JabatanSeeder::class);
         $this->call(PegawaiSeeder::class);
+        $this->call(ProvinsiSeeder::class);
+        $this->call(KotaSeeder::class);
+        $this->call(SupplierSeeder::class);
+        $this->call(TipeBahanBakuSeeder::class);
+        $this->call(BahanBakuSeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(JenisPenerimaanSeeder::class);
+        $this->call(JenisTransaksiSeeder::class);
+        
+
     }
 }

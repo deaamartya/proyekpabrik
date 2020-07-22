@@ -4,9 +4,10 @@ namespace App\Http\Controllers\managerproduksi;
 
 use App\Http\Controllers\Controller;
 
-use App\Managerproduksi\Penerimaan;
-use App\Managerproduksi\Gudang;
-use App\Managerproduksi\Supplier;
+use App\Models\Penerimaan;
+use App\Models\Gudang;
+use App\Models\Supplier;
+use App\Models\BahanBaku;
 
 use Illuminate\Http\Request;
 use PDF;
@@ -32,12 +33,17 @@ class PenerimaanController extends Controller
      */
     public function create()
     {
-        /*
+        
         $gudang = Gudang::all(); 
         $supplier = Supplier::all(); 
-        return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier'));
-        */
-        return view('managerproduksi.penerimaan.create_penerimaan');
+        $bahanbaku = BahanBaku::select('bahan_baku.id_bahan_baku', 'bahan_baku.nama AS nama_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', 'tipe_bahan_baku.nama AS nama_tipe_bahan_baku')
+                    ->join('tipe_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', '=', 'tipe_bahan_baku.id_tipe_bahan_baku' )
+                    ->orderBy('id_bahan_baku', 'asc')
+                    ->get();
+       
+        return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier', 'bahanbaku'));
+        
+        //return view('managerproduksi.penerimaan.create_penerimaan');
 
     }
 
@@ -71,12 +77,12 @@ class PenerimaanController extends Controller
      */
     public function edit($id)
     {
-        /*
+        
         $gudang = Gudang::all(); 
         $supplier = Supplier::all(); 
         return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id])->with(compact('gudang', 'supplier'));
-        */
-        return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id]);
+        
+        //return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id]);
     }
 
     /**

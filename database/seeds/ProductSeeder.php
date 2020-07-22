@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
 
     	foreach($products as $p){
     		DB::table('product')->insert([
-	            'nama' => $j
+	            'nama' => $p
 	        ]);
     	}
     }
