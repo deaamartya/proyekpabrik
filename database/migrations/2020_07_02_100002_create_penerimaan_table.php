@@ -24,11 +24,11 @@ class CreatePenerimaanTable extends Migration
         });
         DB::unprepared("CREATE TRIGGER `auto_id_penerimaan` BEFORE INSERT ON `penerimaan`
              FOR EACH ROW BEGIN
-                SELECT SUBSTRING((MAX(`id_penerimaan`)),3,16) INTO @total FROM penerimaan;
+                SELECT SUBSTRING((MAX(`id_penerimaan`)),4,15) INTO @total FROM penerimaan;
                 IF (@total >= 1) THEN
-                    SET new.id_penerimaan = CONCAT('PR',LPAD(@total+1,16,'0'));
+                    SET new.id_penerimaan = CONCAT('PEN',LPAD(@total+1,15,'0'));
                 ELSE
-                    SET new.id_penerimaan = CONCAT('PR',LPAD(1,16,'0'));
+                    SET new.id_penerimaan = CONCAT('PEN',LPAD(1,15,'0'));
                 END IF;
             END");
     }

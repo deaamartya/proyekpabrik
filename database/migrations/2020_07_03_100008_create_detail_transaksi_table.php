@@ -16,6 +16,7 @@ class CreateDetailTransaksiTable extends Migration
         Schema::create('detail_transaksi', function (Blueprint $table) {
             $table->string('id_detail_transaksi',11)->primary();
             $table->unsignedInteger('id_satuan');
+            $table->string('id_transaksi',18);
             $table->double('jumlah',8,0);
             $table->string('id_bahan_baku',11);
             $table->unsignedInteger('id_jenis_transaksi');

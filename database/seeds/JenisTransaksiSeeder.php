@@ -17,5 +17,9 @@ class JenisTransaksiSeeder extends Seeder
         DB::table('jenis_transaksi')->insert([
             'nama' => 'Kupas Bawang Terima'
         ]);
+
+        DB::table('jenis_transaksi')->insert([
+            'nama' => 'Penerimaan'
+        ]);
     }
 }

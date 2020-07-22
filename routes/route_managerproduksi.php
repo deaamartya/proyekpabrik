@@ -11,6 +11,7 @@ Route::get('/manager-produksi', 'managerproduksi\ManagerproduksiController@dashb
 //penerimaan
 Route::get('/penerimaan/history_penerimaan', 'managerproduksi\PenerimaanController@select_history');
 Route::get('/penerimaan/create_penerimaan', 'managerproduksi\PenerimaanController@create');
+Route::post('/penerimaan/store_penerimaan', 'managerproduksi\PenerimaanController@store');
 Route::get('/penerimaan/edit_penerimaan/{id}', 'managerproduksi\PenerimaanController@edit')->name('edit_penerimaan');
 Route::get('/penerimaan/cetak_barcode',  'managerproduksi\PenerimaanController@printBarcode');
 

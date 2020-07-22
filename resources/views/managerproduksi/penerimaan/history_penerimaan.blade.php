@@ -60,6 +60,7 @@ Penerimaan Barang
                                 </tr>
                             </thead>
                             <tbody>
+                                <!--
                                 <tr>
                                     <td>10/06/2020</td>
                                     <td>SJ100620002</td>
@@ -70,11 +71,13 @@ Penerimaan Barang
                                         </div>
                                     </td>
                                 </tr>
+                            -->
+                            @foreach($historypenerimaan as $hp)
                                
                                 <tr>
-                                    <td>10/06/2020</td>
-                                    <td>SJ100620001</td>
-                                    <td>Bawang X</td>
+                                    <td>{{ $hp->timestamp }}</td>
+                                    <td>{{ $hp->id_transaksi }}</td>
+                                    <td>{{ $hp->id_bahan_baku }}</td>
                                     <td>
                                         <div class="badge-list">
                                             <span class="badge badge-success badge-font">Selesai</span>                  
@@ -82,28 +85,7 @@ Penerimaan Barang
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <td>09/06/2020</td>
-                                    <td>SJ090620001</td>
-                                    <td>Tepung X</td>
-                                    <td>
-                                        <div class="badge-list">
-                                            <span class="badge badge-success badge-font">Selesai</span>                  
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>09/06/2020</td>
-                                    <td>SJ090620001</td>
-                                    <td>Kacang HC</td>
-                                   <td>
-                                        <div class="badge-list">
-                                            <span class="badge badge-success badge-font">Selesai</span>                  
-                                        </div>
-                                    </td>
-                                </tr>
-
+                               @endforeach
                             
                             </tbody>
                         </table>
