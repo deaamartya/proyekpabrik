@@ -10,25 +10,23 @@ Route::get('/gudang-bawang/home-bawang', function () {
     return view('gudangbawang.homebawang');
 });
 
+
 //kerja harian
-Route::get('/gudang-bawang/tenaga-kupas', function () {
-    return view('gudangbawang.tenagakupas');
-});
 
-Route::get('/gudang-bawang/pembagian-bawang', function () {
-    return view('gudangbawang.pembagianbawang');
-});
+//route tenaga kupas
+Route::get('/gudang-bawang/tenaga-kupas','gudangbawang\KerjaHarianController@tenagakupas');
+Route::post('/gudang-bawang/tambahtenagakupas','gudangbawang\KerjaHarianController@addtenagakupas');
+Route::post('/gudang-bawang/statustenagakupas','gudangbawang\KerjaHarianController@statustenagakupas');
 
-Route::get('/gudang-bawang/penerimaan-bawang', function () {
-    return view('gudangbawang.penerimaanbawang');
-});
+//route pembagian bawang
+Route::get('/gudang-bawang/pembagian-bawang','gudangbawang\KerjaHarianController@pembagianbawang');
 
-Route::get('/gudang-bawang/persiapan-masak-kanji', function () {
-    return view('gudangbawang.persiapanmasakkanji');
-});
+//route penerimaan bawang
+Route::get('/gudang-bawang/penerimaan-bawang','gudangbawang\KerjaHarianController@penerimaanbawang');
 
-Route::post('/gudang-bawang/tambahtenagakupas');
-Route::post('/gudang-bawang/statustenagakupas');
+//route persiapan masak kanji
+Route::get('/gudang-bawang/persiapan-masak-kanji','gudangbawang\KerjaHarianController@persiapanmasakkanji');
+
 
 //stock
 Route::get('/gudang-bawang/stockbawangkulit', function () {
