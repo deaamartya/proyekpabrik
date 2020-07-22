@@ -75,9 +75,9 @@ Penerimaan Barang
                             @foreach($historypenerimaan as $hp)
                                
                                 <tr>
-                                    <td>{{ $hp->timestamp }}</td>
+                                    <td>{{ date('d/m/Y' , strtotime($hp->timestamp)) }}</td>
                                     <td>{{ $hp->id_transaksi }}</td>
-                                    <td>{{ $hp->id_bahan_baku }}</td>
+                                    <td>{{ $hp->nama_bahan_baku }}</td>
                                     <td>
                                         <div class="badge-list">
                                             <span class="badge badge-success badge-font">Selesai</span>                  
