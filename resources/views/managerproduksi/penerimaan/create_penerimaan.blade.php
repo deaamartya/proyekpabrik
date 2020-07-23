@@ -74,6 +74,8 @@ Surat Penerimaan Barang
                                     <!-- jenis penerimaan : dari supplier -->
                                     <input type="hidden" id="jenis_penerimaan" name="id_jenis_penerimaan" value="1">
 
+                                    <input type="hidden" class="kode_penerimaan" name="id_penerimaan" value="{{ $id_penerimaan }}">
+
                                     <div class="form-row">
                                         <div class="form-group col-md-6" >
                                             <div class="form-group col-md-8" id="supplier" >
@@ -239,7 +241,7 @@ Surat Penerimaan Barang
                                     
                                     <div class="form-row">
                                         <div class="widgetbar" align="center">
-                                            <a onclick="submitSementara();" class="btn btn-light">Simpan Sementara</a>
+                                            <a onclick="submitSementara();" class="btn btn-light simpan-sementara">Simpan Sementara</a>
                                         
                                             <a onclick="submitPenerimaan();" class="btn btn-primary" style="color: white;">Selesai</a>
 
@@ -276,6 +278,8 @@ Surat Penerimaan Barang
 
                                     <!-- jenis penerimaan : pemindahan bahan-->
                                     <input type="hidden" id="jenis_penerimaan2" name="id_jenis_penerimaan2" value="2">
+
+                                    <input type="hidden" class="kode_penerimaan" name="id_penerimaan" value="{{ $id_penerimaan }}">
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
@@ -390,7 +394,7 @@ Surat Penerimaan Barang
                                     
                                     <div class="form-row">
                                         <div class="widgetbar" align="center">
-                                            <a onclick="submitSementara2();" class="btn btn-light">Simpan Sementara</a>
+                                            <a onclick="submitSementara2();" class="btn btn-light simpan-sementara">Simpan Sementara</a>
                                         
                                             <a onclick="submitPenerimaan2();" class="btn btn-primary" style="color: white;">Selesai</a>
 
@@ -527,6 +531,8 @@ Surat Penerimaan Barang
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
+
+
 <script>
 
 function submitSementara(){
@@ -550,6 +556,24 @@ function submitPenerimaan2(){
   document.getElementById('pemindahan_bahan').submit();
 }
 
+/*
+
+    $(document).ready(function() {
+            $(".simpan-sementara").click(function() {
+                var id_penerimaan = document.getElementsByClassName('kode_penerimaan').value;
+                var status = "belum";
+                $.ajax({
+                    type: "POST",
+                    url: '/penerimaan/history_penerimaan',
+                    data: { id_penerimaan : id_penerimaan, status : status },
+                    success: function(data)
+                    {
+                        
+                    }
+                });
+            });
+    });
+*/
 
 
 $(document).ready(function(){

@@ -26,7 +26,7 @@ class PenerimaanController extends Controller
     public function select_history()
     {
         
-        $historypenerimaan = Penerimaan::select('penerimaan.id_transaksi', 'bahan_baku.nama AS nama_bahan_baku', 'penerimaan.timestamp', 'detail_transaksi.jumlah')
+        $historypenerimaan = Penerimaan::select('penerimaan.id_penerimaan' ,'penerimaan.id_transaksi', 'bahan_baku.nama AS nama_bahan_baku', 'penerimaan.timestamp', 'detail_transaksi.jumlah', 'penerimaan.id_jenis_penerimaan',  'penerimaan.id_gudang')
                     ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'penerimaan.id_penerimaan')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'detail_transaksi.id_bahan_baku' )
                     ->get();
@@ -52,8 +52,19 @@ class PenerimaanController extends Controller
                     ->join('tipe_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', '=', 'tipe_bahan_baku.id_tipe_bahan_baku' )
                     ->orderBy('id_bahan_baku', 'asc')
                     ->get();
+
+            $id= (DB::table('penerimaan')->count());
+            
+            if($id >= 1){
+                $x = str_pad($id+1, 15, "0", STR_PAD_LEFT);
+                $id_penerimaan= "PEN".$x;
+            }
+            else{
+                $y = str_pad(1, 15, "0", STR_PAD_LEFT);
+                $id_penerimaan= "PEN".$y;
+            }
        
-        return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier', 'bahanbaku'));
+        return view('managerproduksi.penerimaan.create_penerimaan')->with(compact('gudang', 'supplier', 'bahanbaku', 'id_penerimaan'));
         
         //return view('managerproduksi.penerimaan.create_penerimaan');
 
@@ -82,15 +93,7 @@ class PenerimaanController extends Controller
 
         
 
-        $id= (DB::table('penerimaan')->count());
-            if($id >= 1){
-                $x = str_pad($id+1, 15, "0", STR_PAD_LEFT);
-                $id_penerimaan= "PEN".$x;
-            }
-            else{
-                $y = str_pad(1, 15, "0", STR_PAD_LEFT);
-                $id_penerimaan= "PEN".$y;
-            }
+            
 
 
         $penerimaan = new Penerimaan;
@@ -102,7 +105,7 @@ class PenerimaanController extends Controller
 
          
         $penerimaan_supplier = new PenerimaanSupplier;
-        $penerimaan_supplier->id_penerimaan= $id_penerimaan;
+        $penerimaan_supplier->id_penerimaan= $request->id_penerimaan;
         $penerimaan_supplier->id_supplier= $request->id_supplier;
         $penerimaan_supplier->berat_surat_jalan= $request->berat_surat_jalan;
 
@@ -131,7 +134,7 @@ class PenerimaanController extends Controller
         
         $detail_transaksi = new DetailTransaksi;
         $detail_transaksi->id_satuan = 1;
-        $detail_transaksi->id_transaksi = $id_penerimaan;
+        $detail_transaksi->id_transaksi = $request->id_penerimaan;
         if (empty($request->berat_aktual)) {
             $detail_transaksi->jumlah = 0;
         }
@@ -176,15 +179,6 @@ class PenerimaanController extends Controller
     
         ]);
 
-        $id= (DB::table('penerimaan')->count());
-            if($id >= 1){
-                $x = str_pad($id+1, 15, "0", STR_PAD_LEFT);
-                $id_penerimaan= "PEN".$x;
-            }
-            else{
-                $y = str_pad(1, 15, "0", STR_PAD_LEFT);
-                $id_penerimaan= "PEN".$y;
-            }
 
 
         $penerimaan = new Penerimaan;
@@ -209,7 +203,7 @@ class PenerimaanController extends Controller
         
         $detail_transaksi = new DetailTransaksi;
         $detail_transaksi->id_satuan = 1;
-        $detail_transaksi->id_transaksi = $id_penerimaan;
+        $detail_transaksi->id_transaksi = $request->id_penerimaan;
          if (empty($request->berat_aktual2)) {
             $detail_transaksi->jumlah = 0;
           
@@ -258,15 +252,6 @@ class PenerimaanController extends Controller
 
         
 
-        $id= (DB::table('penerimaan')->count());
-            if($id >= 1){
-                $x = str_pad($id+1, 15, "0", STR_PAD_LEFT);
-                $id_penerimaan= "PEN".$x;
-            }
-            else{
-                $y = str_pad(1, 15, "0", STR_PAD_LEFT);
-                $id_penerimaan= "PEN".$y;
-            }
 
 
         $penerimaan = new Penerimaan;
@@ -278,7 +263,7 @@ class PenerimaanController extends Controller
 
          
         $penerimaan_supplier = new PenerimaanSupplier;
-        $penerimaan_supplier->id_penerimaan= $id_penerimaan;
+        $penerimaan_supplier->id_penerimaan= $request->id_penerimaan;
         $penerimaan_supplier->id_supplier= $request->id_supplier;
         $penerimaan_supplier->berat_surat_jalan= $request->berat_surat_jalan;
         $penerimaan_supplier->berat_aktual= $request->berat_aktual;
@@ -298,7 +283,7 @@ class PenerimaanController extends Controller
         
         $detail_transaksi = new DetailTransaksi;
         $detail_transaksi->id_satuan = 1;
-        $detail_transaksi->id_transaksi = $id_penerimaan;
+        $detail_transaksi->id_transaksi =$request->id_penerimaan;
         $detail_transaksi->jumlah = $request->berat_aktual;
         $detail_transaksi->id_jenis_transaksi = 3;
         $detail_transaksi->id_bahan_baku = $request->id_bahan_baku;
@@ -328,16 +313,6 @@ class PenerimaanController extends Controller
     
         ]);
 
-        $id= (DB::table('penerimaan')->count());
-            if($id >= 1){
-                $x = str_pad($id+1, 15, "0", STR_PAD_LEFT);
-                $id_penerimaan= "PEN".$x;
-            }
-            else{
-                $y = str_pad(1, 15, "0", STR_PAD_LEFT);
-                $id_penerimaan= "PEN".$y;
-            }
-
 
         $penerimaan = new Penerimaan;
         $penerimaan->id_transaksi = $request->id_transaksi2;
@@ -361,7 +336,7 @@ class PenerimaanController extends Controller
         
         $detail_transaksi = new DetailTransaksi;
         $detail_transaksi->id_satuan = 1;
-        $detail_transaksi->id_transaksi = $id_penerimaan;
+        $detail_transaksi->id_transaksi = $request->id_penerimaan;
         $detail_transaksi->jumlah = $request->berat_aktual2;
         $detail_transaksi->id_jenis_transaksi = 3;
         $detail_transaksi->id_bahan_baku = $request->id_bahan_baku2;
@@ -399,14 +374,43 @@ class PenerimaanController extends Controller
      * @param  \App\Penerimaan  $penerimaan
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit1($id)
     {
         
         $gudang = Gudang::all(); 
         $supplier = Supplier::all(); 
-        return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id])->with(compact('gudang', 'supplier'));
+        $bahanbaku = BahanBaku::select('bahan_baku.id_bahan_baku', 'bahan_baku.nama AS nama_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', 'tipe_bahan_baku.nama AS nama_tipe_bahan_baku')
+                    ->join('tipe_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', '=', 'tipe_bahan_baku.id_tipe_bahan_baku' )
+                    ->orderBy('id_bahan_baku', 'asc')
+                    ->get();
+        $penerimaan_supplier = PenerimaanSupplier::where('id_penerimaan', $id)->first();
+        $penerimaan= Penerimaan::select('penerimaan.id_penerimaan', 'penerimaan.timestamp' , 'penerimaan.id_gudang','penerimaan.id_transaksi', 'penerimaan.id_jenis_penerimaan', 'detail_transaksi.id_bahan_baku' , 'bahan_baku.nama AS nama_bahan_baku', 'detail_susut.berat_susut_kg AS berat_susut_kg ',  'detail_susut.berat_susut_persen AS berat_susut_persen ')
+                        ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'penerimaan.id_penerimaan')
+                        ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'detail_transaksi.id_bahan_baku')
+                        ->join('detail_susut', 'detail_susut.id_detail_transaksi', '=', 'detail_transaksi.id_detail_transaksi')
+                        ->where('id_penerimaan', $id)
+                        ->first();
+        return view('managerproduksi.penerimaan.edit_penerimaan_supplier')->with(compact('gudang', 'supplier', 'bahanbaku', 'penerimaan', 'penerimaan_supplier'));
         
-        //return view('managerproduksi.penerimaan.edit_penerimaan' , ['id_penerimaan' => $id]);
+    }
+
+    public function edit2($id)
+    {
+        
+        $gudang = Gudang::all(); 
+        $bahanbaku = BahanBaku::select('bahan_baku.id_bahan_baku', 'bahan_baku.nama AS nama_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', 'tipe_bahan_baku.nama AS nama_tipe_bahan_baku')
+                    ->join('tipe_bahan_baku', 'bahan_baku.id_tipe_bahan_baku', '=', 'tipe_bahan_baku.id_tipe_bahan_baku' )
+                    ->orderBy('id_bahan_baku', 'asc')
+                    ->get();
+
+        $penerimaan= Penerimaan::select('penerimaan.id_penerimaan', 'penerimaan.timestamp' , 'penerimaan.id_gudang','penerimaan.id_transaksi', 'penerimaan.id_jenis_penerimaan', 'detail_transaksi.id_bahan_baku', 'detail_transaksi.jumlah AS berat_aktual' , 'bahan_baku.nama AS nama_bahan_baku', 'detail_susut.berat_susut_kg AS berat_susut_kg ',  'detail_susut.berat_susut_persen AS berat_susut_persen ', 'detail_susut.berat_kirim AS berat_surat_jalan')
+                        ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'penerimaan.id_penerimaan')
+                        ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'detail_transaksi.id_bahan_baku')
+                        ->join('detail_susut', 'detail_susut.id_detail_transaksi', '=', 'detail_transaksi.id_detail_transaksi')
+                        ->where('id_penerimaan', $id)
+                        ->first();
+        return view('managerproduksi.penerimaan.edit_penerimaan_pemindahanbahan')->with(compact('gudang', 'bahanbaku', 'penerimaan'));
+        
     }
 
     /**
@@ -416,9 +420,87 @@ class PenerimaanController extends Controller
      * @param  \App\Penerimaan  $penerimaan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Penerimaan $penerimaan)
+    public function update1(Request $request, $id)
     {
-        //
+        $request->validate  
+        ([  'id_transaksi' => 'required|max:18',
+            'id_jenis_penerimaan' => 'required',
+            'id_gudang' => 'required',
+            'id_supplier' => 'required',
+            'id_bahan_baku' => 'required',
+            'nomor_kontainer' => 'required',
+            'nomor_polisi' => 'required',
+            'berat_surat_jalan' => 'required',
+            'berat_aktual' => 'required'
+        
+        ]);
+        
+        $penerimaan = Penerimaan::find($id);
+        $penerimaan->id_transaksi = $request->id_transaksi;
+        $penerimaan->id_jenis_penerimaan = $request->id_jenis_penerimaan;
+        $penerimaan->id_gudang = $request->id_gudang;
+        $penerimaan->save();
+
+        $penerimaan_supplier = PenerimaanSupplier::find($id);
+        $penerimaan_supplier->id_supplier= $request->id_supplier;
+        $penerimaan_supplier->berat_surat_jalan= $request->berat_surat_jalan;
+        $penerimaan_supplier->berat_aktual= $request->berat_aktual;
+        $penerimaan_supplier->nomor_kontainer= $request->nomor_kontainer;
+        $penerimaan_supplier->nomor_polisi= $request->nomor_polisi;
+        $penerimaan_supplier->save();
+
+        $detail_transaksi = DetailTransaksi::where('id_transaksi', $id)->first();
+        $detail_transaksi->id_satuan = 1;
+        $detail_transaksi->jumlah = $request->berat_aktual;
+        $detail_transaksi->id_jenis_transaksi = 3;
+        $detail_transaksi->id_bahan_baku = $request->id_bahan_baku;
+        $detail_transaksi->save();
+
+        $detail_susut = DetailSusut::where('id_detail_transaksi', $detail_transaksi->id_detail_transaksi)->first();
+        $detail_susut->nama = "penerimaan";
+        $detail_susut->berat_susut_kg = $request->berat_susut_kg ;
+        $detail_susut->berat_susut_persen = $request->berat_susut_persen ;
+        $detail_susut->berat_kirim = $request->berat_surat_jalan ;
+        $detail_susut->save();
+
+        return redirect('/penerimaan/history_penerimaan');
+
+    }
+
+     public function update2(Request $request, $id)
+    {
+        $request->validate  
+        ([  'id_transaksi' => 'required|max:18',
+            'id_jenis_penerimaan' => 'required',
+            'id_gudang' => 'required',
+            'id_bahan_baku' => 'required',
+            'berat_surat_jalan' => 'required',
+            'berat_aktual' => 'required'
+        
+        ]);
+        
+        $penerimaan = Penerimaan::find($id);
+        $penerimaan->id_transaksi = $request->id_transaksi;
+        $penerimaan->id_jenis_penerimaan = $request->id_jenis_penerimaan;
+        $penerimaan->id_gudang = $request->id_gudang;
+        $penerimaan->save();
+
+        $detail_transaksi = DetailTransaksi::where('id_transaksi', $id)->first();
+        $detail_transaksi->id_satuan = 1;
+        $detail_transaksi->jumlah = $request->berat_aktual;
+        $detail_transaksi->id_jenis_transaksi = 3;
+        $detail_transaksi->id_bahan_baku = $request->id_bahan_baku;
+        $detail_transaksi->save();
+
+        $detail_susut = DetailSusut::where('id_detail_transaksi', $detail_transaksi->id_detail_transaksi)->first();
+        $detail_susut->nama = "penerimaan";
+        $detail_susut->berat_susut_kg = $request->berat_susut_kg ;
+        $detail_susut->berat_susut_persen = $request->berat_susut_persen ;
+        $detail_susut->berat_kirim = $request->berat_surat_jalan ;
+        $detail_susut->save();
+
+        return redirect('/penerimaan/history_penerimaan');
+
     }
 
     /**

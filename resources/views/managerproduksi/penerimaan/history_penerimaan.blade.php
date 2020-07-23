@@ -53,6 +53,8 @@ Penerimaan Barang
                         <table id="datatable" class="display table table-bordered table-striped table-manpro-hover datatable">
                             <thead>
                                 <tr>
+                                    <th style="display: none;"></th>
+                                    <th style="display: none;"></th>
                                     <th>Tanggal</th>
                                     <th>No. Surat Jalan</th>
                                     <th>Bahan</th>
@@ -60,27 +62,16 @@ Penerimaan Barang
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--
-                                <tr>
-                                    <td>10/06/2020</td>
-                                    <td>SJ100620002</td>
-                                    <td>Kacang OB</td>
-                                    <td>
-                                        <div class="badge-list">
-                                            <span class="badge badge-danger badge-font">Belum</span>                       
-                                        </div>
-                                    </td>
-                                </tr>
-                            -->
                             @foreach($historypenerimaan as $hp)
                                
                                 <tr>
+                                    <td style="display: none;">{{ $hp->id_penerimaan }}</td>
+                                    <td style="display: none;">{{ $hp->id_jenis_penerimaan }}</td>
                                     <td>{{ date('d/m/Y' , strtotime($hp->timestamp)) }}</td>
                                     <td>{{ $hp->id_transaksi }}</td>
                                     <td>{{ $hp->nama_bahan_baku }}</td>
                                     <td>
 
-                                     
                                         
                                             @if($hp->jumlah == 0)
                                                 <div class="badge-list">
@@ -92,6 +83,7 @@ Penerimaan Barang
                                                 </div>
                                             @endif
 
+                                        
                             
                                      
                                     </td>
@@ -143,6 +135,8 @@ Penerimaan Barang
         
         
         var table = document.getElementById("datatable");
+        
+
         if (table) {
           for (var i = 0; i < table.rows.length; i++) {
             table.rows[i].onclick = function() {
@@ -153,19 +147,28 @@ Penerimaan Barang
 
        
     
-    });
+   
 
      function editPenerimaan(tableRow) {
-          var tgl = tableRow.childNodes[1].innerHTML;
-          var nomorsurat = tableRow.childNodes[3].innerHTML;
-          var nama = tableRow.childNodes[5].innerHTML;
-          var status = tableRow.childNodes[7].childNodes[0].innerHTML;
-          var obj = {'tgl': tgl, 'nomorsurat': nomorsurat, 'nama': nama, 'status':status};
-          console.log(obj);
-          confirmEdit(nomorsurat);
+          var id_penerimaan = tableRow.childNodes[1].innerHTML;
+          var jenis_penerimaan = tableRow.childNodes[3].innerHTML;
 
-        function confirmEdit(id){
-            let url = "{{ route('edit_penerimaan', ':id') }}";
+          if (jenis_penerimaan == 1) {
+            confirmEdit1(id_penerimaan);
+          }else{
+            confirmEdit2(id_penerimaan);
+          }
+
+          
+
+        function confirmEdit1(id){
+            let url = "{{ route('edit_penerimaan_supplier', ':id') }}";
+            url = url.replace(':id', id);
+            document.location.href=url;
+        }
+
+        function confirmEdit2(id){
+            let url = "{{ route('edit_penerimaan_pemindahanbahan', ':id') }}";
             url = url.replace(':id', id);
             document.location.href=url;
         }
@@ -173,7 +176,10 @@ Penerimaan Barang
 
   
 
-        }
+    }
+
+
+ });
 
 
 

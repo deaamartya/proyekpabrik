@@ -15,8 +15,12 @@ Route::post('/penerimaan/store_sementara_penerimaan_supplier', 'managerproduksi\
 Route::post('/penerimaan/store_sementara_penerimaan_pemindahanbahan', 'managerproduksi\PenerimaanController@store_sementara2');
 Route::post('/penerimaan/store_penerimaan_supplier', 'managerproduksi\PenerimaanController@store1');
 Route::post('/penerimaan/store_penerimaan_pemindahanbahan', 'managerproduksi\PenerimaanController@store2');
-Route::get('/penerimaan/edit_penerimaan/{id}', 'managerproduksi\PenerimaanController@edit')->name('edit_penerimaan');
+Route::get('/penerimaan/edit_penerimaan_supplier/{id}', 'managerproduksi\PenerimaanController@edit1')->name('edit_penerimaan_supplier');
+Route::get('/penerimaan/edit_penerimaan_pemindahanbahan/{id}', 'managerproduksi\PenerimaanController@edit2')->name('edit_penerimaan_pemindahanbahan');
+Route::post('/penerimaan/update_penerimaan_supplier/{id}', 'managerproduksi\PenerimaanController@update1');
+Route::post('/penerimaan/update_penerimaan_pemindahanbahan/{id}', 'managerproduksi\PenerimaanController@update2');
 Route::get('/penerimaan/cetak_barcode',  'managerproduksi\PenerimaanController@printBarcode');
+Route::get('/penerimaan/cetak_barcode_edit/{id}',  'managerproduksi\PenerimaanController@printBarcode2');
 
 // Manager Produksi | Order Masak
 Route::get('/manager-produksi/order-masak', 'managerproduksi\ManagerproduksiController@order_masak');
