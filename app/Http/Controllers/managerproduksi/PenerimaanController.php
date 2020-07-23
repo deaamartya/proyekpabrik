@@ -252,11 +252,8 @@ class PenerimaanController extends Controller
             'nomor_kontainer' => 'required',
             'nomor_polisi' => 'required',
             'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required',
-            'berat_susut_kg' => 'required',
-            'berat_surat_persen' => 'required'
+            'berat_aktual' => 'required'
         
-
         ]);
 
         
@@ -327,9 +324,7 @@ class PenerimaanController extends Controller
             'id_gudang2' => 'required',
             'id_bahan_baku2' => 'required',
             'berat_surat_jalan2' => 'required',
-            'berat_aktual' => 'required',
-            'berat_susut_kg' => 'required',
-            'berat_surat_persen' => 'required'
+            'berat_aktual2' => 'required'
     
         ]);
 

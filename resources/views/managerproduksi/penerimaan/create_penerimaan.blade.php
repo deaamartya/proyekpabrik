@@ -68,7 +68,7 @@ Surat Penerimaan Barang
                             </div>
 
                             <div class="card-body"> 
-                                <form id="penerimaan_supplier" method="post" action="/penerimaan/store_penerimaan_supplier" >
+                                <form id="penerimaan_supplier" method="post" action="" >
                                     @csrf
 
                                     <!-- jenis penerimaan : dari supplier -->
@@ -79,12 +79,21 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8" id="supplier" >
                                                 <i class="fa fa-building" aria-hidden="true"></i>
                                                 <label for="pilih_supplier">Supplier</label>
-                                                <select id="pilih_supplier" name="id_supplier" class="form-control">
+                                                <select id="pilih_supplier" name="id_supplier" value="{{old('id_supplier')}}"  class="form-control @error('id_supplier') is-invalid @enderror">
                                                     <option disabled selected readonly>- Pilih Supplier -</option>
                                                     @foreach($supplier as $s)
                                                     <option value="{{ $s->id_supplier }}" >{{ $s->nama }}</option>
                                                     @endforeach
                                                 </select>
+
+
+                                                @error('id_supplier') 
+                                                    <div class="invalid-feedback form-error font-error">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -94,14 +103,24 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-tags" aria-hidden="true"></i>
                                                 <label for="inputSuratJalan">No. Surat Jalan</label>
-                                                <input type="text" class="form-control" id="inputSuratJalan" name="id_transaksi" placeholder="Masukkan Nomor Surat Jalan">
+                                                <input type="text" class="form-control @error('id_transaksi') is-invalid @enderror" id="inputSuratJalan" name="id_transaksi" placeholder="Masukkan Nomor Surat Jalan" value="{{old('id_transaksi')}}">
+                                                 @error('id_transaksi') 
+                                                    <div class="invalid-feedback form-error font-error">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-tags" aria-hidden="true"></i>
                                                 <label for="inputKontainer">Nomor Kontainer</label>
-                                                <input type="text" class="form-control" id="inputKontainer" name="nomor_kontainer" placeholder="Masukkan Nomor Kontainer">
+                                                <input type="text" class="form-control @error('nomor_kontainer') is-invalid @enderror" id="inputKontainer" name="nomor_kontainer" placeholder="Masukkan Nomor Kontainer" value="{{old('nomor_kontainer')}}">
+                                                 @error('nomor_kontainer') 
+                                                    <div class="invalid-feedback form-error font-error">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -111,19 +130,31 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-tags" aria-hidden="true"></i>
                                                 <label for="inputPolisi">Nomor Polisi</label>
-                                                <input type="text" class="form-control" id="inputPolisi" name="nomor_polisi" placeholder="Masukkan Nomor Polisi">
+                                                <input type="text" class="form-control @error('nomor_polisi') is-invalid @enderror" id="inputPolisi" name="nomor_polisi" placeholder="Masukkan Nomor Polisi" value="{{old('nomor_polisi')}}">
+                                                @error('nomor_polisi') 
+                                                    <div class="invalid-feedback form-error font-error">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-archive" aria-hidden="true"></i>
                                                 <label for="inputGudangSimpan">Gudang Simpan</label>
-                                                <select id="inputGudangSimpan" name="id_gudang" class="form-control">
+                                                <select id="inputGudangSimpan" name="id_gudang" class="form-control  @error('id_gudang') is-invalid @enderror" value="{{old('id_gudang')}}">  
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang as $g)
                                                     <option value="{{ $g->id_gudang }}">{{ $g->nama }}</option>
                                                     @endforeach
                                                 </select>
+                                                @error('id_gudang') 
+                                                    <div class="invalid-feedback form-error font-error">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror  
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -134,10 +165,15 @@ Surat Penerimaan Barang
                                                     <i class="fa fa-industry" aria-hidden="true"></i>
                                                     <label for="kode-bahan">ID Bahan Baku</label>
                                                     <div class="input-group mb-3">
-                                                        <input type="text" id="kode-bahan" class="form-control" placeholder="Masukkan ID Bahan Baku" aria-label="ID Bahan Baku" aria-describedby="button-addon-group" name="id_bahan_baku">
+                                                        <input type="text" id="kode-bahan" class="form-control @error('id_bahan_baku') is-invalid @enderror" placeholder="Masukkan ID Bahan Baku" aria-label="ID Bahan Baku" aria-describedby="button-addon-group" name="id_bahan_baku" value="{{ old('id_bahan_baku') }}">
                                                         <div class="input-group-append">
                                                             <button class="btn btn-primary" type="button" id="button-addon-group" data-toggle="modal" data-target="#modal">Pilih Bahan Baku</button>
                                                         </div>
+                                                        @error('id_bahan_baku') 
+                                                            <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror 
                                                     </div>
                                                 </div>
                                         </div>
@@ -145,7 +181,12 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-industry" aria-hidden="true"></i>
                                                 <label for="nama-bahan">Nama Bahan Baku</label>
-                                                <input type="text" class="form-control" id="nama-bahan" placeholder="Masukkan Nama Bahan Baku">
+                                                <input type="text" class="form-control @error('nama_bahan') is-invalid @enderror" name="nama_bahan" id="nama-bahan" placeholder="Masukkan Nama Bahan Baku" value="{{ old('nama_bahan') }}">
+                                                @error('nama_bahan') 
+                                                            <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                            </div>
+                                                @enderror 
                                             </div>
                                         </div>
                                     </div>
@@ -155,14 +196,24 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                                 <label for="inputBSJ">Berat Surat Jalan (Kg)</label>
-                                                <input type="number" class="form-control" id="berat_suratjalan" name="berat_surat_jalan" placeholder="Masukkan Berat Surat Jalan">
+                                                <input type="number" class="form-control @error('berat_surat_jalan') is-invalid @enderror" id="berat_suratjalan" name="berat_surat_jalan" placeholder="Masukkan Berat Surat Jalan" value="{{ old('berat_surat_jalan') }}">
+                                                 @error('berat_surat_jalan') 
+                                                            <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                            </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                                 <label for="inputNetto">Berat Netto/Aktual (Kg)</label>
-                                                <input type="number" class="form-control" id="berat_netto" name="berat_aktual" placeholder="Masukkan Berat Netto" oninput="hitungSusut();">
+                                                <input type="number" class="form-control @error('berat_aktual') is-invalid @enderror" id="berat_netto" name="berat_aktual" placeholder="Masukkan Berat Netto" oninput="hitungSusut();" value="{{ old('berat_aktual') }}">
+                                                 @error('berat_aktual') 
+                                                            <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                            </div>
+                                                @enderror
                                             </div>
                                         </div> 
                                     </div>
@@ -188,9 +239,9 @@ Surat Penerimaan Barang
                                     
                                     <div class="form-row">
                                         <div class="widgetbar" align="center">
-                                            <a onclick="submitPenerimaan();" class="btn btn-light">Simpan Sementara</a>
+                                            <a onclick="submitSementara();" class="btn btn-light">Simpan Sementara</a>
                                         
-                                            <button type="submit" class="btn btn-primary"> Selesai </button> 
+                                            <a onclick="submitPenerimaan();" class="btn btn-primary" style="color: white;">Selesai</a>
 
                                             <a href="{{ url('/penerimaan/cetak_barcode') }}" class="btn btn-primary">Cetak Barcode</a>
                                       
@@ -220,7 +271,7 @@ Surat Penerimaan Barang
                             </div>
                           
                             <div class="card-body">
-                                <form id="pemindahan_bahan" method="post" action="/penerimaan/store_penerimaan_pemindahanbahan" >
+                                <form id="pemindahan_bahan" method="post" action="" >
                                     @csrf
 
                                     <!-- jenis penerimaan : pemindahan bahan-->
@@ -231,19 +282,29 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-tags" aria-hidden="true"></i>
                                                 <label for="inputSuratJalan2">No. Surat Jalan</label>
-                                                <input type="text" class="form-control" id="inputSuratJalan2" name="id_transaksi2" placeholder="Masukkan Nomor Surat Jalan">
+                                                <input type="text" class="form-control @error('id_transaksi2') is-invalid @enderror" id="inputSuratJalan2" name="id_transaksi2" placeholder="Masukkan Nomor Surat Jalan" value="{{ old('id_transaksi2') }}">
+                                                @error('id_transaksi2') 
+                                                    <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                    </div>
+                                                @enderror 
                                             </div>
                                         </div>
                                          <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-archive" aria-hidden="true"></i>
                                                 <label for="inputGudangSimpan2">Gudang Simpan</label>
-                                                <select id="inputGudangSimpan2" name="id_gudang2" class="form-control">
+                                                <select id="inputGudangSimpan2" name="id_gudang2" class="form-control @error('id_gudang2') is-invalid @enderror" value="{{ old('id_gudang2') }}">
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang as $g)
                                                     <option value="{{ $g->id_gudang }}">{{ $g->nama }}</option>
                                                     @endforeach
                                                 </select>
+                                                @error('id_gudang2') 
+                                                    <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -255,10 +316,15 @@ Surat Penerimaan Barang
                                                     <i class="fa fa-industry" aria-hidden="true"></i>
                                                     <label for="kode-bahan2">ID Bahan Baku</label>
                                                     <div class="input-group mb-3">
-                                                        <input type="text" id="kode-bahan2" class="form-control" placeholder="Masukkan ID Bahan Baku" aria-label="ID Bahan Baku" aria-describedby="button-addon-group" name="id_bahan_baku2">
+                                                        <input type="text" id="kode-bahan2" class="form-control @error('id_bahan_baku2') is-invalid @enderror" placeholder="Masukkan ID Bahan Baku" aria-label="ID Bahan Baku" aria-describedby="button-addon-group" name="id_bahan_baku2" value="{{ old('id_bahan_baku2') }}">
                                                         <div class="input-group-append">
                                                             <button class="btn btn-primary" type="button" id="button-addon-group2" data-toggle="modal" data-target="#modal2">Pilih Bahan Baku</button>
                                                         </div>
+                                                         @error('id_bahan_baku2') 
+                                                            <div class="invalid-feedback form-error font-error"> 
+                                                                        {{ $message }}
+                                                            </div>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                         </div>
@@ -266,7 +332,12 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-industry" aria-hidden="true"></i>
                                                 <label for="nama-bahan2">Nama Bahan Baku</label>
-                                                <input type="text" class="form-control" id="nama-bahan2" placeholder="Masukkan Nama Bahan Baku">
+                                                <input type="text" class="form-control @error('nama_bahan2') is-invalid @enderror" id="nama-bahan2" name="nama_bahan2" placeholder="Masukkan Nama Bahan Baku" value="{{ old('nama_bahan2') }}">
+                                                 @error('nama_bahan2') 
+                                                            <div class="invalid-feedback form-error font-error"> 
+                                                                        {{ $message }}
+                                                            </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -276,14 +347,24 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                                 <label for="inputBSJ">Berat Surat Jalan (Kg)</label>
-                                                <input type="number" class="form-control" id="berat_suratjalan2" name="berat_surat_jalan2" placeholder="Masukkan Berat Surat Jalan">
+                                                <input type="number" class="form-control  @error('berat_surat_jalan2') is-invalid @enderror" id="berat_suratjalan2" name="berat_surat_jalan2" placeholder="Masukkan Berat Surat Jalan" value="{{ old('berat_surat_jalan2') }}">
+                                                 @error('berat_surat_jalan2') 
+                                                            <div class="invalid-feedback form-error font-error"> 
+                                                                        {{ $message }}
+                                                            </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                                 <label for="berat_netto2">Berat Netto/Aktual (Kg)</label>
-                                                <input type="number" class="form-control" id="berat_netto2" name="berat_aktual2" placeholder="Masukkan Berat Netto" oninput="hitungSusut2();">
+                                                <input type="number" class="form-control @error('berat_aktual2') is-invalid @enderror" id="berat_netto2" name="berat_aktual2" placeholder="Masukkan Berat Netto" oninput="hitungSusut2();" value="{{ old('berat_aktual2') }}">
+                                                 @error('berat_aktual2') 
+                                                            <div class="invalid-feedback form-error font-error"> 
+                                                                        {{ $message }}
+                                                            </div>
+                                                @enderror
                                             </div>
                                         </div> 
                                     </div>
@@ -309,9 +390,9 @@ Surat Penerimaan Barang
                                     
                                     <div class="form-row">
                                         <div class="widgetbar" align="center">
-                                            <a onclick="submitPenerimaan2();" class="btn btn-light">Simpan Sementara</a>
+                                            <a onclick="submitSementara2();" class="btn btn-light">Simpan Sementara</a>
                                         
-                                            <button type="submit" class="btn btn-primary"> Selesai </button> 
+                                            <a onclick="submitPenerimaan2();" class="btn btn-primary" style="color: white;">Selesai</a>
 
                                             <a href="{{ url('/penerimaan/cetak_barcode') }}" class="btn btn-primary">Cetak Barcode</a>
                                       
@@ -448,13 +529,24 @@ Surat Penerimaan Barang
 
 <script>
 
-function submitPenerimaan(){
+function submitSementara(){
   $("#penerimaan_supplier").attr("action", "/penerimaan/store_sementara_penerimaan_supplier");
   document.getElementById('penerimaan_supplier').submit();
 }
 
-function submitPenerimaan2(){
+function submitSementara2(){
   $("#pemindahan_bahan").attr("action", "/penerimaan/store_sementara_penerimaan_pemindahanbahan");
+  document.getElementById('pemindahan_bahan').submit();
+}
+
+
+function submitPenerimaan(){
+  $("#penerimaan_supplier").attr("action", "/penerimaan/store_penerimaan_supplier");
+  document.getElementById('penerimaan_supplier').submit();
+}
+
+function submitPenerimaan2(){
+  $("#pemindahan_bahan").attr("action", "/penerimaan/store_penerimaan_pemindahanbahan");
   document.getElementById('pemindahan_bahan').submit();
 }
 
