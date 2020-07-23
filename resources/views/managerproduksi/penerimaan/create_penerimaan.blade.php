@@ -68,7 +68,7 @@ Surat Penerimaan Barang
                             </div>
 
                             <div class="card-body"> 
-                                <form method="post" action="/penerimaan/store_penerimaan_supplier" >
+                                <form id="penerimaan_supplier" method="post" action="/penerimaan/store_penerimaan_supplier" >
                                     @csrf
 
                                     <!-- jenis penerimaan : dari supplier -->
@@ -172,14 +172,14 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-level-down" aria-hidden="true"></i>
                                                 <label for="inputPKG">Penyusutan (Kg)</label>
-                                                <input type="number" class="form-control" id="penyusutan" name="berat_susut_kg" placeholder="Masukkan Penyusutan" value="">
+                                                <input type="number" class="form-control" id="penyusutan" name="berat_susut_kg"  value="" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-level-down" aria-hidden="true"></i>
                                                 <label for="inputPersen">Penyusutan (%)</label>
-                                                <input type="number" class="form-control" id="percent_penyusutan" name="berat_susut_persen" placeholder="Masukkan Penyusutan" value="">
+                                                <input type="number" class="form-control" id="percent_penyusutan" name="berat_susut_persen"  value="" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -188,7 +188,7 @@ Surat Penerimaan Barang
                                     
                                     <div class="form-row">
                                         <div class="widgetbar" align="center">
-                                            <a href="" class="btn btn-light">Simpan Sementara</a>
+                                            <a onclick="submitPenerimaan();" class="btn btn-light">Simpan Sementara</a>
                                         
                                             <button type="submit" class="btn btn-primary"> Selesai </button> 
 
@@ -220,7 +220,7 @@ Surat Penerimaan Barang
                             </div>
                           
                             <div class="card-body">
-                                <form method="post" action="/penerimaan/store_penerimaan_pemindahanbahan" >
+                                <form id="pemindahan_bahan" method="post" action="/penerimaan/store_penerimaan_pemindahanbahan" >
                                     @csrf
 
                                     <!-- jenis penerimaan : pemindahan bahan-->
@@ -293,14 +293,14 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-level-down" aria-hidden="true"></i>
                                                 <label for="penyusutan2">Penyusutan (Kg)</label>
-                                                <input type="number" class="form-control" id="penyusutan2" name="berat_susut_kg2" placeholder="Masukkan Penyusutan" value="">
+                                                <input type="number" class="form-control" id="penyusutan2" name="berat_susut_kg2" value="" readonly="">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-level-down" aria-hidden="true"></i>
                                                 <label for="percent_penyusutan2">Penyusutan (%)</label>
-                                                <input type="number" class="form-control" id="percent_penyusutan2" name="berat_susut_persen2" placeholder="Masukkan Penyusutan" value="">
+                                                <input type="number" class="form-control" id="percent_penyusutan2" name="berat_susut_persen2" value="" readonly="">
                                             </div>
                                         </div>
                                     </div>
@@ -309,7 +309,7 @@ Surat Penerimaan Barang
                                     
                                     <div class="form-row">
                                         <div class="widgetbar" align="center">
-                                            <a href="" class="btn btn-light">Simpan Sementara</a>
+                                            <a onclick="submitPenerimaan2();" class="btn btn-light">Simpan Sementara</a>
                                         
                                             <button type="submit" class="btn btn-primary"> Selesai </button> 
 
@@ -447,6 +447,17 @@ Surat Penerimaan Barang
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
 <script>
+
+function submitPenerimaan(){
+  $("#penerimaan_supplier").attr("action", "/penerimaan/store_sementara_penerimaan_supplier");
+  document.getElementById('penerimaan_supplier').submit();
+}
+
+function submitPenerimaan2(){
+  $("#pemindahan_bahan").attr("action", "/penerimaan/store_sementara_penerimaan_pemindahanbahan");
+  document.getElementById('pemindahan_bahan').submit();
+}
+
 
 
 $(document).ready(function(){

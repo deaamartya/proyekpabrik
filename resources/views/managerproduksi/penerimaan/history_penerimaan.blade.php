@@ -79,9 +79,21 @@ Penerimaan Barang
                                     <td>{{ $hp->id_transaksi }}</td>
                                     <td>{{ $hp->nama_bahan_baku }}</td>
                                     <td>
-                                        <div class="badge-list">
-                                            <span class="badge badge-success badge-font">Selesai</span>                  
-                                        </div>
+
+                                     
+                                        
+                                            @if($hp->jumlah == 0)
+                                                <div class="badge-list">
+                                                    <span class="badge badge-danger badge-font">Belum</span>                       
+                                                </div>
+                                            @else
+                                                <div class="badge-list">
+                                                    <span class="badge badge-success badge-font">Selesai</span>
+                                                </div>
+                                            @endif
+
+                            
+                                     
                                     </td>
                                 </tr>
 
