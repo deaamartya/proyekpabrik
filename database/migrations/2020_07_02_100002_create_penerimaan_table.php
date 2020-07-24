@@ -19,6 +19,7 @@ class CreatePenerimaanTable extends Migration
             $table->string('id_transaksi', 18);
             $table->unsignedInteger('id_jenis_penerimaan');
             $table->unsignedInteger('id_gudang');
+            $table->boolean('status_simpan');//0 = belum, 1 = selesai
             $table->foreign('id_jenis_penerimaan')->references('id_jenis_penerimaan')->on('jenis_penerimaan');
             $table->foreign('id_gudang')->references('id_gudang')->on('gudang')->onUpdate('cascade')->onDelete('cascade');
         });

@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
         $this->call(JenisPenerimaanSeeder::class);
         $this->call(JenisTransaksiSeeder::class);
-        
+        $this->call(GroupKerjaSeeder::class);
 
     }
 }

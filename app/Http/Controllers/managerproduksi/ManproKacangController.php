@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\managerproduksi;
 
-use App\Managerproduksi\ManproKacang;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+use App\Models\Stock;
+use App\Models\BahanBaku;
 
 class ManproKacangController extends Controller
 {
@@ -15,7 +17,13 @@ class ManproKacangController extends Controller
      */
     public function home()
     {
-        return view('managerproduksi.gudang-kacang.home_gudangkacang');
+         $stock = Stock::select('stock.timestamp' , 'stock.stock')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->where('bahan_baku.nama', '=', 'kacang')
+                    ->get();
+
+
+        return view('managerproduksi.gudang-kacang.home_gudangkacang')->with(compact('stock'));
     }
 
 

@@ -16,5 +16,9 @@ class SatuanTableSeeder extends Seeder
             'nama' => 'kg',
             'status' => 1
         ]);
+        DB::table('satuan')->insert([
+            'nama' => 'plastik',
+            'status' => 2
+        ]);
     }
 }
