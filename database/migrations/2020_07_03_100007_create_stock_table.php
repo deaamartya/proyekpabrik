@@ -37,6 +37,16 @@ class CreateStockTable extends Migration
                     SET new.id_stock = CONCAT('ST',LPAD(1,11,'0'));
                 END IF;
             END");
+
+        DB::unprepared("CREATE TRIGGER `auto_count_stock` BEFORE INSERT ON `stock`
+             FOR EACH ROW BEGIN
+                SELECT `stock` INTO @last FROM stock WHERE id_bahan_baku = new.id_bahan_baku AND id_gudang = new.id_gudang ORDER BY `TIMESTAMP`;
+                    IF (@last >= 0) THEN
+                        SET new.stock = @last+new.masuk-new.keluar;
+                    ELSE
+                        SET new.stock = new.masuk-new.keluar;
+                    END IF;
+            END");
     }
 
     /**

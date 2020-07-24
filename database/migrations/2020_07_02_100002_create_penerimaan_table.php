@@ -19,16 +19,17 @@ class CreatePenerimaanTable extends Migration
             $table->string('id_transaksi', 18);
             $table->unsignedInteger('id_jenis_penerimaan');
             $table->unsignedInteger('id_gudang');
+            $table->boolean('status_simpan');//0 = belum, 1 = selesai
             $table->foreign('id_jenis_penerimaan')->references('id_jenis_penerimaan')->on('jenis_penerimaan');
             $table->foreign('id_gudang')->references('id_gudang')->on('gudang')->onUpdate('cascade')->onDelete('cascade');
         });
         DB::unprepared("CREATE TRIGGER `auto_id_penerimaan` BEFORE INSERT ON `penerimaan`
              FOR EACH ROW BEGIN
-                SELECT SUBSTRING((MAX(`id_penerimaan`)),3,16) INTO @total FROM penerimaan;
+                SELECT SUBSTRING((MAX(`id_penerimaan`)),4,15) INTO @total FROM penerimaan;
                 IF (@total >= 1) THEN
-                    SET new.id_penerimaan = CONCAT('PR',LPAD(@total+1,16,'0'));
+                    SET new.id_penerimaan = CONCAT('PEN',LPAD(@total+1,15,'0'));
                 ELSE
-                    SET new.id_penerimaan = CONCAT('PR',LPAD(1,16,'0'));
+                    SET new.id_penerimaan = CONCAT('PEN',LPAD(1,15,'0'));
                 END IF;
             END");
     }

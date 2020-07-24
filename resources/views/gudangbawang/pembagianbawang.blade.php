@@ -8,6 +8,11 @@ Soyuz - Datatable
 <link href="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<style>
+    .hide{
+        display: none;
+    }
+</style>
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -89,41 +94,16 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr id="row1">
-                                    <td data-toggle="modal" data-target="#ubahTerimaModal1">Tiger Nixon</td>
-                                    <td class="terimakg" id="terima1">12</td>
-                                    <td>
-                                    <button type="button" class="delbtn btn btn-round btn-danger" id="del1"><i class="feather icon-trash-2"></i></button></td>
-                                </tr>
-                                <tr id="row2">
-                                    <td>Garrett Winters</td>
-                                    <td class="terimakg" id="terima2">12</td>
-                                    <td>
-                                    <button type="button" class="delbtn btn btn-round btn-danger" id="del2"><i class="feather icon-trash-2"></i></button></td>
-                                </tr>
-                                <tr id="row3">
-                                    <td>Ashton Cox</td>
-                                    <td class="terimakg" id="terima3">12</td>
-                                    <td><button type="button" class="delbtn btn btn-round btn-danger" id="del3"><i class="feather icon-trash-2"></i></button></td>
-                                </tr>
-                                <tr id="row4">
-                                    <td>Cedric Kelly</td>
-                                    <td class="terimakg" id="terima4">12</td>
-                                    <td>
-                                    <button type="button" class="delbtn btn  btn-round btn-danger" id="del4"><i class="feather icon-trash-2"></i></button></td>
-                                </tr>
-                                <tr id="row5">
-                                    <td>Airi Satou</td>
-                                    <td class="terimakg" id="terima5">12</td>
-                                    <td>
-                                    <button type="button" class="delbtn btn  btn-round btn-danger" id="del5"><i class="feather icon-trash-2"></i></button></td>
-                                </tr>
-                                <tr id="row6">
-                                    <td>Brielle Williamson</td>
-                                    <td class="terimakg" id="terima6">12</td>
-                                    <td>
-                                    <button type="button" class="delbtn btn  btn-round btn-danger" id="del6"><i class="feather icon-trash-2"></i></button></td>
-                                </tr>
+                                @foreach($tenagakupas as $t)
+                                    @if($t->status)
+                                    <tr id="row{{$t->id_pegawai}}">
+                                        <td data-toggle="modal" data-target="#ubahTerimaModal{{$t->id_pegawai}}">{{$t->nama}}</td>
+                                        <td class="terimakg" id="terima{{$t->id_pegawai}}">12</td>
+                                        <td>
+                                        <button type="button" class="delbtn btn btn-round btn-danger" id="del{{$t->id_pegawai}}"><i class="feather icon-trash-2"></i></button></td>
+                                    </tr>
+                                    @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -142,16 +122,14 @@ Soyuz - Datatable
                 <div class="modal-body">
                     <h2 class="page-title text-center" id="addModalTitle">Tambah Penerima</h2>
                     <div class="custom-control custom-checkbox" id="pegawai">
-                        <div class="row m-3">
-                            <div class="col text-center">
-                                <input type="checkbox" class="custom-control-input" id="penerima7" value="Suyati">
-                                <label class="custom-control-label" for="penerima7">Suyati</label>
+                        @foreach($tenagakupas as $t)
+                            <div class="row m-3 @if($t->status) hide @endif" id="check{{$t->id_pegawai}}">
+                                <div class="col text-center">
+                                    <input type="checkbox" class="custom-control-input" id="penerima{{$t->id_pegawai}}" value="{{$t->nama}}">
+                                    <label class="custom-control-label" for="penerima{{$t->id_pegawai}}">{{$t->nama}}</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row m-3 align-items-center">
-                            <input type="checkbox" class="custom-control-input" id="penerima8" value="Ida">
-                            <label class="custom-control-label" for="penerima8">Ida</label>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -176,22 +154,24 @@ Soyuz - Datatable
         </div>
     </div>
 </div>
-<div class="modal fade" id="ubahTerimaModal1" tabindex="-1" role="dialog" aria-labelledby="modalUbahTerima" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h2 class="page-title text-center" id="modalUbahTerima">Ubah Penerimaan Tiger</h2>
-                <div class="form-group mb-0">
-                  <label for="validationCustom01">Berat (Kg)</label>
-                  <input type="text" class="form-control" id="berat1" required>
+@foreach($tenagakupas as $t)
+        <div class="modal fade" id="ubahTerimaModal{{$t->id_pegawai}}" tabindex="-1" role="dialog" aria-labelledby="modalUbahTerima" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h2 class="page-title text-center">Ubah Penerimaan {{$t->nama}}</h2>
+                        <div class="form-group mb-0">
+                          <label for="validationCustom01">Berat (Kg)</label>
+                          <input type="text" class="form-control" id="berat{{$t->id_pegawai}}" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnubahTerima{{$t->id_pegawai}}" type="button" class="btn btn-primary ubahTerima mx-auto">Simpan</button>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button id="btnubahTerima1" type="button" class="btn btn-primary ubahTerima mx-auto">Simpan</button>
-            </div>
         </div>
-    </div>
-</div>
+@endforeach
 <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -223,6 +203,19 @@ Soyuz - Datatable
             { "targets": 1 , "width": "45%" }
         ]
     });
+
+    //ubah var tenaga kupas jadi json
+    var pegawai = <?php echo json_encode($tenagakupas); ?>;
+
+    //mencari indeks data di var pegawai dengan parameter id pegawai
+    function cariPegawai(id){
+        var i = 0;
+        while(pegawai[i]["id_pegawai"] != id){
+            i++;
+        }
+        return i;
+    }
+
     //menghitung total terima dari tabel
     function hitungProsesHariIni(){
         var total = 0;
@@ -254,12 +247,32 @@ Soyuz - Datatable
     function delbtn(){
         $(".delbtn").each(function(){
             $(this).click(function(){
+                //remove dari table
                 table
                     .row($(this).parents('tr'))
                     .remove()
                     .draw();
                     //menghitung ulang terima(kg) per orang
                 hitungTotalProsesHariIni();
+
+                let id = $(this).attr('id').substr(3);
+                let nama = pegawai[cariPegawai(id)]["nama"];
+
+                //cek pegawai ada atau enggak di modal tambah penerimaan
+                if($("#check"+id).length){
+                    //show dari pilihan
+                    $("#check"+id).show();
+                }
+                //kalau tidak ada, bikin pilihan baru
+                else{
+                    let addrow = '<div class="row m-3" id="check'+id+'">\
+                        <div class="col text-center">\
+                            <input type="checkbox" class="custom-control-input" id="penerima'+id+'" value="'+nama+'">\
+                            <label class="custom-control-label" for="penerima'+id+'">'+nama+'</label>\
+                        </div>\
+                    </div>';
+                    $("#pegawai").append(addrow);
+                }
             });
         });
     }
@@ -268,7 +281,6 @@ Soyuz - Datatable
     column.visible(false);
 
     $(document).ready(function() {
-        
         hitungProsesHariIni();
 
         //ubah total terima di atas tabel
@@ -328,6 +340,12 @@ Soyuz - Datatable
                     class:'terimakg',
                     id:'terima'+id
                 });
+
+                //hide dari pilihan
+                $("#check"+id).hide();
+
+                //uncheck
+                $(this).prop('checked',false);
             });
             delbtn(); //refresh delbtn
             hitungTotalProsesHariIni(); //dibagi rata ulang terima(kg)
