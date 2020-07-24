@@ -56,7 +56,7 @@ Home Gudang Kacang
                             <thead>
                                     <tr>
                                         <th width="60%">Tanggal Penerimaan Kacang</th>
-                                        <th>Stock <h5 style="font-size: 11px;">(Karung)</h5></th>
+                                        <th>Stock </th>
                                     </tr>
                           
                             </thead>
@@ -83,7 +83,7 @@ Home Gudang Kacang
                            <thead>
                                     <tr>
                                         <th width="60%">Tanggal Penerimaan Kacang</th>
-                                        <th>Stock <h5 style="font-size: 11px;">(Karung)</h5></th>
+                                        <th>Stock </th>
                                     </tr>
                           
                             </thead>
@@ -106,7 +106,7 @@ Home Gudang Kacang
                            <thead>
                                     <tr>
                                         <th width="60%">Tanggal Penerimaan Kacang</th>
-                                        <th>Stock <h5 style="font-size: 11px;">(Karung)</h5></th>
+                                        <th>Stock </th>
                                     </tr>
                           
                             </thead>
