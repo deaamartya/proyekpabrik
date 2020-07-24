@@ -20,6 +20,8 @@ Route::post('/gudang-bawang/statustenagakupas','gudangbawang\KerjaHarianControll
 
 //route pembagian bawang
 Route::get('/gudang-bawang/pembagian-bawang','gudangbawang\KerjaHarianController@pembagianbawang');
+Route::post('/gudang-bawang/simpanberi','gudangbawang\KerjaHarianController@simpanBeri');
+
 
 //route penerimaan bawang
 Route::get('/gudang-bawang/penerimaan-bawang','gudangbawang\KerjaHarianController@penerimaanbawang');
