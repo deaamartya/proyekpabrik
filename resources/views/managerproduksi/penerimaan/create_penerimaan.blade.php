@@ -84,7 +84,11 @@ Surat Penerimaan Barang
                                                 <select id="pilih_supplier" name="id_supplier" value="{{old('id_supplier')}}"  class="form-control @error('id_supplier') is-invalid @enderror">
                                                     <option disabled selected readonly>- Pilih Supplier -</option>
                                                     @foreach($supplier as $s)
-                                                    <option value="{{ $s->id_supplier }}" >{{ $s->nama }}</option>
+                                                    <option value="{{ $s->id_supplier }}"
+                                                        @if($s->id_supplier == old('id_supplier'))
+                                                            selected
+                                                        @endif 
+                                                     >{{ $s->nama }}</option>
                                                     @endforeach
                                                 </select>
 
@@ -148,7 +152,10 @@ Surat Penerimaan Barang
                                                 <select id="inputGudangSimpan" name="id_gudang" class="form-control  @error('id_gudang') is-invalid @enderror" value="{{old('id_gudang')}}">  
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang as $g)
-                                                    <option value="{{ $g->id_gudang }}">{{ $g->nama }}</option>
+                                                    <option value="{{ $g->id_gudang }}"
+                                                         @if($g->id_gudang == old('id_gudang'))
+                                                            selected
+                                                        @endif >{{ $g->nama }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('id_gudang') 
@@ -245,7 +252,7 @@ Surat Penerimaan Barang
                                         
                                             <a onclick="submitPenerimaan();" class="btn btn-primary" style="color: white;">Selesai</a>
 
-                                            <a href="{{ url('/penerimaan/cetak_barcode') }}" class="btn btn-primary">Cetak Barcode</a>
+                                            <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" class="btn btn-primary">Cetak Barcode</a>
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
                                         </div>                        
@@ -301,7 +308,10 @@ Surat Penerimaan Barang
                                                 <select id="inputGudangSimpan2" name="id_gudang2" class="form-control @error('id_gudang2') is-invalid @enderror" value="{{ old('id_gudang2') }}">
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang as $g)
-                                                    <option value="{{ $g->id_gudang }}">{{ $g->nama }}</option>
+                                                    <option value="{{ $g->id_gudang }}"
+                                                          @if($g->id_gudang == old('id_gudang2'))
+                                                            selected
+                                                        @endif >{{ $g->nama }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('id_gudang2') 
@@ -398,7 +408,7 @@ Surat Penerimaan Barang
                                         
                                             <a onclick="submitPenerimaan2();" class="btn btn-primary" style="color: white;">Selesai</a>
 
-                                            <a href="{{ url('/penerimaan/cetak_barcode') }}" class="btn btn-primary">Cetak Barcode</a>
+                                            <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" onclick="cetak_barcode();" class="btn btn-primary">Cetak Barcode</a>
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
                                         </div>                        
@@ -556,25 +566,6 @@ function submitPenerimaan2(){
   document.getElementById('pemindahan_bahan').submit();
 }
 
-/*
-
-    $(document).ready(function() {
-            $(".simpan-sementara").click(function() {
-                var id_penerimaan = document.getElementsByClassName('kode_penerimaan').value;
-                var status = "belum";
-                $.ajax({
-                    type: "POST",
-                    url: '/penerimaan/history_penerimaan',
-                    data: { id_penerimaan : id_penerimaan, status : status },
-                    success: function(data)
-                    {
-                        
-                    }
-                });
-            });
-    });
-*/
-
 
 $(document).ready(function(){
     $('#table-modal').DataTable();
@@ -663,6 +654,9 @@ $(document).ready(function(){
     });
 
   }
+
+
+  
 </script>
 
 

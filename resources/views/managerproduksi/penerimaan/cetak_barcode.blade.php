@@ -13,9 +13,6 @@
         <br>
           {{$id_penerimaan}}
       </td>
-      @if ($no++ %3 ==0)
-           </tr><tr>
-      @endif
     </tr>
    </table>
   </body>

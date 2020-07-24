@@ -53,8 +53,10 @@ Edit Surat Penerimaan Barang
                                     </div>
                             </div>
 
+                            <input type="hidden" id="kode_penerimaan" value="{{ $penerimaan->id_penerimaan }}">
+
                             <div class="card-body"> 
-                                <form id="penerimaan_supplier" method="post" action="/penerimaan/update_penerimaan_supplier/{{ $penerimaan->id_penerimaan }}" >
+                                <form id="penerimaan_supplier" method="post" action="" >
                                     @csrf
 
                                     <!-- jenis penerimaan : dari supplier -->
@@ -218,14 +220,14 @@ Edit Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-level-down" aria-hidden="true"></i>
                                                 <label for="inputPKG">Penyusutan (Kg)</label>
-                                                <input type="number" class="form-control" id="penyusutan" name="berat_susut_kg"  value="{{ $penerimaan->berat_susut_kg }}" readonly>
+                                                <input type="number" class="form-control" id="penyusutan" name="berat_susut_kg"  value="{{ $detail_transaksi->berat_susut_kg }}" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-level-down" aria-hidden="true"></i>
                                                 <label for="inputPersen">Penyusutan (%)</label>
-                                                <input type="number" class="form-control" id="percent_penyusutan" name="berat_susut_persen"  value="{{ $penerimaan->berat_susut_persen }}" readonly>
+                                                <input type="number" class="form-control" id="percent_penyusutan" name="berat_susut_persen"  value="{{ $detail_transaksi->berat_susut_persen }}" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -234,11 +236,11 @@ Edit Surat Penerimaan Barang
                                     
                                     <div class="form-row">
                                         <div class="widgetbar" align="center">
-                                            <button type="submit" class="btn btn-light">Simpan Sementara</button>
+                                             <a onclick="submitSementara();" class="btn btn-light simpan-sementara">Simpan Sementara</a>
                                         
-                                            <button type="submit" class="btn btn-primary" style="color: white;">Selesai</button>
+                                            <a onclick="submitPenerimaan();" class="btn btn-primary" style="color: white;">Selesai</a>
 
-                                            <a href="/penerimaan/cetak_barcode_edit/{{ $penerimaan->id_penerimaan }}" class="btn btn-primary">Cetak Barcode</a>
+                                            <a href="/penerimaan/cetak_barcode/{{ $penerimaan->id_penerimaan }}" class="btn btn-primary">Cetak Barcode</a>
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
                                         </div>                        
@@ -315,18 +317,20 @@ Edit Surat Penerimaan Barang
 
 <script>
 
-/*
+
 function submitSementara(){
-  $("#penerimaan_supplier").attr("action", "/penerimaan/store_sementara_penerimaan_supplier");
+  var id_penerimaan = document.getElementById('kode_penerimaan').value;  
+  $("#penerimaan_supplier").attr("action", "/penerimaan/update_sementara_penerimaan_supplier/"+id_penerimaan);
   document.getElementById('penerimaan_supplier').submit();
 }
 
 
-function submitPenerimaan(id){
-  $("#penerimaan_supplier").attr("action", "/penerimaan/update_penerimaan_supplier/"+id);
+function submitPenerimaan(){
+  var id_penerimaan = document.getElementById('kode_penerimaan').value;  
+  $("#penerimaan_supplier").attr("action", "/penerimaan/update_penerimaan_supplier/"+id_penerimaan);
   document.getElementById('penerimaan_supplier').submit();
 }
-*/
+
 
 
 $(document).ready(function(){
@@ -342,6 +346,8 @@ $(document).ready(function(){
 
 
 
+ 
+   
 
   function hitungSusut(){
 
@@ -366,6 +372,8 @@ $(document).ready(function(){
 
 
   }
+
+
 
 </script>
 

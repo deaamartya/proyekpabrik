@@ -73,7 +73,7 @@ Penerimaan Barang
                                     <td>
 
                                         
-                                            @if($hp->jumlah == 0)
+                                            @if($hp->status_simpan == 0)
                                                 <div class="badge-list">
                                                     <span class="badge badge-danger badge-font">Belum</span>                       
                                                 </div>
