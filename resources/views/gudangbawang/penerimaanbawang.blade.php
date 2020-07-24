@@ -12,6 +12,9 @@ Soyuz - Datatable
     .redclass{
         border-color: red !important;
     }
+    .form-control[readonly] {
+        background-color: white !important; 
+    }
 </style>
 @endsection 
 @section('rightbar-content')
@@ -28,16 +31,12 @@ Soyuz - Datatable
         </div>
     </div>
     <div class="row align-items-center">
-        <div class="col-8 pl-5">
-            <form>
-                <div class="form-group mb-0">
-                  <label for="validationCustom01">Berat Bawang Kupas Diterima (Kg)</label>
-                  <input type="text" class="form-control" name="berat" id="berat" required placeholder="0">
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-            </form>
+        <div class="col-6 pl-5">
+              <label for="validationCustom01">Berat Bawang Kupas Diterima (Kg)</label>
+              <input type="text" class="form-control" name="berat" id="berat" required readonly>
+        </div>
+        <div class="col-6 pt-2">
+            <button type="button" class="btn btn-success mt-4 mr-4" id="simpan">Simpan Data</button>
         </div>
     </div>          
 </div>
@@ -61,42 +60,14 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($tenagakupas as $t)
                                 <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>12</td>
-                                    <td data-toggle="modal" data-target="#hasilKupasTiger">11.6</td>
-                                    <td>0.4</td>
+                                    <td id="nama{{$t->id_pegawai}}">{{$t->nama}}</td>
+                                    <td id="tb{{$t->id_pegawai}}" >{{$t->jumlah}}</td>
+                                    <td data-toggle="modal" data-target="#hasilKupas{{$t->id_pegawai}}" id="bk{{$t->id_pegawai}}" class="jmbawangkulit">0</td>
+                                    <td id="kulit{{$t->id_pegawai}}" class="jmkulit">0</td>
                                 </tr>
-                                <tr>
-                                    <td class="redclass">Garrett Winters</td>
-                                    <td class="redclass">12</td>
-                                    <td class="redclass">11</td>
-                                    <td class="redclass">0.5</td>
-                                </tr>
-                                <tr>
-                                    <td class="redclass">Ashton Cox</td>
-                                    <td class="redclass">12</td>
-                                    <td class="redclass">11.1</td>
-                                    <td class="redclass">0.5</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric Kelly</td>
-                                    <td>12</td>
-                                    <td>11.3</td>
-                                    <td>0.7</td>
-                                </tr>
-                                <tr>
-                                    <td>Airi Satou</td>
-                                    <td>12</td>
-                                    <td>11.5</td>
-                                    <td>0.5</td>
-                                </tr>
-                                <tr>
-                                    <td>Brielle Williamson</td>
-                                    <td>12</td>
-                                    <td>11.7</td>
-                                    <td>0.3</td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -108,40 +79,34 @@ Soyuz - Datatable
     <!-- End row -->
 </div>
 <!-- End Contentbar -->
+@foreach($tenagakupas as $t)
 <!-- Modal -->
-<div class="modal fade" id="hasilKupasTiger" tabindex="-1" role="dialog" aria-labelledby="hasilKupasTitleTiger" aria-hidden="true">
+<div class="modal fade" id="hasilKupas{{$t->id_pegawai}}" tabindex="-1" role="dialog" aria-labelledby="hasilKupasTitle{{$t->id_pegawai}}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="hasilKupasTitleTiger">Hasil Kupas Tiger</h5>
+                <h5 class="modal-title" id="hasilKupasTitle{{$t->id_pegawai}}">Hasil Kupas {{$t->nama}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{url('/gudang-bawang/tenaga-kupas')}}">
-                <div class="modal-body">
-                        <div class="form-group mb-0">
-                          <label for="validationCustom01">Berat Bawang Kupas (Kg)</label>
-                          <input type="text" class="form-control" name="beratbawang" id="beratbawang" required placeholder="11.4">
-                          <div class="valid-feedback">
-                            Looks good!
-                          </div>
-                        </div>
-                        <div class="form-group mb-0">
-                          <label for="validationCustom01">Berat Kulit (Kg)</label>
-                          <input type="text" class="form-control" name="beratkulit" id="beratkulit" required placeholder="0.6">
-                          <div class="valid-feedback">
-                            Looks good!
-                          </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
+            <div class="modal-body">
+                    <div class="form-group mb-0">
+                      <label for="validationCustom01">Berat Bawang Kupas (Kg)</label>
+                      <input type="text" class="form-control" name="beratbawang[{{$t->id_pegawai}}]" id="beratbawang{{$t->id_pegawai}}" required>
+                    </div>
+                    <div class="form-group mb-0">
+                      <label for="validationCustom01">Berat Kulit (Kg)</label>
+                      <input type="text" class="form-control" name="beratkulit[{{$t->id_pegawai}}]" id="beratkulit{{$t->id_pegawai}}" required>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary save" id="save{{$t->id_pegawai}}">Simpan</button>
+            </div>
         </div>
     </div>
 </div>
+@endforeach
 <!-- End Modal -->
 @endsection 
 @section('script')
@@ -152,13 +117,90 @@ Soyuz - Datatable
     "use strict";
     $(document).ready(function() {
         /* -- Table - Datatable -- */
-        $('#datatable').DataTable( {
+        $('#datatable').DataTable({
             "searching" : false,
             "paging" : false,
             "info" : false,
             "order": [[ 1, "asc" ]],
             responsive: true
-        } );
+        });
+
+        var pegawai = <?php echo json_encode($tenagakupas)?>;
+
+        $(".save").click(function(){
+            let id = $(this).attr('id').substr(4);
+            $("#bk"+id).html($("#beratbawang"+id).val());
+            $("#kulit"+id).html($("#beratkulit"+id).val());
+            let jumlah = Number($("#tb"+id).html());
+            let bk = Number($("#bk"+id).html());
+            let kulit = Number($("#kulit"+id).html());
+
+            if(jumlah > (bk+kulit)){
+                $("#nama"+id).addClass("redclass");
+                $("#tb"+id).addClass("redclass");
+                $("#bk"+id).addClass("redclass");
+                $("#kulit"+id).addClass("redclass");
+            }
+            else{
+                $("#nama"+id).removeClass("redclass");
+                $("#tb"+id).removeClass("redclass");
+                $("#bk"+id).removeClass("redclass");
+                $("#kulit"+id).removeClass("redclass");
+            }
+
+            $("#hasilKupas"+id).modal('toggle');
+            hitungBawang();
+
+        });
+
+        function hitungBawang(){
+            let jumlah = 0;
+
+            $(".jmbawangkulit").each(function(){
+                jumlah = jumlah + Number($(this).html());
+            });
+
+            $("#berat").val(jumlah);
+        }
+
+        $("#simpan").click(function(){
+            let jsonberat = [];
+            var data;
+
+            let output = 0;
+            for(let i=0;i<pegawai.length;i++){
+                data = {
+                    beratbawang: $("#beratbawang"+pegawai[i]["id_pegawai"]).val(),
+                    beratkulit: $("#beratkulit"+pegawai[i]["id_pegawai"]).val(),
+                    idtr: pegawai[i]["idtr"],
+                    id_pegawai : pegawai[i]["id_pegawai"]
+                }
+                jsonberat.push(data);
+                output = output + Number($("#tb"+pegawai[i]["id_pegawai"]).html());
+            }
+
+            let jsondata = JSON.stringify(jsonberat);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-bawang/simpanterima') }}",
+                method: 'POST',
+                data: {
+                    data : jsondata,
+                    total_output : $("#berat").val(),
+                    total_input : output,
+                },
+                success: function(result){
+                    $("#simpan").hide();
+                }
+            });
+
+        });
+        
     });
 </script>
 @endsection 

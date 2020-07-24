@@ -128,15 +128,49 @@ Soyuz - Datatable
                     status: 1
                 },
                 success: function(result){
+                    console.log(result.pegawai);
                     var add ='<tr>\
                         <td>'+result.pegawai.nama+'</td>\
                         <td><button type="button" class="btn btn-success status" id="status'+result.pegawai.id_pegawai+'">Aktif</button></td>\
                         </tr>';
-                    $("#datatable tbody").append(add);
+                    $("#datatable tbody").prepend(add);
                     $("#addModal").modal('toggle');
                     $("#addTenagaKupas").trigger('reset');
+                    $(".status").click(function(e){
+                        e.preventDefault();
+                        var status = 0;
+                        if($(this).html() == "Tidak Aktif"){
+                           status = 1;
+                        }
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: "{{ url('/gudang-bawang/statustenagakupas') }}",
+                            method: 'POST',
+                            data: {
+                                id: $(this).attr('id').substr(6),
+                                status: status
+                            },
+                            success: function(result){
+                                if(result.pegawai.status){
+                                    $("#status"+result.pegawai.id_pegawai).removeClass('btn-danger');
+                                    $("#status"+result.pegawai.id_pegawai).addClass('btn-success');
+                                    $("#status"+result.pegawai.id_pegawai).html("Aktif");
+                                }
+                                else{
+                                    $("#status"+result.pegawai.id_pegawai).removeClass('btn-success');
+                                    $("#status"+result.pegawai.id_pegawai).addClass('btn-danger');
+                                    $("#status"+result.pegawai.id_pegawai).html("Tidak Aktif");
+                                }
+                            }
+                        });
+                    });
                 }
             });
+
         });
         $(".status").click(function(e){
             e.preventDefault();
