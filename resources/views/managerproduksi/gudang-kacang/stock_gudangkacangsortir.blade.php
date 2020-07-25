@@ -88,7 +88,7 @@ Stock Gudang Kacang Sortir
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_gs" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -106,40 +106,7 @@ Stock Gudang Kacang Sortir
                                             </tr>
                                       
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>Dari Proses Sortir</td>
-                                                <td>10</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                            </tr>
-                                           
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Sisa Dari Inter</td>
-                                                <td>[20]</td>
-                                                <td>-</td>
-                                                <td>20<br>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>7<br>[20]</td>
-                                                <td>3</td>
-                                            </tr>
-
-                                        </tbody>
+                                       
                                     </table>
                                 </div>
                             </div>
@@ -177,7 +144,7 @@ Stock Gudang Kacang Sortir
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_sp" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -195,32 +162,7 @@ Stock Gudang Kacang Sortir
                                             </tr>
                                       
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Sisa Dari Inter</td>
-                                                <td>[20]</td>
-                                                <td>-</td>
-                                                <td>20<br>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>7<br>[20]</td>
-                                                <td>3</td>
-                                            </tr>
-
-                                        </tbody>
+                                      
                                     </table>
                                 </div>
                             </div>
@@ -257,7 +199,7 @@ Stock Gudang Kacang Sortir
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_hc" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -275,24 +217,7 @@ Stock Gudang Kacang Sortir
                                             </tr>
                                       
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Sisa Dari Inter</td>
-                                                <td>[20]</td>
-                                                <td>-</td>
-                                                <td>20<br> 10</td>
-                                            </tr>
 
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>7<br>[20]</td>
-                                                <td>3</td>
-                                            </tr>
-
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -329,7 +254,7 @@ Stock Gudang Kacang Sortir
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_telor" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -347,24 +272,7 @@ Stock Gudang Kacang Sortir
                                             </tr>
                                       
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Sisa Dari Inter</td>
-                                                <td>[20]</td>
-                                                <td>-</td>
-                                                <td>20<br> 10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>7<br>[20]</td>
-                                                <td>3</td>
-                                            </tr>
-
-                                        </tbody>
+                                      
                                     </table>
                                 </div>
                             </div>
@@ -396,30 +304,260 @@ Stock Gudang Kacang Sortir
 
 <script>
     $(document).ready(function() {
-        $('#datatable1').DataTable( {
+        var datatable1 = $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
 
-        $('#datatable2').DataTable( {
+        var datatable2 = $('#datatable2').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
 
-         $('#datatable3').DataTable( {
+        var datatable3 = $('#datatable3').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
 
-         $('#datatable4').DataTable( {
+        var datatable4 = $('#datatable4').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
+
+
+
+    $(document).on('click', '#terapkan_gs', function (e) {
+    
+    var awal_gs = document.getElementById('date1').value;
+    var tgl_awal_gs = awal_gs.split("/").reverse().join("-");
+
+    var akhir_gs = document.getElementById('date2').value;
+    var tgl_akhir_gs = akhir_gs.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gks/stock_kacang_gs",
+            data:{
+              "tgl_awal_gs":tgl_awal_gs,
+              "tgl_akhir_gs":tgl_akhir_gs,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results.stock_gs.length; i++){
+                    
+                    datatable1.row.add([
+
+                    results.stock_gs[i].tanggal,
+                    results.stock_gs[i].keterangan,
+                    results.stock_gs[i].masuk,
+                    results.stock_gs[i].keluar,
+                    results.stock_gs[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
     });
+
+
+
+    $(document).on('click', '#terapkan_sp', function (e) {
+    
+    var awal_sp = document.getElementById('date3').value;
+    var tgl_awal_sp = awal_sp.split("/").reverse().join("-");
+
+    var akhir_sp = document.getElementById('date4').value;
+    var tgl_akhir_sp = akhir_sp.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gks/stock_kacang_sp",
+            data:{
+              "tgl_awal_sp":tgl_awal_sp,
+              "tgl_akhir_sp":tgl_akhir_sp,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results2) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results2.stock_sp.length; i++){
+                    
+                    datatable2.row.add([
+
+                    results2.stock_sp[i].tanggal,
+                    results2.stock_sp[i].keterangan,
+                    results2.stock_sp[i].masuk,
+                    results2.stock_sp[i].keluar,
+                    results2.stock_sp[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
+
+
+
+    $(document).on('click', '#terapkan_hc', function (e) {
+    
+    var awal_hc = document.getElementById('date5').value;
+    var tgl_awal_hc = awal_hc.split("/").reverse().join("-");
+
+    var akhir_hc = document.getElementById('date6').value;
+    var tgl_akhir_hc = akhir_hc.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gks/stock_kacang_hc",
+            data:{
+              "tgl_awal_hc":tgl_awal_hc,
+              "tgl_akhir_hc":tgl_akhir_hc,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results3) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results3.stock_hc.length; i++){
+                    
+                    datatable3.row.add([
+
+                    results3.stock_hc[i].tanggal,
+                    results3.stock_hc[i].keterangan,
+                    results3.stock_hc[i].masuk,
+                    results3.stock_hc[i].keluar,
+                    results3.stock_hc[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
+
+
+
+    $(document).on('click', '#terapkan_telor', function (e) {
+    
+    var awal_telor = document.getElementById('date7').value;
+    var tgl_awal_telor = awal_telor.split("/").reverse().join("-");
+
+    var akhir_telor = document.getElementById('date8').value;
+    var tgl_akhir_telor = akhir_telor.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gks/stock_kacang_telor",
+            data:{
+              "tgl_awal_telor":tgl_awal_telor,
+              "tgl_akhir_telor":tgl_akhir_telor,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results4) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results4.stock_telor.length; i++){
+                    
+                    datatable4.row.add([
+
+                    results4.stock_telor[i].tanggal,
+                    results4.stock_telor[i].keterangan,
+                    results4.stock_telor[i].masuk,
+                    results4.stock_telor[i].keluar,
+                    results4.stock_telor[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
+
+
+
+
+
+
+
+
+
+
+});
 
 
     $(document).ready(function(){

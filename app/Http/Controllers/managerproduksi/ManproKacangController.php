@@ -67,6 +67,12 @@ class ManproKacangController extends Controller
     }
 
 
+    public function stock_gudangkacang()
+    {
+        return view('managerproduksi.gudang-kacang.stock_gudangkacang');
+    }
+
+
     public function stock_kacang_ob(Request $req)
     {
 
@@ -115,14 +121,26 @@ class ManproKacangController extends Controller
         
     }
 
-    public function stock_gudangkacang()
-    {
-        return view('managerproduksi.gudang-kacang.stock_gudangkacang');
-    }
-
+   
      public function stock_gudangkacangsortir()
     {
         return view('managerproduksi.gudang-kacang.stock_gudangkacangsortir');
+    }
+
+     public function stock_kacang_gs(Request $req)
+    {
+
+         
+        $stock_gs = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                    ->where(['stock.id_bahan_baku' => 'BB0000000010', 'stock.id_gudang' => '9'])
+                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_gs, $req->tgl_akhir_gs))
+                    ->get();
+                    
+
+        return response()->json(['stock_gs'=>$stock_gs]);
+
+        
     }
 
     public function kerjahariini()
