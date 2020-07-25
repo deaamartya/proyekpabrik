@@ -58,5 +58,11 @@ class BahanBakuSeeder extends Seeder
             'status'=>1,
             'id_tipe_bahan_baku'=>2
         ]);
+
+        DB::table('bahan_baku')->insert([
+            'nama' => 'Bumbu Sachet',
+            'status'=>1,
+            'id_tipe_bahan_baku'=>2
+        ]);
     }
 }
