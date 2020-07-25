@@ -95,11 +95,46 @@ class OrdermasakController extends Controller
     */
     public function edit()
     {
-        // $detail_order_masak = OrderMasak::find($_POST['id']);
-        // $detail_order_masak->get();
-        $detail_order_masak = DetailOrderMasak::where('id_order_masak', $_POST['id']);
-        $detail_order_masak->pluck('jumlah');
-        return json_encode($detail_order_masak);
+        $id_order_masak = $_POST['id'];
+        $detail_order_masak = DB::table('detail_order_masak')->select('jumlah', 'id_bahan_product')->where('id_order_masak', $id)->get();
+        $jumlah = array();
+
+        foreach($detail as $detail){
+            array_push($jumlah, $detail);
+        }
+
+        $HC = 0;
+        $SP = 0;
+        $GS = 0;
+        $BAWANG = 0;
+
+        foreach ($jumlah as $jumlah){
+            if ($jumlah->id_bahan_product == 'PR00000000001'){
+                $HC = $jumlah->jumlah;
+            } elseif ($jumlah->id_bahan_product == 'PR00000000002'){
+                $SP = $jumlah->jumlah;
+            } elseif ($jumlah->id_bahan_product == 'PR00000000003'){
+                $GS = $jumlah->jumlah;
+            } elseif ($jumlah->id_bahan_product == 'BB000000004'){
+                $BAWANG = $jumlah->jumlah;
+            }
+        }
+
+        $data = array(
+            'HC' => $HC,
+            'SP' => $SP,
+            'GS' => $GS,
+            'BAWANG' => $BAWANG
+        );
+
+        // return response()->json([
+        //     'HC' => $HC,
+        //     'SP' => $SP,
+        //     'GS' => $GS,
+        //     'BAWANG' => $BAWANG
+        // ]);
+
+        return json_encode($data);
     }
 
     public function test()
@@ -107,11 +142,12 @@ class OrdermasakController extends Controller
         $id = "ORM2007250001";
 
         $detail = DB::table('detail_order_masak')->select('jumlah', 'id_bahan_product')->where('id_order_masak', $id)->get();
-        
+        $jumlah = array();
+
         foreach($detail as $detail){
-            
+            array_push($jumlah, $detail);
         }
 
-        dd($detail);
+        dd($jumlah);
     }
 }
