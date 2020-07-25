@@ -35,9 +35,9 @@
      <div class="col-lg-12">
         {{-- Alert status --}}
         @if (session('status'))
-        <div class="alert alert-success alert-dismissible fade show">
+        <div class="alert alert-success alert-dismissible fade show text-dark">
             {{ session('status') }}
-            <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -50,7 +50,7 @@
              <div class="card-body">
                  <div class="my-2">
                      <button type="button" class="btn btn-primary tombol-input-order-masak" data-animation="zoomIn" data-toggle="modal" data-target="#modal-input-order-masak">
-                        <i class="far fa-edit mr-1"></i>
+                        <i class="fas fa-plus-circle mr-1"></i>
                          INPUT ORDER MASAK
                      </button>
                  </div>
@@ -64,6 +64,7 @@
                                  <th>GS</th>
                                  <th>BAWANG</th>
                                  <th>Status</th>
+                                 <th>Aksi</th>
                              </tr>
                          </thead>
                          <tbody>
@@ -86,10 +87,16 @@
                                     </td>
                                     <td>
                                         {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
-                                        ->where('id_bahan_product', 'BB000000004')->value('jumlah') }}
+                                        ->where('id_bahan_product', 'BB000000008')->value('jumlah') }}
                                     </td>
                                     <td class="status_order">
                                         {{ $order_masak->status }}
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-sm btn-success text-white tombol-edit-order-masak" data-id={{ $order_masak->id_order_masak }} data-animation="zoomIn" data-toggle="modal" data-target="#modal-input-order-masak">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </a>
                                     </td>
                                 </tr>
                              @endforeach
@@ -204,4 +211,5 @@
 {{-- Modal Script --}}
 <script src="{{ asset('/managerproduksi/js/ordermasak.js') }}"></script>
 <script src="{{ asset('/managerproduksi/js/ordermasak_tabel.js') }}"></script>
+<script src="{{ asset('/managerproduksi/js/ordermasak_modal.js') }}"></script>
 @endsection

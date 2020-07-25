@@ -15,7 +15,7 @@ class OrdermasakController extends Controller
 
     /* 
     Menampilkan view order masak
-     */
+    */
     public function index()
     {
         $product = Product::all();
@@ -80,7 +80,7 @@ class OrdermasakController extends Controller
 
         if ( $request->input_bawang != null ){
             $detail_order_masak = new DetailOrderMasak;
-            $detail_order_masak->id_bahan_product = 'BB000000004';
+            $detail_order_masak->id_bahan_product = 'BB000000008';
             $detail_order_masak->jenis_order = 1;
             $detail_order_masak->jumlah = $request->input_bawang;
             $detail_order_masak->save();
@@ -88,5 +88,66 @@ class OrdermasakController extends Controller
         
         return redirect('/manager-produksi/order-masak')->with('status', 'Data order masak berhasil ditambahkan.');
         
+    }
+
+    /*
+    Return data untuk edit order masak
+    */
+    public function edit()
+    {
+        $id_order_masak = $_POST['id'];
+        $detail_order_masak = DB::table('detail_order_masak')->select('jumlah', 'id_bahan_product')->where('id_order_masak', $id)->get();
+        $jumlah = array();
+
+        foreach($detail as $detail){
+            array_push($jumlah, $detail);
+        }
+
+        $HC = 0;
+        $SP = 0;
+        $GS = 0;
+        $BAWANG = 0;
+
+        foreach ($jumlah as $jumlah){
+            if ($jumlah->id_bahan_product == 'PR00000000001'){
+                $HC = $jumlah->jumlah;
+            } elseif ($jumlah->id_bahan_product == 'PR00000000002'){
+                $SP = $jumlah->jumlah;
+            } elseif ($jumlah->id_bahan_product == 'PR00000000003'){
+                $GS = $jumlah->jumlah;
+            } elseif ($jumlah->id_bahan_product == 'BB000000004'){
+                $BAWANG = $jumlah->jumlah;
+            }
+        }
+
+        $data = array(
+            'HC' => $HC,
+            'SP' => $SP,
+            'GS' => $GS,
+            'BAWANG' => $BAWANG
+        );
+
+        // return response()->json([
+        //     'HC' => $HC,
+        //     'SP' => $SP,
+        //     'GS' => $GS,
+        //     'BAWANG' => $BAWANG
+        // ]);
+
+        return json_encode($data);
+    }
+
+    public function test()
+    {
+        $id = "ORM2007250001";
+
+        $detail = DB::table('detail_order_masak')->select('jumlah', 'id_bahan_product')->where('id_order_masak', $id)->get();
+        $jumlah = array();
+
+        foreach($detail as $detail){
+            array_push($jumlah, $detail);
+        }
+
+        dd($jumlah);
     }
 }
