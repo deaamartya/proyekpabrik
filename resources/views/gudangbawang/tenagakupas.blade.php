@@ -41,30 +41,28 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($tenagakupas as $t)
                                 <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td><button type="button" class="btn btn-success status" id="status1">Aktif</button></td>
+                                    <td>{{$t->nama}}</td>
+                                    <td>
+                                        <button type="button" class="btn 
+                                        @if($t->status) btn-success
+                                        @else btn-danger
+                                        @endif
+                                        status" 
+                                        id="status{{$t->id_pegawai}}">
+                                            @php
+                                                if($t->status){
+                                                    echo "Aktif";
+                                                }
+                                                else{
+                                                    echo "Tidak Aktif";
+                                                }
+                                            @endphp
+                                        </button>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>Garrett Winters</td>
-                                    <td><button type="button" class="btn btn-danger">Tidak Aktif</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Ashton Cox</td>
-                                    <td><button type="button" class="btn btn-success">Aktif</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric Kelly</td>
-                                    <td><button type="button" class="btn btn-success">Aktif</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Airi Satou</td>
-                                    <td><button type="button" class="btn btn-success">Aktif</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Brielle Williamson</td>
-                                    <td><button type="button" class="btn btn-success">Aktif</button></td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -107,16 +105,21 @@ Soyuz - Datatable
     "use strict";
     $(document).ready(function() {
         /* -- Table - Datatable -- */
-        $('#datatable').DataTable( {
+        $('#datatable').DataTable({
             "searching" : false,
             "paging" : false,
             "info" : false,
-            "order": [[ 1, "asc" ]],
+            "order": [[1, "desc"]],
             responsive: true
         });
         $("#tambahTenagaKupas").click(function(e){
             console.log("tambah di klik");
             e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $.ajax({
                 url: "{{ url('/gudang-bawang/tambahtenagakupas') }}",
                 method: 'POST',
@@ -125,21 +128,61 @@ Soyuz - Datatable
                     status: 1
                 },
                 success: function(result){
+                    console.log(result.pegawai);
                     var add ='<tr>\
-                        <td>'+$('#nama').val()+'</td>\
-                        <td><button type="button" class="btn btn-success">Aktif</button></td>\
+                        <td>'+result.pegawai.nama+'</td>\
+                        <td><button type="button" class="btn btn-success status" id="status'+result.pegawai.id_pegawai+'">Aktif</button></td>\
                         </tr>';
-                    $("#datatable tbody").append(add);
+                    $("#datatable tbody").prepend(add);
+                    $("#addModal").modal('toggle');
+                    $("#addTenagaKupas").trigger('reset');
+                    $(".status").click(function(e){
+                        e.preventDefault();
+                        var status = 0;
+                        if($(this).html() == "Tidak Aktif"){
+                           status = 1;
+                        }
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: "{{ url('/gudang-bawang/statustenagakupas') }}",
+                            method: 'POST',
+                            data: {
+                                id: $(this).attr('id').substr(6),
+                                status: status
+                            },
+                            success: function(result){
+                                if(result.pegawai.status){
+                                    $("#status"+result.pegawai.id_pegawai).removeClass('btn-danger');
+                                    $("#status"+result.pegawai.id_pegawai).addClass('btn-success');
+                                    $("#status"+result.pegawai.id_pegawai).html("Aktif");
+                                }
+                                else{
+                                    $("#status"+result.pegawai.id_pegawai).removeClass('btn-success');
+                                    $("#status"+result.pegawai.id_pegawai).addClass('btn-danger');
+                                    $("#status"+result.pegawai.id_pegawai).html("Tidak Aktif");
+                                }
+                            }
+                        });
+                    });
                 }
             });
+
         });
         $(".status").click(function(e){
             e.preventDefault();
-            console.log("status di klik");
             var status = 0;
-            if($(this).html() == "Belum"){
+            if($(this).html() == "Tidak Aktif"){
                status = 1;
             }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $.ajax({
                 url: "{{ url('/gudang-bawang/statustenagakupas') }}",
                 method: 'POST',
@@ -148,15 +191,15 @@ Soyuz - Datatable
                     status: status
                 },
                 success: function(result){
-                    if(status == 1){
-                        $(this).removeClass('btn-danger');
-                        $(this).addClass('btn-success');
-                        $(this).html("Ready");
+                    if(result.pegawai.status){
+                        $("#status"+result.pegawai.id_pegawai).removeClass('btn-danger');
+                        $("#status"+result.pegawai.id_pegawai).addClass('btn-success');
+                        $("#status"+result.pegawai.id_pegawai).html("Aktif");
                     }
                     else{
-                        $(this).removeClass('btn-success');
-                        $(this).addClass('btn-danger');
-                        $(this).html("Belum");
+                        $("#status"+result.pegawai.id_pegawai).removeClass('btn-success');
+                        $("#status"+result.pegawai.id_pegawai).addClass('btn-danger');
+                        $("#status"+result.pegawai.id_pegawai).html("Tidak Aktif");
                     }
                 }
             });

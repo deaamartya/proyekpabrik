@@ -16,11 +16,11 @@ class CreateDetailTransaksiTable extends Migration
         Schema::create('detail_transaksi', function (Blueprint $table) {
             $table->string('id_detail_transaksi',11)->primary();
             $table->unsignedInteger('id_satuan');
+            $table->string('id_transaksi',18);
             $table->double('jumlah',8,0);
             $table->string('id_bahan_baku',11);
             $table->unsignedInteger('id_jenis_transaksi');
             $table->timestamp('timestamp');
-            $table->boolean('flag');
             $table->foreign('id_satuan')->references('id_satuan')->on('satuan');
             $table->foreign('id_bahan_baku')->references('id_bahan_baku')->on('bahan_baku');
             $table->foreign('id_jenis_transaksi')->references('id_jenis_transaksi')->on('jenis_transaksi');

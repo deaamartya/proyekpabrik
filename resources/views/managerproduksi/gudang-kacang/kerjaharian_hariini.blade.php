@@ -39,14 +39,10 @@ Kerja Hari Ini
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
-
                        <div class="row">
                         <h5 class="card-title ml-3">Kerja Hari Ini</h5>
                         <h5 class="card-title ml-auto mr-3" id="date"></h5>
                     </div>
-                        
-                       
-                
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 16px; padding-left: 5px;">Proses Sortir</h5>

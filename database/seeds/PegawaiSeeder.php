@@ -30,9 +30,7 @@ class PegawaiSeeder extends Seeder
     			'id_gudang' => '7',
     			'id_jabatan' => '2',
     			'nama' => $nama,
-    			'password' => encrypt(substr(str_replace(' ', '',strtolower($nama)),0,20)),
     			'status' => 1,
-    			'username' => substr(str_replace(' ', '',strtolower($nama)),0,20),
     		]);
     	}
 
