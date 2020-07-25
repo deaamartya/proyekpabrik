@@ -52,38 +52,6 @@ Soyuz - Datatable
                                     <td>50</td>
                                     <td class="text-danger">100</td>
                                     <td>Terambil</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>-</td>
-                                    <td>40</td>
-                                    <td>60</td>
-                                    <td class="text-danger">100</td>
-                                    <td class="text-danger">Siap</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>50</td>
-                                    <td>-</td>
-                                    <td>30</td>
-                                    <td class="text-danger">80</td>
-                                    <td class="text-danger">Siap</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>20</td>
-                                    <td>30</td>
-                                    <td>60</td>
-                                    <td class="text-danger">20</td>
-                                    <td class="text-danger">Kurang</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>30</td>
-                                    <td>20</td>
-                                    <td>20</td>
-                                    <td class="text-danger">0</td>
-                                    <td class="text-danger">Kurang</td>
                                 </tr>                                
                             </tbody>
                         </table>
@@ -104,17 +72,16 @@ Soyuz - Datatable
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect1">Jenis Karung</label>
-                                            <select class="form-control" id="jeniskarung">
-                                              <option>25</option>
-                                              <option>50</option>
+                                            <select class="form-control" id="jeniskarung" name="jeniskarung">
+                                              <option id="kg" name="kg">Kg</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Berat Diambil (Kg)</label>
-                                            <input type="number" name="beratdiambil" class="form-control">
+                                            <input type="number" name="beratdiambil" id="beratdiambil" class="form-control" placeholder="Maksimal ambil {{$stock1c}} Kg">
                                         </div>
                                         <div class="text-center">
-                                            <button type="button" class="btn btn-primary mx-auto">OK</button>
+                                            <button type="button" class="btn btn-primary mx-auto" id="submit" href="#">OK</button>
                                         </div>
                                     </div>                                        
                                 </div>
