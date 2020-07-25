@@ -77,12 +77,42 @@ class ManproKacangController extends Controller
                     ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_ob, $req->tgl_akhir_ob))
                     ->get();
                     
-       //echo $stock_ob;
 
         return response()->json(['stock_ob'=>$stock_ob]);
 
-        //return redirect('/manpro-kacang/stock/gk')->with('stock_ob', $stock_ob);
+        
+    }
 
+     public function stock_kacang_7ml(Request $req)
+    {
+
+         
+        $stock_7ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                    ->where(['stock.id_bahan_baku' => 'BB000000004', 'stock.id_gudang' => '9'])
+                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_7ml, $req->tgl_akhir_7ml))
+                    ->get();
+                    
+
+        return response()->json(['stock_7ml'=>$stock_7ml]);
+
+        
+    }
+
+      public function stock_kacang_8ml(Request $req)
+    {
+
+         
+        $stock_8ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                    ->where(['stock.id_bahan_baku' => 'BB000000005', 'stock.id_gudang' => '9'])
+                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_8ml, $req->tgl_akhir_8ml))
+                    ->get();
+                    
+
+        return response()->json(['stock_8ml'=>$stock_8ml]);
+
+        
     }
 
     public function stock_gudangkacang()

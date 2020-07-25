@@ -106,9 +106,6 @@ Stock Gudang Kacang
                                       
                                         </thead>
 
-                                        <tbody>
-
-                                        </tbody>
                                         
                                     </table>
                                 </div>
@@ -147,7 +144,7 @@ Stock Gudang Kacang
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_7ml" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -166,35 +163,7 @@ Stock Gudang Kacang
                                             </tr>
                                       
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>12 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>10</td>
-                                            </tr>
 
-                                            <tr>
-                                                <td>07/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>07/06/20</td>
-                                                <td>11 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>40</td>
-                                            </tr>
-
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -231,7 +200,7 @@ Stock Gudang Kacang
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_8ml" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -250,26 +219,7 @@ Stock Gudang Kacang
                                             </tr>
                                       
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>07/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>30</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>09/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
-
-                                        </tbody>
+                                      
                                     </table>
                                 </div>
                             </div>
@@ -298,7 +248,28 @@ Stock Gudang Kacang
 
 <script>
 
-$(document).ready(function(){
+
+    $(document).ready(function() {
+        
+        var datatable1 =  $('#datatable1').DataTable( {
+            //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
+
+        var datatable2 = $('#datatable2').DataTable( {
+            //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
+
+        var datatable3 = $('#datatable3').DataTable( {
+            //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
+    
+
     $(document).on('click', '#terapkan_ob', function (e) {
     
     var awal_ob = document.getElementById('date1').value;
@@ -307,12 +278,6 @@ $(document).ready(function(){
     var akhir_ob = document.getElementById('date2').value;
     var tgl_akhir_ob = akhir_ob.split("/").reverse().join("-");
 
-
-    var awal_7ml = document.getElementById('date3').value;
-    var akhir_7ml = document.getElementById('date4').value;
-
-    var awal_8ml = document.getElementById('date5').value;
-    var akhir_8ml = document.getElementById('date6').value;
 
       $.ajaxSetup({
         headers: {
@@ -330,38 +295,82 @@ $(document).ready(function(){
               "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
             },
             success : function(results) {
-             console.log(JSON.stringify(results)); //print_r
+            // console.log(JSON.stringify(results)); //print_r
                  
+              
+              for(var i=0; i<results.stock_ob.length; i++){
+                    
+                    datatable1.row.add([
 
-              var data_stock = results;
-              var table = document.getElementById('datatable1');
+                    results.stock_ob[i].tanggal,
+                    results.stock_ob[i].timestamp,
+                    results.stock_ob[i].keterangan,
+                    results.stock_ob[i].masuk,
+                    results.stock_ob[i].keluar,
+                    results.stock_ob[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
 
-              while(table.rows.length > 1)
-              {
-                table.deleteRow(1);
-              }
+    });
 
 
-              for(var i=0; i<results.stock_ob.length; i++)
-              {
-                
-                var row = table.insertRow(table.rows.length);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                var cell4 = row.insertCell(3);
-                var cell5 = row.insertCell(4);
-                var cell6 = row.insertCell(5);
 
-                cell1.innerHTML = '<td>'+results.stock_ob[i].tanggal+'</td>';
-                cell2.innerHTML = '<td>'+results.stock_ob[i].timestamp+'</td>';
-                cell3.innerHTML = '<td>'+results.stock_ob[i].keterangan+'</td>';
-                cell4.innerHTML = '<td>'+results.stock_ob[i].masuk+'</td>';
-                cell5.innerHTML = '<td>'+results.stock_ob[i].keluar+'</td>';
-                cell6.innerHTML = '<td>'+results.stock_ob[i].stock+'</td>';
-                
-              }
+     $(document).on('click', '#terapkan_7ml', function (e) {
+    
+    var awal_7ml = document.getElementById('date3').value;
+    var tgl_awal_7ml = awal_7ml.split("/").reverse().join("-");
 
+    var akhir_7ml = document.getElementById('date4').value;
+    var tgl_akhir_7ml = akhir_7ml.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gk/stock_kacang_7ml",
+            data:{
+              "tgl_awal_7ml":tgl_awal_7ml,
+              "tgl_akhir_7ml":tgl_akhir_7ml,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results2) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results2.stock_7ml.length; i++){
+                    
+                    datatable2.row.add([
+
+                    results2.stock_7ml[i].tanggal,
+                    results2.stock_7ml[i].timestamp,
+                    results2.stock_7ml[i].keterangan,
+                    results2.stock_7ml[i].masuk,
+                    results2.stock_7ml[i].keluar,
+                    results2.stock_7ml[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
              
             },
             error: function(data) {
@@ -371,34 +380,67 @@ $(document).ready(function(){
 
     });
    
+
+    $(document).on('click', '#terapkan_8ml', function (e) {
+    
+    var awal_8ml = document.getElementById('date5').value;
+    var tgl_awal_8ml = awal_8ml.split("/").reverse().join("-");
+
+    var akhir_8ml = document.getElementById('date6').value;
+    var tgl_akhir_8ml = akhir_8ml.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gk/stock_kacang_8ml",
+            data:{
+              "tgl_awal_8ml":tgl_awal_8ml,
+              "tgl_akhir_8ml":tgl_akhir_8ml,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results3) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results3.stock_8ml.length; i++){
+                    
+                    datatable3.row.add([
+
+                    results3.stock_8ml[i].tanggal,
+                    results3.stock_8ml[i].timestamp,
+                    results3.stock_8ml[i].keterangan,
+                    results3.stock_8ml[i].masuk,
+                    results3.stock_8ml[i].keluar,
+                    results3.stock_8ml[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
+
+
+
 });
 
 
-
   
-
-
-
-    $(document).ready(function() {
-        $('#datatable1').DataTable( {
-            //"order": [[ 0, "asc" ]],
-            "searching" : false,
-            responsive: true
-        });
-
-        $('#datatable2').DataTable( {
-            //"order": [[ 0, "asc" ]],
-            "searching" : false,
-            responsive: true
-        });
-
-         $('#datatable3').DataTable( {
-            //"order": [[ 0, "asc" ]],
-            "searching" : false,
-            responsive: true
-        });
-    });
-
 
     $(document).ready(function(){
         $('#date1').datepicker({
