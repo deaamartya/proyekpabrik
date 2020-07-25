@@ -15,7 +15,7 @@ class OrdermasakController extends Controller
 
     /* 
     Menampilkan view order masak
-     */
+    */
     public function index()
     {
         $product = Product::all();
@@ -88,5 +88,30 @@ class OrdermasakController extends Controller
         
         return redirect('/manager-produksi/order-masak')->with('status', 'Data order masak berhasil ditambahkan.');
         
+    }
+
+    /*
+    Return data untuk edit order masak
+    */
+    public function edit()
+    {
+        // $detail_order_masak = OrderMasak::find($_POST['id']);
+        // $detail_order_masak->get();
+        $detail_order_masak = DetailOrderMasak::where('id_order_masak', $_POST['id']);
+        $detail_order_masak->pluck('jumlah');
+        return json_encode($detail_order_masak);
+    }
+
+    public function test()
+    {
+        $id = "ORM2007250001";
+
+        $detail = DB::table('detail_order_masak')->select('jumlah', 'id_bahan_product')->where('id_order_masak', $id)->get();
+        
+        foreach($detail as $detail){
+            
+        }
+
+        dd($detail);
     }
 }

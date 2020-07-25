@@ -62,38 +62,6 @@
                                  <td class="ready">100%</td>
                                  <td class="ready">100%</td>
                              </tr>
-                             <tr>
-                                 <td>10/06/20</td>
-                                 <td>-</td>
-                                 <td>40</td>
-                                 <td>60</td>
-                                 <td class="belum">80%</td>
-                                 <td class="belum">40%</td>
-                             </tr>
-                             <tr>
-                                 <td>11/06/20</td>
-                                 <td>50</td>
-                                 <td>-</td>
-                                 <td>30</td>
-                                 <td class="belum">0%</td>
-                                 <td class="belum">0%</td>
-                             </tr>
-                             <tr>
-                                 <td>12/06/20</td>
-                                 <td>20</td>
-                                 <td>50</td>
-                                 <td>60</td>
-                                 <td class="belum">0%</td>
-                                 <td class="belum">0%</td>
-                             </tr>
-                             <tr>
-                                 <td>13/06/20</td>
-                                 <td>30</td>
-                                 <td>30</td>
-                                 <td>20</td>
-                                 <td class="belum">0%</td>
-                                 <td class="belum">0%</td>
-                             </tr>
                          </tbody>
                      </table>
                  </div>
@@ -133,35 +101,6 @@
          </div>
          {{-- End Stock bahan --}}
 
-         {{-- Start stock adonan gula --}}
-         <div class="card m-b-30">
-             <div class="card-header">
-                <h5 class="card-title">Stock Adonan Gula</h5>
-             </div>
-             <div class="card-body">
-                 <div class="table-responsive">
-                     <table id="default-datatable" class="display table table-striped table-bordered">
-                         <thead>
-                             <tr>
-                                 <th>HC</th>
-                                 <th>SP</th>
-                                 <th>GS</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <tr>
-                                 <td>30</td>
-                                 <td>0</td>
-                                 <td>10</td>
-                             </tr>
-                         </tbody>
-                     </table>
-                 </div>
-
-             </div>
-         </div>
-         {{-- End Stock adonan gula --}}
-
          {{-- Start stock adonan gula + garam --}}
          <div class="card m-b-30">
              <div class="card-header">
@@ -190,35 +129,6 @@
              </div>
          </div>
          {{-- End Stock adonan gula + garam--}}
-
-         {{-- Start stock bumbu ready --}}
-         <div class="card m-b-30">
-             <div class="card-header">
-                <h5 class="card-title">Stock Bumbu Ready</h5>
-             </div>
-             <div class="card-body">
-                 <div class="table-responsive">
-                     <table id="default-datatable" class="display table table-striped table-bordered">
-                         <thead>
-                             <tr>
-                                 <th>HC</th>
-                                 <th>SP</th>
-                                 <th>GS</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <tr>
-                                 <td>0</td>
-                                 <td>20</td>
-                                 <td>20</td>
-                             </tr>
-                         </tbody>
-                     </table>
-                 </div>
-
-             </div>
-         </div>
-         {{-- End Stock bumbu ready--}}
 
      </div>
      <!-- End col -->

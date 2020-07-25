@@ -50,7 +50,7 @@
              <div class="card-body">
                  <div class="my-2">
                      <button type="button" class="btn btn-primary tombol-input-order-masak" data-animation="zoomIn" data-toggle="modal" data-target="#modal-input-order-masak">
-                        <i class="far fa-edit mr-1"></i>
+                        <i class="fas fa-plus-circle mr-1"></i>
                          INPUT ORDER MASAK
                      </button>
                  </div>
@@ -64,6 +64,7 @@
                                  <th>GS</th>
                                  <th>BAWANG</th>
                                  <th>Status</th>
+                                 <th>Aksi</th>
                              </tr>
                          </thead>
                          <tbody>
@@ -90,6 +91,12 @@
                                     </td>
                                     <td class="status_order">
                                         {{ $order_masak->status }}
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-sm btn-success text-white tombol-edit-order-masak" data-id={{ $order_masak->id_order_masak }} data-animation="zoomIn" data-toggle="modal" data-target="#modal-input-order-masak">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </a>
                                     </td>
                                 </tr>
                              @endforeach
@@ -204,4 +211,5 @@
 {{-- Modal Script --}}
 <script src="{{ asset('/managerproduksi/js/ordermasak.js') }}"></script>
 <script src="{{ asset('/managerproduksi/js/ordermasak_tabel.js') }}"></script>
+<script src="{{ asset('/managerproduksi/js/ordermasak_modal.js') }}"></script>
 @endsection
