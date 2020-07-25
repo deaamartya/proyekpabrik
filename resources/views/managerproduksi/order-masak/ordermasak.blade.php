@@ -35,9 +35,9 @@
      <div class="col-lg-12">
         {{-- Alert status --}}
         @if (session('status'))
-        <div class="alert alert-success alert-dismissible fade show">
+        <div class="alert alert-success alert-dismissible fade show text-dark">
             {{ session('status') }}
-            <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -87,7 +87,7 @@
                                     </td>
                                     <td>
                                         {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
-                                        ->where('id_bahan_product', 'BB000000004')->value('jumlah') }}
+                                        ->where('id_bahan_product', 'BB000000008')->value('jumlah') }}
                                     </td>
                                     <td class="status_order">
                                         {{ $order_masak->status }}

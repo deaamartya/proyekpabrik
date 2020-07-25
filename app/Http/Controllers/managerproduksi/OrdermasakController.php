@@ -80,7 +80,7 @@ class OrdermasakController extends Controller
 
         if ( $request->input_bawang != null ){
             $detail_order_masak = new DetailOrderMasak;
-            $detail_order_masak->id_bahan_product = 'BB000000004';
+            $detail_order_masak->id_bahan_product = 'BB000000008';
             $detail_order_masak->jenis_order = 1;
             $detail_order_masak->jumlah = $request->input_bawang;
             $detail_order_masak->save();
