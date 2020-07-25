@@ -178,23 +178,22 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                   <ul class="horizontal-menu">
                     <li class="dropdown">
-                        <a href="{{url('/gudang-bawang/home-bawang')}}"><span>Home</span></a>
+                        <a href="{{url('/gudang-bawang/home-bawang')}}"><img src="{{asset('assets/images/svg-icon/frontend.svg')}}" class="img-fluid">Home</a>
                     </li>
                     <li class="dropdown">
-                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><span>Stock</span></a>
+                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/basic.svg')}}" class="img-fluid">Stock</a>
                         <ul class="dropdown-menu">
-                            
-                            <li><a href="{{url('/gudang-bawang/stockbawangkulit')}}">Bawang Kulit</a></li>
-                            <li><a href="{{url('/gudang-bawang/stockbawangkupas')}}">Bawang Kupas</a></li>
+                            <li><a href="{{url('/gudang-bawang/stockbawangkulit')}}"><img src="{{asset('assets/images/svg-icon/forms.svg')}}" class="img-fluid">Bawang Kulit</a></li>
+                            <li><a href="{{url('/gudang-bawang/stockbawangkupas')}}"><img src="{{asset('assets/images/svg-icon/forms.svg')}}" class="img-fluid">Bawang Kupas</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><span>Kerja Harian</span></a>
+                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/backend.svg')}}" class="img-fluid">Kerja Harian</a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{url('/gudang-bawang/tenaga-kupas')}}">Tenaga Kupas</a></li>
-                            <li><a href="{{url('/gudang-bawang/pembagian-bawang')}}">Pembagian Bawang</a></li>
-                            <li><a href="{{url('/gudang-bawang/penerimaan-bawang')}}">Penerimaan Bawang</a></li>
-                            <li><a href="{{url('/gudang-bawang/persiapan-masak-kanji')}}">Persiapan Masak Kanji</a></li>
+                            <li><a href="{{url('/gudang-bawang/tenaga-kupas')}}"><img src="{{asset('assets/images/svg-icon/customers.svg')}}" class="img-fluid">Tenaga Kupas</a></li>
+                            <li><a href="{{url('/gudang-bawang/pembagian-bawang')}}"><img src="{{asset('assets/images/svg-icon/forms.svg')}}" class="img-fluid">Pembagian Bawang</a></li>
+                            <li><a href="{{url('/gudang-bawang/penerimaan-bawang')}}"><img src="{{asset('assets/images/svg-icon/basic.svg')}}" class="img-fluid">Penerimaan Bawang</a></li>
+                            <li><a href="{{url('/gudang-bawang/persiapan-masak-kanji')}}"><img src="{{asset('assets/images/svg-icon/icons.svg')}}" class="img-fluid">Persiapan Masak</a></li>
                         </ul>
                     </li>
                   </ul>

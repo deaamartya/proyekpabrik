@@ -61,10 +61,10 @@ Soyuz - Datatable
                             <tbody>
                                 @foreach($tenagakupas as $t)
                                 <tr>
-                                    <td id="nama{{$t->id_pegawai}}">{{$t->nama}}</td>
-                                    <td id="tb{{$t->id_pegawai}}" >{{$t->jumlah}}</td>
-                                    <td id="bk{{$t->id_pegawai}}" class="jmbawangkulit">{{$t->jumlahbawang}}</td>
-                                    <td id="kulit{{$t->id_pegawai}}" class="jmkulit">{{$t->jumlahkulit}}</td>
+                                    <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif" id="nama{{$t->id_pegawai}}">{{$t->nama}}</td>
+                                    <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif" id="tb{{$t->id_pegawai}}" >{{$t->jumlah}}</td>
+                                    <td id="bk{{$t->id_pegawai}}" class="jmbawangkulit @if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->jumlahbawang}}</td>
+                                    <td id="kulit{{$t->id_pegawai}}" class="jmkulit @if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->jumlahkulit}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -106,6 +106,7 @@ Soyuz - Datatable
 
             $("#berat").val(jumlah);
         }
+
         hitungBawang();
         
     });

@@ -10,7 +10,7 @@ Soyuz - Datatable
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .hide{
-        display: none;
+        display: none !important;
     }
     .form-control[readonly] {
         background-color: white !important; 
@@ -29,7 +29,7 @@ Soyuz - Datatable
         </div>
     </div>
     <div class="row align-items-between">
-        @if($cek)
+        @if(!$cek)
         <div class="col">
             <div class="widgetbar">
                 <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addModal">Tambah</button>
@@ -195,6 +195,7 @@ Soyuz - Datatable
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
+    $(document).ready(function() {
     "use strict";
     var table = $('#datatable').DataTable({
         "searching" : false,
@@ -229,6 +230,9 @@ Soyuz - Datatable
         $(".terimakg").each(function(){
             total+= Number($(this).html());
         });
+        $(".terimacustom").each(function(){
+            total+= Number($(this).html());
+        });
         updateProsesHariIni(total);
     };
 
@@ -251,50 +255,43 @@ Soyuz - Datatable
         });
     }
     //function inisiasi tombol delete
-    function delbtn(){
-        $(".delbtn").each(function(){
-            $(this).click(function(){
-                //remove dari table
-                table
-                    .row($(this).parents('tr'))
-                    .remove()
-                    .draw();
-                    //menghitung ulang terima(kg) per orang
-                hitungTotalProsesHariIni();
+    $(document).on("click",".delbtn", function () {
+        //remove dari table
+        table
+            .row($(this).parents('tr'))
+            .remove()
+            .draw();
+        console.log("remove dari table");
+            //menghitung ulang terima(kg) per orang
+        hitungProsesHariIni();
 
-                let id = $(this).attr('id').substr(3);
-                let nama = pegawai[cariPegawai(id)]["nama"];
+        let id = $(this).attr('id').substr(3);
+        let nama = pegawai[cariPegawai(id)]["nama"];
 
-                deleted[deleted.length] = id;
+        deleted[deleted.length] = id;
 
-                //cek pegawai ada atau enggak di modal tambah penerimaan
-                if($("#check"+id).length){
-                    //show dari pilihan
-                    $("#check"+id).show();
-                }
-                //kalau tidak ada, bikin pilihan baru
-                else{
-                    let addrow = '<div class="row m-3" id="check'+id+'">\
-                        <div class="col text-center">\
-                            <input type="checkbox" class="custom-control-input" id="penerima'+id+'" value="'+nama+'">\
-                            <label class="custom-control-label" for="penerima'+id+'">'+nama+'</label>\
-                        </div>\
-                    </div>';
-                    $("#pegawai").append(addrow);
-                }
-            });
-        });
-    }
-    delbtn(); //inisiasi delbtn
+        //cek pegawai ada atau enggak di modal tambah penerimaan
+        if($("#check"+id).length){
+            //show dari pilihan
+            $("#check"+id).show();
+        }
+        //kalau tidak ada, bikin pilihan baru
+        else{
+            let addrow = '<div class="row m-3" id="check'+id+'">\
+                <div class="col text-center">\
+                    <input type="checkbox" class="custom-control-input" id="penerima'+id+'" value="'+nama+'">\
+                    <label class="custom-control-label" for="penerima'+id+'">'+nama+'</label>\
+                </div>\
+            </div>';
+            $("#pegawai").append(addrow);
+        }
+    });
+    // delbtn(); //inisiasi delbtn
     var column = table.column(2);
     column.visible(false);
-
-    $(document).ready(function() {
-
         //membagi target kupas ke tiap tenaga rata.
 
         var jumlah = $(".terimakg").length;
-        console.log(jumlah);
 
         var target = $("#targetkupas").val();
 
@@ -323,13 +320,10 @@ Soyuz - Datatable
                 jsontenaga.push(data);
             });
 
-            
-            console.log(jumlah);
-
             jsontenaga = JSON.stringify(jsontenaga);
             let deletedjson = JSON.stringify(deleted);
 
-            console.log(jsontenaga);
+            let total = $("#proseshariini").val();
 
             $.ajaxSetup({
                 headers: {
@@ -342,10 +336,12 @@ Soyuz - Datatable
                 data: {
                     tenagakupas : jsontenaga,
                     jumlah : jumlah,
+                    totalproses : total,
                     deleted : deletedjson,
                 },
                 success: function(result){
                     $("#saveModal").modal('toggle');
+                    location.reload(); 
                 }
             });
 
@@ -425,8 +421,8 @@ Soyuz - Datatable
                         break;
                     }
                 }
+
             });
-            delbtn(); //refresh delbtn
             hitungTotalProsesHariIni(); //dibagi rata ulang terima(kg)
         });
 

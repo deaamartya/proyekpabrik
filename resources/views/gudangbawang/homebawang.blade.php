@@ -34,7 +34,7 @@ Soyuz - Datatable
                         <table id="default-datatable1" class="display table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Tanggal </th>
+                                    <th>Tanggal</th>
                                     <th>Target Kupas (Kg)</th>
                                     <th>Stock (Kg)</th>
                                     <th>Status</th>

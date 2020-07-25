@@ -40,9 +40,7 @@ Soyuz - Datatable
                             <thead>
                                 <tr>
                                     <th>Tanggal</th>
-                                    <th>HC</th>
-                                    <th>SP</th>
-                                    <th>GS</th>
+                                    <th>Jumlah</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -50,9 +48,7 @@ Soyuz - Datatable
                                 @foreach($ordermasak as $or)
                                     <tr>
                                         <td>{{date_format($or->tanggal_order_masak,'Y-m-d')}}</td>
-                                        <td>{{$or->HC}}</td>
-                                        <td>{{$or->SP}}</td>
-                                        <td>{{$or->GS}}</td>
+                                        <td>{{$or->jumlah}}</td>
                                         <td>
                                         <button type="button" class="btn 
                                         @if($or->status) btn-success

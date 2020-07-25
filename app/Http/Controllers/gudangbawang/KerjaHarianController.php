@@ -95,7 +95,6 @@ class KerjaHarianController extends Controller
     }
 
     public function pembagianbawang(){
-    	$tenagakupas = Pegawai::select('*')->where('id_jabatan','=','2')->get();
 
     	$orderbesok = OrderMasak::select('dom.jumlah')
     	->join('detail_order_masak AS dom','dom.id_order_masak','=','order_masak.id_order_masak')
@@ -109,14 +108,14 @@ class KerjaHarianController extends Controller
 
     	$stockbawang = Stock::select('stock')->where([
     		['id_gudang','=','7'],
-    		['id_bahan_baku','=','BB000000004']
+    		['id_bahan_baku','=','BB000000006']
     	])->orderBy('timestamp','DESC')->first();
 
     	$stockbebas = $stockbawang->stock - $orderbesok->jumlah;
 
     	$ratasusut = 5;
 
-    	$targetkupas = OrderMasak::select('dom.jumlah','tanggal_order_masak')
+    	$targetkupas = OrderMasak::select('dom.jumlah','tanggal_order_masak','dom.id_order_masak')
     	->join('detail_order_masak AS dom','dom.id_order_masak','=','order_masak.id_order_masak')
     	->where([
     		['order_masak.tanggal_order_masak','=',date('Y-m-d')],
@@ -124,9 +123,46 @@ class KerjaHarianController extends Controller
     	])
     	->first();
 
-        $cek = KupasBawang::where('tanggal_beri','=',date('Y-m-d'))->exists();
+        $cek = KupasBawang::where('tanggal_beri',date('Y-m-d'))->exists();
 
-    	return view('gudangbawang.pembagianbawang',['tenagakupas' => $tenagakupas,'orderbesok' => $orderbesok,'stockbebas' => $stockbebas, 'ratasusut' => $ratasusut , 'targetkupas' => $targetkupas, 'cek' => $cek]);
+        if($cek){
+            $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
+            $tenagakupas = json_decode($tenagakupas->id_pegawai);
+            $arrtenaga = [];
+            $jumlah = [];
+            $i=0;
+            foreach($tenagakupas as $t){
+                $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
+                ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
+                ->where('id_pegawai','=',$t->id_pegawai)
+                ->first();
+
+                $arrtenaga[$i] = Pegawai::where('id_pegawai','=',$t->id_pegawai)->first();
+
+                $id_det = $id_det->id_detail_transaksi;
+
+                $id_det = "DT".str_pad(intval(substr($id_det,2))-1,9,"0",STR_PAD_LEFT);
+                
+                $jumlah[$i] = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det)->first();
+
+                $i++;
+            }
+            $totalproses = Stock::select('keluar')->where([
+                    ['id_satuan','=','1'],
+                    ['id_bahan_baku','=','BB000000006'],
+                    ['id_transaksi','=',$targetkupas->id_order_masak],
+                    ['keterangan','=','Beri Bawang'],
+                    ['id_gudang','=','7']
+                ])->orderBy('TIMESTAMP','desc')->first();
+
+            return view('gudangbawang.pembagianbawangisi',['tenagakupas' => $arrtenaga,'orderbesok' => $orderbesok,'stockbebas' => $stockbebas, 'ratasusut' => $ratasusut , 'targetkupas' => $targetkupas, 'cek' => $cek,'totalproses' => $totalproses,'jumlah' => $jumlah]);
+        }
+        else{
+            $tenagakupas = Pegawai::select('*')->where('id_jabatan','=','2')->get();
+            return view('gudangbawang.pembagianbawang',['tenagakupas' => $tenagakupas,'orderbesok' => $orderbesok,'stockbebas' => $stockbebas, 'ratasusut' => $ratasusut , 'targetkupas' => $targetkupas, 'cek' => $cek]);
+        }
+
+    	
     }
 
     public function simpanBeri(Request $req){
@@ -155,20 +191,21 @@ class KerjaHarianController extends Controller
                         'id_jenis_transaksi' => 1,
                         'jumlah' => $t->jumlah,
                         'id_satuan' => 1,
-                        'id_bahan_baku' => 'BB000000004',
+                        'id_bahan_baku' => 'BB000000006',
                     ]);
+                    
 
-                    $id_dt = DetailTransaksi::select('id_detail_transaksi')->where("id_bahan_baku",'=','BB000000004')->orderBy('timestamp','DESC')->first();
-
+                    $id_dt = DetailTransaksi::select('id_detail_transaksi')->where("id_bahan_baku",'=','BB000000006')->orderBy('timestamp','DESC')->first();
+                    sleep(1);
                     DetailTransaksi::insert([
                         'id_transaksi' => $or->id_order_masak,
                         'id_jenis_transaksi' => 2,
                         'jumlah' => 0,
                         'id_satuan' => 1,
-                        'id_bahan_baku' => 'BB000000006',
+                        'id_bahan_baku' => 'BB000000008',
                     ]);
 
-                    $id_dtterima = DetailTransaksi::select('id_detail_transaksi')->where("id_bahan_baku",'=','BB000000006')->orderBy('timestamp','DESC')->first();
+                    $id_dtterima = DetailTransaksi::select('id_detail_transaksi')->where("id_bahan_baku",'=','BB000000008')->orderBy('timestamp','DESC')->first();
 
                     DetailKupasBawang::insert([
                         'id_detail_transaksi' => $id_dtterima->id_detail_transaksi,
@@ -179,16 +216,20 @@ class KerjaHarianController extends Controller
                     $i++;
 
                     $tenagahariini[$i] = $t->id_pegawai;
+
+                    $peg = Pegawai::find($t->id_pegawai);
+                    $peg->status = 1;
+                    $peg->save();
                 }
 
                 //mengurangi stock bawang kulit di gudang bawang
                 Stock::insert([
                     'id_satuan' => '1',
-                    'id_bahan_baku' => 'BB000000004',
+                    'id_bahan_baku' => 'BB000000006',
                     'id_transaksi' => $or->id_order_masak,
                     'keterangan' => 'Beri Bawang',
                     'masuk' => 0,
-                    'keluar' => $req->jumlah,
+                    'keluar' => $req->totalproses,
                     'stock' => 0,
                     'id_gudang' => '7'
                 ]);
@@ -212,15 +253,14 @@ class KerjaHarianController extends Controller
     public function penerimaanbawang(){
 
         $idkerja = KerjaHarianGroup::select('id_kerja_harian_group')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
-
-        $cek = DetailRekapKerjaHarianGroup::where('id_kerja_harian_group','=',$idkerja)->exists();
+        $cek = DB::table('detail_rekap_kerja_harian_group')->where(['id_kerja_harian_group' => $idkerja->id_kerja_harian_group])->exists();
 
         $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
             
         $tenagakupas = json_decode($tenagakupas->id_pegawai);
 
         for($i=0;$i<count($tenagakupas);$i++){
-            $pegawai[$i] = Pegawai::select('id_pegawai','nama')->where('id_pegawai','=',$tenagakupas[$i])->first();
+            $pegawai[$i] = Pegawai::select('id_pegawai','nama')->where('id_pegawai','=',$tenagakupas[$i]->id_pegawai)->first();
         }
 
         $or = OrderMasak::select('order_masak.id_order_masak')
@@ -231,26 +271,7 @@ class KerjaHarianController extends Controller
             ])
             ->first();
 
-        if($cek == false){
-            foreach($pegawai as $t){
-
-                $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
-                ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
-                ->where('id_pegawai','=',$t->id_pegawai)
-                ->first();
-
-                $id_det = $id_det->id_detail_transaksi;
-
-                $id_det = "DT".str_pad(intval(substr($id_det,2))-1,9,"0",STR_PAD_LEFT);
-                
-                $jumlah = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det)->first();
-
-                $t->jumlah = $jumlah->jumlah;
-                $t->idtr = $id_det;
-            }
-            return view('gudangbawang.penerimaanbawang',['tenagakupas' => $pegawai]);
-        }
-        else{
+        if($cek!=0){
             foreach($pegawai as $t){
 
                 $id_det = DetailKupasBawang::select('dt.id_detail_transaksi','kulit')
@@ -274,6 +295,26 @@ class KerjaHarianController extends Controller
                 $t->idtr = $id_det;
             }
             return view('gudangbawang.penerimaanbawangisi',['tenagakupas' => $pegawai]);
+            
+        }
+        else{
+            foreach($pegawai as $t){
+
+                $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
+                ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
+                ->where('id_pegawai','=',$t->id_pegawai)
+                ->first();
+
+                $id_det = $id_det->id_detail_transaksi;
+
+                $id_det = "DT".str_pad(intval(substr($id_det,2))-1,9,"0",STR_PAD_LEFT);
+                
+                $jumlah = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det)->first();
+
+                $t->jumlah = $jumlah->jumlah;
+                $t->idtr = $id_det;
+            }
+            return view('gudangbawang.penerimaanbawang',['tenagakupas' => $pegawai]);
         }
         
     }
@@ -295,9 +336,9 @@ class KerjaHarianController extends Controller
 
                     $id_det = $t->idtr;
 
-                    $id_det = "DT".str_pad(intval(substr($id_det,2)),9,"0",STR_PAD_LEFT);
+                    $id_det = "DT".str_pad(intval(substr($id_det,2))+1,9,"0",STR_PAD_LEFT);
 
-                    $dkb = DB::table("detail_kupas_bawang")
+                    DB::table("detail_kupas_bawang")
                     ->where([
                         'id_detail_transaksi' => $id_det,
                         'id_pegawai' => $t->id_pegawai,
@@ -305,15 +346,18 @@ class KerjaHarianController extends Controller
                         'kulit' => $t->beratkulit
                     ]);
 
-                    $det = DetailTransaksi::find($id_det)->first();
-                    $det->jumlah = $t->beratbawang;
-                    $det->save();
+                    DB::table("detail_transaksi")
+                    ->where([
+                        'id_detail_transaksi' => $id_det,
+                    ])->update([
+                        'jumlah' => $t->beratbawang
+                    ]);
                 }
 
                 //mengurangi stock bawang kulit di gudang bawang
                 Stock::insert([
                     'id_satuan' => '1',
-                    'id_bahan_baku' => 'BB000000006',
+                    'id_bahan_baku' => 'BB000000008',
                     'id_transaksi' => $or->id_order_masak,
                     'keterangan' => 'Terima Bawang',
                     'masuk' => $req->total_output,
@@ -361,21 +405,29 @@ class KerjaHarianController extends Controller
     }
 
     public function persiapanmasakkanji(){
-    	$ordermasak = OrderMasak::select('order_masak.*','dom.jumlah AS HC','dom1.jumlah AS SP','dom2.jumlah AS GS')
-    	->join('detail_order_masak AS dom', function ($join) {
+    	// $ordermasak = OrderMasak::select('order_masak.*','dom.jumlah AS HC','dom1.jumlah AS SP','dom2.jumlah AS GS')
+    	// ->join('detail_order_masak AS dom', function ($join) {
+     //        $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
+     //             ->where('dom.id_bahan_product', '=', 'PR00000000001');
+     //    })
+     //    ->join('detail_order_masak AS dom1', function ($join) {
+     //        $join->on('order_masak.id_order_masak', '=', 'dom1.id_order_masak')
+     //             ->where('dom1.id_bahan_product', '=', 'PR00000000002');
+     //    })
+     //    ->join('detail_order_masak AS dom2', function ($join) {
+     //        $join->on('order_masak.id_order_masak', '=', 'dom2.id_order_masak')
+     //             ->where('dom2.id_bahan_product', '=', 'PR00000000003');
+     //    })
+    	// ->where('tanggal_order_masak','>=',date('Y-m-d'))
+    	// ->get();
+
+        $ordermasak = OrderMasak::select('order_masak.*','dom.*')
+        ->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
-                 ->where('dom.id_bahan_product', '=', 'PR00000000001');
+                 ->where('dom.id_bahan_product', '=', 'BB000000008');
         })
-        ->join('detail_order_masak AS dom1', function ($join) {
-            $join->on('order_masak.id_order_masak', '=', 'dom1.id_order_masak')
-                 ->where('dom1.id_bahan_product', '=', 'PR00000000002');
-        })
-        ->join('detail_order_masak AS dom2', function ($join) {
-            $join->on('order_masak.id_order_masak', '=', 'dom2.id_order_masak')
-                 ->where('dom2.id_bahan_product', '=', 'PR00000000003');
-        })
-    	->where('tanggal_order_masak','>=',date('Y-m-d'))
-    	->get();
+        ->where('tanggal_order_masak','>=',date('Y-m-d'))
+        ->get();
     	return view('gudangbawang.persiapanmasakkanji',['ordermasak' => $ordermasak]);
     }
 
@@ -393,6 +445,5 @@ class KerjaHarianController extends Controller
 
 	        return response()->json(['success' => true,'ordermasak' => $ordermasak]);
     	}
-    }
-
+	}
 }
