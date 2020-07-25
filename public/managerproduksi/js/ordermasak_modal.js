@@ -27,10 +27,16 @@ $(function() {
                 'X-CSRF-TOKEN': token
             },
             url: url,
+            cache: false,
             data: {id : id},
             dataType: 'json',
             success: function(data){
                 console.log(data);
+                $('#input_id').val(data.id);
+                $('#input_hc').val(data.HC);
+                $('#input_sp').val(data.SP);
+                $('#input_gs').val(data.GS);
+                $('#input_bawang').val(data.BAWANG);
             }
         });
     });

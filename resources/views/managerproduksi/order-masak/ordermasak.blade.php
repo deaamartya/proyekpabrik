@@ -127,7 +127,8 @@
                 <form action="{{ url('/manager-produksi/order-masak') }}" method="POST">
                     @csrf
 
-                    {{-- <input type="hidden" name="id" id="id"> --}}
+                    {{-- Hidden id untuk update order masak --}}
+                    <input type="hidden" name="input_id" id="input_id">
 
                     <div class="form-group">
                         <label for="input_tanggal">Tanggal</label>
