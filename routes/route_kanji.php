@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/gudang-bawang/', function () {
     return redirect('/gudang-bawang/home-bawang');
 });
-Route::get('/gudang-bawang/home-bawang', function () {
-    return view('gudangbawang.homebawang');
-});
+Route::get('/gudang-bawang/home-bawang', 'gudangbawang\HomeController@index');
 
 
 //kerja harian
@@ -75,13 +73,11 @@ Route::get('/gudang-bawang/scan', function () {
 Route::get('/gudang-tepung-tapioka/', function () {
     return redirect('/gudang-tepung-tapioka/home');
 });
-Route::get('/gudang-tepung-tapioka/home', 'GudangTepungTapiokaController@index');
+Route::get('/gudang-tepung-tapioka/home', 'gudangtepungtapioka\GudangTepungTapiokaController@index');
 
-Route::get('/gudang-tepung-tapioka/stock', 'GudangTepungTapiokaController@stock');
+Route::get('/gudang-tepung-tapioka/stock', 'gudangtepungtapioka\GudangTepungTapiokaController@stock');
 
-Route::get('/gudang-tepung-tapioka/kerjaharian', function () {
-    return view('gudangtepungtapioka.kerjaharian');
-});
+Route::get('/gudang-tepung-tapioka/kerjaharian', 'gudangtepungtapioka\GudangTepungTapiokaController@kerjaharian');
 
 //gudang bumbu
 
@@ -89,9 +85,7 @@ Route::get('/gudang-bumbu/', function () {
     return redirect('/gudang-bumbu/home-bumbu');
 });
 
-Route::get('/gudang-bumbu/home-bumbu', function () {
-    return view('gudangbumbu.homebumbu');
-});
+Route::get('/gudang-bumbu/home-bumbu','gudangbumbu\HomeController@index');
 
 Route::get('/gudang-bumbu/kerjaharianadonangula', function () {
     return view('gudangbumbu.kerjaharianadonangula');
