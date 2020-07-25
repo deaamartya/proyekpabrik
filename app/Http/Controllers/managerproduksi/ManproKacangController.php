@@ -71,12 +71,13 @@ class ManproKacangController extends Controller
     {
 
          
-         $stock_ob =  Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang OB', 'gudang.nama' => 'Gudang Kacang'])
-                    ->whereBetween(DB::raw('DATE(timestamp)'), array($req->tgl_awal_ob, $req->tgl_akhir_ob))
+        $stock_ob = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                    ->where(['stock.id_bahan_baku' => 'BB000000003', 'stock.id_gudang' => '9'])
+                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_ob, $req->tgl_akhir_ob))
                     ->get();
+                    
+       //echo $stock_ob;
 
         return response()->json(['stock_ob'=>$stock_ob]);
 

@@ -330,7 +330,7 @@ $(document).ready(function(){
               "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
             },
             success : function(results) {
-             // console.log(JSON.stringify(results)); //print_r
+             console.log(JSON.stringify(results)); //print_r
                  
 
               var data_stock = results;
@@ -353,8 +353,8 @@ $(document).ready(function(){
                 var cell5 = row.insertCell(4);
                 var cell6 = row.insertCell(5);
 
-                cell1.innerHTML = '<td>'+results.stock_ob[i].timestamp+'</td>';
-                cell2.innerHTML = '<td> tanggal terima kacang </td>';
+                cell1.innerHTML = '<td>'+results.stock_ob[i].tanggal+'</td>';
+                cell2.innerHTML = '<td>'+results.stock_ob[i].timestamp+'</td>';
                 cell3.innerHTML = '<td>'+results.stock_ob[i].keterangan+'</td>';
                 cell4.innerHTML = '<td>'+results.stock_ob[i].masuk+'</td>';
                 cell5.innerHTML = '<td>'+results.stock_ob[i].keluar+'</td>';
