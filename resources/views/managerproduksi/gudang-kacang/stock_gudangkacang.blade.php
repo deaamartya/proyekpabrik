@@ -85,7 +85,7 @@ Stock Gudang Kacang
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_ob" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -105,44 +105,11 @@ Stock Gudang Kacang
                                             </tr>
                                       
                                         </thead>
+
                                         <tbody>
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Dari Coolstorage I</td>
-                                                <td>50</td>
-                                                <td>-</td>
-                                                <td>50</td>
-                                            </tr>
-                                           
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>12 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>30</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
 
                                         </tbody>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -330,6 +297,88 @@ Stock Gudang Kacang
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
 <script>
+
+$(document).ready(function(){
+    $(document).on('click', '#terapkan_ob', function (e) {
+    
+    var awal_ob = document.getElementById('date1').value;
+    var tgl_awal_ob = awal_ob.split("/").reverse().join("-");
+
+    var akhir_ob = document.getElementById('date2').value;
+    var tgl_akhir_ob = akhir_ob.split("/").reverse().join("-");
+
+
+    var awal_7ml = document.getElementById('date3').value;
+    var akhir_7ml = document.getElementById('date4').value;
+
+    var awal_8ml = document.getElementById('date5').value;
+    var akhir_8ml = document.getElementById('date6').value;
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gk/stock_kacang_ob",
+            data:{
+              "tgl_awal_ob":tgl_awal_ob,
+              "tgl_akhir_ob":tgl_akhir_ob,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results) {
+             console.log(JSON.stringify(results)); //print_r
+                 
+
+              var data_stock = results;
+              var table = document.getElementById('datatable1');
+
+              while(table.rows.length > 1)
+              {
+                table.deleteRow(1);
+              }
+
+
+              for(var i=0; i<results.stock_ob.length; i++)
+              {
+                
+                var row = table.insertRow(table.rows.length);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                var cell6 = row.insertCell(5);
+
+                cell1.innerHTML = '<td>'+results.stock_ob[i].tanggal+'</td>';
+                cell2.innerHTML = '<td>'+results.stock_ob[i].timestamp+'</td>';
+                cell3.innerHTML = '<td>'+results.stock_ob[i].keterangan+'</td>';
+                cell4.innerHTML = '<td>'+results.stock_ob[i].masuk+'</td>';
+                cell5.innerHTML = '<td>'+results.stock_ob[i].keluar+'</td>';
+                cell6.innerHTML = '<td>'+results.stock_ob[i].stock+'</td>';
+                
+              }
+
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
+   
+});
+
+
+
+  
+
+
+
     $(document).ready(function() {
         $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],

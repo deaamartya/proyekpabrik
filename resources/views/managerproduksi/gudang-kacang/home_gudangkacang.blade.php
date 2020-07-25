@@ -53,6 +53,34 @@ Home Gudang Kacang
                     <h5 class="card-title" style="font-size: 16px; padding-left: 5px;">Kacang OB</h5>
                     <div class="table-responsive">
                         <table id="datatable1" class="display table table-bordered table-striped table-manpro-hover datatable" width="80%" >
+                            <?php
+                                    function tgl_indo($tanggal){
+                                        $bulan = array (
+                                            1 =>   'Januari',
+                                            'Februari',
+                                            'Maret',
+                                            'April',
+                                            'Mei',
+                                            'Juni',
+                                            'Juli',
+                                            'Agustus',
+                                            'September',
+                                            'Oktober',
+                                            'November',
+                                            'Desember'
+                                        );
+                                        $pecahkan = explode('-', $tanggal);
+                                        
+                                        // variabel pecahkan 0 = tanggal
+                                        // variabel pecahkan 1 = bulan
+                                        // variabel pecahkan 2 = tahun
+                                     
+                                        return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+                                    }
+                                     
+                                    
+                            ?>
+
                             <thead>
                                     <tr>
                                         <th width="60%">Tanggal Penerimaan Kacang</th>
@@ -60,16 +88,16 @@ Home Gudang Kacang
                                     </tr>
                           
                             </thead>
-                            <tbody>
+                            <tbody>      
+                                @foreach($kacang_ob as $ob)
                                 <tr>
-                                    <td>10 Mei 2020</td>
-                                    <td>20</td>
+                                    
+
+                                     <td>{{ tgl_indo(date('Y-m-d' , strtotime($ob->timestamp))) }}</td>
+                                    <td>{{ $ob->stock }}</td>
                                 </tr>
-                               
-                                <tr>
-                                    <td>12 Mei 2020</td>
-                                    <td>10</td>
-                                </tr>
+                                 @endforeach
+                    
 
                             </tbody>
                         </table>
@@ -88,10 +116,12 @@ Home Gudang Kacang
                           
                             </thead>
                             <tbody>
+                                 @foreach($kacang_7ml as $k)
                                 <tr>
-                                    <td>10 Mei 2020</td>
-                                    <td>10</td>
+                                     <td>{{ tgl_indo(date('Y-m-d' , strtotime($k->timestamp))) }}</td>
+                                    <td>{{ $k->stock }}</td>
                                 </tr>
+                                 @endforeach
                                
 
                             </tbody>
@@ -111,15 +141,12 @@ Home Gudang Kacang
                           
                             </thead>
                             <tbody>
-                                <tr >
-                                    <td>1 Mei 2020</td>
-                                    <td>5</td>
-                                </tr>
-                               
+                                @foreach($kacang_8ml as $c)
                                 <tr>
-                                    <td>13 Mei 2020</td>
-                                    <td>10</td>
+                                     <td>{{ tgl_indo(date('Y-m-d' , strtotime($c->timestamp))) }}</td>
+                                    <td>{{ $c->stock }}</td>
                                 </tr>
+                                 @endforeach
 
                             </tbody>
                         </table>
@@ -153,21 +180,19 @@ Home Gudang Kacang
                           
                             </thead>
                             <tbody>
+                                
+
                                 <tr>
-                                    <td>Karung Full</td>
-                                    <td>5</td>
-                                    <td>10</td>
-                                    <td>7</td>
-                                    <td>13</td>
+                                    <td>Kg</td>
+                                    <td>{{ $kacang_hc}}</td>
+                                    <td>{{ $kacang_sp }}</td>
+                                    <td>{{ $kacang_gs }}</td>
+                                    <td>{{ $kacang_telor}}</td>
+
                                 </tr>
+
+                                
                                
-                                <tr>
-                                    <td>Tidak Full(Kg)</td>
-                                    <td>25</td>
-                                    <td>-</td>
-                                    <td>17</td>
-                                    <td>-</td>
-                                </tr>
 
                             </tbody>
                         </table>

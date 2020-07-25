@@ -5,8 +5,14 @@ namespace App\Http\Controllers\managerproduksi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use DB;
+
 use App\Models\Stock;
 use App\Models\BahanBaku;
+use App\Models\Product;
+use App\Models\DetailOrderMasak;
+
+
 
 class ManproKacangController extends Controller
 {
@@ -17,21 +23,72 @@ class ManproKacangController extends Controller
      */
     public function home()
     {
-         $stock = Stock::select('stock.timestamp' , 'stock.stock')
+         $kacang_ob = Stock::select('stock.timestamp' , 'stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->where('bahan_baku.nama', '=', 'kacang')
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang OB', 'gudang.nama' => 'Gudang Kacang'])
                     ->get();
 
+        $kacang_7ml = Stock::select('stock.timestamp' , 'stock.stock')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 7 ml', 'gudang.nama' => 'Gudang Kacang'])
+                    ->get();
 
-        return view('managerproduksi.gudang-kacang.home_gudangkacang')->with(compact('stock'));
+        $kacang_8ml = Stock::select('stock.timestamp' , 'stock.stock')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 8 ml', 'gudang.nama' => 'Gudang Kacang'])
+                    ->get();
+
+        $kacang_hc = DetailOrderMasak::select('detail_order_masak.id_bahan_product', 'detail_order_masak.jenis_order', 'detail_order_masak.jumlah')
+                    ->join('product', 'product.id_product', '=', 'detail_order_masak.id_bahan_product')
+                    ->where(['detail_order_masak.jenis_order' => 0,'product.nama' => 'HC'])
+                    ->sum('jumlah');
+                   
+
+        $kacang_gs = DetailOrderMasak::select('detail_order_masak.id_bahan_product', 'detail_order_masak.jenis_order', 'detail_order_masak.jumlah')
+                    ->join('product', 'product.id_product', '=', 'detail_order_masak.id_bahan_product')
+                    ->where(['detail_order_masak.jenis_order' => 0,'product.nama' => 'GS'])
+                    ->sum('jumlah');
+
+        $kacang_sp = DetailOrderMasak::select('detail_order_masak.id_bahan_product', 'detail_order_masak.jenis_order', 'detail_order_masak.jumlah')
+                    ->join('product', 'product.id_product', '=', 'detail_order_masak.id_bahan_product')
+                    ->where(['detail_order_masak.jenis_order' => 0,'product.nama' => 'SP'])
+                    ->sum('jumlah');
+
+        $kacang_telor = DetailOrderMasak::select('detail_order_masak.id_bahan_product', 'detail_order_masak.jenis_order', 'detail_order_masak.jumlah')
+                    ->join('product', 'product.id_product', '=', 'detail_order_masak.id_bahan_product')
+                    ->where(['detail_order_masak.jenis_order' => 0,'product.nama' => 'Telor'])
+                    ->sum('jumlah');
+
+
+        return view('managerproduksi.gudang-kacang.home_gudangkacang')->with(compact('kacang_ob', 'kacang_7ml', 'kacang_8ml', 'kacang_hc', 'kacang_gs', 'kacang_sp', 'kacang_telor'));
     }
 
+
+    public function stock_kacang_ob(Request $req)
+    {
+
+         
+        $stock_ob = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                    ->where(['stock.id_bahan_baku' => 'BB000000003', 'stock.id_gudang' => '9'])
+                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_ob, $req->tgl_akhir_ob))
+                    ->get();
+                    
+       //echo $stock_ob;
+
+        return response()->json(['stock_ob'=>$stock_ob]);
+
+        //return redirect('/manpro-kacang/stock/gk')->with('stock_ob', $stock_ob);
+
+    }
 
     public function stock_gudangkacang()
     {
         return view('managerproduksi.gudang-kacang.stock_gudangkacang');
     }
-
 
      public function stock_gudangkacangsortir()
     {

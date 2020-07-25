@@ -25,11 +25,17 @@ Route::get('/penerimaan/cetak_barcode/{id}',  'managerproduksi\PenerimaanControl
 
 // Manager Produksi | Order Masak
 Route::get('/manager-produksi/order-masak', 'managerproduksi\OrdermasakController@index');
+Route::get('/cobayu', 'managerproduksi\OrdermasakController@test');
 Route::post('/manager-produksi/order-masak', 'managerproduksi\OrdermasakController@store');
+Route::post('/manager-produksi/edit-order-masak', 'managerproduksi\OrdermasakController@edit');
+Route::post('/manager-produksi/update-order-masak', 'managerproduksi\OrdermasakController@update');
 
 //manpro-gudangkacang
 Route::get('/manpro-kacang/home', 'managerproduksi\ManproKacangController@home');
 Route::get('/manpro-kacang/stock/gk', 'managerproduksi\ManproKacangController@stock_gudangkacang');
+
+Route::post('/manpro-kacang/stock/gk/stock_kacang_ob', 'managerproduksi\ManproKacangController@stock_kacang_ob');
+
 Route::get('/manpro-kacang/stock/gks', 'managerproduksi\ManproKacangController@stock_gudangkacangsortir');
 Route::get('/manpro-kacang/kerjaharian/hariini', 'managerproduksi\ManproKacangController@kerjahariini');
 Route::get('/manpro-kacang/kerjaharian/sebelumnya', 'managerproduksi\ManproKacangController@kerjaharisebelumnya');
@@ -49,10 +55,10 @@ Route::get('/manager-produksi/gudang-tapioka/stock', 'managerproduksi\Managerpro
 Route::get('/manager-produksi/gudang-tapioka/kerja-harian', 'managerproduksi\ManagerproduksiController@gudang_tapioka_kerjaharian');
 
 // Manager Produksi | Data Produksi | Gudang Bumbu
-Route::get('/manager-produksi/gudang-bumbu', 'managerproduksi\ManagerproduksiController@gudang_bumbu_home');
-Route::get('/manager-produksi/gudang-bumbu/stock-bahan', 'managerproduksi\ManagerproduksiController@gudang_bumbu_stock_bahan');
-Route::get('/manager-produksi/gudang-bumbu/detail-prive', 'managerproduksi\ManagerproduksiController@gudang_bumbu_detail_prive');
-Route::get('/manager-produksi/gudang-bumbu/stock-adonan-gula', 'managerproduksi\ManagerproduksiController@gudang_bumbu_stock_adonan_gula');
-Route::get('/manager-produksi/gudang-bumbu/stock-adonan-gula-garam', 'managerproduksi\ManagerproduksiController@gudang_bumbu_stock_adonan_gula_garam');
-Route::get('/manager-produksi/gudang-bumbu/stock-bumbu-ready', 'managerproduksi\ManagerproduksiController@gudang_bumbu_stock_bumbu_ready');
-Route::get('/manager-produksi/gudang-bumbu/kerja-harian', 'managerproduksi\ManagerproduksiController@gudang_bumbu_kerja_harian');
+Route::get('/manager-produksi/gudang-bumbu', 'managerproduksi\ManproBumbuController@home');
+Route::get('/manager-produksi/gudang-bumbu/stock-bahan', 'managerproduksi\ManproBumbuController@stock_bahan');
+Route::get('/manager-produksi/gudang-bumbu/detail-prive', 'managerproduksi\ManproBumbuController@detail_prive');
+Route::get('/manager-produksi/gudang-bumbu/stock-adonan-gula', 'managerproduksi\ManproBumbuController@stock_adonan_gula');
+Route::get('/manager-produksi/gudang-bumbu/stock-adonan-gula-garam', 'managerproduksi\ManproBumbuController@stock_adonan_gula_garam');
+Route::get('/manager-produksi/gudang-bumbu/stock-bumbu-ready', 'managerproduksi\ManproBumbuController@stock_bumbu_ready');
+Route::get('/manager-produksi/gudang-bumbu/kerja-harian', 'managerproduksi\ManproBumbuController@kerja_harian');
