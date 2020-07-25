@@ -53,6 +53,6 @@ class OrderMasak extends Model
 
 	public function detail_order_masak()
 	{
-		return $this->hasOne(DetailOrderMasak::class, 'id_order_masak');
+		return $this->hasMany(DetailOrderMasak::class, 'id_order_masak');
 	}
 }

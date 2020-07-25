@@ -15,14 +15,6 @@ table thead {
     background-color: #DCDCDC;
 }
 
-td.belum {
-    color: red;
-}
-
-td.ready {
-    color: rgb(64, 180, 64);
-}
-
 .tombol-ambil-tepung, .tombol-tambah-hasil-packing {
     margin-top: 20px;
     font-weight: bold;

@@ -20,6 +20,15 @@ class CreateDetailOrderMasakTable extends Migration
             $table->integer('jumlah');
             $table->foreign('id_order_masak')->references('id_order_masak')->on('order_masak');
         });
+
+        DB::unprepared("CREATE TRIGGER `auto_id_ordermasak` BEFORE INSERT ON `detail_order_masak`
+             FOR EACH ROW BEGIN
+                SELECT id_order_masak FROM order_masak
+                ORDER BY id_order_masak DESC
+                LIMIT 1
+                INTO @new_id_ordermasak;
+                SET NEW.id_order_masak = @new_id_ordermasak;
+            END");
     }
 
     /**

@@ -24,7 +24,8 @@ Route::post('/penerimaan/update_penerimaan_pemindahanbahan/{id}', 'managerproduk
 Route::get('/penerimaan/cetak_barcode/{id}',  'managerproduksi\PenerimaanController@printBarcode')->name('cetak_barcode');
 
 // Manager Produksi | Order Masak
-Route::get('/manager-produksi/order-masak', 'managerproduksi\ManagerproduksiController@order_masak');
+Route::get('/manager-produksi/order-masak', 'managerproduksi\OrdermasakController@index');
+Route::post('/manager-produksi/order-masak', 'managerproduksi\OrdermasakController@store');
 
 //manpro-gudangkacang
 Route::get('/manpro-kacang/home', 'managerproduksi\ManproKacangController@home');
