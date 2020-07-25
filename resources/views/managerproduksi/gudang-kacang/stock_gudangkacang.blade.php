@@ -85,7 +85,7 @@ Stock Gudang Kacang
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button onclick="getStock();" class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_ob" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -105,11 +105,11 @@ Stock Gudang Kacang
                                             </tr>
                                       
                                         </thead>
+
                                         <tbody>
-                                           
-                                           
 
                                         </tbody>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -298,10 +298,15 @@ Stock Gudang Kacang
 
 <script>
 
-function getStock(){
-
+$(document).ready(function(){
+    $(document).on('click', '#terapkan_ob', function (e) {
+    
     var awal_ob = document.getElementById('date1').value;
+    var tgl_awal_ob = awal_ob.split("/").reverse().join("-");
+
     var akhir_ob = document.getElementById('date2').value;
+    var tgl_akhir_ob = akhir_ob.split("/").reverse().join("-");
+
 
     var awal_7ml = document.getElementById('date3').value;
     var akhir_7ml = document.getElementById('date4').value;
@@ -319,17 +324,22 @@ function getStock(){
             type:"POST",
             url:"/manpro-kacang/stock/gk/stock_kacang_ob",
             data:{
-              "awal_ob":awal_ob,
-              "akhir_ob":akhir_ob,
+              "tgl_awal_ob":tgl_awal_ob,
+              "tgl_akhir_ob":tgl_akhir_ob,
 
               "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
             },
             success : function(results) {
-              //console.log(JSON.stringify(results)); //print_r
-                //console.log(results.product[0].product_name);
+             // console.log(JSON.stringify(results)); //print_r
+                 
 
               var data_stock = results;
               var table = document.getElementById('datatable1');
+
+              while(table.rows.length > 1)
+              {
+                table.deleteRow(1);
+              }
 
 
               for(var i=0; i<results.stock_ob.length; i++)
@@ -358,7 +368,14 @@ function getStock(){
                 console.log(data);
             }
       });
-}
+
+    });
+   
+});
+
+
+
+  
 
 
 
