@@ -29,6 +29,9 @@ Route::get('/manager-produksi/order-masak', 'managerproduksi\ManagerproduksiCont
 //manpro-gudangkacang
 Route::get('/manpro-kacang/home', 'managerproduksi\ManproKacangController@home');
 Route::get('/manpro-kacang/stock/gk', 'managerproduksi\ManproKacangController@stock_gudangkacang');
+
+Route::get('/manpro-kacang/stock/gk/stock_kacang_ob', 'managerproduksi\ManproKacangController@stock_kacang_ob');
+
 Route::get('/manpro-kacang/stock/gks', 'managerproduksi\ManproKacangController@stock_gudangkacangsortir');
 Route::get('/manpro-kacang/kerjaharian/hariini', 'managerproduksi\ManproKacangController@kerjahariini');
 Route::get('/manpro-kacang/kerjaharian/sebelumnya', 'managerproduksi\ManproKacangController@kerjaharisebelumnya');

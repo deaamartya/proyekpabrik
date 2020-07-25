@@ -45,13 +45,43 @@ Edit Surat Penerimaan Barang
         <!-- Start col -->
         <div class="col-lg-12">
             <div class="card m-b-30">
+                            <?php
+                                    function tgl_indo($tanggal){
+                                        $bulan = array (
+                                            1 =>   'Januari',
+                                            'Februari',
+                                            'Maret',
+                                            'April',
+                                            'Mei',
+                                            'Juni',
+                                            'Juli',
+                                            'Agustus',
+                                            'September',
+                                            'Oktober',
+                                            'November',
+                                            'Desember'
+                                        );
+                                        $pecahkan = explode('-', $tanggal);
+                                        
+                                        // variabel pecahkan 0 = tanggal
+                                        // variabel pecahkan 1 = bulan
+                                        // variabel pecahkan 2 = tahun
+                                     
+                                        return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+                                    }
+                                     
+                                    
+                            ?>
     
                             <div class="card-header">
                                    <div class="row">
                                         <h5 class="card-title ml-3">Penerimaan Pemindahan Bahan</h5>
-                                        <h5 class="card-title ml-auto mr-3" >{{ date('d M Y' , strtotime($penerimaan->timestamp)) }}</h5>
+                                        <h5 class="card-title ml-auto mr-3" >
+                                            {{ tgl_indo(date('Y-m-d' , strtotime($penerimaan->timestamp))) }}
+                                        </h5>
                                     </div>
                             </div>
+    
 
                             <input type="hidden" id="kode_penerimaan" value="{{ $penerimaan->id_penerimaan }}">
 
