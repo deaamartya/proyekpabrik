@@ -74,7 +74,7 @@ Surat Penerimaan Barang
                                     <!-- jenis penerimaan : dari supplier -->
                                     <input type="hidden" id="jenis_penerimaan" name="id_jenis_penerimaan" value="1">
 
-                                    <input type="hidden" class="kode_penerimaan" name="id_penerimaan" value="{{ $id_penerimaan }}">
+                                    <input type="hidden" id="kode_penerimaan" name="id_penerimaan" value="{{ $id_penerimaan }}">
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6" >
@@ -251,8 +251,10 @@ Surat Penerimaan Barang
                                             <a onclick="submitSementara();" class="btn btn-light simpan-sementara">Simpan Sementara</a>
                                         
                                             <a onclick="submitPenerimaan();" class="btn btn-primary" style="color: white;">Selesai</a>
+                                            
 
                                             <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" class="btn btn-primary">Cetak Barcode</a>
+                                       
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
                                         </div>                        
@@ -286,7 +288,7 @@ Surat Penerimaan Barang
                                     <!-- jenis penerimaan : pemindahan bahan-->
                                     <input type="hidden" id="jenis_penerimaan2" name="id_jenis_penerimaan2" value="2">
 
-                                    <input type="hidden" class="kode_penerimaan" name="id_penerimaan" value="{{ $id_penerimaan }}">
+                                    <input type="hidden" id="kode_penerimaan2" name="id_penerimaan" value="{{ $id_penerimaan }}">
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
@@ -408,7 +410,11 @@ Surat Penerimaan Barang
                                         
                                             <a onclick="submitPenerimaan2();" class="btn btn-primary" style="color: white;">Selesai</a>
 
+                                            
+
                                             <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" onclick="cetak_barcode();" class="btn btn-primary">Cetak Barcode</a>
+
+                                           
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
                                         </div>                        
@@ -565,6 +571,9 @@ function submitPenerimaan2(){
   $("#pemindahan_bahan").attr("action", "/penerimaan/store_penerimaan_pemindahanbahan");
   document.getElementById('pemindahan_bahan').submit();
 }
+
+
+
 
 
 $(document).ready(function(){

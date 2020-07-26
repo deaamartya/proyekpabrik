@@ -66,7 +66,7 @@ Stock Gudang Kacang
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
-                                                <input type="text" id="date1" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
+                                                <input type="text" id="date1" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1" autocomplete="off"/>   
                                             </div>
                                        
                                     </div>
@@ -77,7 +77,7 @@ Stock Gudang Kacang
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
-                                                <input type="text" id="date2" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
+                                                <input type="text" id="date2" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2" autocomplete="off"/>  
                                             </div>
                                     </div>
 
@@ -125,7 +125,7 @@ Stock Gudang Kacang
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
-                                                <input type="text" id="date3" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
+                                                <input type="text" id="date3" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1" autocomplete="off"/>   
                                             </div>
                                        
                                     </div>
@@ -136,7 +136,7 @@ Stock Gudang Kacang
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
-                                                <input type="text" id="date4" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
+                                                <input type="text" id="date4" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2" autocomplete="off"/>  
                                             </div>
                                     </div>
 
@@ -181,7 +181,7 @@ Stock Gudang Kacang
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
-                                                <input type="text" id="date5" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
+                                                <input type="text" id="date5" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1" autocomplete="off"/>   
                                             </div>
                                        
                                     </div>
@@ -192,7 +192,7 @@ Stock Gudang Kacang
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                                   </div>                             
-                                                <input type="text" id="date6" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
+                                                <input type="text" id="date6" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2" autocomplete="off"/>  
                                             </div>
                                     </div>
 

@@ -54,7 +54,7 @@ Stock Bawang Kulit
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                           </div>                             
-                                        <input type="text" id="date1" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
+                                        <input type="text" id="date1" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1" autocomplete="off"/>   
                                     </div>
                                
                             </div>
@@ -65,7 +65,7 @@ Stock Bawang Kulit
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                           </div>                             
-                                        <input type="text" id="date2" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
+                                        <input type="text" id="date2" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2" autocomplete="off"/>  
                                     </div>
                             </div>
 
@@ -96,15 +96,7 @@ Stock Bawang Kulit
                           
                             </thead>
                             <tbody>
-                                <!--
-                                <tr>
-                                    <td>09/06/2020</td>
-                                    <td>Merk 1 / 10 Mei 2020</td>
-                                    <td>-</td>
-                                    <td>50</td>
-                                    <td>0</td>
-                                </tr>
-                            -->
+                               
                                
                                 
                             </tbody>

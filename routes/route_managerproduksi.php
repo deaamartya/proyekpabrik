@@ -23,6 +23,7 @@ Route::post('/penerimaan/update_penerimaan_supplier/{id}', 'managerproduksi\Pene
 Route::post('/penerimaan/update_penerimaan_pemindahanbahan/{id}', 'managerproduksi\PenerimaanController@update2');
 Route::get('/penerimaan/cetak_barcode/{id}',  'managerproduksi\PenerimaanController@printBarcode')->name('cetak_barcode');
 
+
 // Manager Produksi | Order Masak
 Route::get('/manager-produksi/order-masak', 'managerproduksi\OrdermasakController@index');
 Route::get('/cobayu', 'managerproduksi\OrdermasakController@test');

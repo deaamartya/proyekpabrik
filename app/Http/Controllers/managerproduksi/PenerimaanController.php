@@ -653,30 +653,14 @@ class PenerimaanController extends Controller
     }
 
     public  function printBarcode($id){ 
-        /*
-        $request->validate  
-        ([  'id_transaksi' => 'required|max:18',
-            'id_jenis_penerimaan' => 'required',
-            'id_gudang' => 'required',
-            'id_supplier' => 'required',
-            'id_bahan_baku' => 'required',
-            'nomor_kontainer' => 'required',
-            'nomor_polisi' => 'required',
-            'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required',
-            'berat_susut_kg' => 'required',
-            'berat_susut_persen' => 'required'
-        
-
-        ]);
-        */
-
         
         $id_penerimaan= $id;
         $pdf =  PDF::loadView('managerproduksi.penerimaan.cetak_barcode', compact('id_penerimaan')); 
         $pdf->setPaper('a4',  'potrait'); 
         return $pdf->stream(); 
     }
+
+   
 
     
 
