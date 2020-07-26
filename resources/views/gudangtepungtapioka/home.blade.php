@@ -53,7 +53,13 @@ Soyuz - Datatable
                                         <td>{{$or->HC}}</td>
                                         <td>{{$or->SP}}</td>
                                         <td>{{$or->GS}}</td>
-                                        <td>{{$or->status}}</td>
+                                        <td>@if($or->status == 0) Selesai
+                                            @else
+                                            @if($or->status == 1) Ready
+                                            @else Belum
+                                            @endif
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach                                
                             </tbody>

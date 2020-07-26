@@ -40,103 +40,71 @@ Soyuz - Datatable
                                     <th>HC</th>
                                     <th>SP</th>
                                     <th>GS</th>
-                                    <th>Stock Tersedia</th>
+                                    <th>Stock Tepung</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>50</td>
-                                    <td>-</td>
-                                    <td>50</td>
-                                    <td class="text-danger">100</td>
-                                    <td>Terambil</td>
-                                </tr>                                
+                                @foreach($ordermasak as $or)
+                                    <tr>
+                                        <td>{{date_format($or->tanggal_order_masak,'Y-m-d')}}</td>
+                                        <td>{{$or->HC}}</td>
+                                        <td>{{$or->SP}}</td>
+                                        <td>{{$or->GS}}</td>
+                                        <td>{{$stock2c}}</td>
+                                        <td>@if($or->status == 0) Selesai
+                                            @else
+                                            @if($or->status == 1) Ready
+                                            @else Belum
+                                            @endif
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach                                
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <!-- Start row2 -->
-                <div class="row">
-                    <div class="col-md-4 pl-5">                        
-                        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleStandardModal">Ambil Stock Tepung Karung
-                        </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleStandardModal" tabindex="-1" role="dialog" aria-labelledby="exampleStandardModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <div class="col">
-                                            <h2 class="page-title text-center">Ambil Stock Karung</h2>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Jenis Karung</label>
-                                            <select class="form-control" id="jeniskarung" name="jeniskarung">
-                                              <option id="kg" name="kg">Kg</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Berat Diambil (Kg)</label>
-                                            <input type="number" name="beratdiambil" id="beratdiambil" class="form-control" placeholder="Maksimal ambil {{$stock1c}} Kg">
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="button" class="btn btn-primary mx-auto" id="submit" href="#">OK</button>
-                                        </div>
-                                    </div>                                        
-                                </div>
+                <form class="user" action="{{ url('/ambiltepung') }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-4 pl-5">                        
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Ambil Stock Tepung Karung
+                            </button>                        
+                        </div>
+                        <div class="col-md-4">
+                            <div class="col-md mb-3">
+                              <label>Jenis Stock</label>
+                              <input type="text" class="form-control" name="jenisstock" id="jenisstock" readonly="" required value="kg">
                             </div>
                         </div>
-                        <!-- End Modal -->
+                        <div class="col-md-4">
+                            <div class="col-md mb-3">
+                              <label>Berat (Kg)</label>
+                              <input type="number" name="berat" id="berat" max="{{$stock1c}}" min="0" class="form-control" required placeholder="Maksimal ambil {{$stock1c}}">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <table class="display table table-bordered">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Jenis Stock</th>
-                                    <th>Berat (Kg)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div><br>
+                </form>
+                <br>
                 <!-- End row2 -->
                 <!-- Start row3 -->
-                <div class="row">
-                    <div class="col-md-4 pl-5">                        
-                        <button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#exampleStandardModal2">Tambah Hasil Packing
-                        </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleStandardModal2" tabindex="-1" role="dialog" aria-labelledby="exampleStandardModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <div class="col">
-                                            <h2 class="page-title text-center">Tambah Hasil Packing</h2>
-                                        </div>                                        
-                                        <div class="form-group">
-                                            <label>Jumlah Hasil (Plastik)</label>
-                                            <input type="number" name="beratdiambil" class="form-control">
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="button" class="btn btn-primary mx-auto">OK</button>
-                                        </div>
-                                    </div>
-                                </div>
+                <form class="user" action="{{ url('/tambahpacking') }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-4 pl-5">                        
+                            <button class="btn btn-warning btn-lg btn-block" type="submit">Tambah Hasil Packing
+                            </button>                        
+                        </div>
+                        <div class="col-md-4">
+                            <div class="col-md mb-3">
+                                <label>Hasil Packing (Plastik)</label>
+                                <input type="number" class="form-control" id="hasilpack" name="hasilpack" placeholder="Hasil Packing" required>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                      <label>Hasil Packing (Plastik)</label>
-                      <input type="text" class="form-control" readonly="" required>
-                    </div>
-                </div>
+                </form>
                 <!-- End row3 -->
             </div>
         </div>

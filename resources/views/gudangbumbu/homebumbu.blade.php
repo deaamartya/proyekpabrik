@@ -48,7 +48,13 @@ Soyuz - Datatable
                                         <td>{{$or->HC}}</td>
                                         <td>{{$or->SP}}</td>
                                         <td>{{$or->GS}}</td>
-                                        <td>{{$or->status}}</td>
+                                        <td>@if($or->status == 0) Selesai
+                                            @else
+                                            @if($or->status == 1) Ready
+                                            @else Belum
+                                            @endif
+                                            @endif
+                                        </td>
                                         <td></td>
                                     </tr>
                                 @endforeach 
@@ -132,87 +138,6 @@ Soyuz - Datatable
                                         <td>{{$or->GS}}</td>
                                     </tr>
                                 @endforeach                                
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>HC</th>
-                                    <th>SP</th>
-                                    <th>GS</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End col -->
-        <div class="row align-items-center">
-                <div class="">
-                    <h5 class="page-title text-left pl-5">Stock Adonan Gula + Garam</h5>
-                </div>
-            </div>
-        <!-- Start col -->
-        <div class="col-lg-12">
-            <div class="card m-b-30">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="default-datatable4" class="display table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>HC</th>
-                                    <th>SP</th>
-                                    <th>GS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>70</td>
-                                    <td>20</td>
-                                    <td>80</td>
-                                </tr>
-                                <tr>
-                                    <td>70</td>
-                                    <td>50</td>
-                                    <td>50</td>
-                                </tr>                                
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>HC</th>
-                                    <th>SP</th>
-                                    <th>GS</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End col -->
-        <div class="row align-items-center">
-                <div class="">
-                    <h5 class="page-title text-left pl-5">Stock Bumbu Ready</h5>
-                </div>
-            </div>
-        <!-- Start col -->
-        <div class="col-lg-12">
-            <div class="card m-b-30">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="default-datatable5" class="display table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>HC</th>
-                                    <th>SP</th>
-                                    <th>GS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>50</td>
-                                    <td>80</td>
-                                    <td>40</td>
-                                </tr>                            
                             </tbody>
                             <tfoot>
                                 <tr>

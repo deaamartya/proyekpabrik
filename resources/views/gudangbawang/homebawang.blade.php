@@ -46,7 +46,14 @@ Soyuz - Datatable
                                         <td>{{date_format($ord->tanggal_order_masak,'Y-m-d')}}</td>
                                         <td>{{$ord->jumlah}}</td>   
                                         <td>{{$stock1c}}</td>
-                                        <td>{{$ord->status}}</td>
+                                        <td>
+                                            @if($ord->status == 0) Selesai
+                                            @else
+                                            @if($ord->status == 1) Ready
+                                            @else Belum
+                                            @endif
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach                                 
                             </tbody>
