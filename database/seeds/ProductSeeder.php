@@ -11,7 +11,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $products = ['HC','SP','GS', 'Telor', 'Bawang Kupas'];
+        $products = ['HC','SP','GS', 'Telor', 'Bawang Kupas', 'Packing'];
 
     	foreach($products as $p){
     		DB::table('product')->insert([
