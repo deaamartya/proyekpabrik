@@ -62,37 +62,27 @@ Persiapan Masak Kanji
                           
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>10/06/20</td>
-                                    <td>-</td>
-                                    <td>40</td>
-                                    <td>60</td>
-                                    <td>
-                                        <div class="badge-list">
-                                            <span class="badge badge-success badge-font">Ready</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                               
-                                <tr>
-                                    <td>11/06/20</td>
-                                    <td>50</td>
-                                    <td>-</td>
-                                    <td>30</td>
-                                   <td>
-                                        <span class="badge badge-success badge-font">Ready</span>
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td>12/06/20</td>
-                                    <td>60</td>
-                                    <td>-</td>
-                                    <td>30</td>
-                                   <td>
-                                        <span class="badge badge-danger badge-font">Belum</span>
-                                    </td>
-                                </tr>
+                                  @foreach($ordermasak as $or)
+                                    <tr>
+                                        <td>{{date_format($or->tanggal_order_masak,'d/m/Y')}}</td>
+                                        <td>{{$or->jumlah}}</td>
+                                        <td>
+                                        
+                                        @if($or->status)
+                                            <div class="badge-list">
+                                                <span class="badge badge-success badge-font">Ready</span>
+                                            </div>
+                                        @else 
+                                            <div class="badge-list">
+                                                <span class="badge badge-danger badge-font">Belum</span>
+                                            </div>
+                                        @endif
+  
+                                        
+                                        </td>
+                                    </tr>
+                                @endforeach
 
 
                             </tbody>

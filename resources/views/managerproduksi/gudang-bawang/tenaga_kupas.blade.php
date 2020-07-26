@@ -50,34 +50,25 @@ Tenaga Kupas
                                 </tr>
                             </thead>
                             <tbody>
+                              
+                               @foreach($tenagakupas as $t)
                                 <tr>
-                                    <td>Ida</td>
+                                    <td>{{ $t->nama }}</td>
                                     <td>
-                                        <div class="badge-list">
-                                            <span class="badge badge-success badge-font">Aktif</span>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-                               
-                                <tr>
-                                    <td>Kayat</td>
-                                    <td>
-                                        <div class="badge-list">
-                                            <span class="badge badge-success badge-font">Aktif</span>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Sum</td>
-                                    <td>
-                                        <div class="badge-list">
+                                        @if($t->status == 1)
+                                            <div class="badge-list">
+                                                <span class="badge badge-success badge-font">Aktif</span>
+                                            </div>
+                                        @else
+                                            <div class="badge-list">
                                             <span class="badge badge-danger badge-font">Tidak Aktif</span>
                                         </div>
+                                        @endif
                                     </td>
                                 </tr>
+                                @endforeach
 
+                          
                             </tbody>
                         </table>
                     </div>
@@ -92,22 +83,6 @@ Tenaga Kupas
 @endsection 
 @section('script')
 <!-- Datatable js -->
-<!--
-<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/js/custom/custom-table-datatable.js') }}"></script>
--->
-
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
@@ -122,7 +97,6 @@ Tenaga Kupas
        
     
     });
-
 
 
 </script>

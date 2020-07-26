@@ -60,20 +60,19 @@ Pembagian Bawang
                           
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Ida</td>
-                                    <td>14</td>
-                                </tr>
-                               
-                                <tr>
-                                    <td>Kayat</td>
-                                    <td>14</td>
-                                </tr>
 
-                                <tr>
-                                    <td>Sum</td>
-                                    <td>14</td>
-                                </tr>
+                                @php $i=0; @endphp
+                                @foreach($tenagakupas as $t)
+
+                                    @if($t->status)
+                                    <tr>
+                                        <td>{{$t->nama}}</td>
+                                        <td>{{$jumlah[$i]->jumlah}}</td>
+                                    </tr>
+                                    @endif
+                                @php $i++; @endphp
+                                @endforeach
+                        
 
                             </tbody>
                         </table>

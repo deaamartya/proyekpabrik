@@ -70,7 +70,7 @@ Stock Bawang Kupas
                             <div class="form-group col-md-4">
                                     <label for=""></label>
                                     <div class="input-group mt-2"> 
-                                        <button class="btn btn-primary">Terapkan</button>
+                                        <button id="terapkan_tgl" class="btn btn-primary">Terapkan</button>
                                     </div>
                             </div>
 
@@ -92,20 +92,7 @@ Stock Bawang Kupas
                           
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>09/06/2020</td>
-                                    <td>-</td>
-                                    <td>50</td>
-                                    <td>0</td>
-                                </tr>
                                
-                                <tr>
-                                    <td>10/06/2020</td>
-                                    <td>200</td>
-                                    <td>-</td>
-                                    <td>200</td>
-                                    
-                                </tr>
 
                             </tbody>
                         </table>
@@ -139,11 +126,65 @@ Stock Bawang Kupas
 
 
     $(document).ready(function() {
-        $('#datatable1').DataTable( {
+        var datatable1 =  $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
+
+
+
+    $(document).on('click', '#terapkan_tgl', function (e) {
+    
+    var awal = document.getElementById('date1').value;
+    var tgl_awal = awal.split("/").reverse().join("-");
+
+    var akhir = document.getElementById('date2').value;
+    var tgl_akhir = akhir.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-bawang/stock/bawangkupas/get_stock",
+            data:{
+              "tgl_awal":tgl_awal,
+              "tgl_akhir":tgl_akhir,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results.stock_bawangkupas.length; i++){
+                    
+                    datatable1.row.add([
+
+                    results.stock_bawangkupas[i].tanggal,
+                    results.stock_bawangkupas[i].masuk,
+                    results.stock_bawangkupas[i].keluar,
+                    results.stock_bawangkupas[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
 
     });
 

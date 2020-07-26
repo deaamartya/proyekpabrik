@@ -249,7 +249,7 @@ Stock Gudang Kacang
 <script>
 
 
-    $(document).ready(function() {
+$(document).ready(function() {
         
         var datatable1 =  $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
