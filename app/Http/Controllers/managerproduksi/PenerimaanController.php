@@ -248,7 +248,9 @@ class PenerimaanController extends Controller
             'nomor_kontainer' => 'required',
             'nomor_polisi' => 'required',
             'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required'
+            'berat_aktual' => 'required',
+            'berat_susut_kg' => 'required|min:0',
+            'berat_susut_persen' => 'required|min:0'
         
         ]);
 
@@ -300,7 +302,9 @@ class PenerimaanController extends Controller
         $detail_susut->berat_kirim = $request->berat_surat_jalan ;
         $detail_susut->save();
 
-        return redirect('/penerimaan/history_penerimaan');
+        return redirect('/penerimaan/history_penerimaan')->with('alert_simpan', 'Data Berhasil Disimpan.');
+       
+
 
     }
 
@@ -312,7 +316,9 @@ class PenerimaanController extends Controller
             'id_gudang2' => 'required',
             'id_bahan_baku2' => 'required',
             'berat_surat_jalan2' => 'required',
-            'berat_aktual2' => 'required'
+            'berat_aktual2' => 'required',
+            'berat_susut_kg2' => 'required|min:0',
+            'berat_susut_persen2' => 'required|min:0'
     
         ]);
 
@@ -354,9 +360,7 @@ class PenerimaanController extends Controller
         $detail_susut->berat_kirim = $request->berat_surat_jalan2 ;
         $detail_susut->save();
         
-
-
-        return redirect('/penerimaan/history_penerimaan');
+        return redirect('/penerimaan/history_penerimaan')->with('alert_simpan2', 'Data Berhasil Disimpan.');
     }
 
 
@@ -563,9 +567,9 @@ class PenerimaanController extends Controller
             'nomor_kontainer' => 'required',
             'nomor_polisi' => 'required',
             'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required|min:1',
-            'berat_susut_kg' => 'required|min:1',
-            'berat_susut_persen' => 'required|min:1'
+            'berat_aktual' => 'required',
+            'berat_susut_kg' => 'required|min:0',
+            'berat_susut_persen' => 'required|min:0'
         
         ]);
         
@@ -598,7 +602,7 @@ class PenerimaanController extends Controller
         $detail_susut->berat_kirim = $request->berat_surat_jalan ;
         $detail_susut->save();
 
-        return redirect('/penerimaan/history_penerimaan');
+        return redirect('/penerimaan/history_penerimaan')->with('alert_update', 'Data Berhasil Diupdate.');
 
     }
 
@@ -610,9 +614,9 @@ class PenerimaanController extends Controller
             'id_gudang' => 'required',
             'id_bahan_baku' => 'required',
             'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required|min:1',
-            'berat_susut_kg' => 'required|min:1',
-            'berat_susut_persen' => 'required|min:1'
+            'berat_aktual' => 'required',
+            'berat_susut_kg' => 'required|min:0',
+            'berat_susut_persen' => 'required|min:0'
         
         ]);
         
@@ -637,7 +641,7 @@ class PenerimaanController extends Controller
         $detail_susut->berat_kirim = $request->berat_surat_jalan ;
         $detail_susut->save();
 
-        return redirect('/penerimaan/history_penerimaan');
+        return redirect('/penerimaan/history_penerimaan')->with('alert_update2', 'Data Berhasil Diupdate.');
 
     }
 
