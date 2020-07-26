@@ -13,7 +13,7 @@ class GudangTepungTapiokaController extends Controller
     public function index()
     {
         $ordermasak = OrderMasak::select('order_masak.*','dom.jumlah AS HC','dom1.jumlah AS SP','dom2.jumlah AS GS')
-        ->join('detail_order_masak AS dom', function ($join) {
+    	->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
                  ->where('dom.id_bahan_product', '=', 'PR00000000001');
         })
@@ -25,7 +25,7 @@ class GudangTepungTapiokaController extends Controller
             $join->on('order_masak.id_order_masak', '=', 'dom2.id_order_masak')
                  ->where('dom2.id_bahan_product', '=', 'PR00000000003');
         })
-        //->where('tanggal_order_masak','>=',date('Y-m-d'))
+    	//->where('tanggal_order_masak','>=',date('Y-m-d'))
         ->get();
 
         $stock1a = DB::table('stock')->where('id_satuan', '=', 1)->sum('masuk');
@@ -48,7 +48,7 @@ class GudangTepungTapiokaController extends Controller
     public function kerjaharian()
     {
         $ordermasak = OrderMasak::select('order_masak.*','dom.jumlah AS HC','dom1.jumlah AS SP','dom2.jumlah AS GS')
-        ->join('detail_order_masak AS dom', function ($join) {
+    	->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
                  ->where('dom.id_bahan_product', '=', 'PR00000000001');
         })
@@ -60,15 +60,15 @@ class GudangTepungTapiokaController extends Controller
             $join->on('order_masak.id_order_masak', '=', 'dom2.id_order_masak')
                  ->where('dom2.id_bahan_product', '=', 'PR00000000003');
         })
-        //->where('tanggal_order_masak','>=',date('Y-m-d'))
+    	//->where('tanggal_order_masak','>=',date('Y-m-d'))
         ->get();
 
         $ordermasak2 = OrderMasak::select('order_masak.*','dom.jumlah AS jumlah')
-        ->join('detail_order_masak AS dom', function ($join) {
+    	->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
                  ->where('dom.id_bahan_product', '=', 'PR00000000006');
-        })
-        ->get();
+		})
+		->get();
 
         $stock1a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->sum('masuk');
         $stock1b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->sum('keluar');
@@ -106,7 +106,7 @@ class GudangTepungTapiokaController extends Controller
             'keterangan' => 'Hasil Tambah Packing',
             'masuk' => $request->hasilpack,
             'keluar' => 0,
-            'id_gudang' => 5
+            'id_gudang' => 6
     ]);
     // alihkan halaman ke halaman kategori
     return redirect('gudang-tepung-tapioka/kerjaharian');
