@@ -37,7 +37,6 @@
              <div class="card-header">
                  <div class="row">
                      <h5 class="card-title mx-4">Order Masak</h5>
-                     <h5 class="card-title ml-auto mr-4">10 JUni 2020</h5>
                 </div>
              </div>
              <div class="card-body">
@@ -53,42 +52,29 @@
                              </tr>
                          </thead>
                          <tbody>
-                             <tr>
-                                 <td>09/06/20</td>
-                                 <td>50</td>
-                                 <td>-</td>
-                                 <td>50</td>
-                                 <td class="selesai">Selesai</td>
-                             </tr>
-                             <tr>
-                                 <td>10/06/20</td>
-                                 <td>-</td>
-                                 <td>40</td>
-                                 <td>60</td>
-                                 <td class="ready">Ready</td>
-                             </tr>
-                             <tr>
-                                 <td>11/06/20</td>
-                                 <td>50</td>
-                                 <td>-</td>
-                                 <td>30</td>
-                                 <td class="ready">Ready</td>
-                             </tr>
-                             <tr>
-                                 <td>12/06/20</td>
-                                 <td>20</td>
-                                 <td>50</td>
-                                 <td>60</td>
-                                 <td class="belum">Belum</td>
-                             </tr>
-                             <tr>
-                                 <td>13/06/20</td>
-                                 <td>230</td>
-                                 <td>30</td>
-                                 <td>20</td>
-                                 <td class="belum">Belum</td>
-                             </tr>
-                         </tbody>
+                            @foreach ($order_masak as $order_masak)
+                               <tr>
+                                   <td>
+                                       {{ $order_masak->tanggal_order_masak }}
+                                   </td>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000001')->value('jumlah') }}
+                                   </td>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000002')->value('jumlah') }}
+                                   </td>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000003')->value('jumlah') }}
+                                   </td>
+                                   <td class="status_order">
+                                       {{ $order_masak->status }}
+                                   </td>
+                               </tr>
+                            @endforeach
+                        </tbody>
                      </table>
                  </div>
 
@@ -102,20 +88,23 @@
                 <h5 class="card-title">Stock Gudang</h5>
              </div>
              <div class="card-body">
+                <h5 class="card-subtitle">Stock Tepung Tapioka</h5>
                  <div class="table-responsive">
                      <table id="default-datatable" class="display table table-striped table-bordered">
                          <thead>
                              <tr>
-                                 <th>Kacang 25 (Kg)</th>
-                                 <th>Kacang 50 (Kg)</th>
+                                 <th>Karung (Kg)</th>
                                  <th>Masakan (Plastik)</th>
                              </tr>
                          </thead>
                          <tbody>
                              <tr>
-                                 <td>500</td>
-                                 <td>600</td>
-                                 <td>2000</td>
+                                 <td>
+                                     {{ $stock_tapioka_karung }}
+                                 </td>
+                                 <td>
+                                     {{ $stock_tapioka_plastik }}
+                                 </td>
                              </tr>
                          </tbody>
                      </table>

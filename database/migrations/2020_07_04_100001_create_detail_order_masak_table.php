@@ -18,6 +18,7 @@ class CreateDetailOrderMasakTable extends Migration
             $table->string('id_bahan_product', 50);
             $table->boolean('jenis_order');
             $table->integer('jumlah');
+            $table->double('presentase_status', 8, 2)->nullable()->default(0);
             $table->foreign('id_order_masak')->references('id_order_masak')->on('order_masak');
         });
 

@@ -2,7 +2,7 @@
 @extends('managerproduksi/layout')
 
 {{-- Judul --}}
-@section('title', 'Manager Produksi | Data Produksi | Gudang Bumbu | Stock Adonan Gula + Garam')
+@section('title', 'Manager Produksi | Data Produksi | Gudang Bumbu | Stock Bahan')
 
 {{-- CSS Tambahan --}}
 @section('extra-css')
@@ -16,13 +16,13 @@
 @endsection
 
 {{-- Judul Halaman --}}
-@section('page-title', 'Stock Adonan Gula + Garam')
+@section('page-title', 'Stock Bahan')
 
 {{-- Breadcrumbbar --}}
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="">Data Produksi</a></li>
 <li class="breadcrumb-item"><a href="{{ url('/manager-produksi/gudang-bumbu') }}">Gudang Bumbu</a></li>
-<li class="breadcrumb-item active" aria-current="page">Stock Adonan Gula + Garam</li>
+<li class="breadcrumb-item active" aria-current="page">Stock Bahan</li>
 @endsection
 
 
@@ -33,54 +33,52 @@
      <!-- Start col -->
      <div class="col-lg-12">
 
-        {{-- Start Adonan Gula + Garam --}}
+        {{-- Start Bumbu --}}
          <div class="card m-b-30">
              <div class="card-header">
-                <h5 class="card-title">Adonan Gula + Garam</h5>
+                <h5 class="card-title">Stock Bumbu</h5>
              </div>
              <div class="card-body">
                  <div class="table-responsive">
-                     <table id="default-datatable" class="display table table-striped table-bordered">
+                     <table id="default-datatable-4" class="display table table-striped table-bordered multi-datatable">
                          <thead>
                              <tr>
                                  <th>Tanggal</th>
+                                 <th>Keterangan</th>
                                  <th>Masuk (Kg)</th>
                                  <th>Keluar (Kg)</th>
                                  <th>Stock (Kg)</th>
                              </tr>
                          </thead>
                          <tbody>
-                             <tr>
-                                 <td>07/06/20</td>
-                                 <td>45</td>
-                                 <td>50</td>
-                                 <td>18</td>
-                             </tr>
-                             <tr>
-                                 <td>07/06/20</td>
-                                 <td>45</td>
-                                 <td>50</td>
-                                 <td>18</td>
-                             </tr>
-                             <tr>
-                                 <td>07/06/20</td>
-                                 <td>45</td>
-                                 <td>50</td>
-                                 <td>18</td>
-                             </tr>
-                             <tr>
-                                 <td>07/06/20</td>
-                                 <td>45</td>
-                                 <td>50</td>
-                                 <td>18</td>
-                             </tr>
+                             @foreach ($stock_bumbu as $stock_bumbu)
+                                 <tr>
+                                     <td>
+                                         {{ $stock_bumbu->TIMESTAMP }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_bumbu->keterangan }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_bumbu->masuk }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_bumbu->keluar }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_bumbu->stock }}
+                                     </td>
+                                 </tr>
+                             @endforeach
                          </tbody>
                      </table>
                  </div>
 
              </div>
          </div>
-         {{-- End Adonan Gula + Garam--}}
+         {{-- End Bumbu --}}
+
+         
 
      </div>
      <!-- End col -->
@@ -109,4 +107,5 @@
 
 {{-- Modal Script --}}
 <script src="{{ asset('/managerproduksi/js/gudangbumbu.js') }}"></script>
+<script src="{{ asset('/managerproduksi/js/multi-datatable.js') }}"></script>
 @endsection
