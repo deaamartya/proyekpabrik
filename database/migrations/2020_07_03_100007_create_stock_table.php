@@ -39,8 +39,8 @@ class CreateStockTable extends Migration
             END");
 
         DB::unprepared("CREATE TRIGGER `auto_count_stock` BEFORE INSERT ON `stock`
-             FOR EACH ROW BEGIN
-                SELECT `stock` INTO @last FROM stock WHERE id_bahan_baku = new.id_bahan_baku AND id_gudang = new.id_gudang ORDER BY `TIMESTAMP`;
+                FOR EACH ROW BEGIN
+                SELECT `stock` INTO @last FROM stock WHERE id_bahan_baku = new.id_bahan_baku AND id_gudang = new.id_gudang ORDER BY `TIMESTAMP` DESC LIMIT 1;
                     IF (@last >= 0) THEN
                         SET new.stock = @last+new.masuk-new.keluar;
                     ELSE
