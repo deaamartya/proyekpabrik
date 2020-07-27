@@ -293,41 +293,57 @@ Surat Penerimaan Barang
                                     <!-- jenis penerimaan : pemindahan bahan-->
                                     <input type="hidden" id="jenis_penerimaan2" name="id_jenis_penerimaan2" value="2">
 
-                                    <input type="hidden" id="kode_penerimaan2" name="id_penerimaan" value="{{ $id_penerimaan }}">
+                                    <input type="hidden" id="kode_pemindahanbahan" name="id_pemindahan_bahan" value="{{ $id_pemindahan_bahan }}">
+
+                                     <input type="hidden" id="kode_penerimaan2" name="id_penerimaan2" value="{{ $id_penerimaan }}">
 
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <div class="form-group col-md-8">
-                                                <i class="fa fa-tags" aria-hidden="true"></i>
-                                                <label for="inputSuratJalan2">No. Surat Jalan</label>
-                                                <input type="text" class="form-control @error('id_transaksi2') is-invalid @enderror" id="inputSuratJalan2" name="id_transaksi2" placeholder="Masukkan Nomor Surat Jalan" value="{{ old('id_transaksi2') }}">
-                                                @error('id_transaksi2') 
-                                                    <div class="invalid-feedback form-error font-error"> 
-                                                                {{ $message }}
-                                                    </div>
-                                                @enderror 
-                                            </div>
-                                        </div>
+                                        
                                          <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-archive" aria-hidden="true"></i>
-                                                <label for="inputGudangSimpan2">Gudang Simpan</label>
-                                                <select id="inputGudangSimpan2" name="id_gudang2" class="form-control @error('id_gudang2') is-invalid @enderror" value="{{ old('id_gudang2') }}">
+                                                <label for="gudang_asal">Gudang Asal</label>
+                                                <select id="gudang_asal" name="id_gudang_asal" class="form-control @error('gudang_asal') is-invalid @enderror" value="{{ old('gudang_asal') }}">
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang as $g)
                                                     <option value="{{ $g->id_gudang }}"
-                                                          @if($g->id_gudang == old('id_gudang2'))
+                                                          @if($g->id_gudang == old('gudang_asal'))
                                                             selected
                                                         @endif >{{ $g->nama }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('id_gudang2') 
+                                                @error('gudang_asal') 
                                                     <div class="invalid-feedback form-error font-error"> 
                                                                 {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        <div class="form-group col-md-6">
+                                            <div class="form-group col-md-8">
+                                                <i class="fa fa-archive" aria-hidden="true"></i>
+                                                <label for="gudang_tujuan">Gudang Tujuan</label>
+                                                <select id="gudang_tujuan" name="id_gudang_tujuan" class="form-control @error('gudang_tujuan') is-invalid @enderror" value="{{ old('gudang_tujuan') }}">
+                                                    <option disabled selected readonly>Pilih Salah Satu...</option>
+                                                    @foreach($gudang_tujuan as $gt)
+                                                    <option value="{{ $gt->id_gudang }}"
+                                                          @if($gt->id_gudang == old('gudang_tujuan'))
+                                                            selected
+                                                        @endif >{{ $gt->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('gudang_tujuan') 
+                                                    <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+
+
+
                                     </div>
 
 
@@ -367,9 +383,9 @@ Surat Penerimaan Barang
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
-                                                <label for="inputBSJ">Berat Surat Jalan (Kg)</label>
-                                                <input type="number" class="form-control  @error('berat_surat_jalan2') is-invalid @enderror" id="berat_suratjalan2" name="berat_surat_jalan2" placeholder="Masukkan Berat Surat Jalan" value="{{ old('berat_surat_jalan2') }}">
-                                                 @error('berat_surat_jalan2') 
+                                                <label for="berat_pindah">Berat Pindah(Kg)</label>
+                                                <input type="number" class="form-control  @error('berat_pindah') is-invalid @enderror" id="berat_pindah" name="berat_pindah" placeholder="Masukkan Berat Pindah" value="{{ old('berat_pindah') }}">
+                                                 @error('berat_pindah') 
                                                             <div class="invalid-feedback form-error font-error"> 
                                                                         {{ $message }}
                                                             </div>
@@ -694,25 +710,25 @@ $(document).ready(function(){
   function hitungSusut2(){
 
 
-    var berat_suratjalan2 = document.getElementById("berat_suratjalan2").value;
+    var berat_pindah = document.getElementById("berat_pindah").value;
     var berat_netto2 = document.getElementById("berat_netto2").value;
 
-    if (berat_suratjalan2 == "" || berat_netto2 == ""  ) {
+    if (berat_pindah == "" || berat_netto2 == ""  ) {
 
         document.getElementById('penyusutan2').value = 0;
         document.getElementById('percent_penyusutan2').value = 0;
 
     }else{
-        var s2 = berat_suratjalan2 - berat_netto2;
+        var s2 = berat_pindah - berat_netto2;
         var susut2 = s2.toFixed(2);
-        var ps2 = (susut2 / berat_suratjalan2)* 100;
+        var ps2 = (susut2 / berat_pindah)* 100;
         var percent_susut2 = ps2.toFixed(2);
 
         document.getElementById('penyusutan2').value = susut2;
         document.getElementById('percent_penyusutan2').value = percent_susut2;
     }
 
-    $(document).on('keyup', '#berat_suratjalan2', function (e) {
+    $(document).on('keyup', '#berat_pindah', function (e) {
         hitungSusut2();
     });
 
