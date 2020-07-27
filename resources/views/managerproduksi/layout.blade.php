@@ -15,7 +15,11 @@
     <title>@yield('title')</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('/managerproduksi/favicon/favicon.ico') }}">
+    {{-- <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('/managerproduksi/favicon/apple-touch-icon.png') }}"> --}}
+    {{-- <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/managerproduksi/favicon/favicon-32*32.png') }}"> --}}
+    {{-- <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/managerproduksi/favicon/favicon-16*16.png') }}"> --}}
+    {{-- <link rel="manifest" href="{{ asset('/managerproduksi/favicon/site.webmanifest') }}"> --}}
     
     {{-- Soyuz CSS + Bootstrap --}}
     <link href="{{ asset('/assets/plugins/switchery/switchery.min.css') }}" rel="stylesheet">
@@ -29,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('/managerproduksi/fontawesome/css/all.min.css') }}">
 
     {{-- Extra CSS --}}
+    <link rel="stylesheet" href="{{ asset('/managerproduksi/css/header.css') }}">
     @yield('extra-css')
 
 </head>
@@ -148,7 +153,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="mobile-logobar">
-                        <a href="index.html" class="mobile-logo"><img src="{{ asset('/assets/images/logo.svg') }}" class="img-fluid"
+                        <a href="{{ url('/manager-produksi') }}" class="mobile-logo"><img src="{{ asset('/managerproduksi/img/logo_gangsar.png') }}" class="img-fluid"
                                 alt="logo"></a>
                     </div>
                     <div class="mobile-togglebar">
@@ -191,7 +196,7 @@
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item">
                                     <div class="logobar">
-                                        <a href="index.html" class="logo logo-large"><img src="{{ asset('/assets/images/logo.svg') }}"
+                                        <a href="{{ url('/manager-produksi') }}" class="logo logo-large"><img src="{{ asset('/managerproduksi/img/logo_gangsar.png') }}"
                                                 class="img-fluid" alt="logo"></a>
                                     </div>
                                 </li>
@@ -219,18 +224,12 @@
                                         <div class="dropdown">
                                             <a class="dropdown-toggle" href="#" role="button" id="languagelink"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                                                    class="live-icon">EN</span><span
+                                                    class="live-icon">ID</span><span
                                                     class="feather icon-chevron-down live-icon"></span></a>
                                             <div class="dropdown-menu dropdown-menu-right"
                                                 aria-labelledby="languagelink">
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="flag flag-icon-us flag-icon-squared"></i>English</a>
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="flag flag-icon-de flag-icon-squared"></i>German</a>
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="flag flag-icon-bl flag-icon-squared"></i>France</a>
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="flag flag-icon-ru flag-icon-squared"></i>Russian</a>
+                                                <a class="dropdown-item" href="#"><i class="flag flag-icon-id flag-icon-squared"></i>Indonesia</a>
+                                                <a class="dropdown-item" href="#"><i class="flag flag-icon-us flag-icon-squared"></i>English</a>
                                             </div>
                                         </div>
                                     </div>

@@ -2,7 +2,7 @@
 @extends('managerproduksi/layout')
 
 {{-- Judul --}}
-@section('title', 'Manager Produksi | Data Produksi | Gudang Bumbu | Stock Bahan')
+@section('title', 'Manager Produksi | Data Produksi | Gudang Bumbu | Stock')
 
 {{-- CSS Tambahan --}}
 @section('extra-css')
@@ -22,7 +22,7 @@
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="">Data Produksi</a></li>
 <li class="breadcrumb-item"><a href="{{ url('/manager-produksi/gudang-bumbu') }}">Gudang Bumbu</a></li>
-<li class="breadcrumb-item active" aria-current="page">Stock Bahan</li>
+<li class="breadcrumb-item active" aria-current="page">Stock</li>
 @endsection
 
 
