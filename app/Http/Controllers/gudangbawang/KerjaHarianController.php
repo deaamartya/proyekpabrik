@@ -405,21 +405,6 @@ class KerjaHarianController extends Controller
     }
 
     public function persiapanmasakkanji(){
-    	// $ordermasak = OrderMasak::select('order_masak.*','dom.jumlah AS HC','dom1.jumlah AS SP','dom2.jumlah AS GS')
-    	// ->join('detail_order_masak AS dom', function ($join) {
-     //        $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
-     //             ->where('dom.id_bahan_product', '=', 'PR00000000001');
-     //    })
-     //    ->join('detail_order_masak AS dom1', function ($join) {
-     //        $join->on('order_masak.id_order_masak', '=', 'dom1.id_order_masak')
-     //             ->where('dom1.id_bahan_product', '=', 'PR00000000002');
-     //    })
-     //    ->join('detail_order_masak AS dom2', function ($join) {
-     //        $join->on('order_masak.id_order_masak', '=', 'dom2.id_order_masak')
-     //             ->where('dom2.id_bahan_product', '=', 'PR00000000003');
-     //    })
-    	// ->where('tanggal_order_masak','>=',date('Y-m-d'))
-    	// ->get();
 
         $ordermasak = OrderMasak::select('order_masak.*','dom.*')
         ->join('detail_order_masak AS dom', function ($join) {
