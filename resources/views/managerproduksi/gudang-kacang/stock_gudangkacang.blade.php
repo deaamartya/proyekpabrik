@@ -95,6 +95,7 @@ Stock Gudang Kacang
                                 <div class="table-responsive">
                                     <table id="datatable1" class="display table table-bordered table-striped table-manpro-hover datatable">
                                         <thead>
+                                           
                                             <tr>
                                                 <th>Tanggal</th>
                                                 <th>Tanggal Penerimaan Kacang</th>
@@ -103,9 +104,19 @@ Stock Gudang Kacang
                                                 <th>Keluar</th>
                                                 <th>Stock</th>
                                             </tr>
+                                            
                                       
                                         </thead>
-
+                                        <tbody>
+                                             @foreach($kacang_ob as $ob)
+                                                 <td>{{ $ob->tanggal }}</td>
+                                                 <td>{{ $ob->timestamp }}</td>
+                                                 <td>{{ $ob->keterangan}}</td>
+                                                 <td>{{ $ob->masuk}}</td>
+                                                 <td>{{ $ob->keluar}}</td>
+                                                 <td>{{ $ob->stock}}</td>
+                                             @endforeach
+                                        </tbody>
                                         
                                     </table>
                                 </div>
@@ -163,7 +174,16 @@ Stock Gudang Kacang
                                             </tr>
                                       
                                         </thead>
-
+                                         <tbody>
+                                             @foreach($kacang_7ml as $kt)
+                                                 <td>{{ $kt->tanggal }}</td>
+                                                 <td>{{ $kt->timestamp }}</td>
+                                                 <td>{{ $kt->keterangan}}</td>
+                                                 <td>{{ $kt->masuk}}</td>
+                                                 <td>{{ $kt->keluar}}</td>
+                                                 <td>{{ $kt->stock}}</td>
+                                             @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -219,6 +239,16 @@ Stock Gudang Kacang
                                             </tr>
                                       
                                         </thead>
+                                          <tbody>
+                                             @foreach($kacang_8ml as $kd)
+                                                 <td>{{ $kd->tanggal }}</td>
+                                                 <td>{{ $kd->timestamp }}</td>
+                                                 <td>{{ $kd->keterangan}}</td>
+                                                 <td>{{ $kd->masuk}}</td>
+                                                 <td>{{ $kd->keluar}}</td>
+                                                 <td>{{ $kd->stock}}</td>
+                                             @endforeach
+                                        </tbody>
                                       
                                     </table>
                                 </div>

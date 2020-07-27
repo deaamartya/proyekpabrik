@@ -107,6 +107,15 @@ Stock Gudang Kacang Sortir
                                       
                                         </thead>
                                        
+                                        <tbody>
+                                             @foreach($kacang_gs as $gs)
+                                                 <td>{{ $gs->tanggal }}</td>
+                                                 <td>{{ $gs->keterangan}}</td>
+                                                 <td>{{ $gs->masuk}}</td>
+                                                 <td>{{ $gs->keluar}}</td>
+                                                 <td>{{ $gs->stock}}</td>
+                                             @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -162,6 +171,15 @@ Stock Gudang Kacang Sortir
                                             </tr>
                                       
                                         </thead>
+                                         <tbody>
+                                             @foreach($kacang_sp as $sp)
+                                                 <td>{{ $sp->tanggal }}</td>
+                                                 <td>{{ $sp->keterangan}}</td>
+                                                 <td>{{ $sp->masuk}}</td>
+                                                 <td>{{ $sp->keluar}}</td>
+                                                 <td>{{ $sp->stock}}</td>
+                                             @endforeach
+                                        </tbody>
                                       
                                     </table>
                                 </div>
@@ -217,7 +235,15 @@ Stock Gudang Kacang Sortir
                                             </tr>
                                       
                                         </thead>
-
+                                         <tbody>
+                                             @foreach($kacang_hc as $hc)
+                                                 <td>{{ $hc->tanggal }}</td>
+                                                 <td>{{ $hc->keterangan}}</td>
+                                                 <td>{{ $hc->masuk}}</td>
+                                                 <td>{{ $hc->keluar}}</td>
+                                                 <td>{{ $hc->stock}}</td>
+                                             @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -272,7 +298,15 @@ Stock Gudang Kacang Sortir
                                             </tr>
                                       
                                         </thead>
-                                      
+                                         <tbody>
+                                             @foreach($kacang_telor as $telor)
+                                                 <td>{{ $telor->tanggal }}</td>
+                                                 <td>{{ $telor->keterangan}}</td>
+                                                 <td>{{ $telor->masuk}}</td>
+                                                 <td>{{ $telor->keluar}}</td>
+                                                 <td>{{ $telor->stock}}</td>
+                                             @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
