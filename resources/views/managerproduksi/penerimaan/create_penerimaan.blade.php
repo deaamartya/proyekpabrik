@@ -251,9 +251,14 @@ Surat Penerimaan Barang
                                             <a onclick="submitSementara();" class="btn btn-light simpan-sementara">Simpan Sementara</a>
                                         
                                             <a onclick="submitPenerimaan();" class="btn btn-primary" style="color: white;">Selesai</a>
-                                            
+
 
                                             <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" class="btn btn-primary">Cetak Barcode</a>
+                                        
+                                            <!--
+                                            
+                                            <a onclick="cetakBarcode();" class="btn btn-primary" style="color: white;">Cetak Barcode</a>
+                                            -->
                                        
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
@@ -572,7 +577,47 @@ function submitPenerimaan2(){
   document.getElementById('pemindahan_bahan').submit();
 }
 
+/*
+function cetakBarcode(){
+  let supplier = document.getElementById('pilih_supplier').value;
+  let surat_jalan = document.getElementById('inputSuratJalan').value;
+  let nomor_kontainer = document.getElementById('inputKontainer').value;
+  let nomor_polisi = document.getElementById('inputPolisi').value;
+  let gudang = document.getElementById('inputGudangSimpan').value;
+  let id_bahanbaku = document.getElementById('kode-bahan').value;
+  let nama_bahanbaku = document.getElementById('nama-bahan').value;
+  let berat_suratjalan= document.getElementById('berat_suratjalan').value;
+  let berat_netto = document.getElementById('berat_netto').value;
+  let penyusutan = document.getElementById('penyusutan').value;
+  let percent_penyusutan = document.getElementById('percent_penyusutan').value;
 
+
+
+    
+      if (supplier != "- Pilih Supplier -" || surat_jalan != "" ) {
+            if(nomor_kontainer != "" || nomor_polisi != "" || gudang != "Pilih Salah Satu..."){
+                if(id_bahanbaku != "" || nama_bahanbaku != ""){
+                    if(berat_suratjalan != "" || berat_netto != ""){
+                        if( penyusutan != "" || percent_penyusutan != ""){
+                            var url = "{{ route('cetak_barcode', ':id') }}";
+                            var id = document.getElementById('kode_penerimaan').value;
+                            url = url.replace(':id', id);
+                            document.location.href=url;
+                        }
+                    }
+
+                }
+
+            }
+            
+      }
+   
+  
+
+
+}
+
+*/
 
 
 
