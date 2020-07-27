@@ -32,7 +32,7 @@ class HomeController extends Controller
         $ordermasak2 = OrderMasak::select('order_masak.*','dom.jumlah AS jumlah')
         ->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
-                 ->where('dom.id_bahan_product', '=', 'PR00000000005');
+                 ->where('dom.id_bahan_product', '=', 'BB000000008');
         })
         ->get();
 

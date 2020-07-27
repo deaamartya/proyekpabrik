@@ -106,7 +106,7 @@ class GudangTepungTapiokaController extends Controller
             'keterangan' => 'Hasil Tambah Packing',
             'masuk' => $request->hasilpack,
             'keluar' => 0,
-            'id_gudang' => 6
+            'id_gudang' => 5
     ]);
     // alihkan halaman ke halaman kategori
     return redirect('gudang-tepung-tapioka/kerjaharian');

@@ -112,3 +112,8 @@ Route::get('/gudang-bumbu/adonangulagaram', function () {
 Route::get('/gudang-bumbu/bumbuready', function () {
     return view('gudangbumbu.bumbuready');
 });
+
+//Dashboard Kanji
+Route::get('/dashboard-kanji', function () {
+    return view('dashboardkanji.dashboardkanji');
+});
