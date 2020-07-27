@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Pegawai;
 
 class HomeController extends Controller
 {
@@ -45,4 +46,16 @@ class HomeController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+
+    public function changepass(Request $req){
+
+        $id = Auth::user()->id_pegawai;
+
+        $pegawai = Pegawai::find($id);
+        $pegawai->password = bcrypt($req->password);
+        $pegawai->save();
+
+        return redirect('/');
+    }
+
 }

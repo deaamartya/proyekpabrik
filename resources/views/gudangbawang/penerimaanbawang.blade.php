@@ -1,5 +1,5 @@
 @section('title') 
-Soyuz - Datatable
+Penerimaan Bawang
 @endsection 
 @extends('gudangbawang.layouts.main')
 @section('style')
@@ -8,6 +8,7 @@ Soyuz - Datatable
 <link href="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 <style type="text/css">
     .redclass{
         border-color: red !important;
@@ -26,7 +27,7 @@ Soyuz - Datatable
         </div>
         <div class="col-4">
             <div class="widgetbar">
-                <h5 class="page-subtitle text-left pl-5">10 Juni 2020</h5>
+                <h5 class="page-subtitle text-left pl-5">@php echo date("d F Y"); @endphp</h5>
             </div>                        
         </div>
     </div>
@@ -113,6 +114,7 @@ Soyuz - Datatable
 <!-- Datatable js -->
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script>
     "use strict";
     $(document).ready(function() {
@@ -196,6 +198,20 @@ Soyuz - Datatable
                 },
                 success: function(result){
                     $("#simpan").hide();
+                    swal({
+                        title: 'Berhasil!',
+                        text: 'Data Berhasil Disimpan',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        type: 'success',
+                    }).then(
+                    function () {
+                    },
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                        }
+                    }
+                    );
                 }
             });
 

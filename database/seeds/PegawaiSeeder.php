@@ -41,7 +41,7 @@ class PegawaiSeeder extends Seeder
         DB::table('pegawai')->insert([
             'id_jabatan' => '3',
             'nama' => $nama,
-            'password' => encrypt(substr(str_replace(' ', '',strtolower($nama)),0,20)),
+            'password' => bcrypt(substr(str_replace(' ', '',strtolower($nama)),0,20)),
             'status' => 1,
             'username' => substr(str_replace(' ', '',strtolower($nama)),0,20),
         ]);
@@ -54,7 +54,7 @@ class PegawaiSeeder extends Seeder
             'id_gudang' => '8',
             'id_jabatan' => '1',
             'nama' => $nama,
-            'password' => encrypt(substr(str_replace(' ', '',strtolower($nama)),0,20)),
+            'password' => bcrypt(substr(str_replace(' ', '',strtolower($nama)),0,20)),
             'status' => 1,
             'username' => substr(str_replace(' ', '',strtolower($nama)),0,20),
         ]);
@@ -67,7 +67,7 @@ class PegawaiSeeder extends Seeder
             'id_gudang' => '7',
             'id_jabatan' => '1',
             'nama' => $nama,
-            'password' => encrypt(substr(str_replace(' ', '',strtolower($nama)),0,20)),
+            'password' => bcrypt(substr(str_replace(' ', '',strtolower($nama)),0,20)),
             'status' => 1,
             'username' => substr(str_replace(' ', '',strtolower($nama)),0,20),
         ]);

@@ -24,15 +24,20 @@ class KerjaHarianController extends Controller
 {
     public function tenagakupas(){
     	$tenagakupas = Pegawai::where('id_jabatan','=','2')->orderBy('nama','asc')->get();
-    	$tenagaaktif = Pegawai::select('id_pegawai')->where(['id_jabatan' => '2', 'status' => 1])->get();
-    	$json = json_encode($tenagaaktif);
 
+    	$tenagaaktif = Pegawai::select('id_pegawai')->where(['id_jabatan' => '2', 'status' => 1])->get();
+
+    	$json = json_encode($tenagaaktif);
     	$kerjahariangroup = KerjaHarianGroup::where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
+        $kupasbawang = KupasBawang::where(['tanggal_beri' => date('Y-m-d')])->exists();
 
     	if($kerjahariangroup){
-	    	$kerjahariangroup->id_pegawai = $json;
-	    	$kerjahariangroup->save();
+            if(!$kupasbawang){
+                $kerjahariangroup->id_pegawai = $json;
+                $kerjahariangroup->save();
+            }
     	}
+
     	else{
     		KerjaHarianGroup::insert([
 	    		'id_group_kerja' => 'G0000000001',
@@ -64,11 +69,14 @@ class KerjaHarianController extends Controller
 	    	$json = json_encode($tenagaaktif);
 
 	    	$kerjahariangroup = KerjaHarianGroup::where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
+            $kupasbawang = KupasBawang::where(['tanggal_beri' => date('Y-m-d')])->exists();
 
-	    	if($kerjahariangroup){
-		    	$kerjahariangroup->id_pegawai = $json;
-		    	$kerjahariangroup->save();
-	    	}
+            if($kerjahariangroup){
+                if(!$kupasbawang){
+                    $kerjahariangroup->id_pegawai = $json;
+                    $kerjahariangroup->save();
+                }
+            }
 
 	        return response()->json(['success' => true,'pegawai' => $pegawai]);
     	}
@@ -77,18 +85,28 @@ class KerjaHarianController extends Controller
     public function statustenagakupas(Request $req){
     	if($req->ajax()){
 	    	$pegawai = Pegawai::find($req->id);
-	    	$pegawai->status = $req->status;
-	    	$pegawai->save();
+            if($pegawai->status == 0){
+                $pegawai->status = 1;
+            }
+            else{
+                $pegawai->status = 0;
+            }
+
+            $pegawai->save();
 
 	    	$tenagaaktif = Pegawai::select('id_pegawai')->where(['id_jabatan' => '2', 'status' => 1])->get();
 	    	$json = json_encode($tenagaaktif);
 
 	    	$kerjahariangroup = KerjaHarianGroup::where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
 
-	    	if($kerjahariangroup){
-		    	$kerjahariangroup->id_pegawai = $json;
-		    	$kerjahariangroup->save();
-	    	}
+	    	$kupasbawang = KupasBawang::where(['tanggal_beri' => date('Y-m-d')])->exists();
+
+            if($kerjahariangroup){
+                if(!$kupasbawang){
+                    $kerjahariangroup->id_pegawai = $json;
+                    $kerjahariangroup->save();
+                }
+            }
 
 	        return response()->json(['success' => true,'pegawai' => $pegawai]);
     	}
@@ -170,6 +188,7 @@ class KerjaHarianController extends Controller
             $tenagakupas = json_decode($req->tenagakupas);
             $deleted = json_decode($req->deleted);
             DB::transaction(function() use ($req,$tenagakupas,$deleted){
+
                 $or = OrderMasak::select('order_masak.id_order_masak')
                     ->join('detail_order_masak AS dom','dom.id_order_masak','=','order_masak.id_order_masak')
                     ->where([
@@ -234,7 +253,7 @@ class KerjaHarianController extends Controller
                     'id_gudang' => '7'
                 ]);
 
-                $jsonp = json_encode($tenagahariini);
+                $jsonp = json_encode($tenagakupas);
 
                 $khg = KerjaHarianGroup::where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
                 $khg->id_pegawai = $jsonp;

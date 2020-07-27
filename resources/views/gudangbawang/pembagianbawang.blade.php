@@ -1,5 +1,5 @@
 @section('title') 
-Soyuz - Datatable
+Pembagian Bawang
 @endsection 
 @extends('gudangbawang.layouts.main')
 @section('style')
@@ -16,6 +16,7 @@ Soyuz - Datatable
         background-color: white !important; 
     }
 </style>
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -25,7 +26,7 @@ Soyuz - Datatable
             <h4 class="page-title text-left pl-5">Pembagian Bawang</h4>
         </div>
         <div class="col-4">
-            <h4 class="page-title text-right pr-5">10 Juni 2020</h4>           
+            <h4 class="page-title text-right pr-5">@php echo date("d F Y"); @endphp</h4>           
         </div>
     </div>
     <div class="row align-items-between">
@@ -194,6 +195,7 @@ Soyuz - Datatable
 <!-- Datatable js -->
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script>
     $(document).ready(function() {
     "use strict";
@@ -209,7 +211,7 @@ Soyuz - Datatable
             { "targets": 1 , "width": "45%" }
         ]
     });
-
+    
     var deleted = [];
 
     //ubah var tenaga kupas jadi json
@@ -340,8 +342,21 @@ Soyuz - Datatable
                     deleted : deletedjson,
                 },
                 success: function(result){
-                    $("#saveModal").modal('toggle');
-                    location.reload(); 
+                    swal({
+                        title: 'Berhasil!',
+                        text: 'Data Berhasil Disimpan',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        type: 'success',
+                    }).then(
+                    function () {
+                    },
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                        }
+                    }
+                    );
+                    location.reload();
                 }
             });
 
