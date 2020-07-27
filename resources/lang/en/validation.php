@@ -136,14 +136,7 @@ return [
             'required' => 'No. Surat Jalan Wajib Diisi. ',
             'max' => 'No. Surat Jalan Tidak Boleh Lebih dari :max Karakter '
         ],
-        'id_transaksi2' => [
-            'required' => 'No. Surat Jalan Wajib Diisi. ',
-            'max' => 'No. Surat Jalan Tidak Boleh Lebih dari :max Karakter '
-        ],
-        'id_transaksi2' => [
-            'required' => 'No. Surat Jalan Wajib Diisi. ',
-            'max' => 'No. Surat Jalan Tidak Boleh Lebih dari :max Karakter '
-        ],
+       
         'id_gudang' => [
             'required' => 'Gudang Wajib Diisi. ',
         ],
@@ -168,9 +161,7 @@ return [
          'berat_surat_jalan' => [
             'required' => 'Berat Surat Jalan Wajib Diisi. ',
         ],
-        'berat_surat_jalan2' => [
-            'required' => 'Berat Surat Jalan Wajib Diisi. ',
-        ],
+     
         'berat_aktual' => [
             'required' => 'Berat Aktual Wajib Diisi. ',
         ],
@@ -188,6 +179,15 @@ return [
         ],
         'berat_susut_persen2' => [
             'required' => 'Persen Berat Susut Wajib Diisi. ',
+        ],
+        'id_gudang_asal' => [
+            'required' => 'Gudang Asal Wajib Diisi. ',
+        ],
+        'id_gudang_tujuan' => [
+            'required' => 'Gudang Tujuan Wajib Diisi. ',
+        ],
+        'berat_pindah' => [
+            'required' => 'Berat Pindah Wajib Diisi. ',
         ],
 
 
