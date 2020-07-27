@@ -41,10 +41,8 @@ Home Gudang Bawang
             <div class="card m-b-30">
                 <div class="card-header">
 
-                    <div class="row">
                         <h5 class="card-title ml-3">Order Kupas Bawang</h5>
-                        <h5 class="card-title ml-auto mr-3" id="date"></h5>
-                    </div>
+                      
                     
                 </div>
                 <div class="card-body">
@@ -70,7 +68,7 @@ Home Gudang Bawang
                                         <td>
                                             @if($okb->status == 0)
                                                 <div class="badge-list">
-                                                    <span class="badge badge-secondary badge-font">Selesai</span>
+                                                    <span class="badge badge-danger badge-font">Belum</span>
                                                 </div>
 
                                             @elseif($okb->status == 1)
@@ -79,7 +77,7 @@ Home Gudang Bawang
                                                 </div>
                                             @else
                                                 <div class="badge-list">
-                                                    <span class="badge badge-danger badge-font">Belum</span>
+                                                    <span class="badge badge-secondary badge-font">Selesai</span>
                                                 </div>
                                             @endif
 
@@ -104,10 +102,9 @@ Home Gudang Bawang
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
-                     <div class="row">
+              
                         <h5 class="card-title ml-3">Order Masak</h5>
-                        <h5 class="card-title ml-auto mr-3" id="date2"></h5>
-                    </div>
+                      
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -166,21 +163,7 @@ Home Gudang Bawang
         });
     });
 
- $(document).ready(function() {
-    var now = new Date();
-    //var month = now.toLocaleString('default', { month: 'long' }); 
-    var month_name = function(dt){
-                    mlist = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" ];
-                    return mlist[dt.getMonth()];
-                    };
-    var month = month_name(now);              
-    var day = now.getDate();
-    if (day < 10) 
-        day = "0" + day;
-    var today = day + ' ' + month + ' ' + now.getFullYear() ;
-    document.getElementById('date').innerHTML = today;
-    document.getElementById('date2').innerHTML = today;
-});
+
 
 </script>
 

@@ -251,9 +251,14 @@ Surat Penerimaan Barang
                                             <a onclick="submitSementara();" class="btn btn-light simpan-sementara">Simpan Sementara</a>
                                         
                                             <a onclick="submitPenerimaan();" class="btn btn-primary" style="color: white;">Selesai</a>
-                                            
+
 
                                             <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" class="btn btn-primary">Cetak Barcode</a>
+                                        
+                                            <!--
+                                            
+                                            <a onclick="cetakBarcode();" class="btn btn-primary" style="color: white;">Cetak Barcode</a>
+                                            -->
                                        
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
@@ -288,41 +293,57 @@ Surat Penerimaan Barang
                                     <!-- jenis penerimaan : pemindahan bahan-->
                                     <input type="hidden" id="jenis_penerimaan2" name="id_jenis_penerimaan2" value="2">
 
-                                    <input type="hidden" id="kode_penerimaan2" name="id_penerimaan" value="{{ $id_penerimaan }}">
+                                    <input type="hidden" id="kode_pemindahanbahan" name="id_pemindahan_bahan" value="{{ $id_pemindahan_bahan }}">
+
+                                     <input type="hidden" id="kode_penerimaan2" name="id_penerimaan2" value="{{ $id_penerimaan }}">
 
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <div class="form-group col-md-8">
-                                                <i class="fa fa-tags" aria-hidden="true"></i>
-                                                <label for="inputSuratJalan2">No. Surat Jalan</label>
-                                                <input type="text" class="form-control @error('id_transaksi2') is-invalid @enderror" id="inputSuratJalan2" name="id_transaksi2" placeholder="Masukkan Nomor Surat Jalan" value="{{ old('id_transaksi2') }}">
-                                                @error('id_transaksi2') 
-                                                    <div class="invalid-feedback form-error font-error"> 
-                                                                {{ $message }}
-                                                    </div>
-                                                @enderror 
-                                            </div>
-                                        </div>
+                                        
                                          <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-archive" aria-hidden="true"></i>
-                                                <label for="inputGudangSimpan2">Gudang Simpan</label>
-                                                <select id="inputGudangSimpan2" name="id_gudang2" class="form-control @error('id_gudang2') is-invalid @enderror" value="{{ old('id_gudang2') }}">
+                                                <label for="gudang_asal">Gudang Asal</label>
+                                                <select id="gudang_asal" name="id_gudang_asal" class="form-control @error('gudang_asal') is-invalid @enderror" value="{{ old('gudang_asal') }}">
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang as $g)
                                                     <option value="{{ $g->id_gudang }}"
-                                                          @if($g->id_gudang == old('id_gudang2'))
+                                                          @if($g->id_gudang == old('gudang_asal'))
                                                             selected
                                                         @endif >{{ $g->nama }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('id_gudang2') 
+                                                @error('gudang_asal') 
                                                     <div class="invalid-feedback form-error font-error"> 
                                                                 {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
                                         </div>
+
+                                        <div class="form-group col-md-6">
+                                            <div class="form-group col-md-8">
+                                                <i class="fa fa-archive" aria-hidden="true"></i>
+                                                <label for="gudang_tujuan">Gudang Tujuan</label>
+                                                <select id="gudang_tujuan" name="id_gudang_tujuan" class="form-control @error('gudang_tujuan') is-invalid @enderror" value="{{ old('gudang_tujuan') }}">
+                                                    <option disabled selected readonly>Pilih Salah Satu...</option>
+                                                    @foreach($gudang_tujuan as $gt)
+                                                    <option value="{{ $gt->id_gudang }}"
+                                                          @if($gt->id_gudang == old('gudang_tujuan'))
+                                                            selected
+                                                        @endif >{{ $gt->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('gudang_tujuan') 
+                                                    <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+
+
+
                                     </div>
 
 
@@ -362,9 +383,9 @@ Surat Penerimaan Barang
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
-                                                <label for="inputBSJ">Berat Surat Jalan (Kg)</label>
-                                                <input type="number" class="form-control  @error('berat_surat_jalan2') is-invalid @enderror" id="berat_suratjalan2" name="berat_surat_jalan2" placeholder="Masukkan Berat Surat Jalan" value="{{ old('berat_surat_jalan2') }}">
-                                                 @error('berat_surat_jalan2') 
+                                                <label for="berat_pindah">Berat Pindah(Kg)</label>
+                                                <input type="number" class="form-control  @error('berat_pindah') is-invalid @enderror" id="berat_pindah" name="berat_pindah" placeholder="Masukkan Berat Pindah" value="{{ old('berat_pindah') }}">
+                                                 @error('berat_pindah') 
                                                             <div class="invalid-feedback form-error font-error"> 
                                                                         {{ $message }}
                                                             </div>
@@ -572,7 +593,47 @@ function submitPenerimaan2(){
   document.getElementById('pemindahan_bahan').submit();
 }
 
+/*
+function cetakBarcode(){
+  let supplier = document.getElementById('pilih_supplier').value;
+  let surat_jalan = document.getElementById('inputSuratJalan').value;
+  let nomor_kontainer = document.getElementById('inputKontainer').value;
+  let nomor_polisi = document.getElementById('inputPolisi').value;
+  let gudang = document.getElementById('inputGudangSimpan').value;
+  let id_bahanbaku = document.getElementById('kode-bahan').value;
+  let nama_bahanbaku = document.getElementById('nama-bahan').value;
+  let berat_suratjalan= document.getElementById('berat_suratjalan').value;
+  let berat_netto = document.getElementById('berat_netto').value;
+  let penyusutan = document.getElementById('penyusutan').value;
+  let percent_penyusutan = document.getElementById('percent_penyusutan').value;
 
+
+
+    
+      if (supplier != "- Pilih Supplier -" || surat_jalan != "" ) {
+            if(nomor_kontainer != "" || nomor_polisi != "" || gudang != "Pilih Salah Satu..."){
+                if(id_bahanbaku != "" || nama_bahanbaku != ""){
+                    if(berat_suratjalan != "" || berat_netto != ""){
+                        if( penyusutan != "" || percent_penyusutan != ""){
+                            var url = "{{ route('cetak_barcode', ':id') }}";
+                            var id = document.getElementById('kode_penerimaan').value;
+                            url = url.replace(':id', id);
+                            document.location.href=url;
+                        }
+                    }
+
+                }
+
+            }
+            
+      }
+   
+  
+
+
+}
+
+*/
 
 
 
@@ -649,25 +710,25 @@ $(document).ready(function(){
   function hitungSusut2(){
 
 
-    var berat_suratjalan2 = document.getElementById("berat_suratjalan2").value;
+    var berat_pindah = document.getElementById("berat_pindah").value;
     var berat_netto2 = document.getElementById("berat_netto2").value;
 
-    if (berat_suratjalan2 == "" || berat_netto2 == ""  ) {
+    if (berat_pindah == "" || berat_netto2 == ""  ) {
 
         document.getElementById('penyusutan2').value = 0;
         document.getElementById('percent_penyusutan2').value = 0;
 
     }else{
-        var s2 = berat_suratjalan2 - berat_netto2;
+        var s2 = berat_pindah - berat_netto2;
         var susut2 = s2.toFixed(2);
-        var ps2 = (susut2 / berat_suratjalan2)* 100;
+        var ps2 = (susut2 / berat_pindah)* 100;
         var percent_susut2 = ps2.toFixed(2);
 
         document.getElementById('penyusutan2').value = susut2;
         document.getElementById('percent_penyusutan2').value = percent_susut2;
     }
 
-    $(document).on('keyup', '#berat_suratjalan2', function (e) {
+    $(document).on('keyup', '#berat_pindah', function (e) {
         hitungSusut2();
     });
 
