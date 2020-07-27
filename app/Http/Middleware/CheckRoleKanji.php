@@ -29,7 +29,7 @@ class CheckRoleKanji
         if (Auth::user()->id_jabatan == 1) {
             // kacang
             if (Auth::user()->id_gudang == 9) {
-                return redirect()->route('/gudang-kacang');
+                return redirect()->route('dashboard-kacang');
             }
             // kanji
             if (Auth::user()->id_gudang == 8) {
