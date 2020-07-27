@@ -345,7 +345,7 @@ $(document).ready(function(){
     else {
         var s = berat_pindah - berat_netto;
         var susut = s.toFixed(2);
-        var ps = (susut / berat_suratjalan)* 100;
+        var ps = (susut / berat_pindah)* 100;
         var percent_susut = ps.toFixed(2);
 
         document.getElementById('penyusutan').value = susut;

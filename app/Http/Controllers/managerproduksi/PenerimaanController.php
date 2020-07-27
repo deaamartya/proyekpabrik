@@ -566,7 +566,7 @@ class PenerimaanController extends Controller
         $detail_transaksi->save();
 
         $detail_susut = DetailSusut::where('id_detail_transaksi', $detail_transaksi->id_detail_transaksi)->first();
-        $detail_susut->nama = "penerimaan";
+        $detail_susut->nama = "Penerimaan Supplier";
         if (empty($request->berat_susut_kg )) {
             $detail_susut->berat_susut_kg = 0;
             $detail_susut->berat_susut_persen = 0 ;
@@ -594,24 +594,6 @@ class PenerimaanController extends Controller
 
      public function update_sementara2(Request $request, $id)
     {
-        /*
-        $request->validate  
-        ([  'id_transaksi' => 'required|max:18',
-            'id_jenis_penerimaan' => 'required',
-            'id_gudang' => 'required',
-            'id_bahan_baku' => 'required',
-            'berat_surat_jalan' => 'required'
-        
-        ]);
-        
-        $penerimaan = Penerimaan::find($id);
-        $penerimaan->status_simpan = 0;
-        $penerimaan->id_transaksi = $request->id_transaksi;
-        $penerimaan->id_jenis_penerimaan = $request->id_jenis_penerimaan;
-        $penerimaan->id_gudang = $request->id_gudang;
-        $penerimaan->save();
-        */
-
 
 
         $request->validate  
@@ -718,7 +700,7 @@ class PenerimaanController extends Controller
         $detail_transaksi->save();
 
         $detail_susut = DetailSusut::where('id_detail_transaksi', $detail_transaksi->id_detail_transaksi)->first();
-        $detail_susut->nama = "penerimaan";
+        $detail_susut->nama = "Penerimaan Supplier";
         $detail_susut->berat_susut_kg = $request->berat_susut_kg ;
         $detail_susut->berat_susut_persen = $request->berat_susut_persen ;
         $detail_susut->berat_kirim = $request->berat_surat_jalan ;
@@ -740,26 +722,7 @@ class PenerimaanController extends Controller
 
      public function update2(Request $request, $id)
     {
-        /*
-        $request->validate  
-        ([  'id_transaksi' => 'required|max:18',
-            'id_jenis_penerimaan' => 'required',
-            'id_gudang' => 'required',
-            'id_bahan_baku' => 'required',
-            'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required',
-            'berat_susut_kg' => 'required|min:0',
-            'berat_susut_persen' => 'required|min:0'
         
-        ]);
-        
-        $penerimaan = Penerimaan::find($id);
-        $penerimaan->status_simpan = 1;
-        $penerimaan->id_transaksi = $request->id_transaksi;
-        $penerimaan->id_jenis_penerimaan = $request->id_jenis_penerimaan;
-        $penerimaan->id_gudang = $request->id_gudang;
-        $penerimaan->save();
-        */
 
           $request->validate  
         ([  'id_pemindahan_bahan' => 'required|max:18',
