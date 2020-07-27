@@ -616,7 +616,6 @@ class PenerimaanController extends Controller
 
         $request->validate  
         ([  'id_pemindahan_bahan' => 'required|max:18',
-            'id_penerimaan' => 'required',
             'id_jenis_penerimaan' => 'required',
             'id_gudang_asal' => 'required',
             'id_gudang_tujuan' => 'required',
@@ -764,7 +763,6 @@ class PenerimaanController extends Controller
 
           $request->validate  
         ([  'id_pemindahan_bahan' => 'required|max:18',
-            'id_penerimaan' => 'required',
             'id_jenis_penerimaan' => 'required',
             'id_gudang_asal' => 'required',
             'id_gudang_tujuan' => 'required',
