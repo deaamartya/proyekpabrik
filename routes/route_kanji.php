@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::middleware(['auth', 'kanji'])->group(function () {
+
 //gudang bawang
 Route::get('/gudang-bawang/', function () {
     return redirect('/gudang-bawang/home-bawang');
@@ -111,4 +113,6 @@ Route::get('/gudang-bumbu/adonangulagaram', function () {
 
 Route::get('/gudang-bumbu/bumbuready', function () {
     return view('gudangbumbu.bumbuready');
+});
+
 });
