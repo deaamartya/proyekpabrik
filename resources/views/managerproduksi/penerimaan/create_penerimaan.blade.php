@@ -303,7 +303,7 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-archive" aria-hidden="true"></i>
                                                 <label for="gudang_asal">Gudang Asal</label>
-                                                <select id="gudang_asal" name="id_gudang_asal" class="form-control @error('gudang_asal') is-invalid @enderror" value="{{ old('gudang_asal') }}">
+                                                <select id="gudang_asal" name="id_gudang_asal" class="form-control @error('id_gudang_asal') is-invalid @enderror" value="{{ old('id_gudang_asal') }}">
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang as $g)
                                                     <option value="{{ $g->id_gudang }}"
@@ -312,7 +312,7 @@ Surat Penerimaan Barang
                                                         @endif >{{ $g->nama }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('gudang_asal') 
+                                                @error('id_gudang_asal') 
                                                     <div class="invalid-feedback form-error font-error"> 
                                                                 {{ $message }}
                                                     </div>
@@ -324,7 +324,7 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-archive" aria-hidden="true"></i>
                                                 <label for="gudang_tujuan">Gudang Tujuan</label>
-                                                <select id="gudang_tujuan" name="id_gudang_tujuan" class="form-control @error('gudang_tujuan') is-invalid @enderror" value="{{ old('gudang_tujuan') }}">
+                                                <select id="gudang_tujuan" name="id_gudang_tujuan" class="form-control @error('id_gudang_tujuan') is-invalid @enderror" value="{{ old('id_gudang_tujuan') }}">
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang_tujuan as $gt)
                                                     <option value="{{ $gt->id_gudang }}"
@@ -333,7 +333,7 @@ Surat Penerimaan Barang
                                                         @endif >{{ $gt->nama }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('gudang_tujuan') 
+                                                @error('id_gudang_tujuan') 
                                                     <div class="invalid-feedback form-error font-error"> 
                                                                 {{ $message }}
                                                     </div>
