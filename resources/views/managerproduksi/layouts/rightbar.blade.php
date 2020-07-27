@@ -188,7 +188,7 @@
                          <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="ui-kits"><span>Data Produksi</span></a>
                         <ul class="dropdown-menu">
                              <li class="dropdown">
-                                <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="tables">Gudang Kacang</a>
+                                <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="tables">Gudang Kacang & Gudang Kacang Sortir</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('/manpro-kacang/home') }}">Home</a></li>
                                     <li class="dropdown">
@@ -238,27 +238,8 @@
 
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('/manager-produksi/gudang-bumbu') }}">Home</a></li>
-                                    <li class="dropdown">
-                                        <a href="javaScript:void();" class="dropdown-toggle"
-                                            data-toggle="dropdown">Stock</a>
-
-                                        <ul class="dropdown-menu">
-                                            <li><a
-                                                    href="{{ url('/manager-produksi/gudang-bumbu/stock-bahan') }}">Bahan</a>
-                                            </li>
-                                            <li><a href="{{ url('/manager-produksi/gudang-bumbu/detail-prive') }}">Detail
-                                                    Prive</a></li>
-                                            <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock-adonan-gula') }}">Adonan
-                                                    Gula</a></li>
-                                            <li><a
-                                                    href="{{ url('/manager-produksi/gudang-bumbu/stock-adonan-gula-garam') }}">Adonan
-                                                    Gula + Garam</a></li>
-                                            <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock-bumbu-ready') }}">Bumbu
-                                                    Ready</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/kerja-harian') }}">Kerja
-                                            Harian</a></li>
+                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock') }}">Stock</a></li>
+                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/kerja-harian') }}">Kerja Harian</a></li>
                                 </ul>
                             </li>
 

@@ -10,7 +10,14 @@ Penerimaan Bawang
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
 
-
+<style type="text/css">
+    .redclass{
+        border-color: red !important;
+    }
+    .form-control[readonly] {
+        background-color: white !important; 
+    }
+</style>
 
 
 @endsection 
@@ -65,26 +72,14 @@ Penerimaan Bawang
                           
                             </thead>
                             <tbody>
+                                 @foreach($tenagakupas as $t)
                                 <tr>
-                                    <td>Ida</td>
-                                    <td>12</td>
-                                    <td class="bawang-kupas">11.4</td>
-                                    <td>0.6</td>
+                                    <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif" id="nama{{$t->id_pegawai}}">{{$t->nama}}</td>
+                                    <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif" id="tb{{$t->id_pegawai}}" >{{$t->jumlah}}</td>
+                                    <td id="bk{{$t->id_pegawai}}" class="jmbawangkulit @if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->jumlahbawang}}</td>
+                                    <td id="kulit{{$t->id_pegawai}}" class="jmkulit @if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->jumlahkulit}}</td>
                                 </tr>
-                               
-                                <tr class="border-red">
-                                    <td style="border: 1px solid red;">Kayat</td>
-                                    <td style="border-bottom: 1px solid red;">12</td>
-                                    <td style="border-bottom: 1px solid red;" class="bawang-kupas">11.1 </td>
-                                    <td style="border-bottom: 1px solid red; border-right: 1px solid red">0.4</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Sum</td>
-                                    <td>12</td>
-                                    <td class="bawang-kupas">11.5</td>
-                                    <td>0.5</td>
-                                </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -114,6 +109,7 @@ Penerimaan Bawang
             "searching" : false,
             responsive: true
         });
+
     });
 
  $(document).ready(function() {

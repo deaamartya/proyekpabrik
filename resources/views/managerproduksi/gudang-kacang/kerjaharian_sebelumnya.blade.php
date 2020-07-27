@@ -116,7 +116,7 @@ Kerja Hari Sebelumnya
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Karung</td>
+                                    <td>Kg</td>
                                     <td>10</td>
                                     <td>7</td>
                                     <td>0</td>
@@ -142,22 +142,6 @@ Kerja Hari Sebelumnya
                           
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Karung Full</td>
-                                    <td>4</td>
-                                    <td>6</td>
-                                    <td>6</td>
-                                    <td>-</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Tidak Full (Kg)</td>
-                                    <td>15</td>
-                                    <td>8</td>
-                                    <td>13</td>
-                                    <td>-</td>
-                                </tr>
-
                                 <tr>
                                     <td>Total (Kg)</td>
                                     <td>215</td>
@@ -196,7 +180,7 @@ Kerja Hari Sebelumnya
                             </thead>
                             <tbody>
                                 <tr >
-                                    <td>Karung</td>
+                                    <td>Kg</td>
                                     <td>4</td>
                                     <td>6</td>
                                     <td>6</td>

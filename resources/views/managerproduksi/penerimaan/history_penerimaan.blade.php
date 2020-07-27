@@ -107,30 +107,42 @@ Penerimaan Barang
 @endsection 
 @section('script')
 <!-- Datatable js -->
-<!--
-<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/jszip.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/vfs_fonts.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/buttons.print.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/js/custom/custom-table-datatable.js') }}"></script>
--->
+
 
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
-    //"use strict";
 
 
-        
-    $(document).ready(function() {
+
+//"use strict";
+$(document).ready(function() {
+
+    var msg = '{{Session::get('alert_simpan')}}';
+    var exist = '{{Session::has('alert_simpan')}}';
+    if(exist){
+      alert(msg);
+    }
+
+    var msg2 = '{{Session::get('alert_simpan2')}}';
+    var exist2 = '{{Session::has('alert_simpan2')}}';
+    if(exist2){
+      alert(msg2);
+    }
+
+    var msg3 = '{{Session::get('alert_update')}}';
+    var exist3 = '{{Session::has('alert_update')}}';
+    if(exist3){
+      alert(msg3);
+    }
+
+    var msg4 = '{{Session::get('alert_update2')}}';
+    var exist4 = '{{Session::has('alert_update2')}}';
+    if(exist4){
+      alert(msg4);
+    }
+
+
         $('#datatable').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
@@ -138,15 +150,10 @@ Penerimaan Barang
         });
 
         
-        
         var table = document.getElementById("datatable");
-        
-        
         
 
         if (table) {
-
-
           for (var i = 0; i < table.rows.length; i++) {
 
             //var status = document.getElementsByClassName("status_simpan").value;
@@ -157,8 +164,6 @@ Penerimaan Barang
                 editPenerimaan(this);
                 };
             
-
-
             
           }
         }

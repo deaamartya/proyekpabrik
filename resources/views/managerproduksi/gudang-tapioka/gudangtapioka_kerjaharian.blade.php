@@ -50,92 +50,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>09/06/20</td>
-                                <td>50</td>
-                                <td>-</td>
-                                <td>50</td>
-                                <td class="selesai">Selesai</td>
-                            </tr>
-                            <tr>
-                                <td>10/06/20</td>
-                                <td>-</td>
-                                <td>40</td>
-                                <td>60</td>
-                                <td class="ready">Ready</td>
-                            </tr>
-                            <tr>
-                                <td>11/06/20</td>
-                                <td>50</td>
-                                <td>-</td>
-                                <td>30</td>
-                                <td class="ready">Ready</td>
-                            </tr>
-                            <tr>
-                                <td>12/06/20</td>
-                                <td>20</td>
-                                <td>50</td>
-                                <td>60</td>
-                                <td class="belum">Belum</td>
-                            </tr>
-                            <tr>
-                                <td>13/06/20</td>
-                                <td>230</td>
-                                <td>30</td>
-                                <td>20</td>
-                                <td class="belum">Belum</td>
-                            </tr>
+                            @foreach ($order_masak as $order_masak)
+                               <tr>
+                                   <td>
+                                       {{ $order_masak->tanggal_order_masak }}
+                                   </td>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000001')->value('jumlah') }}
+                                   </td>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000002')->value('jumlah') }}
+                                   </td>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000003')->value('jumlah') }}
+                                   </td>
+                                   <td class="status_order">
+                                       {{ $order_masak->status }}
+                                   </td>
+                               </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
-
-                <div class="row mt-5 justify-content-center">
-                    <div class="col-md-2">
-                       <button class="btn btn-primary tombol-ambil-tepung" data-animation="zoomIn" data-toggle="modal" data-target="#modal-ambil-tepung">
-                           Ambil Stock Tepung Karung
-                       </button>
-                    </div>
-
-                    <div class="col-md-3 table-responsive">
-                        <table class="display table table-striped table-bordered">
-                           <thead>
-                               <tr>
-                                   <th>Jenis Stock</th>
-                                   <th>Berat (Kg)</th>
-                               </tr>
-                           </thead>
-                           <tbody>
-                               <tr>
-                                   <td>25 Kg</td>
-                                   <td>125</td>
-                               </tr>
-                           </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="row mt-5 justify-content-center">
-                   <div class="col-md-2">
-                       <button class="btn btn-success tombol-tambah-hasil-packing" data-animation="zoomIn" data-toggle="modal" data-target="#modal-tambah-packing">
-                           Tambah Hasil Packing
-                       </button>
-                    </div>
-
-                    <div class="col-md-3 table-responsive">
-                       <table class="display table table-striped table-bordered">
-                          <thead>
-                              <tr>
-                                  <th>Hasil Packing (Plastik)</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td>50</td>
-                              </tr>
-                          </tbody>
-                       </table>
-                   </div>
-                </div>
+                
             </div>
         </div>
     </div>

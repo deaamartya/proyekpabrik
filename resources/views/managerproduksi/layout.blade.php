@@ -443,17 +443,7 @@
 
                                         <ul class="dropdown-menu">
                                             <li><a href="{{ url('/manager-produksi/gudang-bumbu') }}">Home</a></li>
-                                            <li class="dropdown">
-                                                <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown">Stock</a>
-
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock-bahan') }}">Bahan</a></li>
-                                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/detail-prive') }}">Detail Prive</a></li>
-                                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock-adonan-gula') }}">Adonan Gula</a></li>
-                                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock-adonan-gula-garam') }}">Adonan Gula + Garam</a></li>
-                                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock-bumbu-ready') }}">Bumbu Ready</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock') }}">Stock</a></li>
                                             <li><a href="{{ url('/manager-produksi/gudang-bumbu/kerja-harian') }}">Kerja Harian</a></li>
                                         </ul>
                                     </li>
@@ -533,7 +523,7 @@
         <!-- Start Footerbar -->
         <div class="footerbar">
             <footer class="footer">
-                <p class="mb-0">© 2020 Soyuz - All Rights Reserved.</p>
+                <p class="mb-0">© 2020 Gangsar - All Rights Reserved.</p>
             </footer>
         </div>
         <!-- End Footerbar -->

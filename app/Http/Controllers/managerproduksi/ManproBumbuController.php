@@ -14,36 +14,42 @@ class ManproBumbuController extends Controller
     
     public function home()
     {
-        return view('managerproduksi/gudang-bumbu/gudangbumbu');
+        $order_masak = OrderMasak::all();
+        $stock1a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000002')->sum('masuk');
+        $stock1b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000002')->sum('keluar');
+        $stockgula = $stock1a - $stock1b;
+
+        $stock2a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000001')->sum('masuk');
+        $stock2b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000001')->sum('keluar');
+        $stockgaram = $stock2a - $stock2b;
+
+        $stock3a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000009')->sum('masuk');
+        $stock3b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000009')->sum('keluar');
+        $stockbumbu = $stock3a - $stock3b;
+
+        return view('managerproduksi/gudang-bumbu/gudangbumbu', [
+            'stockgula' => $stockgula,
+            'stockgaram' => $stockgaram,
+            'stockbumbu' => $stockbumbu,
+            'order_masak' => $order_masak
+        ]);
     }
 
-    public function stock_bahan()
+    public function stock()
     {
-        return view('managerproduksi/gudang-bumbu/gudangbumbu_stockbahan');
-    }
+        $id_bumbu = 'BB000000009';
+        $stock_bumbu = DB::table('stock')->where('id_bahan_baku', $id_bumbu)->get();
 
-    public function detail_prive()
-    {
-        return view('managerproduksi/gudang-bumbu/gudangbumbu_detailprive');
-    }
-
-    public function stock_adonan_gula()
-    {
-        return view('managerproduksi/gudang-bumbu/gudangbumbu_stockadonangula');
-    }
-
-    public function stock_adonan_gula_garam()
-    {
-        return view('managerproduksi/gudang-bumbu/gudangbumbu_stockadonangulagaram');
-    }
-
-    public function stock_bumbu_ready()
-    {
-        return view('managerproduksi/gudang-bumbu/gudangbumbu_stockbumbuready');
+        return view('managerproduksi/gudang-bumbu/gudangbumbu_stock', [
+            'stock_bumbu' => $stock_bumbu
+        ]);
     }
 
     public function kerja_harian()
     {
-        return view('managerproduksi/gudang-bumbu/gudangbumbu_kerjaharian');
+        $order_masak = OrderMasak::all();
+        return view('managerproduksi/gudang-bumbu/gudangbumbu_kerjaharian', [
+            'order_masak' => $order_masak
+        ]);
     }
 }
