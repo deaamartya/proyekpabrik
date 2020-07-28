@@ -57,6 +57,7 @@ Penerimaan Barang
                                     <th style="display: none;"></th>
                                     <th>Tanggal</th>
                                     <th>No. Surat Jalan</th>
+                                    <th>Jenis Penerimaan</th>
                                     <th>Bahan</th>
                                     <th>Status</th>
                                 </tr>
@@ -69,8 +70,11 @@ Penerimaan Barang
                                     <td style="display: none;">{{ $hp->id_jenis_penerimaan }}</td>
                                     <td>{{ date('d/m/Y' , strtotime($hp->timestamp)) }}</td>
                                     <td>{{ $hp->id_transaksi }}</td>
+                                    <td>{{ $hp->nama_jenis_penerimaan}}</td>
                                     <td>{{ $hp->nama_bahan_baku }}</td>
+                                    
                                     <td>
+                                        
 
                                         
                                             @if($hp->status_simpan == 0)
@@ -125,6 +129,9 @@ Penerimaan Barang
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
     //"use strict";
+
+
+        
     $(document).ready(function() {
         $('#datatable').DataTable( {
             //"order": [[ 0, "asc" ]],
@@ -136,12 +143,25 @@ Penerimaan Barang
         
         var table = document.getElementById("datatable");
         
+        
+        
 
         if (table) {
+
+
           for (var i = 0; i < table.rows.length; i++) {
-            table.rows[i].onclick = function() {
-              editPenerimaan(this);
-            };
+
+            //var status = document.getElementsByClassName("status_simpan").value;
+
+            //console.log(status);
+
+                table.rows[i].onclick = function() {
+                editPenerimaan(this);
+                };
+            
+
+
+            
           }
         }
 

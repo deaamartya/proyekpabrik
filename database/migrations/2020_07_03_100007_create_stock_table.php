@@ -16,7 +16,7 @@ class CreateStockTable extends Migration
         Schema::create('stock', function (Blueprint $table) {
             $table->string('id_stock',13)->primary();
             $table->unsignedInteger('id_satuan');
-            $table->string('id_transaksi',11);
+            $table->string('id_transaksi',18);
             $table->string('id_bahan_baku',18);
             $table->timestamp('TIMESTAMP');
             $table->string('keterangan',50);
@@ -39,8 +39,8 @@ class CreateStockTable extends Migration
             END");
 
         DB::unprepared("CREATE TRIGGER `auto_count_stock` BEFORE INSERT ON `stock`
-             FOR EACH ROW BEGIN
-                SELECT `stock` INTO @last FROM stock WHERE id_bahan_baku = new.id_bahan_baku AND id_gudang = new.id_gudang ORDER BY `TIMESTAMP`;
+                FOR EACH ROW BEGIN
+                SELECT `stock` INTO @last FROM stock WHERE id_bahan_baku = new.id_bahan_baku AND id_gudang = new.id_gudang ORDER BY `TIMESTAMP` DESC LIMIT 1;
                     IF (@last >= 0) THEN
                         SET new.stock = @last+new.masuk-new.keluar;
                     ELSE

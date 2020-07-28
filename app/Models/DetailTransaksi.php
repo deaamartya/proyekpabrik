@@ -41,8 +41,7 @@ class DetailTransaksi extends Model
 	protected $casts = [
 		'id_satuan' => 'int',
 		'jumlah' => 'float',
-		'id_jenis_transaksi' => 'int',
-		'flag' => 'bool'
+		'id_jenis_transaksi' => 'int'
 	];
 
 	protected $dates = [
@@ -55,7 +54,7 @@ class DetailTransaksi extends Model
 		'id_bahan_baku',
 		'id_jenis_transaksi',
 		'timestamp',
-		'flag'
+		'id_transaksi'
 	];
 
 	public function bahan_baku()

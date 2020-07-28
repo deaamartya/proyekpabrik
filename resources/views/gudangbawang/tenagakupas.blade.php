@@ -1,5 +1,5 @@
 @section('title') 
-Soyuz - Datatable
+Tenaga Kupas
 @endsection 
 @extends('gudangbawang.layouts.main')
 @section('style')
@@ -8,6 +8,8 @@ Soyuz - Datatable
 <link href="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -18,7 +20,7 @@ Soyuz - Datatable
         </div>
         <div class="col-4">
             <div class="widgetbar">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Tambah</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus-circle mr-2"></i>Tambah</button>
             </div>                        
         </div>
     </div>          
@@ -101,6 +103,7 @@ Soyuz - Datatable
 <!-- Datatable js -->
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script>
     "use strict";
     $(document).ready(function() {
@@ -128,22 +131,34 @@ Soyuz - Datatable
                     status: 1
                 },
                 success: function(result){
+                    console.log(result.pegawai);
                     var add ='<tr>\
                         <td>'+result.pegawai.nama+'</td>\
                         <td><button type="button" class="btn btn-success status" id="status'+result.pegawai.id_pegawai+'">Aktif</button></td>\
                         </tr>';
-                    $("#datatable tbody").append(add);
+                    $("#datatable tbody").prepend(add);
                     $("#addModal").modal('toggle');
                     $("#addTenagaKupas").trigger('reset');
+                    swal({
+                        title: 'Berhasil!',
+                        text: 'Pegawai berhasil ditambahkan',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        type: 'success',
+                    }).then(
+                    function () {
+                    },
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                        }
+                    }
+                    );
                 }
             });
+
         });
-        $(".status").click(function(e){
+        $(document).on("click",".status", function () {
             e.preventDefault();
-            var status = 0;
-            if($(this).html() == "Tidak Aktif"){
-               status = 1;
-            }
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -153,19 +168,34 @@ Soyuz - Datatable
                 url: "{{ url('/gudang-bawang/statustenagakupas') }}",
                 method: 'POST',
                 data: {
-                    id: $(this).attr('id').substr(6),
-                    status: status
+                    id: $(this).attr('id').substr(6)
                 },
                 success: function(result){
-                    if(result.pegawai.status){
-                        $("#status"+result.pegawai.id_pegawai).removeClass('btn-danger');
-                        $("#status"+result.pegawai.id_pegawai).addClass('btn-success');
-                        $("#status"+result.pegawai.id_pegawai).html("Aktif");
-                    }
-                    else{
-                        $("#status"+result.pegawai.id_pegawai).removeClass('btn-success');
-                        $("#status"+result.pegawai.id_pegawai).addClass('btn-danger');
-                        $("#status"+result.pegawai.id_pegawai).html("Tidak Aktif");
+                    if(result.pegawai.status != status){
+                        if(result.pegawai.status){
+                            $("#status"+result.pegawai.id_pegawai).removeClass('btn-danger');
+                            $("#status"+result.pegawai.id_pegawai).addClass('btn-success');
+                            $("#status"+result.pegawai.id_pegawai).html("Aktif");
+                        }
+                        else{
+                            $("#status"+result.pegawai.id_pegawai).removeClass('btn-success');
+                            $("#status"+result.pegawai.id_pegawai).addClass('btn-danger');
+                            $("#status"+result.pegawai.id_pegawai).html("Tidak Aktif");
+                        }
+                        swal({
+                            title: 'Berhasil!',
+                            text: 'Data berhasil diubah',
+                            timer: 2000,
+                            showConfirmButton: false,
+                            type: 'success',
+                        }).then(
+                        function () {
+                        },
+                        function (dismiss) {
+                            if (dismiss === 'timer') {
+                            }
+                        }
+                        );
                     }
                 }
             });

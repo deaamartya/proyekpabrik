@@ -22,8 +22,9 @@ class CreateGroupKerjaTable extends Migration
             $table->integer('jumlah_personil')->unsigned();
             $table->boolean('level');
             $table->string('parent_id_group_kerja')->nullable();
-            $table->foreign('parent_id_group_kerja')->references('id_group_kerja')->on('group_kerja')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('parent_id_group_kerja','p_id_fk')->references('id_group_kerja')->on('group_kerja')->onUpdate('cascade')->onDelete('cascade');
         });
+       
 
         DB::unprepared("CREATE TRIGGER `auto_id_group_kerja` BEFORE INSERT ON `group_kerja`
              FOR EACH ROW BEGIN

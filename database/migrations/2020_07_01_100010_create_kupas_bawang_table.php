@@ -14,7 +14,7 @@ class CreateKupasBawangTable extends Migration
     public function up()
     {
         Schema::create('kupas_bawang', function (Blueprint $table) {
-            $table->string('id_kupas_bawang',10)->primary();
+            $table->string('id_kupas_bawang',13)->primary();
             $table->date('tanggal_beri');
         });
         DB::unprepared("CREATE TRIGGER `auto_id_kupas_bawang` BEFORE INSERT ON `kupas_bawang`

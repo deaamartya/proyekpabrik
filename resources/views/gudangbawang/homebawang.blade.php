@@ -17,7 +17,7 @@ Soyuz - Datatable
             <h1 class="page-title text-left pl-5">Order Kupas Bawang</h1>
         </div>
         <div class="col-4">
-            <h2 class="page-title text-right pr-5">10 Juni 2020</h2>
+            <h2 class="page-title text-right pr-5">@php echo date("d F Y"); @endphp</h2>
         </div>
     </div>        
 </div>
@@ -41,36 +41,21 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>100</td>
-                                    <td>50</td>
-                                    <td>Selesai</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>120</td>
-                                    <td class="text-warning">60</td>
-                                    <td class="text-warning">Ready</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>100</td>
-                                    <td class="text-warning">30</td>
-                                    <td class="text-warning">Ready</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>80</td>
-                                    <td class="text-danger">0</td>
-                                    <td class="text-danger">Belum</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>70</td>
-                                    <td class="text-danger">0</td>
-                                    <td class="text-danger">Belum</td>
-                                </tr>                                
+                                @foreach($ordermasak2 as $ord)
+                                    <tr>
+                                        <td>{{date_format($ord->tanggal_order_masak,'Y-m-d')}}</td>
+                                        <td>{{$ord->jumlah}}</td>   
+                                        <td>{{$stock1c}}</td>
+                                        <td>
+                                            @if($ord->status == 0) Selesai
+                                            @else
+                                            @if($ord->status == 1) Ready
+                                            @else Belum
+                                            @endif
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach                                 
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -106,36 +91,14 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>50</td>
-                                    <td>-</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>-</td>
-                                    <td>40</td>
-                                    <td>60</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>50</td>
-                                    <td>-</td>
-                                    <td>30</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>20</td>
-                                    <td>30</td>
-                                    <td>60</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>30</td>
-                                    <td>20</td>
-                                    <td>20</td>
-                                </tr>                                
+                                @foreach($ordermasak as $or)
+                                    <tr>
+                                        <td>{{date_format($or->tanggal_order_masak,'Y-m-d')}}</td>
+                                        <td>{{$or->HC}}</td>
+                                        <td>{{$or->SP}}</td>
+                                        <td>{{$or->GS}}</td>
+                                    </tr>
+                                @endforeach                                 
                             </tbody>
                             <tfoot>
                                 <tr>

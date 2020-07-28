@@ -6,12 +6,10 @@ $(function() {
     $('.tombol-input-order-masak').click(function(br) {
         $('.modal .modal-dialog').attr('class', 'modal-dialog  ' + $(this).data("animation") + '  animated');
     });
-
-    $('.tombol-ambil-tepung').click(function(br) {
+    
+    $('.tombol-edit-order-masak').click(function(br) {
         $('.modal .modal-dialog').attr('class', 'modal-dialog  ' + $(this).data("animation") + '  animated');
     });
 
-    $('.tombol-tambah-hasil-packing').click(function(br) {
-        $('.modal .modal-dialog').attr('class', 'modal-dialog  ' + $(this).data("animation") + '  animated');
-    });
+    
 });

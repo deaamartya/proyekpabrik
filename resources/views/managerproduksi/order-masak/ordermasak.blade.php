@@ -33,6 +33,16 @@
  <div class="row">
      <!-- Start col -->
      <div class="col-lg-12">
+        {{-- Alert status --}}
+        @if (session('status'))
+        <div class="alert alert-success alert-dismissible fade show text-dark">
+            {{ session('status') }}
+            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+
          <div class="card m-b-30">
              <div class="card-header">
                  <h5 class="card-title">Order Masak</h5>
@@ -40,7 +50,7 @@
              <div class="card-body">
                  <div class="my-2">
                      <button type="button" class="btn btn-primary tombol-input-order-masak" data-animation="zoomIn" data-toggle="modal" data-target="#modal-input-order-masak">
-                        <i class="far fa-edit mr-1"></i>
+                        <i class="fas fa-plus-circle mr-1"></i>
                          INPUT ORDER MASAK
                      </button>
                  </div>
@@ -52,45 +62,44 @@
                                  <th>HC</th>
                                  <th>SP</th>
                                  <th>GS</th>
+                                 <th>BAWANG</th>
                                  <th>Status</th>
+                                 <th>Aksi</th>
                              </tr>
                          </thead>
                          <tbody>
-                             <tr>
-                                 <td>09/06/20</td>
-                                 <td>50</td>
-                                 <td>-</td>
-                                 <td>50</td>
-                                 <td class="selesai">Selesai</td>
-                             </tr>
-                             <tr>
-                                 <td>10/06/20</td>
-                                 <td>-</td>
-                                 <td>40</td>
-                                 <td>60</td>
-                                 <td class="ready">Ready</td>
-                             </tr>
-                             <tr>
-                                 <td>11/06/20</td>
-                                 <td>50</td>
-                                 <td>-</td>
-                                 <td>30</td>
-                                 <td class="ready">Ready</td>
-                             </tr>
-                             <tr>
-                                 <td>12/06/20</td>
-                                 <td>20</td>
-                                 <td>50</td>
-                                 <td>60</td>
-                                 <td class="belum">Belum</td>
-                             </tr>
-                             <tr>
-                                 <td>13/06/20</td>
-                                 <td>230</td>
-                                 <td>30</td>
-                                 <td>20</td>
-                                 <td class="belum">Belum</td>
-                             </tr>
+                             @foreach ($order_masak as $order_masak)
+                                <tr>
+                                    <td>
+                                        {{ $order_masak->tanggal_order_masak }}
+                                    </td>
+                                    <td>
+                                        {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                        ->where('id_bahan_product', 'PR00000000001')->value('jumlah') }}
+                                    </td>
+                                    <td>
+                                        {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                        ->where('id_bahan_product', 'PR00000000002')->value('jumlah') }}
+                                    </td>
+                                    <td>
+                                        {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                        ->where('id_bahan_product', 'PR00000000003')->value('jumlah') }}
+                                    </td>
+                                    <td>
+                                        {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
+                                        ->where('id_bahan_product', 'BB000000008')->value('jumlah') }}
+                                    </td>
+                                    <td class="status_order">
+                                        {{ $order_masak->status }}
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-sm btn-success text-white tombol-edit-order-masak" data-id={{ $order_masak->id_order_masak }} data-animation="zoomIn" data-toggle="modal" data-target="#modal-input-order-masak">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr>
+                             @endforeach
                          </tbody>
                      </table>
                  </div>
@@ -103,7 +112,7 @@
  <!-- End row -->
 
 
- {{-- Modal Input Order Masak--}}
+{{-- Modal Input Order Masak--}}
 <div class="modal fade" id="modal-input-order-masak" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -115,34 +124,60 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST">
+                <form action="{{ url('/manager-produksi/order-masak') }}" method="POST">
                     @csrf
 
-                    {{-- <input type="hidden" name="id" id="id"> --}}
+                    {{-- Hidden id untuk update order masak --}}
+                    <input type="hidden" name="input_id" id="input_id">
 
                     <div class="form-group">
-                        <label for="">Tanggal</label>
-                        <input type="date" name="" id="" class="form-control">
+                        <label for="input_tanggal">Tanggal</label>
+                        <input type="date" name="input_tanggal" id="input_tanggal" class="form-control @error('input_tanggal') is-invalid @enderror">
+                    
+                        @error('input_tanggal')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="">HC</label>
-                        <input type="number" name="" id="" class="form-control" min="0">
+                        <label for="input_hc">HC</label>
+                        <input type="number" name="input_hc" id="input_hc" class="form-control @error('input_hc') is-invalid @enderror" min="0" placeholder="Jumlah (Kg)" autocomplete="off" value="{{ old('input_hc') }}">
+                    
+                        @error('input_hc')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="">SP</label>
-                        <input type="number" name="" id="" class="form-control" min="0">
+                        <label for="input_sp">SP</label>
+                        <input type="number" name="input_sp" id="input_sp" class="form-control @error('input_sp') is-invalid @enderror" min="0" placeholder="Jumlah (Kg)" autocomplete="off" value="{{ old('input_sp') }}">
+                    
+                        @error('input_sp')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="">GS</label>
-                        <input type="number" name="" id="" class="form-control" min="0">
+                        <label for="input_gs">GS</label>
+                        <input type="number" name="input_gs" id="input_gs" class="form-control @error('input_gs') is-invalid @enderror" min="0" placeholder="Jumlah (Kg)" autocomplete="off" value="{{ old('input_gs') }}">
+                    
+                        @error('input_gs')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input_bawang">BAWANG</label>
+                        <input type="number" name="input_bawang" id="input_bawang" class="form-control @error('input_bawang') is-invalid @enderror" min="0" placeholder="Jumlah (Kg)" autocomplete="off" value="{{ old('input_bawang') }}">
+                    
+                        @error('input_bawang')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
-                        <button type="button" class="btn btn-primary">SIMPAN</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">BATAL</button>
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
                     </div>
                 </form>
             </div>
@@ -176,4 +211,6 @@
 
 {{-- Modal Script --}}
 <script src="{{ asset('/managerproduksi/js/ordermasak.js') }}"></script>
+<script src="{{ asset('/managerproduksi/js/ordermasak_tabel.js') }}"></script>
+<script src="{{ asset('/managerproduksi/js/ordermasak_modal.js') }}"></script>
 @endsection

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\managerproduksi;
 
+use App\Models\Product;
+use App\Models\OrderMasak;
+use App\Models\DetailOrderMasak;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

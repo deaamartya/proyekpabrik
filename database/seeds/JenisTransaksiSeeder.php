@@ -19,7 +19,11 @@ class JenisTransaksiSeeder extends Seeder
         ]);
 
         DB::table('jenis_transaksi')->insert([
-            'nama' => 'Penerimaan'
+            'nama' => 'Penerimaan Supplier'
+        ]);
+
+        DB::table('jenis_transaksi')->insert([
+            'nama' => 'Pemindahan Bahan'
         ]);
     }
 }

@@ -47,41 +47,21 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>50</td>
-                                    <td>-</td>
-                                    <td>50</td>
-                                    <td>Selesai</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>-</td>
-                                    <td>40</td>
-                                    <td>60</td>
-                                    <td class="text-danger">Ready</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>50</td>
-                                    <td>-</td>
-                                    <td>30</td>
-                                    <td class="text-danger">Ready</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>20</td>
-                                    <td>30</td>
-                                    <td>60</td>
-                                    <td class="text-danger">Belum</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>30</td>
-                                    <td>20</td>
-                                    <td>20</td>
-                                    <td class="text-danger">Belum</td>
-                                </tr>                                
+                                @foreach($ordermasak as $or)
+                                    <tr>
+                                        <td>{{date_format($or->tanggal_order_masak,'Y-m-d')}}</td>
+                                        <td>{{$or->HC}}</td>
+                                        <td>{{$or->SP}}</td>
+                                        <td>{{$or->GS}}</td>
+                                        <td>@if($or->status == 0) Selesai
+                                            @else
+                                            @if($or->status == 1) Ready
+                                            @else Belum
+                                            @endif
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach                                
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -111,27 +91,19 @@ Soyuz - Datatable
                         <table id="default-datatable2" class="display table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Karung 25 (Kg)</th>
-                                    <th>Karung 50 (Kg)</th>
+                                    <th>Karung (Kg)</th>
                                     <th>Masakan Plastik</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>500</td>
-                                    <td>650</td>
-                                    <td>200</td>
-                                </tr>
-                                <tr>
-                                    <td>700</td>
-                                    <td>200</td>
-                                    <td>450</td>
+                                    <td>{{$stock1c}}</td>
+                                    <td>{{$stock2c}}</td>
                                 </tr>                                
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Karung 25 (Kg)</th>
-                                    <th>Karung 50 (Kg)</th>
+                                    <th>Karung (Kg)</th>
                                     <th>Masakan Plastik</th>
                                 </tr>
                             </tfoot>

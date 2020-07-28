@@ -33,103 +33,6 @@
 
 </head>
 <body class="horizontal-layout">
-
-<!-- Start Infobar Setting Sidebar -->
-<div id="infobar-settings-sidebar" class="infobar-settings-sidebar">
-    <div class="infobar-settings-sidebar-head d-flex w-100 justify-content-between">
-        <h4>Settings</h4><a href="javascript:void(0)" id="infobar-settings-close" class="infobar-settings-close"><img
-                src="{{ asset('/assets/images/svg-icon/close.svg') }}" class="img-fluid menu-hamburger-close" alt="close"></a>
-    </div>
-    <div class="infobar-settings-sidebar-body">
-        <div class="custom-mode-setting">
-            <div class="row align-items-center pb-3">
-                <div class="col-8">
-                    <h6 class="mb-0">New Order Notification</h6>
-                </div>
-                <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-first" checked /></div>
-            </div>
-            <div class="row align-items-center pb-3">
-                <div class="col-8">
-                    <h6 class="mb-0">Low Stock Alerts</h6>
-                </div>
-                <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-second" checked /></div>
-            </div>
-            <div class="row align-items-center pb-3">
-                <div class="col-8">
-                    <h6 class="mb-0">Vacation Mode</h6>
-                </div>
-                <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-third" /></div>
-            </div>
-            <div class="row align-items-center pb-3">
-                <div class="col-8">
-                    <h6 class="mb-0">Order Tracking</h6>
-                </div>
-                <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-fourth" checked /></div>
-            </div>
-            <div class="row align-items-center pb-3">
-                <div class="col-8">
-                    <h6 class="mb-0">Newsletter Subscription</h6>
-                </div>
-                <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-fifth" checked /></div>
-            </div>
-            <div class="row align-items-center pb-3">
-                <div class="col-8">
-                    <h6 class="mb-0">Show Review</h6>
-                </div>
-                <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-sixth" /></div>
-            </div>
-            <div class="row align-items-center pb-3">
-                <div class="col-8">
-                    <h6 class="mb-0">Enable Wallet</h6>
-                </div>
-                <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-seventh" checked /></div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-8">
-                    <h6 class="mb-0">Sales Report</h6>
-                </div>
-                <div class="col-4 text-right"><input type="checkbox" class="js-switch-setting-eightth" checked /></div>
-            </div>
-        </div>
-        <div class="custom-layout-setting">
-            <div class="row align-items-center pb-3">
-                <div class="col-12">
-                    <h6 class="mb-3">Select Account</h6>
-                </div>
-                <div class="col-6">
-                    <div class="account-box active">
-                        <img src="{{ asset('/assets/images/users/boy.svg') }}" class="img-fluid" alt="user">
-                        <h5>John</h5>
-                        <p>CEO</p>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="account-box">
-                        <img src="{{ asset('/assets/images/users/women.svg') }}" class="img-fluid" alt="user">
-                        <h5>Kate</h5>
-                        <p>COO</p>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="account-box">
-                        <img src="{{ asset('/assets/images/users/men.svg') }}" class="img-fluid" alt="user">
-                        <h5>Mark</h5>
-                        <p>MD</p>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="account-box">
-                        <p class="dash-analytic-icon"><i class="feather icon-plus font-35"></i></p>
-                        <h5>Add</h5>
-                        <p>ACCOUNT</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="infobar-settings-sidebar-overlay"></div>
-<!-- End Infobar Setting Sidebar -->
 <!-- Start Containerbar -->
 <div id="containerbar" class="container-fluid">
     <!-- Start Leftbar -->
@@ -195,26 +98,12 @@
                                                 class="img-fluid" alt="logo"></a>
                                     </div>
                                 </li>
-                                <li class="list-inline-item">
-                                    <div class="searchbar">
-                                        <form>
-                                            <div class="input-group">
-                                                <div class="input-group-append">
-                                                    <button class="btn" type="submit" id="button-addonSearch"><img
-                                                            src="{{ asset('/assets/images/svg-icon/search.svg') }}" class="img-fluid"
-                                                            alt="search"></button>
-                                                </div>
-                                                <input type="search" class="form-control" placeholder="Search"
-                                                    aria-label="Search" aria-describedby="button-addonSearch">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                         <div class="infobar">
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item">
+
                                     <div class="languagebar">
                                         <div class="dropdown">
                                             <a class="dropdown-toggle" href="#" role="button" id="languagelink"
@@ -295,36 +184,36 @@
                                     </div>
                                 </li>
                                 <li class="list-inline-item">
+
                                     <div class="profilebar">
                                         <div class="dropdown">
                                             <a class="dropdown-toggle" href="#" role="button" id="profilelink"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
                                                     src="{{ asset('/assets/images/users/profile.svg') }}" class="img-fluid"
-                                                    alt="profile"><span class="live-icon">John Doe</span><span
-                                                    class="feather icon-chevron-down live-icon"></span></a>
+                                                    alt="profile">
+                                                    <span class="live-icon">{{ App\Models\Pegawai::where('id_jabatan', 3)->value('nama') }}</span>
+                                                    <span class="feather icon-chevron-down live-icon"></span>
+                                            </a>
                                             <div class="dropdown-menu dropdown-menu-right"
                                                 aria-labelledby="profilelink">
                                                 <div class="dropdown-item">
                                                     <div class="profilename">
-                                                        <h5>John Doe</h5>
+                                                        <h5>{{ App\Models\Pegawai::where('id_jabatan', 3)->value('nama') }}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="userbox">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="media dropdown-item">
-                                                            <a href="#" class="profile-icon"><img
-                                                                    src="{{ asset('/assets/images/svg-icon/crm.svg') }}"
-                                                                    class="img-fluid" alt="user">My Profile</a>
+                                                            <a href="{{ url('/change-password') }}" class="profile-icon">
+                                                                <img src="{{ asset('/assets/images/svg-icon/authentication.svg') }}" class="img-fluid" alt="logout">
+                                                                Change Password
+                                                            </a>
                                                         </li>
                                                         <li class="media dropdown-item">
-                                                            <a href="#" class="profile-icon"><img
-                                                                    src="{{ asset('/assets/images/svg-icon/email.svg') }}"
-                                                                    class="img-fluid" alt="email">Email</a>
-                                                        </li>
-                                                        <li class="media dropdown-item">
-                                                            <a href="#" class="profile-icon"><img
-                                                                    src="{{ asset('/assets/images/svg-icon/logout.svg') }}"
-                                                                    class="img-fluid" alt="logout">Logout</a>
+                                                            <a href="{{ url('/logout') }}" class="profile-icon">
+                                                                <img src="{{ asset('/assets/images/svg-icon/logout.svg') }}" class="img-fluid" alt="logout">
+                                                                Logout
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -560,6 +449,6 @@
     @yield('extra-script')
     
     {{-- Core Js --}}
-    {{-- <script src="{{ asset('/assets/js/core.js') }}"></script> --}}
+    <script src="{{ asset('/assets/js/core2.js') }}"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 @section('title') 
-Soyuz - Datatable
+Persiapan Masak Kanji
 @endsection 
 @extends('gudangbawang.layouts.main')
 @section('style')
@@ -8,6 +8,7 @@ Soyuz - Datatable
 <link href="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -22,7 +23,7 @@ Soyuz - Datatable
             <h2 class="page-title text-left pl-5">Order Masak</h2>
         </div>
         <div class="col-4">
-            <h2 class="page-title text-right pr-5">10 Juni 2020</h2>
+            <h2 class="page-title text-right pr-5">@php echo date("d F Y"); @endphp</h2>
         </div>
     </div>        
 </div>
@@ -39,42 +40,35 @@ Soyuz - Datatable
                         <table id="datatable" class="display table table-striped table-bordered text-center">
                             <thead>
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>HC</th>
-                                    <th>SP</th>
-                                    <th>GS</th>
+                                    <th>Tanggal</th>
+                                    <th>Jumlah</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>-</td>
-                                    <td>40</td>
-                                    <td>60</td>
-                                    <td><button type="button" class="status btn btn-danger">Belum</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Garrett Winters</td>
-                                    <td>50</td>
-                                    <td>-</td>
-                                    <td>30</td>
-                                    <td><button type="button" class="status btn btn-danger">Belum</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Ashton Cox</td>
-                                    <td>20</td>
-                                    <td>50</td>
-                                    <td>20</td>
-                                    <td><button type="button" class="status btn btn-danger">Belum</button></td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric Kelly</td>
-                                    <td>30</td>
-                                    <td>30</td>
-                                    <td>60</td>
-                                    <td><button type="button" class="status btn btn-danger">Belum</button></td>
-                                </tr>
+                                @foreach($ordermasak as $or)
+                                    <tr>
+                                        <td>{{date_format($or->tanggal_order_masak,'Y-m-d')}}</td>
+                                        <td>{{$or->jumlah}}</td>
+                                        <td>
+                                        <button type="button" class="btn 
+                                        @if($or->status) btn-success
+                                        @else btn-danger
+                                        @endif
+                                        status" 
+                                        id="status{{$or->id_order_masak}}">
+                                            @php
+                                                if($or->status){
+                                                    echo "Ready";
+                                                }
+                                                else{
+                                                    echo "Belum";
+                                                }
+                                            @endphp
+                                        </button>
+                                    </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -91,7 +85,9 @@ Soyuz - Datatable
 <!-- Datatable js -->
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script>
+    var ordermasak = <?php echo json_encode($ordermasak)?>;
     "use strict";
     $(document).ready(function() {
         /* -- Table - Datatable -- */
@@ -99,20 +95,50 @@ Soyuz - Datatable
             "searching" : false,
             "paging" : false,
             "info" : false,
-            "order": [[ 1, "asc" ]],
+            "order": [[ 0, "asc" ]],
             responsive: true
         });
-        $('.status').click(function(){
-            if( $(this).html() == "Belum" ){
-                $(this).removeClass('btn-danger');
-                $(this).addClass('btn-success');
-                $(this).html("Ready");
-            }
-            else{
-                $(this).addClass('btn-danger');
-                $(this).removeClass('btn-success');
-                $(this).html("Belum");
-            }
+        $(".status").click(function(e){
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-bawang/statusordermasak') }}",
+                method: 'POST',
+                data: {
+                    id: $(this).attr('id').substr(6),
+                },
+                success: function(result){
+                    let id = result.ordermasak.id_order_masak;
+                    if(result.ordermasak.status){
+                        $("#status"+id).removeClass('btn-danger');
+                        $("#status"+id).addClass('btn-success');
+                        $("#status"+id).html("Ready");
+                    }
+                    else{
+                        $("#status"+id).removeClass('btn-success');
+                        $("#status"+id).addClass('btn-danger');
+                        $("#status"+id).html("Belum");
+                    }
+                    swal({
+                        title: 'Berhasil!',
+                        text: 'Data Berhasil Disimpan',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        type: 'success',
+                    }).then(
+                    function () {
+                    },
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                        }
+                    }
+                    );
+                }
+            });
         });
     });
 </script>

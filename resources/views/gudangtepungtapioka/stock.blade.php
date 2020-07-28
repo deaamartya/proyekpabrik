@@ -21,10 +21,7 @@ Soyuz - Datatable
                 <div class="card-body">                        
                     <ul class="nav nav-tabs nav-justified mb-3" id="defaultTabJustified" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab-justified" data-toggle="tab" href="#home-justified" role="tab" aria-controls="home" aria-selected="true">25 Kg</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab-justified" data-toggle="tab" href="#profile-justified" role="tab" aria-controls="profile" aria-selected="false">50 Kg</a>
+                            <a class="nav-link active" id="home-tab-justified" data-toggle="tab" href="#home-justified" role="tab" aria-controls="home" aria-selected="true">Kg</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="contact-tab-justified" data-toggle="tab" href="#contact-justified" role="tab" aria-controls="contact" aria-selected="false">Masakan</a>
@@ -39,7 +36,7 @@ Soyuz - Datatable
                             </div>
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h4 class="page-title text-left">Karung 25 Kg</h4>
+                                    <h4 class="page-title text-left">Karung</h4>
                                 </div>
                             </div>
                             <div class="row">
@@ -85,138 +82,17 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach($stock1 as $stck)
                                 <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Terima dari supplier</td>
-                                    <td>500</td>
-                                    <td>-</td>
-                                    <td>650</td>
+                                  <td>{{ $stck-> TIMESTAMP }}</td>
+                                  <td>{{ $stck-> keterangan }}</td>
+                                  <td>{{ $stck-> masuk }}</td>
+                                  <td>{{ $stck-> keluar }}</td>
+                                  <td>{{ $stck-> stock }}</td>
                                 </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>450</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>60</td>
-                                    <td>350</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>20</td>
-                                    <td>450</td>
-                                </tr>                                
+                            @endforeach
                             </tbody>
                         </table>
-                        </div>
-                        </div>
-                        <div class="tab-pane fade" id="profile-justified" role="tabpanel" aria-labelledby="profile-tab-justified">
-                            <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab-justified">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <h3 class="page-title text-left">Stock Tepung Tapioka</h3>
-                                </div>
-                            </div>
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <h4 class="page-title text-left">Karung 50 Kg</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <div class="card m-b-30">
-                                        <div class="card-body">
-                                            <h5>Awal</h5>
-                                            <div class="form-group mb-0">
-                                                <input type="date" class="form-control" name="inputDate" id="inputDate">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End col -->
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <div class="card m-b-30">
-                                        <div class="card-body">
-                                            <h5>Akhir</h5>
-                                            <div class="form-group mb-0">
-                                                <input type="date" class="form-control" name="inputDate" id="inputDate">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End col -->
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-secondary btn-lg btn-block">Terapkan</button>
-                                </div>
-                                <!-- End col -->
-                            </div>
-                            <div class="table-responsive">
-                        <table id="default-datatable1" class="display table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Tanggal</th>
-                                    <th>Keterangan</th>
-                                    <th>Masuk (Kg)</th>
-                                    <th>Keluar (Kg)</th>
-                                    <th>Stock (Kg)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Terima dari supplier</td>
-                                    <td>500</td>
-                                    <td>-</td>
-                                    <td>650</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>450</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>60</td>
-                                    <td>350</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>20</td>
-                                    <td>450</td>
-                                </tr>                                
-                            </tbody>
-                        </table>
-                        </div>
                         </div>
                         </div>
                         <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab-justified">
@@ -272,37 +148,15 @@ Soyuz - Datatable
                                     <th>Stock (Plastik)</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody>                                
+                            @foreach($stock2 as $stck2)
                                 <tr>
-                                    <td>2011/04/25</td>
-                                    <td>500</td>
-                                    <td>-</td>
-                                    <td>650</td>
+                                  <td>{{ $stck2-> TIMESTAMP }}</td>
+                                  <td>{{ $stck2-> masuk }}</td>
+                                  <td>{{ $stck2-> keluar }}</td>
+                                  <td>{{ $stck2-> stock }}</td>
                                 </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>450</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>-</td>
-                                    <td>60</td>
-                                    <td>350</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>-</td>
-                                    <td>20</td>
-                                    <td>450</td>
-                                </tr>                                
+                            @endforeach                                
                             </tbody>
                         </table>
                         </div>

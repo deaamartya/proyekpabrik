@@ -40,50 +40,20 @@ Soyuz - Datatable
                                         <th>SP</th>
                                         <th>GS</th>
                                         <th>Status</th>
-                                        <th>Terambil</th>
+                                        {{-- <th>Terambil</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>2011/04/25</td>
-                                        <td>50</td>
-                                        <td>-</td>
-                                        <td>50</td>
-                                        <td class="text-danger">100%</td>
-                                        <td class="text-danger">100%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2011/04/25</td>
-                                        <td>-</td>
-                                        <td>40</td>
-                                        <td>60</td>
-                                        <td class="text-danger">80%</td>
-                                        <td class="text-danger">40%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2011/04/25</td>
-                                        <td>50</td>
-                                        <td>-</td>
-                                        <td>30</td>
-                                        <td class="text-danger">0%</td>
-                                        <td class="text-danger">0%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2011/04/25</td>
-                                        <td>20</td>
-                                        <td>30</td>
-                                        <td>60</td>
-                                        <td class="text-danger">0%</td>
-                                        <td class="text-danger">0%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2011/04/25</td>
-                                        <td>30</td>
-                                        <td>20</td>
-                                        <td>20</td>
-                                        <td class="text-danger">0%</td>
-                                        <td class="text-danger">0%</td>
-                                    </tr>                                
+                                    @foreach($ordermasak as $or)
+                                        <tr>
+                                            <td>{{date_format($or->tanggal_order_masak,'Y-m-d')}}</td>
+                                            <td>{{$or->HC}}</td>
+                                            <td>{{$or->SP}}</td>
+                                            <td>{{$or->GS}}</td>
+                                            <td>{{$or->status}}</td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach 
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -92,7 +62,7 @@ Soyuz - Datatable
                                         <th>SP</th>
                                         <th>GS</th>
                                         <th>Status</th>
-                                        <th>Terambil</th>
+                                        {{-- <th>Terambil</th> --}}
                                     </tr>
                                 </tfoot>
                             </table>
@@ -107,15 +77,17 @@ Soyuz - Datatable
             <h2 class="page-title text-left pl-5">Kerja harian Adonan Gula</h2> 
             <div class="row">
                 <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1" style="transform: translate(140px, 0px);" >Tambah bahan</button><br>
+                <button  type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1" style="transform: translate(140px, 0px);" >Tambah bahan</button><br>
                 <h5 style="text-align:center">Terima (Kg)</h5>
-                <input  class="form-control" type="text" name="terimakarung" id="terimakarung">
+                {{-- <input  class="form-control" type="text" name="terimakarung" id="terimakarung"> --}}
+                <p class="form-control" style="color: black">{{$jumlah3}}</p>
                 </div>
 
                 <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2" style="transform: translate(150px, 0px);" >Sisa bahan</button><br>
                 <h5 style="text-align:center">Sisa (Kg)</h5>    
-                <input class="form-control" type="text" name="terimakarung" id="terimakarung">
+                {{-- <input class="form-control" type="text" name="terimakarung" id="terimakarung"> --}}
+                <p class="form-control" style="color: black">{{$jumlah4}}</p>
                 </div>
 
                 {{-- <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
@@ -130,20 +102,25 @@ Soyuz - Datatable
                 <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
                    
                     <h5 style="color:black ; text-align:center"  > HC </h5> 
-                    <input class="form-control" type="text" name="terimakarung" id="terimakarung">
+                    <p class="form-control" style="color: black">{{$hc}}</p>
+                    {{-- <input class="form-control" type="text" name="terimakarung" id="terimakarung"> --}}
                 </div>
                 <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
                     
                     <h5 style="color:black ; text-align:center"  > SP </h5> 
-                    <input class="form-control" type="text" name="terimakarung" id="terimakarung">
+                    <p class="form-control" style="color: black">{{$sp}} </p>
+                    {{-- <input class="form-control" type="text" name="terimakarung" id="terimakarung"> --}}
                 </div>
                 <div style="width:30%;border-style: solid; margin:0px 0px 5px 20px">
                    
-                    <h5 style="color:black ; text-align:center"  > GS </h5> 
-                    <input class="form-control" type="text" name="terimakarung" id="terimakarung">
+                    <h5 style="color:black ; text-align:center"  > GS </h5>
+                    <p class="form-control" style="color: black">{{$gs}} </p> 
+                    {{-- <input class="form-control" type="text" name="terimakarung" id="terimakarung"> --}}
                 </div>
             </div>
-        
+
+        <form action="/gudang-bumbu/input_data" method="post">
+            @csrf
             <div>
                 <h5 style="margin:5px 0px 5px 50px ">Hasil</h5>
                 <div class="col-lg-8" style="margin:0px 0px 5px 20px" >
@@ -152,7 +129,7 @@ Soyuz - Datatable
                             <h5 class="card-title">HC</h5>
                         </div>
                         <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn" name="touchspin-vertical-btn" value="0">
+                            <input class="form-control increment" type="text"  id="touchspin-vertical-btn0" name="jumlahhc" >
                         </div>
                     </div>
                 </div>  
@@ -163,7 +140,7 @@ Soyuz - Datatable
                             <h5 class="card-title">SP</h5>
                         </div>
                         <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn1" name="touchspin-vertical-btn" value="0">
+                            <input class="form-control increment" type="text"  id="touchspin-vertical-btn1" name="jumlahsp" >
                         </div>
                     </div>
                 </div>  
@@ -174,12 +151,13 @@ Soyuz - Datatable
                             <h5 class="card-title">GS</h5>
                         </div>
                         <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn2" name="touchspin-vertical-btn" value="0">
+                            <input class="form-control increment" type="text"  id="touchspin-vertical-btn2" name="jumlahgs" >
                         </div>
                     </div>
                 </div>              
             </div>
-        
+            <button type="submit" style="color: black" class="form-control"><b>Submit</b></button>
+        </form>
 
         </div>
         {{-- end kerja harian adonan gula --}}
@@ -239,7 +217,7 @@ Soyuz - Datatable
                             <h5 class="card-title">HC</h5>
                         </div>
                         <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn3" name="touchspin-vertical-btn" value="0">
+                            <input class="form-control increment" type="text"  id="touchspin-vertical-btn3" name="touchspin-vertical-btn" value="0">
                         </div>
                     </div>
                 </div>  
@@ -250,7 +228,7 @@ Soyuz - Datatable
                             <h5 class="card-title">SP</h5>
                         </div>
                         <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn4" name="touchspin-vertical-btn" value="0">
+                            <input class="form-control increment" type="text"  id="touchspin-vertical-btn4" name="touchspin-vertical-btn" value="0">
                         </div>
                     </div>
                 </div>  
@@ -261,7 +239,7 @@ Soyuz - Datatable
                             <h5 class="card-title">GS</h5>
                         </div>
                         <div class="card-body">
-                            <input class="form-control" type="text"  id="touchspin-vertical-btn5" name="touchspin-vertical-btn" value="0">
+                            <input class="form-control increment" type="text"  id="touchspin-vertical-btn5" name="touchspin-vertical-btn" value="0">
                         </div>
                     </div>
                 </div>              
@@ -347,7 +325,7 @@ Soyuz - Datatable
                                 <h5 class="card-title">Jumlah Masakan HC</h5>
                             </div>
                             <div class="card-body">
-                                <input class="form-control" type="text"  id="touchspin-vertical-btn6" name="touchspin-vertical-btn" value="0">
+                                <input class="form-control increment" type="text"  id="touchspin-vertical-btn6" name="touchspin-vertical-btn" value="0">
                             </div>
                         </div>
                     </div>  
@@ -358,7 +336,7 @@ Soyuz - Datatable
                                 <h5 class="card-title">Jumlah Masakan SP</h5>
                             </div>
                             <div class="card-body">
-                                <input class="form-control" type="text"  id="touchspin-vertical-btn7" name="touchspin-vertical-btn" value="0">
+                                <input class="form-control increment" type="text"  id="touchspin-vertical-btn7" name="touchspin-vertical-btn" value="0">
                             </div>
                         </div>
                     </div>  
@@ -369,7 +347,7 @@ Soyuz - Datatable
                                 <h5 class="card-title">Jumlah Masakan GS</h5>
                             </div>
                             <div class="card-body">
-                                <input class="form-control" type="text"  id="touchspin-vertical-btn8" name="touchspin-vertical-btn" value="0">
+                                <input class="form-control increment" type="text"  id="touchspin-vertical-btn8" name="touchspin-vertical-btn" value="0">
                             </div>
                         </div>
                     </div> 
@@ -406,7 +384,7 @@ Soyuz - Datatable
                                 <h5 class="card-title">Jumlah Masakan</h5>
                             </div>
                             <div class="card-body">
-                                <input class="form-control" type="text"  id="touchspin-vertical-btn8" name="touchspin-vertical-btn" value="0">
+                                <input class="form-control" type="text"   id="touchspin-vertical-btn8" name="touchspin-vertical-btn" value="0">
                             </div>
                         </div>
                     </div> 
@@ -431,30 +409,34 @@ Soyuz - Datatable
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
 
-                        <form action="/action_page.php">
+                        <form action="/gudang-bumbu/kerjaharianadonangula/inputmasuk">
                         <div class="modal-body row">   
                             
                             <div>
                                 <h5 style="width: 100px;margin: 0px 5px"> Stock</h5>
-                                <input  class="form-control" type="number" name="stock" style="width: 100px;margin: 0px 5px">
+                                {{-- <input  class="form-control" type="number" name="stock" style="width: 100px;margin: 0px 5px"> --}}
+                                
+                            <p class="form-control">{{$stock}}</p>
+                                
+                                
                             </div>
 
                             <div>
-                                <h5 style="width: 100px;margin: 0px 5px"> Karung</h5>
-                                <input class="form-control"  type="number" name="karung" style="width: 100px ;margin: 0px 5px">
+                                <h5 style="width: 100px;margin: 0px 5px"> kg</h5>
+                                <input class="form-control"  type="number" name="kg" style="width: 100px ;margin: 0px 5px">
                                 </div>
 
-                            <div>
+                            {{-- <div>
                                 <h5 style="width: 100px;margin: 0px 5px"> Karung</h5>
                                 <input class="form-control" type="number" name="jumlah" style="width: 100px ;margin: 0px 5px ">
-                            </div>
+                            </div> --}}
                         </div>
-                        
-                        </form>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-default"> Simpan</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
+                        </form>
+                        
                     </div>
                             
                     </div>
@@ -482,13 +464,14 @@ Soyuz - Datatable
                                 <h5 style="width: 100px;margin: 0px 5px"> Satuan</h5>
                                 <select class="form-control" id="satuan">
                                     <option>kg</option>
-                                    <option>karung</option>
+                                    {{-- <option>karung</option> --}}
                                   </select>
                             </div>
 
                             <div>
-                                <h5 style="width: 100px;margin: 0px 5px"> Stock tersedia</h5>
-                                <input class="form-control" type="number" name="karung" style="width: 100px ;margin: 0px 5px">
+                                <h5 style="width: 200px;margin: 0px 5px"> Stock tersedia</h5>
+                                {{-- <input class="form-control" type="number" name="karung" style="width: 100px ;margin: 0px 5px"> --}}
+                                <p class="form-control" style="color: black">{{$stock}}</p>
                             </div>
 
                             
@@ -701,6 +684,20 @@ Soyuz - Datatable
         });
     });
 
+    $(".increment").click(function(){
+            $.ajax({
+                url: "{{ url('/gudang-bawang/tambahstock') }}",
+                method: 'POST',
+                success: function(result){
+                    var x =$(this).attr("id");
+                    var val = Number($("#"+x).val());
+                    val++;
+                    $("#"+x).val(val);
+                   
+                }
+            });
+        });
+
     // "use strict";
     // $(document).ready(function() {
     //     /* -- Table - Datatable -- */
@@ -714,6 +711,9 @@ Soyuz - Datatable
 </script>
 <script>
    $(document).ready(function() {
+    $("#touchspin-vertical-btn0").TouchSpin({
+      verticalbuttons: true
+    });
    $("#touchspin-vertical-btn1").TouchSpin({
       verticalbuttons: true
     });
@@ -740,4 +740,6 @@ Soyuz - Datatable
     });
 });
     </script>
+
+
 @endsection 

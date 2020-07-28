@@ -43,20 +43,23 @@ Soyuz - Datatable
                 </div>
                 <div class="card-body">
                     {{-- <h6 class="card-subtitle">With DataTables you can alter the ordering characteristics of the table at initialisation time.</h6> --}}
-                    <button type="button" class="status btn btn-warning" style="width: 100% ; height:50px"> <a href="/gudang-bawang/penerimaan-bawang" style="color:white">Penerimaan </a></button>
-                    
+                    <button type="button" class="status btn btn-warning" style="width: 100% ; height:50px"> <a href="/gudang-bawang/penerimaanstockbawangkulit" style="color:white">Penerimaan </a></button>
+                    <form action="/gudang-bawang/stockbawangkulit" method="post">
+                        @csrf
                     <div class="row"  style="margin: 10px 0px">
-                        <div class="column" style="width : 35%">
+                        
+                            <div class="column" style="width : 35%">
                           <h4> Awal</h4>
-                          <input type="text" id="awal" name="awal" placeholder="Date Picker">
-                        </div>
-                        <div class="column" style="width : 35%">
+                          <input type="datetime-local" class="form-control" name="awalDate" id="inputDate" placeholder="date picker">
+                            </div>
+                         <div class="column" style="width : 35%">
                           <h4>Akhir</h4>
-                          <input type="text" id="awal" name="awal" placeholder="Date Picker" style="">
+                          <input type="datetime-local" class="form-control" name="akhirDate" id="inputDate" placeholder="date picker">
                         </div>
-                        <button type="button" class="status btn btn-primary" style="width: 30% ; height:50px;margin: 5px 0px"> Terapkan </button>
-                      </div>
-                    
+                        <button type="submit" class="status btn btn-primary" style="width: 30% ; height:50px;margin: 5px 0px"> Terapkan </button>
+                        
+                    </div>
+                    </form>
                     
                     
                     <div class="table-responsive">
@@ -72,15 +75,16 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($stock as $stk ) 
                                 <tr>
-                                    <td>09/06/20</td>
-                                    <td>Merk 1 / 10 Mei 20</td>
-                                    <td> - </td>
-                                    <td>50</td>
-                                    <td> 0 </td>
+                                    <td>{{$stk->TIMESTAMP}}</td>
+                                    <td>{{ $stk->keterangan}}</td>
+                                    <td>{{ $stk->masuk}}</td>
+                                    <td>{{ $stk->keluar}}</td>
+                                    <td>{{ $stk->stock}}</td>
                                     
                                 </tr>
-                              
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 {{-- <tr>

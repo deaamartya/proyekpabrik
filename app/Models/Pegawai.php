@@ -6,8 +6,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Pegawai
@@ -29,8 +29,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Pegawai extends Model
+class Pegawai extends Authenticatable
 {
+	use Notifiable;
 	protected $table = 'pegawai';
 	protected $primaryKey = 'id_pegawai';
 	public $incrementing = false;

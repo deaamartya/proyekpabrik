@@ -1,0 +1,15 @@
+.welcome-picture {
+    margin-top: -100px;
+    margin-bottom: 0 !important;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .welcome-picture {
+        margin-top: -70px;
+    }
+
+    .welcome-picture img {
+        width: 130%;
+    }
+}

@@ -45,13 +45,43 @@ Edit Surat Penerimaan Barang
         <!-- Start col -->
         <div class="col-lg-12">
             <div class="card m-b-30">
+                            <?php
+                                    function tgl_indo($tanggal){
+                                        $bulan = array (
+                                            1 =>   'Januari',
+                                            'Februari',
+                                            'Maret',
+                                            'April',
+                                            'Mei',
+                                            'Juni',
+                                            'Juli',
+                                            'Agustus',
+                                            'September',
+                                            'Oktober',
+                                            'November',
+                                            'Desember'
+                                        );
+                                        $pecahkan = explode('-', $tanggal);
+                                        
+                                        // variabel pecahkan 0 = tanggal
+                                        // variabel pecahkan 1 = bulan
+                                        // variabel pecahkan 2 = tahun
+                                     
+                                        return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+                                    }
+                                     
+                                    
+                            ?>
     
                             <div class="card-header">
                                    <div class="row">
                                         <h5 class="card-title ml-3">Penerimaan Pemindahan Bahan</h5>
-                                        <h5 class="card-title ml-auto mr-3" >{{ date('d M Y' , strtotime($penerimaan->timestamp)) }}</h5>
+                                        <h5 class="card-title ml-auto mr-3" >
+                                            {{ tgl_indo(date('Y-m-d' , strtotime($penerimaan->timestamp))) }}
+                                        </h5>
                                     </div>
                             </div>
+    
 
                             <input type="hidden" id="kode_penerimaan" value="{{ $penerimaan->id_penerimaan }}">
 
@@ -62,42 +92,53 @@ Edit Surat Penerimaan Barang
                                     <!-- jenis penerimaan : dari pemindahanbahan -->
                                     <input type="hidden" id="jenis_penerimaan" name="id_jenis_penerimaan" value="{{ $penerimaan->id_jenis_penerimaan }}">
 
+                                    <input type="hidden" id="kode_pemindahanbahan" name="id_pemindahan_bahan" value="{{ $penerimaan->id_transaksi }}">
+
                            
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
-                                                <i class="fa fa-tags" aria-hidden="true"></i>
-                                                <label for="inputSuratJalan">No. Surat Jalan</label>
-                                                <input type="text" class="form-control @error('id_transaksi') is-invalid @enderror" id="inputSuratJalan" name="id_transaksi" placeholder="Masukkan Nomor Surat Jalan" value="{{ $penerimaan->id_transaksi }}">
-                                                 @error('id_transaksi') 
-                                                    <div class="invalid-feedback form-error font-error">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                         <div class="form-group col-md-6">
-                                            <div class="form-group col-md-8">
                                                 <i class="fa fa-archive" aria-hidden="true"></i>
-                                                <label for="inputGudangSimpan">Gudang Simpan</label>
-                                                <select id="inputGudangSimpan" name="id_gudang" class="form-control  @error('id_gudang') is-invalid @enderror" value="{{ $penerimaan->id_gudang }}">  
+                                                <label for="gudang_asal">Gudang Asal</label>
+                                                <select id="gudang_asal" name="id_gudang_asal" class="form-control @error('id_gudang_asal') is-invalid @enderror" value="{{ $penerimaan->id_gudang_asal }}">
                                                     <option disabled selected readonly>Pilih Salah Satu...</option>
                                                     @foreach($gudang as $g)
                                                     <option value="{{ $g->id_gudang }}"
-                                                        @if($g->id_gudang == $penerimaan->id_gudang)
+                                                          @if($g->id_gudang == $penerimaan->id_gudang_asal)
                                                             selected
                                                         @endif >{{ $g->nama }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('id_gudang') 
-                                                    <div class="invalid-feedback form-error font-error">
-                                                        {{ $message }}
+                                                @error('id_gudang_asal') 
+                                                    <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
                                                     </div>
-                                                @enderror  
-                                                
+                                                @enderror
                                             </div>
                                         </div>
+
+                                        <div class="form-group col-md-6">
+                                            <div class="form-group col-md-8">
+                                                <i class="fa fa-archive" aria-hidden="true"></i>
+                                                <label for="gudang_tujuan">Gudang Tujuan</label>
+                                                <select id="gudang_tujuan" name="id_gudang_tujuan" class="form-control @error('id_gudang_tujuan') is-invalid @enderror" value="{{ $penerimaan->id_gudang_tujuan }}">
+                                                    <option disabled selected readonly>Pilih Salah Satu...</option>
+                                                    @foreach($gudang_tujuan as $gt)
+                                                    <option value="{{ $gt->id_gudang }}"
+                                                          @if($gt->id_gudang == $penerimaan->id_gudang_tujuan)
+                                                            selected
+                                                        @endif >{{ $gt->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('id_gudang_tujuan') 
+                                                    <div class="invalid-feedback form-error font-error"> 
+                                                                {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                     </div>
 
 
@@ -137,11 +178,11 @@ Edit Surat Penerimaan Barang
                                         <div class="form-group col-md-6">
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
-                                                <label for="inputBSJ">Berat Surat Jalan (Kg)</label>
-                                                <input type="number" class="form-control @error('berat_surat_jalan') is-invalid @enderror" id="berat_suratjalan" name="berat_surat_jalan" placeholder="Masukkan Berat Surat Jalan" value="{{ $detail_transaksi->berat_surat_jalan }}">
-                                                 @error('berat_surat_jalan') 
+                                                <label for="berat_pindah">Berat Pindah(Kg)</label>
+                                                <input type="number" class="form-control  @error('berat_pindah') is-invalid @enderror" id="berat_pindah" name="berat_pindah" placeholder="Masukkan Berat Pindah" value="{{ $detail_transaksi->berat_pindah}}">
+                                                 @error('berat_pindah') 
                                                             <div class="invalid-feedback form-error font-error"> 
-                                                                {{ $message }}
+                                                                        {{ $message }}
                                                             </div>
                                                 @enderror
                                             </div>
@@ -292,14 +333,25 @@ $(document).ready(function(){
 
   function hitungSusut(){
 
-    var berat_suratjalan = document.getElementById("berat_suratjalan").value;
+    var berat_pindah = document.getElementById("berat_pindah").value;
     var berat_netto = document.getElementById("berat_netto").value;
+
 
     if (berat_suratjalan != "" && berat_netto != ""  ) {
 
         var s = berat_suratjalan - berat_netto;
+
+    if (berat_pindah == "" || berat_netto == "") {
+
+        document.getElementById('penyusutan').value = 0;
+        document.getElementById('percent_penyusutan').value = 0;
+
+    }
+    else {
+        var s = berat_pindah - berat_netto;
+
         var susut = s.toFixed(2);
-        var ps = (susut / berat_suratjalan)* 100;
+        var ps = (susut / berat_pindah)* 100;
         var percent_susut = ps.toFixed(2);
 
         document.getElementById('penyusutan').value = susut;
@@ -307,7 +359,11 @@ $(document).ready(function(){
 
     }
 
+
     $(document).on('input', '#berat_suratjalan', function (e) {
+
+    $(document).on('keyup', '#berat_pindah', function (e) {
+
         hitungSusut();
     });
 

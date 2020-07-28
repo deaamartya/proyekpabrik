@@ -40,7 +40,13 @@ Home Gudang Bawang
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
+
                     <h5 class="card-title">Order Kupas Bawang</h5>
+
+
+                        <h5 class="card-title ml-3">Order Kupas Bawang</h5>
+                      
+
                     
                 </div>
                 <div class="card-body">
@@ -57,6 +63,7 @@ Home Gudang Bawang
                           
                             </thead>
                             <tbody>
+
                                 <tr>
                                     <td>09/06/2020</td>
                                     <td>100</td>
@@ -93,6 +100,34 @@ Home Gudang Bawang
                                     </td>
                                 </tr>
 
+
+                                    @foreach($orderkupasbawang as $okb)
+                                    <tr>
+                                        <td>{{date_format($okb->tanggal_order_masak,'d/m/Y')}}</td>
+                                        <td>{{$okb->jumlah}}</td>   
+                                        <td>{{$stock1c}}</td>
+                                        <td>
+                                            @if($okb->status == 0)
+                                                <div class="badge-list">
+                                                    <span class="badge badge-danger badge-font">Belum</span>
+                                                </div>
+
+                                            @elseif($okb->status == 1)
+                                                 <div class="badge-list">
+                                                    <span class="badge badge-success badge-font">Ready</span>
+                                                </div>
+                                            @else
+                                                <div class="badge-list">
+                                                    <span class="badge badge-secondary badge-font">Selesai</span>
+                                                </div>
+                                            @endif
+
+
+                                        </td>
+                                    </tr>
+                                    @endforeach  
+
+
                             </tbody>
                         </table>
                     </div>
@@ -109,7 +144,12 @@ Home Gudang Bawang
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
+
                     <h5 class="card-title" >Order Masak</h5>
+      
+                        <h5 class="card-title ml-3">Order Masak</h5>
+                      
+
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

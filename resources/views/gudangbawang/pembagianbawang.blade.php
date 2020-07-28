@@ -1,5 +1,5 @@
 @section('title') 
-Soyuz - Datatable
+Pembagian Bawang
 @endsection 
 @extends('gudangbawang.layouts.main')
 @section('style')
@@ -10,9 +10,13 @@ Soyuz - Datatable
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .hide{
-        display: none;
+        display: none !important;
+    }
+    .form-control[readonly] {
+        background-color: white !important; 
     }
 </style>
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -22,10 +26,11 @@ Soyuz - Datatable
             <h4 class="page-title text-left pl-5">Pembagian Bawang</h4>
         </div>
         <div class="col-4">
-            <h4 class="page-title text-right pr-5">10 Juni 2020</h4>           
+            <h4 class="page-title text-right pr-5">@php echo date("d F Y"); @endphp</h4>           
         </div>
     </div>
     <div class="row align-items-between">
+        @if(!$cek)
         <div class="col">
             <div class="widgetbar">
                 <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#addModal">Tambah</button>
@@ -38,9 +43,10 @@ Soyuz - Datatable
         </div>
         <div class="col">
             <div class="widgetbar">
-                <button class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#saveModal">Simpan Data</button>
+                <button class="btn btn-success btn-lg btn-block" id="btn-simpan">Simpan Data</button>
             </div>                        
-        </div>  
+        </div>
+        @endif
     </div>
     <div class="row align-items-center px-5 py-3">
         <div class="col">
@@ -49,21 +55,21 @@ Soyuz - Datatable
                     <div class="form-row align-items-center">
                         <div class="form-group col-sm-6">
                             <label for="orderbesok" class="text-left">Order Besok</label>
-                            <input type="text" class="form-control" name="orderbesok" id="orderbesok" placeholder="100">
+                            <input type="text" class="form-control" readonly name="orderbesok" id="orderbesok" placeholder="100" value="{{$orderbesok->jumlah}}">
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="stockbebas">Stock Bebas</label>
-                            <input type="text" class="form-control" name="stockbebas" id="stockbebas" placeholder="10">
+                            <input type="text" class="form-control" name="stockbebas" id="stockbebas" placeholder="10" value="{{$stockbebas}}" readonly>
                         </div>
                     </div>
                     <div class="form-row align-items-center">
                         <div class="form-group col-sm-4">
                             <label for="ratasusut">Rata2 Susut</label>
-                            <input type="text" class="form-control" name="ratasusut" id="ratasusut" placeholder="5.3%">
+                            <input type="text" class="form-control disable" name="ratasusut" id="ratasusut" value="{{$ratasusut}}%" readonly>
                         </div>
                         <div class="form-group col-sm-4">
                             <label for="targetkupas">Target Kupas (Kg)</label>
-                            <input type="text" class="form-control" name="targetkupas" id="targetkupas" placeholder="74">
+                            <input type="text" class="form-control disable" name="targetkupas" id="targetkupas" value="{{$targetkupas->jumlah}}" readonly>
                         </div>
                         <div class="form-group col-sm-4">
                             <label for="proseshariini">Proses Hari Ini</label>
@@ -98,7 +104,7 @@ Soyuz - Datatable
                                     @if($t->status)
                                     <tr id="row{{$t->id_pegawai}}">
                                         <td data-toggle="modal" data-target="#ubahTerimaModal{{$t->id_pegawai}}">{{$t->nama}}</td>
-                                        <td class="terimakg" id="terima{{$t->id_pegawai}}">12</td>
+                                        <td class="terimakg" id="terima{{$t->id_pegawai}}">0</td>
                                         <td>
                                         <button type="button" class="delbtn btn btn-round btn-danger" id="del{{$t->id_pegawai}}"><i class="feather icon-trash-2"></i></button></td>
                                     </tr>
@@ -189,7 +195,9 @@ Soyuz - Datatable
 <!-- Datatable js -->
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script>
+    $(document).ready(function() {
     "use strict";
     var table = $('#datatable').DataTable({
         "searching" : false,
@@ -203,6 +211,8 @@ Soyuz - Datatable
             { "targets": 1 , "width": "45%" }
         ]
     });
+    
+    var deleted = [];
 
     //ubah var tenaga kupas jadi json
     var pegawai = <?php echo json_encode($tenagakupas); ?>;
@@ -220,6 +230,9 @@ Soyuz - Datatable
     function hitungProsesHariIni(){
         var total = 0;
         $(".terimakg").each(function(){
+            total+= Number($(this).html());
+        });
+        $(".terimacustom").each(function(){
             total+= Number($(this).html());
         });
         updateProsesHariIni(total);
@@ -244,44 +257,110 @@ Soyuz - Datatable
         });
     }
     //function inisiasi tombol delete
-    function delbtn(){
-        $(".delbtn").each(function(){
-            $(this).click(function(){
-                //remove dari table
-                table
-                    .row($(this).parents('tr'))
-                    .remove()
-                    .draw();
-                    //menghitung ulang terima(kg) per orang
-                hitungTotalProsesHariIni();
+    $(document).on("click",".delbtn", function () {
+        //remove dari table
+        table
+            .row($(this).parents('tr'))
+            .remove()
+            .draw();
+        console.log("remove dari table");
+            //menghitung ulang terima(kg) per orang
+        hitungProsesHariIni();
 
-                let id = $(this).attr('id').substr(3);
-                let nama = pegawai[cariPegawai(id)]["nama"];
+        let id = $(this).attr('id').substr(3);
+        let nama = pegawai[cariPegawai(id)]["nama"];
 
-                //cek pegawai ada atau enggak di modal tambah penerimaan
-                if($("#check"+id).length){
-                    //show dari pilihan
-                    $("#check"+id).show();
-                }
-                //kalau tidak ada, bikin pilihan baru
-                else{
-                    let addrow = '<div class="row m-3" id="check'+id+'">\
-                        <div class="col text-center">\
-                            <input type="checkbox" class="custom-control-input" id="penerima'+id+'" value="'+nama+'">\
-                            <label class="custom-control-label" for="penerima'+id+'">'+nama+'</label>\
-                        </div>\
-                    </div>';
-                    $("#pegawai").append(addrow);
-                }
-            });
-        });
-    }
-    delbtn(); //inisiasi delbtn
+        deleted[deleted.length] = id;
+
+        //cek pegawai ada atau enggak di modal tambah penerimaan
+        if($("#check"+id).length){
+            //show dari pilihan
+            $("#check"+id).show();
+        }
+        //kalau tidak ada, bikin pilihan baru
+        else{
+            let addrow = '<div class="row m-3" id="check'+id+'">\
+                <div class="col text-center">\
+                    <input type="checkbox" class="custom-control-input" id="penerima'+id+'" value="'+nama+'">\
+                    <label class="custom-control-label" for="penerima'+id+'">'+nama+'</label>\
+                </div>\
+            </div>';
+            $("#pegawai").append(addrow);
+        }
+    });
+    // delbtn(); //inisiasi delbtn
     var column = table.column(2);
     column.visible(false);
+        //membagi target kupas ke tiap tenaga rata.
 
-    $(document).ready(function() {
+        var jumlah = $(".terimakg").length;
+
+        var target = $("#targetkupas").val();
+
+        var terima = Number(target/jumlah);
+
+        $(".terimakg").each(function(){
+            $(this).html(terima);
+        });
+
         hitungProsesHariIni();
+
+        //event button simpan di klik
+
+        $("#btn-simpan").click(function(){
+
+            let jsontenaga = [];
+            var data;
+
+            $("#datatable tbody tr").each(function(index){
+                let id_pegawai = $(this).attr('id').substr(3);
+                let jumlah = $("#terima"+id_pegawai).html();
+                data = {
+                    id_pegawai: id_pegawai,
+                    jumlah: jumlah
+                }
+                jsontenaga.push(data);
+            });
+
+            jsontenaga = JSON.stringify(jsontenaga);
+            let deletedjson = JSON.stringify(deleted);
+
+            let total = $("#proseshariini").val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-bawang/simpanberi') }}",
+                method: 'POST',
+                data: {
+                    tenagakupas : jsontenaga,
+                    jumlah : jumlah,
+                    totalproses : total,
+                    deleted : deletedjson,
+                },
+                success: function(result){
+                    swal({
+                        title: 'Berhasil!',
+                        text: 'Data Berhasil Disimpan',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        type: 'success',
+                    }).then(
+                    function () {
+                    },
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                        }
+                    }
+                    );
+                    location.reload();
+                }
+            });
+
+        });
 
         //ubah total terima di atas tabel
         $("#btnubahJumlah").click(function(e){
@@ -346,8 +425,19 @@ Soyuz - Datatable
 
                 //uncheck
                 $(this).prop('checked',false);
+
+                
+                for(let i=0;i<deleted.length;i++){
+                    if(deleted[i] != id){
+                        i++;
+                    }
+                    else{
+                        deleted.splice(i, 1);
+                        break;
+                    }
+                }
+
             });
-            delbtn(); //refresh delbtn
             hitungTotalProsesHariIni(); //dibagi rata ulang terima(kg)
         });
 

@@ -85,7 +85,7 @@ Stock Gudang Kacang
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_ob" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -95,6 +95,7 @@ Stock Gudang Kacang
                                 <div class="table-responsive">
                                     <table id="datatable1" class="display table table-bordered table-striped table-manpro-hover datatable">
                                         <thead>
+                                           
                                             <tr>
                                                 <th>Tanggal</th>
                                                 <th>Tanggal Penerimaan Kacang</th>
@@ -103,46 +104,20 @@ Stock Gudang Kacang
                                                 <th>Keluar</th>
                                                 <th>Stock</th>
                                             </tr>
+                                            
                                       
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Dari Coolstorage I</td>
-                                                <td>50</td>
-                                                <td>-</td>
-                                                <td>50</td>
-                                            </tr>
-                                           
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>12 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>30</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
-
+                                             @foreach($kacang_ob as $ob)
+                                                 <td>{{ $ob->tanggal }}</td>
+                                                 <td>{{ $ob->timestamp }}</td>
+                                                 <td>{{ $ob->keterangan}}</td>
+                                                 <td>{{ $ob->masuk}}</td>
+                                                 <td>{{ $ob->keluar}}</td>
+                                                 <td>{{ $ob->stock}}</td>
+                                             @endforeach
                                         </tbody>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -180,7 +155,7 @@ Stock Gudang Kacang
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_7ml" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -199,34 +174,15 @@ Stock Gudang Kacang
                                             </tr>
                                       
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>12 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>07/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>07/06/20</td>
-                                                <td>11 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>40</td>
-                                            </tr>
-
+                                         <tbody>
+                                             @foreach($kacang_7ml as $kt)
+                                                 <td>{{ $kt->tanggal }}</td>
+                                                 <td>{{ $kt->timestamp }}</td>
+                                                 <td>{{ $kt->keterangan}}</td>
+                                                 <td>{{ $kt->masuk}}</td>
+                                                 <td>{{ $kt->keluar}}</td>
+                                                 <td>{{ $kt->stock}}</td>
+                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -264,7 +220,7 @@ Stock Gudang Kacang
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button id="terapkan_8ml" class="btn btn-primary">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -283,26 +239,17 @@ Stock Gudang Kacang
                                             </tr>
                                       
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>07/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>30</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>09/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
-
+                                          <tbody>
+                                             @foreach($kacang_8ml as $kd)
+                                                 <td>{{ $kd->tanggal }}</td>
+                                                 <td>{{ $kd->timestamp }}</td>
+                                                 <td>{{ $kd->keterangan}}</td>
+                                                 <td>{{ $kd->masuk}}</td>
+                                                 <td>{{ $kd->keluar}}</td>
+                                                 <td>{{ $kd->stock}}</td>
+                                             @endforeach
                                         </tbody>
+                                      
                                     </table>
                                 </div>
                             </div>
@@ -330,26 +277,200 @@ Stock Gudang Kacang
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
 <script>
+
+
     $(document).ready(function() {
-        $('#datatable1').DataTable( {
+        
+        var datatable1 =  $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
 
-        $('#datatable2').DataTable( {
+        var datatable2 = $('#datatable2').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
 
-         $('#datatable3').DataTable( {
+        var datatable3 = $('#datatable3').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
+    
+
+    $(document).on('click', '#terapkan_ob', function (e) {
+    
+    var awal_ob = document.getElementById('date1').value;
+    var tgl_awal_ob = awal_ob.split("/").reverse().join("-");
+
+    var akhir_ob = document.getElementById('date2').value;
+    var tgl_akhir_ob = akhir_ob.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gk/stock_kacang_ob",
+            data:{
+              "tgl_awal_ob":tgl_awal_ob,
+              "tgl_akhir_ob":tgl_akhir_ob,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results.stock_ob.length; i++){
+                    
+                    datatable1.row.add([
+
+                    results.stock_ob[i].tanggal,
+                    results.stock_ob[i].timestamp,
+                    results.stock_ob[i].keterangan,
+                    results.stock_ob[i].masuk,
+                    results.stock_ob[i].keluar,
+                    results.stock_ob[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
     });
 
+
+
+     $(document).on('click', '#terapkan_7ml', function (e) {
+    
+    var awal_7ml = document.getElementById('date3').value;
+    var tgl_awal_7ml = awal_7ml.split("/").reverse().join("-");
+
+    var akhir_7ml = document.getElementById('date4').value;
+    var tgl_akhir_7ml = akhir_7ml.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gk/stock_kacang_7ml",
+            data:{
+              "tgl_awal_7ml":tgl_awal_7ml,
+              "tgl_akhir_7ml":tgl_akhir_7ml,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results2) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results2.stock_7ml.length; i++){
+                    
+                    datatable2.row.add([
+
+                    results2.stock_7ml[i].tanggal,
+                    results2.stock_7ml[i].timestamp,
+                    results2.stock_7ml[i].keterangan,
+                    results2.stock_7ml[i].masuk,
+                    results2.stock_7ml[i].keluar,
+                    results2.stock_7ml[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
+   
+
+    $(document).on('click', '#terapkan_8ml', function (e) {
+    
+    var awal_8ml = document.getElementById('date5').value;
+    var tgl_awal_8ml = awal_8ml.split("/").reverse().join("-");
+
+    var akhir_8ml = document.getElementById('date6').value;
+    var tgl_akhir_8ml = akhir_8ml.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/manpro-kacang/stock/gk/stock_kacang_8ml",
+            data:{
+              "tgl_awal_8ml":tgl_awal_8ml,
+              "tgl_akhir_8ml":tgl_akhir_8ml,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results3) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results3.stock_8ml.length; i++){
+                    
+                    datatable3.row.add([
+
+                    results3.stock_8ml[i].tanggal,
+                    results3.stock_8ml[i].timestamp,
+                    results3.stock_8ml[i].keterangan,
+                    results3.stock_8ml[i].masuk,
+                    results3.stock_8ml[i].keluar,
+                    results3.stock_8ml[i].stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
+
+
+
+});
+
+
+  
 
     $(document).ready(function(){
         $('#date1').datepicker({
