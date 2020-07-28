@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-    return view('managerproduksi/auth/login');
-});
+Route::middleware(['auth', 'manpro'])->group(function() {
 
-Route::get('/manager-produksi', 'managerproduksi\ManagerproduksiController@dashboard')->name('dashboard-manager-produksi');
+// Dashboard manager produksi
+Route::get('/manager-produksi', 'managerproduksi\ManagerproduksiController@dashboard')
+            ->name('dashboard-manager-produksi');
 
 //penerimaan
 Route::get('/penerimaan/history_penerimaan', 'managerproduksi\PenerimaanController@select_history')->name('history_penerimaan');
@@ -73,3 +73,5 @@ Route::get('/manager-produksi/gudang-tapioka/kerja-harian', 'managerproduksi\Man
 Route::get('/manager-produksi/gudang-bumbu', 'managerproduksi\ManproBumbuController@home');
 Route::get('/manager-produksi/gudang-bumbu/stock', 'managerproduksi\ManproBumbuController@stock');
 Route::get('/manager-produksi/gudang-bumbu/kerja-harian', 'managerproduksi\ManproBumbuController@kerja_harian');
+
+});

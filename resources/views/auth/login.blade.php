@@ -6,6 +6,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="{{ asset('/managerproduksi/favicon/favicon.ico') }}">
 </head>
 <body>
 	<img class="wave" src="{{ asset('/managerproduksi/img/wave.png') }}">
