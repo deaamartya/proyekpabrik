@@ -37,7 +37,7 @@ Soyuz - Datatable
                                     <th>Tanggal</th>
                                     <th>Target Kupas (Kg)</th>
                                     <th>Stock (Kg)</th>
-                                    <th>Status %</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,14 @@ Soyuz - Datatable
                                         <td>{{date_format($ord->tanggal_order_masak,'Y-m-d')}}</td>
                                         <td>{{$ord->jumlah}}</td>   
                                         <td>{{$stock1c}}</td>
-                                        <td>{{$ord->presentase_status}}</td>
+                                        <td>
+                                            @if($ord->status == 0) Selesai
+                                            @else
+                                            @if($ord->status == 1) Ready
+                                            @else Belum
+                                            @endif
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach                                 
                             </tbody>
@@ -55,7 +62,7 @@ Soyuz - Datatable
                                     <th>Tanggal</th>
                                     <th>Target Kupas (Kg)</th>
                                     <th>Stock (Kg)</th>
-                                    <th>Status %</th>
+                                    <th>Status</th>
                                 </tr>
                             </tfoot>
                         </table>
