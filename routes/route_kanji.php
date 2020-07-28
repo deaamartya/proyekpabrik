@@ -118,7 +118,7 @@ Route::get('/gudang-bumbu/home-bumbu','gudangbumbu\HomeController@index');
 
 
 
-Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
+// Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
 
 
 Route::get('/gudang-bumbu/bahan', function () {
@@ -138,8 +138,8 @@ Route::get('/gudang-bumbu/adonangulagaram', function () {
     return view('gudangbumbu.adonangulagaram');
 });
 
-Route::post('/gudang-bumbu/input_data', 'KerjaharianadonangulaController@ganti');
-Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@tb');
+// Route::post('/gudang-bumbu/input_data', 'KerjaharianadonangulaController@ganti');
+// Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@tb');
 
 
 Route::get('/gudang-bumbu/bumbuready', function () {
