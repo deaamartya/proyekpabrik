@@ -90,36 +90,27 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($stock0 as $stk ) 
                                 <tr>
-                                    <td>2020/06/07</td>
-                                    <td>Sisa dari packing</td>
-                                    <td>10</td>
-                                    <td>-</td>
-                                    <td>60[10]</td>
+                                    <td>{{ $stk->TIMESTAMP}}</td>
+                                    <td>{{ $stk->keterangan}}</td>
+                                    <td>{{ $stk->masuk}}</td>
+                                    <td>{{ $stk->keluar}}</td>
+                                    <td>{{ $stk->stock}}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>2020/06/08</td>
-                                    <td>Proses packing</td>
-                                    <td>-</td>
-                                    <td>15[10]</td>
-                                    <td>45</td>
-                                </tr>
-                                <tr>
-                                    <td>2020/06/09</td>
-                                    <td>Proses packing</td>
-                                    <td>-</td>
-                                    <td>14</td>
-                                    <td>31</td>
-                                </tr>
-                                <tr>
-                                    <td>2020/06/09</td>
-                                    <td>Prive dari stock</td>
-                                    <td>30</td>
-                                    <td>-</td>
-                                    <td>30[20]</td>
-                                </tr>
-                                                               
+                                @endforeach
                             </tbody>
+                            <tfoot>
+                                {{-- <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr> --}}
+                            </tfoot>
                         </table>
                         </div>
                         </div>
@@ -178,41 +169,27 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($stock1 as $stk1 ) 
                                 <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Terima dari supplier</td>
-                                    <td>500</td>
-                                    <td>-</td>
-                                    <td>650</td>
+                                    <td>{{ $stk1->TIMESTAMP}}</td>
+                                    <td>{{ $stk1->keterangan}}</td>
+                                    <td>{{ $stk1->masuk}}</td>
+                                    <td>{{ $stk1->keluar}}</td>
+                                    <td>{{ $stk1->stock}}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>450</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>60</td>
-                                    <td>350</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>20</td>
-                                    <td>450</td>
-                                </tr>                                
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                {{-- <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr> --}}
+                            </tfoot>                                
                             </tbody>
                         </table>
                         </div>
@@ -273,42 +250,27 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($stock2 as $stk2 ) 
                                 <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Terima dari supplier</td>
-                                    <td>500</td>
-                                    <td>-</td>
-                                    <td>650</td>
+                                    <td>{{ $stk2->TIMESTAMP}}</td>
+                                    <td>{{ $stk2->keterangan}}</td>
+                                    <td>{{ $stk2->masuk}}</td>
+                                    <td>{{ $stk2->keluar}}</td>
+                                    <td>{{ $stk2->stock}}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>450</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>60</td>
-                                    <td>350</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>20</td>
-                                    <td>450</td>
-                                </tr>                                
+                                @endforeach
                             </tbody>
+                            <tfoot>
+                                {{-- <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr> --}}
+                            </tfoot>
                         </table>
                         </div>
                         </div>
@@ -365,42 +327,27 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($stock3 as $stk3 ) 
                                 <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Terima dari supplier</td>
-                                    <td>500</td>
-                                    <td>-</td>
-                                    <td>650</td>
+                                    <td>{{ $stk3->TIMESTAMP}}</td>
+                                    <td>{{ $stk3->keterangan}}</td>
+                                    <td>{{ $stk3->masuk}}</td>
+                                    <td>{{ $stk3->keluar}}</td>
+                                    <td>{{ $stk3->stock}}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>100</td>
-                                    <td>450</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>60</td>
-                                    <td>350</td>
-                                </tr>
-                                <tr>
-                                    <td>2011/04/25</td>
-                                    <td>Pembagian ke plastik masakan</td>
-                                    <td>-</td>
-                                    <td>20</td>
-                                    <td>450</td>
-                                </tr>                                
+                                @endforeach
                             </tbody>
+                            <tfoot>
+                                {{-- <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Office</th>
+                                    <th>Age</th>
+                                    <th>Start date</th>
+                                    <th>Salary</th>
+                                </tr> --}}
+                            </tfoot>
                         </table>
                         </div>
                         </div>

@@ -38,10 +38,7 @@ Tenaga Kupas
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
-                     <div class="row">
-                        <h5 class="card-title ml-3">Tenaga Kupas</h5>
-                        <h5 class="card-title ml-auto mr-3" id="date"></h5>
-                    </div>
+                    <h5 class="card-title">Tenaga Kupas</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -53,25 +50,34 @@ Tenaga Kupas
                                 </tr>
                             </thead>
                             <tbody>
-                              
-                               @foreach($tenagakupas as $t)
                                 <tr>
-                                    <td>{{ $t->nama }}</td>
+                                    <td>Ida</td>
                                     <td>
-                                        @if($t->status == 1)
-                                            <div class="badge-list">
-                                                <span class="badge badge-success badge-font">Aktif</span>
-                                            </div>
-                                        @else
-                                            <div class="badge-list">
-                                            <span class="badge badge-danger badge-font">Tidak Aktif</span>
+                                        <div class="badge-list">
+                                            <span class="badge badge-success badge-font">Aktif</span>
                                         </div>
-                                        @endif
+                                    </td>
+                                    
+                                </tr>
+                               
+                                <tr>
+                                    <td>Kayat</td>
+                                    <td>
+                                        <div class="badge-list">
+                                            <span class="badge badge-success badge-font">Aktif</span>
+                                        </div>
                                     </td>
                                 </tr>
-                                @endforeach
 
-                          
+                                <tr>
+                                    <td>Sum</td>
+                                    <td>
+                                        <div class="badge-list">
+                                            <span class="badge badge-danger badge-font">Tidak Aktif</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -86,6 +92,22 @@ Tenaga Kupas
 @endsection 
 @section('script')
 <!-- Datatable js -->
+<!--
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/jszip.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/buttons.colVis.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/js/custom/custom-table-datatable.js') }}"></script>
+-->
+
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
@@ -101,20 +123,6 @@ Tenaga Kupas
     
     });
 
-    $(document).ready(function() {
-    var now = new Date();
-    //var month = now.toLocaleString('default', { month: 'long' }); 
-    var month_name = function(dt){
-                    mlist = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" ];
-                    return mlist[dt.getMonth()];
-                    };
-    var month = month_name(now);              
-    var day = now.getDate();
-    if (day < 10) 
-        day = "0" + day;
-    var today = day + ' ' + month + ' ' + now.getFullYear() ;
-    document.getElementById('date').innerHTML = today;
-});
 
 
 </script>

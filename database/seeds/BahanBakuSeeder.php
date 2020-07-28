@@ -24,21 +24,9 @@ class BahanBakuSeeder extends Seeder
         ]);
 
         DB::table('bahan_baku')->insert([
-            'nama' => 'Kacang OB',
+            'nama' => 'Kacang',
             'status'=>1,
-            'id_tipe_bahan_baku'=>1
-        ]);
-
-        DB::table('bahan_baku')->insert([
-            'nama' => 'Kacang 7 ml',
-            'status'=>1,
-            'id_tipe_bahan_baku'=>1
-        ]);
-
-        DB::table('bahan_baku')->insert([
-            'nama' => 'Kacang 8 ml',
-            'status'=>1,
-            'id_tipe_bahan_baku'=>1
+            'id_tipe_bahan_baku'=>2
         ]);
 
         DB::table('bahan_baku')->insert([
@@ -49,24 +37,6 @@ class BahanBakuSeeder extends Seeder
 
         DB::table('bahan_baku')->insert([
             'nama' => 'Tepung Tapioka',
-            'status'=>1,
-            'id_tipe_bahan_baku'=>2
-        ]);
-
-        DB::table('bahan_baku')->insert([
-            'nama' => 'Bawang Kupas',
-            'status'=>1,
-            'id_tipe_bahan_baku'=>2
-        ]);
-
-        DB::table('bahan_baku')->insert([
-            'nama' => 'Bumbu Sachet',
-            'status'=>1,
-            'id_tipe_bahan_baku'=>2
-        ]);
-
-        DB::table('bahan_baku')->insert([
-            'nama' => 'Kacang Sortir',
             'status'=>1,
             'id_tipe_bahan_baku'=>2
         ]);

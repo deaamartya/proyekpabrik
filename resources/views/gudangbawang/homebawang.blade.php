@@ -17,7 +17,7 @@ Soyuz - Datatable
             <h1 class="page-title text-left pl-5">Order Kupas Bawang</h1>
         </div>
         <div class="col-4">
-            <h2 class="page-title text-right pr-5">10 Juni 2020</h2>
+            <h2 class="page-title text-right pr-5">@php echo date("d F Y"); @endphp</h2>
         </div>
     </div>        
 </div>
