@@ -40,8 +40,8 @@ class GudangTepungTapiokaController extends Controller
 
     public function stock()
     {
-        $stock1 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->get();
-        $stock2 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 2)->get();
+        $stock1 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 1)->get();
+        $stock2 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 2)->get();
         return view('gudangtepungtapioka.stock', ['stock1' => $stock1, 'stock2' => $stock2]);
     }
 
@@ -70,11 +70,11 @@ class GudangTepungTapiokaController extends Controller
 		})
 		->get();
 
-        $stock1a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->sum('masuk');
-        $stock1b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->sum('keluar');
+        $stock1a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 1)->sum('masuk');
+        $stock1b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 1)->sum('keluar');
         $stock1c = $stock1a - $stock1b;
-        $stock2a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 2)->sum('masuk');
-        $stock2b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 2)->sum('keluar');
+        $stock2a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 2)->sum('masuk');
+        $stock2b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 2)->sum('keluar');
         $stock2c = $stock2a - $stock2b;       
         
         return view('gudangtepungtapioka.kerjaharian', ['stock1c' => $stock1c, 'stock2c' => $stock2c, 'ordermasak' => $ordermasak]);
@@ -86,7 +86,7 @@ class GudangTepungTapiokaController extends Controller
         DB::table('stock')->insert([
             'id_satuan' => 1,
             'id_transaksi' => 1,
-            'id_bahan_baku' => 'BB000000007',
+            'id_bahan_baku' => 'BB000000005',
             'keterangan' => 'Diambil',
             'masuk' => 0,
             'keluar' => $request->berat,
@@ -102,7 +102,7 @@ class GudangTepungTapiokaController extends Controller
         DB::table('stock')->insert([
             'id_satuan' => 2,
             'id_transaksi' => 1,
-            'id_bahan_baku' => 'BB000000007',
+            'id_bahan_baku' => 'BB000000005',
             'keterangan' => 'Hasil Tambah Packing',
             'masuk' => $request->hasilpack,
             'keluar' => 0,
@@ -112,4 +112,5 @@ class GudangTepungTapiokaController extends Controller
     return redirect('gudang-tepung-tapioka/kerjaharian');
     }
 
+    
 }

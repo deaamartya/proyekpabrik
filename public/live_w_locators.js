@@ -1,88 +1,33 @@
 $(function() {
-var App = {
+    var App = {
         init : function() {
-            Quagga.init(this.state, function(err) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                App.attachListeners();
-                App.checkCapabilities();
-                Quagga.start();
-            });
-        },
-        checkCapabilities: function() {
-            var track = Quagga.CameraAccess.getActiveTrack();
-            var capabilities = {};
-            if (typeof track.getCapabilities === 'function') {
-                capabilities = track.getCapabilities();
-            }
-            this.applySettingsVisibility('zoom', capabilities.zoom);
-            this.applySettingsVisibility('torch', capabilities.torch);
-        },
-        updateOptionsForMediaRange: function(node, range) {
-            console.log('updateOptionsForMediaRange', node, range);
-            var NUM_STEPS = 6;
-            var stepSize = (range.max - range.min) / NUM_STEPS;
-            var option;
-            var value;
-            while (node.firstChild) {
-                node.removeChild(node.firstChild);
-            }
-            for (var i = 0; i <= NUM_STEPS; i++) {
-                value = range.min + (stepSize * i);
-                option = document.createElement('option');
-                option.value = value;
-                option.innerHTML = value;
-                node.appendChild(option);
-            }
-        },
-        applySettingsVisibility: function(setting, capability) {
-            if (typeof capability === 'boolean') {
-                var node = document.querySelector('input[name="settings_' + setting + '"]');
-                if (node) {
-                    node.parentNode.style.display = capability ? 'block' : 'none';
-                }
-                return;
-            }
-            if (window.MediaSettingsRange && capability instanceof window.MediaSettingsRange) {
-                var node = document.querySelector('select[name="settings_' + setting + '"]');
-                if (node) {
-                    this.updateOptionsForMediaRange(node, capability);
-                    node.parentNode.style.display = 'block';
-                }
-                return;
-            }
-        },
-        initCameraSelection: function(){
-            var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
+            this.overlay = document.querySelector('#interactive canvas.drawing');
 
-            return Quagga.CameraAccess.enumerateVideoDevices()
-            .then(function(devices) {
-                function pruneText(text) {
-                    return text.length > 30 ? text.substr(0, 30) : text;
-                }
-                var $deviceSelection = document.getElementById("deviceSelection");
-                while ($deviceSelection.firstChild) {
-                    $deviceSelection.removeChild($deviceSelection.firstChild);
-                }
-                devices.forEach(function(device) {
-                    var $option = document.createElement("option");
-                    $option.value = device.deviceId || device.id;
-                    $option.appendChild(document.createTextNode(pruneText(device.label || device.deviceId || device.id)));
-                    $option.selected = streamLabel === device.label;
-                    $deviceSelection.appendChild($option);
-                });
+            this.scanner = Quagga
+                .fromConfig(this.state);
+
+            this.scanner
+                .addEventListener("processed", drawResult.bind(this, this.scanner))
+                .addEventListener("detected", addToResults.bind(this, this.scanner));
+
+            this.scanner.start()
+            .then(function (){
+                console.log("started");
+                this.attachListeners();
+            }.bind(this))
+            .catch(function(err) {
+                console.log("Error: " + err);
             });
         },
         attachListeners: function() {
             var self = this;
 
-            self.initCameraSelection();
             $(".controls").on("click", "button.stop", function(e) {
                 e.preventDefault();
-                Quagga.stop();
-            });
+                this.detachListeners();
+                this.scanner.stop();
+                this.scanner.removeEventListener();
+            }.bind(this));
 
             $(".controls .reader-config-group").on("change", "input, select", function(e) {
                 e.preventDefault();
@@ -102,11 +47,7 @@ var App = {
 
             return parts.reduce(function(o, key, i) {
                 if (setter && (i + 1) === depth) {
-                    if (typeof o[key] === "object" && typeof val === "object") {
-                        Object.assign(o[key], val);
-                    } else {
-                        o[key] = val;
-                    }
+                    o[key] = val;
                 }
                 return key in o ? o[key] : {};
             }, obj);
@@ -120,17 +61,6 @@ var App = {
             $(".controls").off("click", "button.stop");
             $(".controls .reader-config-group").off("change", "input, select");
         },
-        applySetting: function(setting, value) {
-            var track = Quagga.CameraAccess.getActiveTrack();
-            if (track && typeof track.getCapabilities === 'function') {
-                switch (setting) {
-                case 'zoom':
-                    return track.applyConstraints({advanced: [{zoom: parseFloat(value)}]});
-                case 'torch':
-                    return track.applyConstraints({advanced: [{torch: !!value}]});
-                }
-            }
-        },
         setState: function(path, value) {
             var self = this;
 
@@ -138,30 +68,22 @@ var App = {
                 value = self._accessByPath(self.inputMapper, path)(value);
             }
 
-            if (path.startsWith('settings.')) {
-                var setting = path.substring(9);
-                return self.applySetting(setting, value);
-            }
             self._accessByPath(self.state, path, value);
 
             console.log(JSON.stringify(self.state));
-            App.detachListeners();
-            Quagga.stop();
-            App.init();
+            this.detachListeners();
+            this.scanner.stop();
+            this.scanner.removeEventListener();
+            this.init();
         },
         inputMapper: {
             inputStream: {
                 constraints: function(value){
-                    if (/^(\d+)x(\d+)$/.test(value)) {
-                        var values = value.split('x');
-                        return {
-                            width: {min: parseInt(values[0])},
-                            height: {min: parseInt(values[1])}
-                        };
-                    }
+                    var values = value.split('x');
                     return {
-                        deviceId: value
-                    };
+                        width: parseInt(values[0]),
+                        height: parseInt(values[1])
+                    }
                 }
             },
             numOfWorkers: function(value) {
@@ -190,9 +112,8 @@ var App = {
             inputStream: {
                 type : "LiveStream",
                 constraints: {
-                    width: {min: 640},
-                    height: {min: 480},
-                    aspectRatio: {min: 1, max: 100},
+                    width: 640,
+                    height: 480,
                     facingMode: "environment" // or user
                 }
             },
@@ -215,11 +136,45 @@ var App = {
 
     App.init();
 
+    function drawResult(scanner, result) {
+        var processingCanvas = scanner.getCanvas(),
+            canvas = App.overlay,
+            ctx = canvas.getContext("2d");
 
+        canvas.setAttribute('width', processingCanvas.getAttribute('width'));
+        canvas.setAttribute('height', processingCanvas.getAttribute('height'));
 
-    Quagga.onDetected(function(result) {
-        var code = result.codeResult.code;
-        Quagga.stop();
-        $("#result").html(code);
-    });
+        if (result) {
+            if (result.boxes) {
+                ctx.clearRect(0, 0, parseInt(canvas.getAttribute("width")), parseInt(canvas.getAttribute("height")));
+                result.boxes.filter(function (box) {
+                    return box !== result.box;
+                }).forEach(function (box) {
+                    Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, ctx, {color: "green", lineWidth: 2});
+                });
+            }
+
+            if (result.box) {
+                Quagga.ImageDebug.drawPath(result.box, {x: 0, y: 1}, ctx, {color: "#00F", lineWidth: 2});
+            }
+
+            if (result.codeResult && result.codeResult.code) {
+                Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, ctx, {color: 'red', lineWidth: 3});
+            }
+        }
+    };
+
+    function addToResults(scanner, result) {
+        var code = result.codeResult.code,
+            $node,
+            canvas = scanner.getCanvas();
+
+        if (App.lastResult !== code) {
+            App.lastResult = code;
+            $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
+            $node.find("img").attr("src", canvas.toDataURL());
+            $node.find("h4.code").html(code);
+            $("#result_strip ul.thumbnails").prepend($node);
+        }
+    };
 });

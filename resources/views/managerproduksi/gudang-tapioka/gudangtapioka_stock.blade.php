@@ -36,7 +36,7 @@
         {{-- Start Karung 25 Kg --}}
          <div class="card m-b-30">
              <div class="card-header">
-                <h5 class="card-title">Karung 25 Kg</h5>
+                <h5 class="card-title">Karung</h5>
              </div>
              <div class="card-body">
                  <div class="table-responsive">
@@ -51,34 +51,25 @@
                              </tr>
                          </thead>
                          <tbody>
-                             <tr>
-                                 <td>05/06/20</td>
-                                 <td>Terima dari Supplier</td>
-                                 <td>500</td>
-                                 <td>-</td>
-                                 <td>550</td>
-                             </tr>
-                             <tr>
-                                 <td>05/06/20</td>
-                                 <td>Pembagian ke Plastik Masakan</td>
-                                 <td>-</td>
-                                 <td>100</td>
-                                 <td>450</td>
-                             </tr>
-                             <tr>
-                                 <td>07/06/20</td>
-                                 <td>Pembagian ke Plastik Masakan</td>
-                                 <td>-</td>
-                                 <td>100</td>
-                                 <td>350</td>
-                             </tr>
-                             <tr>
-                                 <td>09/06/20</td>
-                                 <td>Pembagian ke Plastik Masakan</td>
-                                 <td>-</td>
-                                 <td>150</td>
-                                 <td>200</td>
-                             </tr>
+                             @foreach ($stock_tapioka_karung as $stock_tapioka_karung)
+                                <tr>
+                                    <td>
+                                        {{ $stock_tapioka_karung->TIMESTAMP }}
+                                    </td>
+                                    <td>
+                                        {{ $stock_tapioka_karung->keterangan }}
+                                    </td>
+                                    <td>
+                                        {{ $stock_tapioka_karung->masuk }}
+                                    </td>
+                                    <td>
+                                        {{ $stock_tapioka_karung->keluar }}
+                                    </td>
+                                    <td>
+                                        {{ $stock_tapioka_karung->stock }}
+                                    </td>
+                                </tr>
+                             @endforeach
                          </tbody>
                      </table>
                  </div>
@@ -98,30 +89,32 @@
                          <thead>
                              <tr>
                                  <th>Tanggal</th>
+                                 <th>Keterangan</th>
                                  <th>Masuk (Plastik)</th>
                                  <th>Keluar (Plastik)</th>
                                  <th>Stock (Plastik)</th>
                              </tr>
                          </thead>
                          <tbody>
-                             <tr>
-                                 <td>08/06/20</td>
-                                 <td>-</td>
-                                 <td>100</td>
-                                 <td>190</td>
-                             </tr>
-                             <tr>
-                                 <td>08/06/20</td>
-                                 <td>110</td>
-                                 <td>-</td>
-                                 <td>300</td>
-                             </tr>
-                             <tr>
-                                 <td>09/06/20</td>
-                                 <td>-</td>
-                                 <td>100</td>
-                                 <td>200</td>
-                             </tr>
+                            @foreach ($stock_tapioka_plastik as $stock_tapioka_plastik)
+                            <tr>
+                                <td>
+                                    {{ $stock_tapioka_plastik->TIMESTAMP }}
+                                </td>
+                                <td>
+                                    {{ $stock_tapioka_plastik->keterangan }}
+                                </td>
+                                <td>
+                                    {{ $stock_tapioka_plastik->masuk }}
+                                </td>
+                                <td>
+                                    {{ $stock_tapioka_plastik->keluar }}
+                                </td>
+                                <td>
+                                    {{ $stock_tapioka_plastik->stock }}
+                                </td>
+                            </tr>
+                         @endforeach
                          </tbody>
                      </table>
                  </div>
