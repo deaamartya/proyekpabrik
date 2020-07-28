@@ -28,6 +28,7 @@
 
         function startScanner() {
             Quagga.init({
+                
                 inputStream: {
                     name: "Live",
                     type: "LiveStream",

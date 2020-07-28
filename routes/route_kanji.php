@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+//coba scan
+Route::get('/scand',function(){
+    return view('scan2');
+});
+
+Route::get('/scan', function () {
+    return view('gudangbawang.scan');
+});
 
 Route::middleware(['auth', 'kanji'])->group(function () {
 
@@ -9,12 +17,6 @@ Route::middleware(['auth', 'kanji'])->group(function () {
 Route::get('/dashboard-kanji', function () {
     return view('dashboardkanji.dashboardkanji');
 })->name('dashboard-kanji');
-
-
-//coba scan
-Route::get('/scand',function(){
-    return view('scan');
-});
 
 //gudang bawang
 Route::get('/gudang-bawang/', function () {
