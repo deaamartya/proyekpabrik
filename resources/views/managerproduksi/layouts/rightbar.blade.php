@@ -115,7 +115,7 @@
                          <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="ui-kits"><span>Data Produksi</span></a>
                         <ul class="dropdown-menu">
                              <li class="dropdown">
-                                <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="tables">Gudang Kacang & Gudang Kacang Sortir</a>
+                                <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="tables">Gudang Kacang</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('/manpro-kacang/home') }}">Home</a></li>
                                     <li class="dropdown">
