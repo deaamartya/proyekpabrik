@@ -8,9 +8,9 @@
         <meta name="author" content="Themesbox17">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title> @yield('title') </title>
+        <title> Gudang Tepung Tapioka - @yield('title') </title>
         <!-- Fevicon -->
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+        <link rel="icon" href="{{ asset('managerproduksi/favicon/favicon.ico') }}">
         <!-- Start CSS -->   
         @yield('style')
         <link href="{{ asset('assets/plugins/switchery/switchery.min.css') }}" rel="stylesheet" type="text/css">

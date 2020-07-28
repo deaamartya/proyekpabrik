@@ -51,11 +51,11 @@
                             <li class="list-inline-item">
                                 <div class="profilebar">
                                     <div class="dropdown">
-                                      <a class="dropdown-toggle" href="#" role="button" id="profilelink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assets/images/users/profile.svg')}}" class="img-fluid" alt="profile"><span class="live-icon">Nama</span><span class="feather icon-chevron-down live-icon"></span></a>
+                                      <a class="dropdown-toggle" href="#" role="button" id="profilelink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assets/images/users/profile.svg')}}" class="img-fluid" alt="profile"><span class="live-icon">{{auth()->user()->nama}}</span><span class="feather icon-chevron-down live-icon"></span></a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profilelink">
                                             <div class="dropdown-item">
                                                 <div class="profilename">
-                                                  <h5>John Doe</h5>
+                                                <h5>{{auth()->user()->nama}}</h5>
                                                 </div>
                                             </div>
                                             <div class="userbox">
@@ -99,13 +99,13 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                   <ul class="horizontal-menu">
                     <li class="dropdown">
-                        <a href="{{url('/gudang-tepung-tapioka/home')}}"><span>Home</span></a>
+                        <a href="{{url('/gudang-tepung-tapioka/home')}}"><img src="{{asset('assets/images/svg-icon/frontend.svg')}}" class="img-fluid">Home</span></a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{url('/gudang-tepung-tapioka/stock')}}"><span>Stock</span></a>
+                        <a href="{{url('/gudang-tepung-tapioka/stock')}}"><img src="{{asset('assets/images/svg-icon/basic.svg')}}" class="img-fluid">Stock</span></a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{url('/gudang-tepung-tapioka/kerjaharian')}}"><span>Kerja Harian</span></a>
+                        <a href="{{url('/gudang-tepung-tapioka/kerjaharian')}}"><img src="{{asset('assets/images/svg-icon/backend.svg')}}" class="img-fluid">Kerja Harian</span></a>
                     </li>
                   </ul>
                 </div>
