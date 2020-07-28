@@ -157,7 +157,7 @@ Kerja Harian
                                                                 </tr>
                                                                 <tr role="row">
                                                                     <td>BS (Kg)</td>
-                                                                    <td colspan="4"><input type="number" class="form-control" id="inputmask-card-number" name="BS"></td>
+                                                                    <td colspan="4"><input type="number" class="form-control" id="bs" name="BS"></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -506,6 +506,11 @@ Kerja Harian
             sortir_sp : $('#sortirsp').val(),
             sortir_hc : $('#sortirhc').val(),
             sortir_telor : $('#sortirtelor').val(),
+
+            bs : $('#bs').val(),
+
+            
+
         }
             jsonberat.push(data);
 
@@ -523,7 +528,7 @@ Kerja Harian
                 data : jsondata,
             },
                 success: function(result){
-                    $("#simpandata").hide();
+                    $("#exampleModalLong").hide();
                     swal({
                         title: 'Berhasil!',
                         text: 'Data Berhasil Disimpan',

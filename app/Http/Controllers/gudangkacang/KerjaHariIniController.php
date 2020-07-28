@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 // use App\Models\DetailRekapKerjaHarianGroup;
 use App\Models\Stock;
 use App\Models\GroupKerja;
+use App\Models\DetailTransaksi;
+use App\Models\DetailRekap;
 
 use DB;
 
@@ -56,7 +58,7 @@ class KerjaHariIniController extends Controller
                     'id_transaksi' => 'TR0000000000000004',
                     'keterangan' => 'Kacang OB Keluar',
                     'masuk' => 0,
-                    'keluar' => $data[0]->penerimaan_ob;
+                    'keluar' => $data[0]->penerimaan_ob,
                     'stock' => 0,
                     'id_gudang' => '9'
                 ]);
@@ -179,10 +181,26 @@ class KerjaHariIniController extends Controller
                     'nama' => 'Sortir Kacang',
                     'jumlah_personil' => $data[0]->pekerja,
                     'level' => 0,
-                    'parent_id_grup_kerja' => ''
                 ]);
 
-                //Rekap Stock
+                //Rekap
+                DetailTransaksi::insert([
+                    'id_satuan' => '1',
+                    'id_transaksi' => 'TR0000000000000015',
+                    'jumlah' => $data[0]->bs,
+                    'id_bahan_baku' => 'BB000000010',
+                    'id_jenis_transaksi' => '5'
+                ]);
+
+                //Select
+                $id = DetailTransaksi::select('id_detail_transaksi')->orderBy('timestamp', 'desc')->first();
+
+                DetailRekap::insert([
+                    'id_detail_transaksi' => $id->id_detail_transaksi,
+                    'berat_wadah_kosong' => 0,
+                    'berat_BS' => $data[0]->bs
+                ]);
+
             });
         return response()->json(['success' => true]);
         }
