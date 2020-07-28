@@ -68,7 +68,8 @@ class ManproBawangController extends Controller
 
         $stock_bawangkulit = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d %M %Y") AS tgl_terima') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
                     ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
-                    ->where(['stock.id_bahan_baku' => 'BB000000006', 'stock.id_gudang' => '7'])
+                    //->where(['stock.id_bahan_baku' => 'BB000000006', 'stock.id_gudang' => '7'])
+                    ->where('stock.keterangan' '=', 'kulit')
                     ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
                     ->get();
                     
