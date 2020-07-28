@@ -178,7 +178,7 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                   <ul class="horizontal-menu">
                     <li class="scroll dropdown">
-                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><span>HOME</span></a>
+                        <a href="{{url('/home')}}"><span>HOME</span></a>
                     </li>
                     <li class="dropdown">
                         <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><span>STOCK</span></a>
@@ -191,7 +191,7 @@
                         <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><span>KERJA HARIAN</span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{url('/hari_ini')}}">Hari Ini</a></li>
-                            <li><a href="{{url('/sebelumnya')}}">Sebelumnya</a></li>
+                            <li><a href="{{url('/hari_sebelumnya')}}">Sebelumnya</a></li>
                         </ul>
                     </li>
                   </ul>
@@ -206,7 +206,7 @@
     <!-- Start Footerbar -->
     <div class="footerbar">
         <footer class="footer">
-            <p class="mb-0">© 2020 Soyuz - All Rights Reserved.</p>
+            <p class="mb-0">© Pabrik Gangsar</p>
         </footer>
     </div>
     <!-- End Footerbar -->

@@ -1,7 +1,7 @@
 @section('title') 
 Kerja Harian
 @endsection 
-@extends('gudang_kacang.layouts.main')
+@extends('gudangkacang.layouts.main')
 @section('style')
 <!-- Apex css -->
 <link href="{{ asset('assets/plugins/apexcharts/apexcharts.css') }}" rel="stylesheet" type="text/css" />
@@ -17,7 +17,7 @@ Kerja Harian
 <div class="breadcrumbbar">
     <div class="row align-items-center">
         <div class="col-md-8 col-lg-8">
-            <h4>Kerja Hari Ini</h4>
+            <h4 class="page-title">Kerja Hari Ini</h4>
         </div>
         <div class="col-md-4 col-lg-4">
             <div class="widgetbar">
@@ -52,6 +52,19 @@ Kerja Harian
                                     <h2 style="color: red">Tutup Hari</h2>
                                     <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-12">
+                                        <div class="row">
+                                            <!-- <div class="col-sm-12"> -->
+                                                <div class="col-sm-2 text-left">
+                                                    <h6 style="color: blue;">Jumlah Grup</h6>
+                                                    <input type="number" id="jml_grup" name="jml_grup" min="0" style="width: 50%">
+                                                </div>
+                                                <div class="col-sm-2 text-left">
+                                                    <h6 style="color: blue;">Jumlah Pekerja</h6>
+                                                    <input type="number" id="jml_Pekerja" name="jml_Pekerja" min="0" style="width: 50%">
+                                                </div>
+                                            <!-- </div> -->
+                                        </div>
+                                        <br>
                                         <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
                                             <thead>
                                                 <tr role="row">
@@ -134,6 +147,11 @@ Kerja Harian
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-sm-12">
+                                        <br><button type="button" class="btn btn-primary" style="margin-right: 10px;">Tutup</button>
                                     </div>
                                     </div>
                                 </div>
