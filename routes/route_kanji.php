@@ -3,9 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
 Route::middleware(['auth', 'kanji'])->group(function () {
 
 //Dashboard Kanji
@@ -18,9 +15,6 @@ Route::get('/dashboard-kanji', function () {
 Route::get('/scand',function(){
     return view('scan');
 });
-
-
-
 
 //gudang bawang
 Route::get('/gudang-bawang/', function () {

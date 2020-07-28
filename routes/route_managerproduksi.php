@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Route;
 
 // Auth::routes();
 
-Route::middleware(['auth', 'manpro'])->group(function () {
-
 Route::middleware(['auth', 'manpro'])->group(function() {
 
 
@@ -86,5 +84,4 @@ Route::get('/manager-produksi/gudang-bumbu/stock', 'managerproduksi\ManproBumbuC
 
 Route::get('/manager-produksi/gudang-bumbu/kerja-harian', 'managerproduksi\ManproBumbuController@kerja_harian');
 
-});
 });
