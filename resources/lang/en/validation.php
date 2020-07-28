@@ -132,6 +132,7 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
 //HEAD
 
 
@@ -214,7 +215,6 @@ return [
         ],
 
 // parent of 0719684... update
-
 
     ],
 
