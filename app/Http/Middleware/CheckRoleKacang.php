@@ -34,7 +34,7 @@ class CheckRoleKacang
             }
             // kanji
             if (Auth::user()->id_gudang == 8) {
-                return redirect()->route('/gudang-bawang');
+                return redirect()->route('dashboard-kanji');
             }
         }
         

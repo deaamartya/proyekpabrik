@@ -69,7 +69,25 @@ class ManproKacangController extends Controller
 
     public function stock_gudangkacang()
     {
-        return view('managerproduksi.gudang-kacang.stock_gudangkacang');
+
+        $kacang_ob = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                //->join('detail_transaksi','stock.id_transaksi' ,'=', 'detail_transaksi.id_transaksi')
+                //->join('penerimaan','detail_transaksi.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                ->where(['stock.id_bahan_baku' => 'BB000000003', 'stock.id_gudang' => '9'])
+                ->get();
+
+        $kacang_7ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                    ->where(['stock.id_bahan_baku' => 'BB000000004', 'stock.id_gudang' => '9'])
+                    ->get();
+                    
+        $kacang_8ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                    ->where(['stock.id_bahan_baku' => 'BB000000005', 'stock.id_gudang' => '9'])
+                    ->get();
+                    
+        return view('managerproduksi.gudang-kacang.stock_gudangkacang')->with(compact('kacang_ob', 'kacang_7ml', 'kacang_8ml'));
     }
 
 
@@ -124,7 +142,31 @@ class ManproKacangController extends Controller
    
      public function stock_gudangkacangsortir()
     {
-        return view('managerproduksi.gudang-kacang.stock_gudangkacangsortir');
+         $kacang_gs = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
+                    ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
+                    ->where(['detail_order_masak.id_bahan_product' => 'PR00000000003', 'stock.id_gudang' => '10', 'stock.id_bahan_baku' => 'BB000000010'])
+                    ->get();
+
+         $kacang_sp = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
+                    ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
+                    ->where(['detail_order_masak.id_bahan_product' => 'PR00000000002', 'stock.id_gudang' => '10', 'stock.id_bahan_baku' => 'BB000000010'])
+                    ->get();
+
+         $kacang_hc = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
+                    ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
+                    ->where(['detail_order_masak.id_bahan_product' => 'PR00000000001', 'stock.id_gudang' => '10', 'stock.id_bahan_baku' => 'BB000000010'])
+                    ->get();
+
+        $kacang_telor = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
+                    ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
+                    ->where(['detail_order_masak.id_bahan_product' => 'PR00000000004', 'stock.id_gudang' => '10', 'stock.id_bahan_baku' => 'BB000000010'])
+                    ->get();
+
+        return view('managerproduksi.gudang-kacang.stock_gudangkacangsortir')->with(compact('kacang_gs', 'kacang_sp', 'kacang_hc', 'kacang_telor'));
     }
 
      public function stock_kacang_gs(Request $req)

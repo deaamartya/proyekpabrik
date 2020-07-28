@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 // Route::get('/', function(){
 //     return view('managerproduksi/auth/login');
 // });
@@ -10,7 +11,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'manpro'])->group(function () {
 
-Route::get('/manager-produksi', 'managerproduksi\ManagerproduksiController@dashboard')->name('dashboard-manager-produksi');
+Route::middleware(['auth', 'manpro'])->group(function() {
+
+
+// Dashboard manager produksi
+Route::get('/manager-produksi', 'managerproduksi\ManagerproduksiController@dashboard')
+            ->name('dashboard-manager-produksi');
 
 //penerimaan
 Route::get('/penerimaan/history_penerimaan', 'managerproduksi\PenerimaanController@select_history')->name('history_penerimaan');
@@ -69,11 +75,16 @@ Route::get('/manager-produksi/gudang-tapioka/kerja-harian', 'managerproduksi\Man
 // Manager Produksi | Data Produksi | Gudang Bumbu
 
 Route::get('/manager-produksi/gudang-bumbu', 'managerproduksi\ManproBumbuController@home');
+
 Route::get('/manager-produksi/gudang-bumbu/stock-bahan', 'managerproduksi\ManproBumbuController@stock_bahan');
 Route::get('/manager-produksi/gudang-bumbu/detail-prive', 'managerproduksi\ManproBumbuController@detail_prive');
 Route::get('/manager-produksi/gudang-bumbu/stock-adonan-gula', 'managerproduksi\ManproBumbuController@stock_adonan_gula');
 Route::get('/manager-produksi/gudang-bumbu/stock-adonan-gula-garam', 'managerproduksi\ManproBumbuController@stock_adonan_gula_garam');
 Route::get('/manager-produksi/gudang-bumbu/stock-bumbu-ready', 'managerproduksi\ManproBumbuController@stock_bumbu_ready');
+
+Route::get('/manager-produksi/gudang-bumbu/stock', 'managerproduksi\ManproBumbuController@stock');
+
 Route::get('/manager-produksi/gudang-bumbu/kerja-harian', 'managerproduksi\ManproBumbuController@kerja_harian');
 
+});
 });

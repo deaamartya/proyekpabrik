@@ -132,6 +132,68 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
+
+        'id_transaksi' => [
+            'required' => 'No. Surat Jalan Wajib Diisi. ',
+            'max' => 'No. Surat Jalan Tidak Boleh Lebih dari :max Karakter '
+        ],
+       
+        'id_gudang' => [
+            'required' => 'Gudang Wajib Diisi. ',
+        ],
+        'id_gudang2' => [
+            'required' => 'Gudang Wajib Diisi. ',
+        ],
+        'id_supplier' => [
+            'required' => 'Supplier Wajib Diisi. ',
+        ],
+        'id_bahan_baku' => [
+            'required' => 'Bahan Baku Wajib Diisi. ',
+        ],
+        'id_bahan_baku2' => [
+            'required' => 'Bahan Baku Wajib Diisi. ',
+        ],
+         'nomor_kontainer' => [
+            'required' => 'Nomor Kontainer Wajib Diisi. ',
+        ],
+         'nomor_polisi' => [
+            'required' => 'Nomor Polisi Wajib Diisi. ',
+        ],
+         'berat_surat_jalan' => [
+            'required' => 'Berat Surat Jalan Wajib Diisi. ',
+        ],
+     
+        'berat_aktual' => [
+            'required' => 'Berat Aktual Wajib Diisi. ',
+        ],
+        'berat_aktual2' => [
+            'required' => 'Berat Aktual Wajib Diisi. ',
+        ],
+        'berat_susut_kg' => [
+            'required' => 'Berat Susut Wajib Diisi. ',
+        ],
+        'berat_susut_kg2' => [
+            'required' => 'Berat Susut Wajib Diisi. ',
+        ],
+        'berat_susut_persen' => [
+            'required' => 'Persen Berat Susut Wajib Diisi. ',
+        ],
+        'berat_susut_persen2' => [
+            'required' => 'Persen Berat Susut Wajib Diisi. ',
+        ],
+        'id_gudang_asal' => [
+            'required' => 'Gudang Asal Wajib Diisi. ',
+        ],
+        'id_gudang_tujuan' => [
+            'required' => 'Gudang Tujuan Wajib Diisi. ',
+        ],
+        'berat_pindah' => [
+            'required' => 'Berat Pindah Wajib Diisi. ',
+        ],
+
+
+
     ],
 
     /*

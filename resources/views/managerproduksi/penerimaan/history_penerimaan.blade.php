@@ -57,6 +57,7 @@ Penerimaan Barang
                                     <th style="display: none;"></th>
                                     <th>Tanggal</th>
                                     <th>No. Surat Jalan</th>
+                                    <th>Jenis Penerimaan</th>
                                     <th>Bahan</th>
                                     <th>Status</th>
                                 </tr>
@@ -69,6 +70,7 @@ Penerimaan Barang
                                     <td style="display: none;">{{ $hp->id_jenis_penerimaan }}</td>
                                     <td>{{ date('d/m/Y' , strtotime($hp->timestamp)) }}</td>
                                     <td>{{ $hp->id_transaksi }}</td>
+                                    <td>{{ $hp->nama_jenis_penerimaan}}</td>
                                     <td>{{ $hp->nama_bahan_baku }}</td>
                                     
                                     <td>

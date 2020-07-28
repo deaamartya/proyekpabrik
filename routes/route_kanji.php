@@ -2,12 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+
+
+
 Route::middleware(['auth', 'kanji'])->group(function () {
 
 //Dashboard Kanji
 Route::get('/dashboard-kanji', function () {
     return view('dashboardkanji.dashboardkanji');
 })->name('dashboard-kanji');
+
+
+//coba scan
+Route::get('/scand',function(){
+    return view('scan');
+});
+
+
+
 
 //gudang bawang
 Route::get('/gudang-bawang/', function () {
@@ -104,6 +117,10 @@ Route::get('/gudang-bumbu/home-bumbu','gudangbumbu\HomeController@index');
 
 
 
+
+Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
+
+
 Route::get('/gudang-bumbu/bahan', function () {
     return view('gudangbumbu.bahan');
 });
@@ -130,6 +147,7 @@ Route::get('/gudang-bumbu/bumbuready', function () {
 });
 
 
+
 Route::post('/gudang-bumbu/input_data', 'KerjaharianadonangulaController@ganti');
 Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
 Route::get('/gudang-bumbu/kerjaharianadonangula/inputmasuk', 'KerjaharianadonangulaController@masuk');
@@ -137,4 +155,7 @@ Route::get('/gudang-bumbu/kerjaharianadonangula/inputmasuk', 'Kerjaharianadonang
 
 
 });
+
+
+
 
