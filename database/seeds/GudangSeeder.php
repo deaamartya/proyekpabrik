@@ -12,7 +12,7 @@ class GudangSeeder extends Seeder
     public function run()
     {
     	$gudang = ['coolstorage I','coolstorage II','coolstorage III',
-    		'Gudang Bumbu','Gudang Tapioka','Gudang Tepung Besar','Gudang Bawang', 'Gudang Masak Kanji', 'Gudang Kacang'];
+    		'Gudang Bumbu','Gudang Tapioka','Gudang Tepung Besar','Gudang Bawang', 'Gudang Masak Kanji', 'Gudang Kacang', 'Gudang Kacang Sortir'];
 
     	foreach($gudang as $g){
     		DB::table('gudang')->insert([

@@ -133,12 +133,27 @@ return [
             'rule-name' => 'custom-message',
         ],
 
+//HEAD
 
+
+
+// parent of 0719684... update
         'id_transaksi' => [
             'required' => 'No. Surat Jalan Wajib Diisi. ',
             'max' => 'No. Surat Jalan Tidak Boleh Lebih dari :max Karakter '
         ],
+//HEAD
        
+
+        'id_transaksi2' => [
+            'required' => 'No. Surat Jalan Wajib Diisi. ',
+            'max' => 'No. Surat Jalan Tidak Boleh Lebih dari :max Karakter '
+        ],
+        'id_transaksi2' => [
+            'required' => 'No. Surat Jalan Wajib Diisi. ',
+            'max' => 'No. Surat Jalan Tidak Boleh Lebih dari :max Karakter '
+        ],
+// parent of 0719684... update
         'id_gudang' => [
             'required' => 'Gudang Wajib Diisi. ',
         ],
@@ -163,7 +178,13 @@ return [
          'berat_surat_jalan' => [
             'required' => 'Berat Surat Jalan Wajib Diisi. ',
         ],
+// HEAD
      
+
+        'berat_surat_jalan2' => [
+            'required' => 'Berat Surat Jalan Wajib Diisi. ',
+        ],
+// parent of 0719684... update
         'berat_aktual' => [
             'required' => 'Berat Aktual Wajib Diisi. ',
         ],
@@ -182,6 +203,7 @@ return [
         'berat_susut_persen2' => [
             'required' => 'Persen Berat Susut Wajib Diisi. ',
         ],
+// HEAD
         'id_gudang_asal' => [
             'required' => 'Gudang Asal Wajib Diisi. ',
         ],
@@ -192,7 +214,7 @@ return [
             'required' => 'Berat Pindah Wajib Diisi. ',
         ],
 
-
+// parent of 0719684... update
 
     ],
 

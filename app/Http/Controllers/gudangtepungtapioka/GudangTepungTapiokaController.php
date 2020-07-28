@@ -40,8 +40,8 @@ class GudangTepungTapiokaController extends Controller
 
     public function stock()
     {
-        $stock1 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->get();
-        $stock2 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 2)->get();
+        $stock1 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 1)->get();
+        $stock2 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 2)->get();
         return view('gudangtepungtapioka.stock', ['stock1' => $stock1, 'stock2' => $stock2]);
     }
 
@@ -66,7 +66,7 @@ class GudangTepungTapiokaController extends Controller
         $ordermasak2 = OrderMasak::select('order_masak.*','dom.jumlah AS jumlah')
     	->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
-                 ->where('dom.id_bahan_product', '=', 'PR00000000006');
+                 ->where('dom.id_bahan_product', '=', 'PR00000000005');
 		})
 		->get();
 
@@ -112,4 +112,5 @@ class GudangTepungTapiokaController extends Controller
     return redirect('gudang-tepung-tapioka/kerjaharian');
     }
 
+    
 }

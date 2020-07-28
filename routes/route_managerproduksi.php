@@ -2,15 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-// Route::get('/', function(){
-//     return view('managerproduksi/auth/login');
-// });
-
-// Auth::routes();
-
 Route::middleware(['auth', 'manpro'])->group(function() {
-
 
 // Dashboard manager produksi
 Route::get('/manager-produksi', 'managerproduksi\ManagerproduksiController@dashboard')
@@ -30,6 +22,7 @@ Route::post('/penerimaan/update_sementara_penerimaan_pemindahanbahan/{id}', 'man
 Route::post('/penerimaan/update_penerimaan_supplier/{id}', 'managerproduksi\PenerimaanController@update1');
 Route::post('/penerimaan/update_penerimaan_pemindahanbahan/{id}', 'managerproduksi\PenerimaanController@update2');
 Route::get('/penerimaan/cetak_barcode/{id}',  'managerproduksi\PenerimaanController@printBarcode')->name('cetak_barcode');
+
 
 // Manager Produksi | Order Masak
 Route::get('/manager-produksi/order-masak', 'managerproduksi\OrdermasakController@index');
@@ -59,29 +52,26 @@ Route::get('/manpro-kacang/kerjaharian/sebelumnya', 'managerproduksi\ManproKacan
 //manpro-gudangbawang
 Route::get('/manpro-bawang/home', 'managerproduksi\ManproBawangController@home');
 Route::get('/manpro-bawang/stock/bawangkulit', 'managerproduksi\ManproBawangController@stock_bawangkulit');
+
+Route::post('/manpro-bawang/stock/bawangkulit/get_stock', 'managerproduksi\ManproBawangController@get_stock_bawangkulit');
+
 Route::get('/manpro-bawang/stock/bawangkupas', 'managerproduksi\ManproBawangController@stock_bawangkupas');
+
+Route::post('/manpro-bawang/stock/bawangkupas/get_stock', 'managerproduksi\ManproBawangController@get_stock_bawangkupas');
+
 Route::get('/manpro-bawang/kerjaharian/tenagakupas', 'managerproduksi\ManproBawangController@tenaga_kupas');
 Route::get('/manpro-bawang/kerjaharian/pembagianbawang', 'managerproduksi\ManproBawangController@pembagian_bawang');
 Route::get('/manpro-bawang/kerjaharian/penerimaanbawang', 'managerproduksi\ManproBawangController@penerimaan_bawang');
 Route::get('/manpro-bawang/kerjaharian/persiapanmasak', 'managerproduksi\ManproBawangController@persiapan_masak');
 
 // Manager Produksi | Data Produksi | Gudang Tapioka
-Route::get('/manager-produksi/gudang-tapioka', 'managerproduksi\ManagerproduksiController@gudang_tapioka_home');
-Route::get('/manager-produksi/gudang-tapioka/stock', 'managerproduksi\ManagerproduksiController@gudang_tapioka_stock');
-Route::get('/manager-produksi/gudang-tapioka/kerja-harian', 'managerproduksi\ManagerproduksiController@gudang_tapioka_kerjaharian');
+Route::get('/manager-produksi/gudang-tapioka', 'managerproduksi\ManproTapiokaController@home');
+Route::get('/manager-produksi/gudang-tapioka/stock', 'managerproduksi\ManproTapiokaController@stock');
+Route::get('/manager-produksi/gudang-tapioka/kerja-harian', 'managerproduksi\ManproTapiokaController@kerja_harian');
 
 // Manager Produksi | Data Produksi | Gudang Bumbu
-
 Route::get('/manager-produksi/gudang-bumbu', 'managerproduksi\ManproBumbuController@home');
-
-Route::get('/manager-produksi/gudang-bumbu/stock-bahan', 'managerproduksi\ManproBumbuController@stock_bahan');
-Route::get('/manager-produksi/gudang-bumbu/detail-prive', 'managerproduksi\ManproBumbuController@detail_prive');
-Route::get('/manager-produksi/gudang-bumbu/stock-adonan-gula', 'managerproduksi\ManproBumbuController@stock_adonan_gula');
-Route::get('/manager-produksi/gudang-bumbu/stock-adonan-gula-garam', 'managerproduksi\ManproBumbuController@stock_adonan_gula_garam');
-Route::get('/manager-produksi/gudang-bumbu/stock-bumbu-ready', 'managerproduksi\ManproBumbuController@stock_bumbu_ready');
-
 Route::get('/manager-produksi/gudang-bumbu/stock', 'managerproduksi\ManproBumbuController@stock');
-
 Route::get('/manager-produksi/gudang-bumbu/kerja-harian', 'managerproduksi\ManproBumbuController@kerja_harian');
 
 });
