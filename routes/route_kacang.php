@@ -51,6 +51,8 @@ Route::get('/hari_sebelumnya', function () {
     return view('gudangkacang.kerja_harian_sebelumnya');
 });
 
+Route::post('/kerjaharian/simpanhasil', 'gudangkacang\KerjaHariIniController@store');
+
 Route::get('/tutup', function () {
     return view('gudangkacang.review_harian');
 });

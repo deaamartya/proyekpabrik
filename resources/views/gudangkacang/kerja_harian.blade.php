@@ -189,7 +189,7 @@ Kerja Harian
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-12">
-                                                                <br><button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="kirimData()">Tutup</button>
+                                                                <br><button type="button" id="simpandata" class="btn btn-primary" style="margin-right: 10px;" onclick="kirimData()">Tutup</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -485,7 +485,63 @@ Kerja Harian
             document.getElementById('pi_hc').innerHTML = strhc.value;
             document.getElementById('pi_telor').innerHTML = strtelor.value;
         }
+    
+    //Kirim Data
+    function kirimData(){
+        let jsonberat = [];
+        var data;
+        data = {
+            pekerja : Number(document.getElementById('jml_pekerja').value),
 
+            penerimaan_ob : document.getElementById('p_ob').innerHTML,
+            penerimaan_hc : document.getElementById('p_hc').innerHTML,
+            penerimaan_8ml : document.getElementById('p_8ml').innerHTML,
+
+            hasil_gs : $('#jmlgs').val(),
+            hasil_sp : $('#jmlsp').val(),
+            hasil_hc : $('#jmlhc').val(),
+            hasil_telor : $('#jmltelor').val(),
+
+            sortir_gs : $('#sortirgs').val(),
+            sortir_sp : $('#sortirsp').val(),
+            sortir_hc : $('#sortirhc').val(),
+            sortir_telor : $('#sortirtelor').val(),
+        }
+            jsonberat.push(data);
+
+            let jsondata = JSON.stringify(jsonberat);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{ url('/kerjaharian/simpanhasil') }}",
+            method: 'POST',
+            data: {
+                data : jsondata,
+            },
+                success: function(result){
+                    $("#simpandata").hide();
+                    swal({
+                        title: 'Berhasil!',
+                        text: 'Data Berhasil Disimpan',
+                        timer: 3000,
+                        showConfirmButton: false,
+                        type: 'success',
+                    }).then(
+                    function () {
+                    },
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                        }
+                    }
+                    );
+                }
+            });
+
+    }
 
     function show() {
         var table = document.getElementById("addgrup");
@@ -879,59 +935,6 @@ function mstelor(){
         x = parseInt(x) - 1;
     }
     document.getElementById('sortirtelor').value = x;
-}
-
-//Kirim Data
-function kirimData(){
-    let jsonberat = [];
-        var data;
-
-        let output = 0;
-        for(let i=0;i<pegawai.length;i++){
-            data = {
-                beratbawang: $("#beratbawang"+pegawai[i]["id_pegawai"]).val(),
-                beratkulit: $("#beratkulit"+pegawai[i]["id_pegawai"]).val(),
-                idtr: pegawai[i]["idtr"],
-                id_pegawai : pegawai[i]["id_pegawai"]
-            }
-            jsonberat.push(data);
-            output = output + Number($("#tb"+pegawai[i]["id_pegawai"]).html());
-        }
-
-        let jsondata = JSON.stringify(jsonberat);
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        url: "{{ url('/kerjaharian/simpanhasil') }}",
-        method: 'POST',
-        data: {
-            data : jsondata,
-                total_output : $("#berat").val(),
-                total_input : output,
-            },
-            success: function(result){
-                $("#simpan").hide();
-                swal({
-                    title: 'Berhasil!',
-                    text: 'Data Berhasil Disimpan',
-                    timer: 3000,
-                    showConfirmButton: false,
-                    type: 'success',
-                }).then(
-                function () {
-                },
-                function (dismiss) {
-                    if (dismiss === 'timer') {
-                    }
-                }
-                );
-            }
-        });
-
 }
 
 </script>
