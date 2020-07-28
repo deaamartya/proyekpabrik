@@ -1,7 +1,7 @@
 @section('title') 
 Input History Penerimaan Bahan
 @endsection 
-@extends('layouts.main')
+@extends('gudangkacang.layouts.main')
 @section('style')
 <!-- DataTables css -->
 <link href="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
