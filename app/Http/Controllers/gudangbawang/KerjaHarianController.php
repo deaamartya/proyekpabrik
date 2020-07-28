@@ -114,6 +114,7 @@ class KerjaHarianController extends Controller
 
     public function pembagianbawang(){
 
+        // AMBIL JUMLAH ORDER BESOK
     	$orderbesok = OrderMasak::select('dom.jumlah')
     	->join('detail_order_masak AS dom','dom.id_order_masak','=','order_masak.id_order_masak')
     	->where([
@@ -122,17 +123,24 @@ class KerjaHarianController extends Controller
     	])
     	->first();
 
-    	//AMBIL STOCK BAWANG KUPAS
+    	//AMBIL STOCK BAWANG KULIT
 
     	$stockbawang = Stock::select('stock')->where([
     		['id_gudang','=','7'],
     		['id_bahan_baku','=','BB000000006']
     	])->orderBy('timestamp','DESC')->first();
 
+        // AMBIL JUMLAH STOCK BEBAS
     	$stockbebas = $stockbawang->stock - $orderbesok->jumlah;
 
-    	$ratasusut = 5;
+        // AMBIL RATA-RATA SUSUT
+        $id_rekap = RekapTransaksiHarianGudang::select('id_rekap_transaksi_gudang')->where('id_gudang','=','7')->get();
+        $ratasusut = SusutDlmProse::join('rekap_transaksi_harian_gudang AS rh','rh.id_rekap_transaksi_gudang','=','susut_dlm_proses.id_rekap_transaksi_harian_gudang')->average('berat_susut_persen');
+        if(!$ratasusut){
+            $ratasusut = 5;
+        }
 
+        // AMBIL JUMLAH ORDER HARI INI
     	$targetkupas = OrderMasak::select('dom.jumlah','tanggal_order_masak','dom.id_order_masak')
     	->join('detail_order_masak AS dom','dom.id_order_masak','=','order_masak.id_order_masak')
     	->where([
@@ -141,15 +149,31 @@ class KerjaHarianController extends Controller
     	])
     	->first();
 
+        // CEK APAKAH KERJA HARIAN UDAH DIBUAT ATAU BELUM
+        $cekkerja = KerjaHarianGroup::where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->exists();
+
+        if(!$cekkerja){
+            $tenagaaktif = Pegawai::select('id_pegawai')->where(['id_jabatan' => '2', 'status' => 1])->get();
+            $json = json_encode($tenagaaktif);
+            KerjaHarianGroup::insert([
+                'id_group_kerja' => 'G0000000001',
+                'tanggal' => date('Y-m-d'),
+                'id_pegawai' => $json,
+            ]);
+        }
+
+        // CEK APAKAH KUPAS BAWANG UDAH DIBUAT ATAU BELUM, ADA = SUDAH ADA DATA PEMBERIAN BAWANG
         $cek = KupasBawang::where('tanggal_beri',date('Y-m-d'))->exists();
 
         if($cek){
+            // AMBIL TENAGA KUPAS
             $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
             $tenagakupas = json_decode($tenagakupas->id_pegawai);
             $arrtenaga = [];
             $jumlah = [];
             $i=0;
             foreach($tenagakupas as $t){
+                // AMBIL DETAIL TRANSAKSI UNTUK TENAGA KUPAS (BERI BAWANG)
                 $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
                 ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
                 ->where('id_pegawai','=',$t->id_pegawai)
@@ -161,10 +185,13 @@ class KerjaHarianController extends Controller
 
                 $id_det = "DT".str_pad(intval(substr($id_det,2))-1,9,"0",STR_PAD_LEFT);
                 
+                 // AMBIL JUMLAH BAWANG YANG DIBERI PER TENAGA KUPAS
                 $jumlah[$i] = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det)->first();
 
                 $i++;
             }
+
+             // AMBIL DATA TOTAL PROSES HARI INI
             $totalproses = Stock::select('keluar')->where([
                     ['id_satuan','=','1'],
                     ['id_bahan_baku','=','BB000000006'],
@@ -271,69 +298,88 @@ class KerjaHarianController extends Controller
 
     public function penerimaanbawang(){
 
-        $idkerja = KerjaHarianGroup::select('id_kerja_harian_group')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
-        $cek = DB::table('detail_rekap_kerja_harian_group')->where(['id_kerja_harian_group' => $idkerja->id_kerja_harian_group])->exists();
+        $cekkerja = KerjaHarianGroup::where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->exists();
 
-        $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
-            
-        $tenagakupas = json_decode($tenagakupas->id_pegawai);
-
-        for($i=0;$i<count($tenagakupas);$i++){
-            $pegawai[$i] = Pegawai::select('id_pegawai','nama')->where('id_pegawai','=',$tenagakupas[$i]->id_pegawai)->first();
+        if(!$cekkerja){
+            $tenagaaktif = Pegawai::select('id_pegawai')->where(['id_jabatan' => '2', 'status' => 1])->get();
+            $json = json_encode($tenagaaktif);
+            KerjaHarianGroup::insert([
+                'id_group_kerja' => 'G0000000001',
+                'tanggal' => date('Y-m-d'),
+                'id_pegawai' => $json,
+            ]);
         }
 
-        $or = OrderMasak::select('order_masak.id_order_masak')
-            ->join('detail_order_masak AS dom','dom.id_order_masak','=','order_masak.id_order_masak')
-            ->where([
-                ['order_masak.tanggal_order_masak','=',date('Y-m-d')],
-                ['dom.jenis_order','=',1]
-            ])
-            ->first();
+        $cek = KupasBawang::where('tanggal_beri',date('Y-m-d'))->exists();
 
-        if($cek!=0){
-            foreach($pegawai as $t){
-
-                $id_det = DetailKupasBawang::select('dt.id_detail_transaksi','kulit')
-                ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
-                ->where('id_pegawai','=',$t->id_pegawai)
-                ->first();
-
-                $t->jumlahkulit = $id_det->kulit;
-
-                $jumlahbawang = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det->id_detail_transaksi)->first();
-
-                $t->jumlahbawang = $jumlahbawang->jumlah;
-
-                $id_det = $id_det->id_detail_transaksi;
-
-                $id_det = "DT".str_pad(intval(substr($id_det,2))-1,9,"0",STR_PAD_LEFT);
-                
-                $jumlah = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det)->first();
-
-                $t->jumlah = $jumlah->jumlah;
-                $t->idtr = $id_det;
-            }
-            return view('gudangbawang.penerimaanbawangisi',['tenagakupas' => $pegawai]);
-            
+        if(!$cek){
+            return redirect('gudang-bawang/pembagianbawang')->with('error','Data belum diisi');
         }
         else{
-            foreach($pegawai as $t){
+            $idkerja = KerjaHarianGroup::select('id_kerja_harian_group')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
+            $cek = DB::table('detail_rekap_kerja_harian_group')->where(['id_kerja_harian_group' => $idkerja->id_kerja_harian_group])->exists();
 
-                $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
-                ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
-                ->where('id_pegawai','=',$t->id_pegawai)
+            $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
+                
+            $tenagakupas = json_decode($tenagakupas->id_pegawai);
+
+            for($i=0;$i<count($tenagakupas);$i++){
+                $pegawai[$i] = Pegawai::select('id_pegawai','nama')->where('id_pegawai','=',$tenagakupas[$i]->id_pegawai)->first();
+            }
+
+            $or = OrderMasak::select('order_masak.id_order_masak')
+                ->join('detail_order_masak AS dom','dom.id_order_masak','=','order_masak.id_order_masak')
+                ->where([
+                    ['order_masak.tanggal_order_masak','=',date('Y-m-d')],
+                    ['dom.jenis_order','=',1]
+                ])
                 ->first();
 
-                $id_det = $id_det->id_detail_transaksi;
+            if($cek!=0){
+                foreach($pegawai as $t){
 
-                $id_det = "DT".str_pad(intval(substr($id_det,2))-1,9,"0",STR_PAD_LEFT);
+                    $id_det = DetailKupasBawang::select('dt.id_detail_transaksi','kulit')
+                    ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
+                    ->where('id_pegawai','=',$t->id_pegawai)
+                    ->first();
+
+                    $t->jumlahkulit = $id_det->kulit;
+
+                    $jumlahbawang = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det->id_detail_transaksi)->first();
+
+                    $t->jumlahbawang = $jumlahbawang->jumlah;
+
+                    $id_det = $id_det->id_detail_transaksi;
+
+                    $id_det = "DT".str_pad(intval(substr($id_det,2))-1,9,"0",STR_PAD_LEFT);
+                    
+                    $jumlah = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det)->first();
+
+                    $t->jumlah = $jumlah->jumlah;
+                    $t->idtr = $id_det;
+                }
+                return view('gudangbawang.penerimaanbawangisi',['tenagakupas' => $pegawai]);
                 
-                $jumlah = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det)->first();
-
-                $t->jumlah = $jumlah->jumlah;
-                $t->idtr = $id_det;
             }
-            return view('gudangbawang.penerimaanbawang',['tenagakupas' => $pegawai]);
+            else{
+                foreach($pegawai as $t){
+
+                    $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
+                    ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
+                    ->where('id_pegawai','=',$t->id_pegawai)
+                    ->first();
+
+                    $id_det = $id_det->id_detail_transaksi;
+
+                    $id_det = "DT".str_pad(intval(substr($id_det,2))-1,9,"0",STR_PAD_LEFT);
+                    
+                    $jumlah = DetailTransaksi::select('jumlah')->where('id_detail_transaksi','=',$id_det)->first();
+
+                    $t->jumlah = $jumlah->jumlah;
+                    $t->idtr = $id_det;
+                }
+                return view('gudangbawang.penerimaanbawang',['tenagakupas' => $pegawai]);
+            }
         }
         
     }
@@ -357,6 +403,10 @@ class KerjaHarianController extends Controller
 
                     $id_det = "DT".str_pad(intval(substr($id_det,2))+1,9,"0",STR_PAD_LEFT);
 
+                    if($t->beratkulit == ''){
+                        $t->beratkulit = 0;
+                    }
+
                     DB::table("detail_kupas_bawang")
                     ->where([
                         'id_detail_transaksi' => $id_det,
@@ -373,7 +423,7 @@ class KerjaHarianController extends Controller
                     ]);
                 }
 
-                //mengurangi stock bawang kulit di gudang bawang
+                //MENAMBAH STOCK BAWANG KUPAS SESUAI PENERIMAAN
                 Stock::insert([
                     'id_satuan' => '1',
                     'id_bahan_baku' => 'BB000000008',

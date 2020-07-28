@@ -94,12 +94,13 @@ Penerimaan Bawang
             <div class="modal-body">
                     <div class="form-group mb-0">
                       <label for="validationCustom01">Berat Bawang Kupas (Kg)</label>
-                      <input type="text" class="form-control" name="beratbawang[{{$t->id_pegawai}}]" id="beratbawang{{$t->id_pegawai}}" required>
+                      <input type="number" min="0" step="0.01" class="form-control bb-class" name="beratbawang[{{$t->id_pegawai}}]" id="beratbawang{{$t->id_pegawai}}" required>
                     </div>
                     <div class="form-group mb-0">
-                      <label for="validationCustom01">Berat Kulit (Kg)</label>
-                      <input type="text" class="form-control" name="beratkulit[{{$t->id_pegawai}}]" id="beratkulit{{$t->id_pegawai}}" required>
+                      <label for="validationCustom01">Berat Kulit Bawang (Kg)</label>
+                      <input type="number" min="0" step="0.01" class="form-control bk-class" name="beratkulit[{{$t->id_pegawai}}]" id="beratkulit{{$t->id_pegawai}}" required>
                     </div>
+                    <p class="badge badge-danger mt-1" id="warning{{$t->id_pegawai}}">Jumlah berat bawang kupas dan kulit bawang melebihi berat bawang kulit.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary save" id="save{{$t->id_pegawai}}">Simpan</button>
@@ -129,30 +130,44 @@ Penerimaan Bawang
 
         var pegawai = <?php echo json_encode($tenagakupas)?>;
 
+        $(".badge").hide();
+
         $(".save").click(function(){
             let id = $(this).attr('id').substr(4);
             $("#bk"+id).html($("#beratbawang"+id).val());
             $("#kulit"+id).html($("#beratkulit"+id).val());
+            if($("#beratbawang"+id).val() == ""){
+                $("#bk"+id).html(0);
+            }
+            if($("#beratkulit"+id).val() == ""){
+                $("#kulit"+id).html(0);
+            }
             let jumlah = Number($("#tb"+id).html());
             let bk = Number($("#bk"+id).html());
             let kulit = Number($("#kulit"+id).html());
-
-            if(jumlah > (bk+kulit)){
-                $("#nama"+id).addClass("redclass");
-                $("#tb"+id).addClass("redclass");
-                $("#bk"+id).addClass("redclass");
-                $("#kulit"+id).addClass("redclass");
+            if(jumlah < (bk+kulit)){
+                $("#bk"+id).html(0);
+                $("#kulit"+id).html(0);
+                $("#warning"+id).show();
             }
             else{
-                $("#nama"+id).removeClass("redclass");
-                $("#tb"+id).removeClass("redclass");
-                $("#bk"+id).removeClass("redclass");
-                $("#kulit"+id).removeClass("redclass");
+                $("#warning"+id).hide();
+                if(jumlah > (bk+kulit)){
+                    $("#nama"+id).addClass("redclass");
+                    $("#tb"+id).addClass("redclass");
+                    $("#bk"+id).addClass("redclass");
+                    $("#kulit"+id).addClass("redclass");
+                }
+                else{
+                    $("#nama"+id).removeClass("redclass");
+                    $("#tb"+id).removeClass("redclass");
+                    $("#bk"+id).removeClass("redclass");
+                    $("#kulit"+id).removeClass("redclass");
+
+                }
+                $("#hasilKupas"+id).modal('toggle');
+                hitungBawang();
             }
-
-            $("#hasilKupas"+id).modal('toggle');
-            hitungBawang();
-
         });
 
         function hitungBawang(){

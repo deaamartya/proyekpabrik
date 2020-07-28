@@ -22,6 +22,7 @@
     <!-- Div to show the scanner -->
     <div id="scanner-container"></div>
     <input type="button" id="btnScan" value="Start/Stop the scanner" />
+    <input type="text" id="hdnBarcode"/>
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -113,7 +114,7 @@ function startScanner() {
         console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
         $("#hdnBarcode").val(result.codeResult.code);
         
-        LoadPage();
+        // LoadPage();
         $("#btnScan").click();
     });
 }
@@ -121,7 +122,7 @@ function startScanner() {
 function LoadPage()
 {
     if ($("#hdnBarcode").val() == "")
-        $("#hdnBarcode").val("1900067611"); //default barcode
+        $("#hdnBarcode").val("BELOM DE"); //default barcode
 
     $.ajax({
         type: 'Get',

@@ -106,7 +106,7 @@
             
             <!-- End Leftbar -->
             <!-- Start Rightbar -->
-            @include('gudang_kacang.layouts.rightbar')          
+            @include('gudangkacang.layouts.rightbar')          
             @yield('content')
             <!-- End Rightbar --> 
         </div>

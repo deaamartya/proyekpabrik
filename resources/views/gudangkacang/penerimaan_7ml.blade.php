@@ -14,13 +14,13 @@ Input Penerimaan Kacang OB
 <div class="breadcrumbbar">
     <div class="row align-items-center">
         <div class="col-md-8 col-lg-8">
-            <h4 class="page-title">Input Penerimaan Kacang OB</h4>
+            <h4 class="page-title">Input Penerimaan Kacang 7 ML</h4>
             <div class="breadcrumb-list">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="">Home</a></li>
                     <li class="breadcrumb-item"><a href="">Stock</a></li>
                     <li class="breadcrumb-item"><a href="">Gudang Kacang</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Input Penerimaan Kacang OB</li>
+                    <li class="breadcrumb-item active" aria-current="page">Input Penerimaan Kacang 7 ML</li>
             </div>
         </div>
         <div class="col-md-4 col-lg-4">
@@ -39,11 +39,10 @@ Input Penerimaan Kacang OB
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
-                    <h5 class="card-title">Input Penerimaan Kacang OB</h5>
+                    <h5 class="card-title">Input Penerimaan Kacang 7 ML</h5>
                 </div>
                 <div class="card-body">
-                    <form action="/insert_stock_gudang_kacang_penerimaan_ob" method="post">
-                    {{ csrf_field() }}
+                    <form>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="tanggal">Tanggal Sekarang</label>
