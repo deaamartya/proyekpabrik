@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Stock;
+use App\Models\DetailOrderMasak;
 
 class StockbawangkulitController extends Controller
 {
@@ -16,15 +17,16 @@ class StockbawangkulitController extends Controller
      */
     public function index()
     {
-        $stock= \App\Models\Stock::all();
+        // $stock= \App\Models\Stock::all();
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kulit')->get();
      return view('gudangbawang.stockbawangkulit', ['stock' => $stock]);
-     return view('gudangbawang.stockbawangkupas', ['stock' => $stock]);
+    
     }
 
     public function indexkupas()
     {
-        $stock= \App\Models\Stock::all();
-     
+        // $stock= \App\Models\Stock::all();
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kupas')->get();
      return view('gudangbawang.stockbawangkupas', ['stock' => $stock]);
     }
     /**
@@ -93,10 +95,51 @@ class StockbawangkulitController extends Controller
     {
         //
     }
-    public function tambah()
+
+    public function carikulit(Request $request)
     {
-        //
+        // Stock::create($request->all());
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kulit')
+        ->whereBetween('TIMESTAMP', array($request->awalDate, $request->akhirDate))->get();
+        return view('gudangbawang.stockbawangkulit', ['stock' => $stock]);
     }
+    
+    public function carikupas(Request $request)
+    {
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kupas')
+        ->whereBetween('TIMESTAMP', array($request->awalDate, $request->akhirDate))->get();
+        return view('gudangbawang.stockbawangkupas', ['stock' => $stock]);
+    }
+    
+
+
+
+    public function tambah($id)
+    {
+        $detailordermasak= \App\Models\DetailOrderMasak::all();
+        $substring= substr($id,22);
+        switch ($substring) {
+            case 0:
+              echo "Your favorite color is red!";
+              break;
+            case 1:
+              echo "Your favorite color is blue!";
+              break;
+            case 2:
+              echo "Your favorite color is green!";
+              break;
+            default:
+              echo "Your favorite color is neither red, blue, nor green!";
+          }
+        $jumlah = DB::table('detail_order_masak')->select('jumlah')->where('id',$id);
+        $jumlah1 =$jumlah+1;
+        $jumlah->jumlah = $jumlah1;
+        $jumlah->save();
+        // $tambah=DB::table('detailordermasak')->where('id', $id) ->update(['jumlah' => $jumlah]);
+        return response()->json(['success' => true  ]);
+    //  return view('gudangbawang.stockbawangkulit', ['detailordermasak' => $detailordermasak]);
+    }
+    
 
 
 }
