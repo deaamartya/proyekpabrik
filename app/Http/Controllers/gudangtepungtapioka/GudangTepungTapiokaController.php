@@ -86,7 +86,7 @@ class GudangTepungTapiokaController extends Controller
         DB::table('stock')->insert([
             'id_satuan' => 1,
             'id_transaksi' => 1,
-            'id_bahan_baku' => 'BB000000007',
+            'id_bahan_baku' => 'BB000000005',
             'keterangan' => 'Diambil',
             'masuk' => 0,
             'keluar' => $request->berat,
@@ -102,7 +102,7 @@ class GudangTepungTapiokaController extends Controller
         DB::table('stock')->insert([
             'id_satuan' => 2,
             'id_transaksi' => 1,
-            'id_bahan_baku' => 'BB000000007',
+            'id_bahan_baku' => 'BB000000005',
             'keterangan' => 'Hasil Tambah Packing',
             'masuk' => $request->hasilpack,
             'keluar' => 0,
