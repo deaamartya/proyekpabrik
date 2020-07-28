@@ -21,7 +21,7 @@ Route::get('/gudang-bawang/', function () {
     return redirect('/gudang-bawang/home-bawang');
 });
 
-Route::get('/gudang-bawang/home-bawang', 'gudangbawang\HomeController@index')->name('dashboard-kanji');
+Route::get('/gudang-bawang/home-bawang', 'gudangbawang\HomeController@index');
 
 //kerja harian
 
