@@ -248,9 +248,7 @@ class PenerimaanController extends Controller
             'nomor_kontainer' => 'required',
             'nomor_polisi' => 'required',
             'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required',
-            'berat_susut_kg' => 'required|min:0',
-            'berat_susut_persen' => 'required|min:0'
+            'berat_aktual' => 'required'
         
         ]);
 
@@ -302,9 +300,7 @@ class PenerimaanController extends Controller
         $detail_susut->berat_kirim = $request->berat_surat_jalan ;
         $detail_susut->save();
 
-        return redirect('/penerimaan/history_penerimaan')->with('alert_simpan', 'Data Berhasil Disimpan.');
-       
-
+        return redirect('/penerimaan/history_penerimaan');
 
     }
 
@@ -316,9 +312,7 @@ class PenerimaanController extends Controller
             'id_gudang2' => 'required',
             'id_bahan_baku2' => 'required',
             'berat_surat_jalan2' => 'required',
-            'berat_aktual2' => 'required',
-            'berat_susut_kg2' => 'required|min:0',
-            'berat_susut_persen2' => 'required|min:0'
+            'berat_aktual2' => 'required'
     
         ]);
 
@@ -360,7 +354,9 @@ class PenerimaanController extends Controller
         $detail_susut->berat_kirim = $request->berat_surat_jalan2 ;
         $detail_susut->save();
         
-        return redirect('/penerimaan/history_penerimaan')->with('alert_simpan2', 'Data Berhasil Disimpan.');
+
+
+        return redirect('/penerimaan/history_penerimaan');
     }
 
 
@@ -567,9 +563,9 @@ class PenerimaanController extends Controller
             'nomor_kontainer' => 'required',
             'nomor_polisi' => 'required',
             'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required',
-            'berat_susut_kg' => 'required|min:0',
-            'berat_susut_persen' => 'required|min:0'
+            'berat_aktual' => 'required|min:1',
+            'berat_susut_kg' => 'required|min:1',
+            'berat_susut_persen' => 'required|min:1'
         
         ]);
         
@@ -602,7 +598,7 @@ class PenerimaanController extends Controller
         $detail_susut->berat_kirim = $request->berat_surat_jalan ;
         $detail_susut->save();
 
-        return redirect('/penerimaan/history_penerimaan')->with('alert_update', 'Data Berhasil Diupdate.');
+        return redirect('/penerimaan/history_penerimaan');
 
     }
 
@@ -614,9 +610,9 @@ class PenerimaanController extends Controller
             'id_gudang' => 'required',
             'id_bahan_baku' => 'required',
             'berat_surat_jalan' => 'required',
-            'berat_aktual' => 'required',
-            'berat_susut_kg' => 'required|min:0',
-            'berat_susut_persen' => 'required|min:0'
+            'berat_aktual' => 'required|min:1',
+            'berat_susut_kg' => 'required|min:1',
+            'berat_susut_persen' => 'required|min:1'
         
         ]);
         
@@ -641,7 +637,7 @@ class PenerimaanController extends Controller
         $detail_susut->berat_kirim = $request->berat_surat_jalan ;
         $detail_susut->save();
 
-        return redirect('/penerimaan/history_penerimaan')->with('alert_update2', 'Data Berhasil Diupdate.');
+        return redirect('/penerimaan/history_penerimaan');
 
     }
 
@@ -657,14 +653,30 @@ class PenerimaanController extends Controller
     }
 
     public  function printBarcode($id){ 
+        /*
+        $request->validate  
+        ([  'id_transaksi' => 'required|max:18',
+            'id_jenis_penerimaan' => 'required',
+            'id_gudang' => 'required',
+            'id_supplier' => 'required',
+            'id_bahan_baku' => 'required',
+            'nomor_kontainer' => 'required',
+            'nomor_polisi' => 'required',
+            'berat_surat_jalan' => 'required',
+            'berat_aktual' => 'required',
+            'berat_susut_kg' => 'required',
+            'berat_susut_persen' => 'required'
+        
+
+        ]);
+        */
+
         
         $id_penerimaan= $id;
         $pdf =  PDF::loadView('managerproduksi.penerimaan.cetak_barcode', compact('id_penerimaan')); 
         $pdf->setPaper('a4',  'potrait'); 
         return $pdf->stream(); 
     }
-
-   
 
     
 

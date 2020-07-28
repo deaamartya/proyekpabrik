@@ -325,13 +325,8 @@ $(document).ready(function(){
     var berat_suratjalan = document.getElementById("berat_suratjalan").value;
     var berat_netto = document.getElementById("berat_netto").value;
 
-    if (berat_suratjalan == "" || berat_netto == "") {
+    if (berat_suratjalan != "" && berat_netto != ""  ) {
 
-        document.getElementById('penyusutan').value = 0;
-        document.getElementById('percent_penyusutan').value = 0;
-
-    }
-    else {
         var s = berat_suratjalan - berat_netto;
         var susut = s.toFixed(2);
         var ps = (susut / berat_suratjalan)* 100;
@@ -339,11 +334,10 @@ $(document).ready(function(){
 
         document.getElementById('penyusutan').value = susut;
         document.getElementById('percent_penyusutan').value = percent_susut;
-    }
-        
-    
 
-    $(document).on('keyup', '#berat_suratjalan', function (e) {
+    }
+
+    $(document).on('input', '#berat_suratjalan', function (e) {
         hitungSusut();
     });
 

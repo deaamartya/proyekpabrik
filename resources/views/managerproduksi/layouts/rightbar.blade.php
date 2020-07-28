@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-md-12">
                 <div class="mobile-logobar">
-                    <a href="{{url('/')}}" class="mobile-logo"><img src="{{asset('/managerproduksi/img/logo_gangsar.png')}}" class="img-fluid" alt="logo"></a>
+                    <a href="{{url('/')}}" class="mobile-logo"><img src="{{asset('assets/images/logo.svg')}}" class="img-fluid" alt="logo"></a>
                 </div>
                 <div class="mobile-togglebar">
                     <ul class="list-inline mb-0">
@@ -41,7 +41,7 @@
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item">
                                 <div class="logobar">
-                                    <a href="{{url('/')}}" class="logo logo-large"><img src="{{asset('/managerproduksi/img/logo_gangsar.png')}}" class="img-fluid" alt="logo"></a>
+                                    <a href="{{url('/')}}" class="logo logo-large"><img src="{{asset('assets/images/logo.svg')}}" class="img-fluid" alt="logo"></a>
                                 </div>
                             </li>
                             <li class="list-inline-item">
@@ -63,10 +63,12 @@
                             <li class="list-inline-item">
                                 <div class="languagebar">
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle" href="#" role="button" id="languagelink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="live-icon">ID</span><span class="feather icon-chevron-down live-icon"></span></a>
+                                        <a class="dropdown-toggle" href="#" role="button" id="languagelink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="live-icon">EN</span><span class="feather icon-chevron-down live-icon"></span></a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="languagelink">
-                                            <a class="dropdown-item" href="#"><i class="flag flag-icon-id flag-icon-squared"></i>Indonesia</a>
                                             <a class="dropdown-item" href="#"><i class="flag flag-icon-us flag-icon-squared"></i>English</a>
+                                            <a class="dropdown-item" href="#"><i class="flag flag-icon-de flag-icon-squared"></i>German</a>
+                                            <a class="dropdown-item" href="#"><i class="flag flag-icon-bl flag-icon-squared"></i>France</a>
+                                            <a class="dropdown-item" href="#"><i class="flag flag-icon-ru flag-icon-squared"></i>Russian</a>
                                         </div>
                                     </div>
                                 </div>                                   
@@ -186,7 +188,7 @@
                          <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="ui-kits"><span>Data Produksi</span></a>
                         <ul class="dropdown-menu">
                              <li class="dropdown">
-                                <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="tables">Gudang Kacang & Gudang Kacang Sortir</a>
+                                <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/tables.svg')}}" class="img-fluid" alt="tables">Gudang Kacang</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('/manpro-kacang/home') }}">Home</a></li>
                                     <li class="dropdown">
@@ -236,8 +238,27 @@
 
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('/manager-produksi/gudang-bumbu') }}">Home</a></li>
-                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock') }}">Stock</a></li>
-                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/kerja-harian') }}">Kerja Harian</a></li>
+                                    <li class="dropdown">
+                                        <a href="javaScript:void();" class="dropdown-toggle"
+                                            data-toggle="dropdown">Stock</a>
+
+                                        <ul class="dropdown-menu">
+                                            <li><a
+                                                    href="{{ url('/manager-produksi/gudang-bumbu/stock-bahan') }}">Bahan</a>
+                                            </li>
+                                            <li><a href="{{ url('/manager-produksi/gudang-bumbu/detail-prive') }}">Detail
+                                                    Prive</a></li>
+                                            <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock-adonan-gula') }}">Adonan
+                                                    Gula</a></li>
+                                            <li><a
+                                                    href="{{ url('/manager-produksi/gudang-bumbu/stock-adonan-gula-garam') }}">Adonan
+                                                    Gula + Garam</a></li>
+                                            <li><a href="{{ url('/manager-produksi/gudang-bumbu/stock-bumbu-ready') }}">Bumbu
+                                                    Ready</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{ url('/manager-produksi/gudang-bumbu/kerja-harian') }}">Kerja
+                                            Harian</a></li>
                                 </ul>
                             </li>
 
@@ -275,7 +296,7 @@
     <!-- Start Footerbar -->
     <div class="footerbar">
         <footer class="footer">
-            <p class="mb-0">© 2020 Gangsar - All Rights Reserved.</p>
+            <p class="mb-0">© Pabrik Gangsar</p>
         </footer>
     </div>
     <!-- End Footerbar -->

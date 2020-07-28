@@ -163,14 +163,11 @@ Home Gudang Kacang
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
-                    <div class="row">
-                        <h5 class="card-title ml-3">Gudang Kacang Sortir</h5>
-                        <h5 class="card-title ml-auto mr-3" id="date2"></h5>
-                    </div>
+                    <h5 class="card-title">Gudang Kacang Sortir</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="display table table-bordered table-striped table-manpro-hover">
+                        <table id="datatable4" class="display table table-bordered table-striped table-manpro-hover datatable" >
                            <thead>
                                     <tr>
                                         <th>Stock</th>
@@ -236,7 +233,11 @@ Home Gudang Kacang
             responsive: true
         });
 
-         
+         $('#datatable4').DataTable( {
+            //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
     });
 
  $(document).ready(function() {
@@ -252,7 +253,6 @@ Home Gudang Kacang
         day = "0" + day;
     var today = day + ' ' + month + ' ' + now.getFullYear() ;
     document.getElementById('date').innerHTML = today;
-    document.getElementById('date2').innerHTML = today;
 });
 
 </script>

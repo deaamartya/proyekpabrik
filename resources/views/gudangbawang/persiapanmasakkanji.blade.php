@@ -1,5 +1,5 @@
 @section('title') 
-Soyuz - Datatable
+Persiapan Masak Kanji
 @endsection 
 @extends('gudangbawang.layouts.main')
 @section('style')
@@ -8,6 +8,7 @@ Soyuz - Datatable
 <link href="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -22,7 +23,7 @@ Soyuz - Datatable
             <h2 class="page-title text-left pl-5">Order Masak</h2>
         </div>
         <div class="col-4">
-            <h2 class="page-title text-right pr-5">10 Juni 2020</h2>
+            <h2 class="page-title text-right pr-5">@php echo date("d F Y"); @endphp</h2>
         </div>
     </div>        
 </div>
@@ -84,6 +85,7 @@ Soyuz - Datatable
 <!-- Datatable js -->
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <script>
     var ordermasak = <?php echo json_encode($ordermasak)?>;
     "use strict";
@@ -98,7 +100,6 @@ Soyuz - Datatable
         });
         $(".status").click(function(e){
             e.preventDefault();
-            let id = $(this).attr('id').substr(6);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -111,8 +112,8 @@ Soyuz - Datatable
                     id: $(this).attr('id').substr(6),
                 },
                 success: function(result){
+                    let id = result.ordermasak.id_order_masak;
                     if(result.ordermasak.status){
-                        id = result.ordermasak.id_order_masak;
                         $("#status"+id).removeClass('btn-danger');
                         $("#status"+id).addClass('btn-success');
                         $("#status"+id).html("Ready");
@@ -122,6 +123,20 @@ Soyuz - Datatable
                         $("#status"+id).addClass('btn-danger');
                         $("#status"+id).html("Belum");
                     }
+                    swal({
+                        title: 'Berhasil!',
+                        text: 'Data Berhasil Disimpan',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        type: 'success',
+                    }).then(
+                    function () {
+                    },
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                        }
+                    }
+                    );
                 }
             });
         });

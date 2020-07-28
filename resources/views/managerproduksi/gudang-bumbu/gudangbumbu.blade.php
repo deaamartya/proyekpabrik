@@ -37,6 +37,7 @@
              <div class="card-header">
                 <div class="row">
                     <h5 class="card-title ml-3">Order Masak</h5>
+                    <h5 class="card-title ml-auto mr-3">10 Juni 2020</h5>
                 </div>
              </div>
              <div class="card-body">
@@ -48,41 +49,20 @@
                                  <th>HC</th>
                                  <th>SP</th>
                                  <th>GS</th>
-                                 <th>Status (HC | SP | GS)</th>
+                                 <th>Status</th>
+                                 <th>Terambil</th>
                              </tr>
                          </thead>
                          <tbody>
-                            @foreach ($order_masak as $order_masak)
-                               <tr>
-                                   <td>
-                                       {{ $order_masak->tanggal_order_masak }}
-                                   </td>
-                                   <td>
-                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
-                                       ->where('id_bahan_product', 'PR00000000001')->value('jumlah') }}
-                                   </td>
-                                   <td>
-                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
-                                       ->where('id_bahan_product', 'PR00000000002')->value('jumlah') }}
-                                   </td>
-                                   <td>
-                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
-                                       ->where('id_bahan_product', 'PR00000000003')->value('jumlah') }}
-                                   </td>
-                                   <td colspan="3">
-                                        {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
-                                            ->where('id_bahan_product', 'PR00000000001')->value('presentase_status') }}
-                                        % | 
-                                        {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
-                                            ->where('id_bahan_product', 'PR00000000002')->value('presentase_status') }}
-                                        % | 
-                                        {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
-                                            ->where('id_bahan_product', 'PR00000000003')->value('presentase_status') }}
-                                        %
-                                   </td>
-                               </tr>
-                            @endforeach
-                        </tbody>
+                             <tr>
+                                 <td>09/06/20</td>
+                                 <td>-</td>
+                                 <td>50</td>
+                                 <td>30</td>
+                                 <td class="ready">100%</td>
+                                 <td class="ready">100%</td>
+                             </tr>
+                         </tbody>
                      </table>
                  </div>
 
@@ -101,15 +81,17 @@
                          <thead>
                              <tr>
                                  <th>Gula (Kg)</th>
-                                 <th>Garam (Kg)</th>
-                                 <th>Bumbu sachet</th>
+                                 <th>Garam 50 Kg (Kg)</th>
+                                 <th>Garam 25 Kg (Kg)</th>
+                                 <th>Bumbu (sachet)</th>
                              </tr>
                          </thead>
                          <tbody>
                              <tr>
-                                <td>{{ $stockgula }}</td>
-                                <td>{{ $stockgaram }}</td>
-                                <td>{{ $stockbumbu }}</td>
+                                 <td>20</td>
+                                 <td>20</td>
+                                 <td>12</td>
+                                 <td>50</td>
                              </tr>
                          </tbody>
                      </table>
@@ -122,7 +104,7 @@
          {{-- Start stock adonan gula + garam --}}
          <div class="card m-b-30">
              <div class="card-header">
-                <h5 class="card-title">Stock Bumbu</h5>
+                <h5 class="card-title">Stock Adonan Gula + Garam</h5>
              </div>
              <div class="card-body">
                  <div class="table-responsive">
@@ -173,6 +155,6 @@
 {{-- <script src="{{ asset('/assets/plugins/datatables/responsive.bootstrap4.min.js') }}"></script> --}}
 <script src="{{ asset('/assets/js/custom/custom-table-datatable.js') }}"></script>
 
-{{-- Custom Script --}}
+{{-- Modal Script --}}
 <script src="{{ asset('/managerproduksi/js/gudangbumbu.js') }}"></script>
 @endsection

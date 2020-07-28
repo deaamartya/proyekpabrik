@@ -88,32 +88,17 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($stock as $stk ) 
                                 <tr>
-                                    <td>2020/06/07</td>
-                                    <td>45</td>
-                                    <td>50</td>
-                                    <td>18</td>
+                                    <td>{{ $stk->TIMESTAMP}}</td>
+                                    <td>{{ $stk->masuk}}</td>
+                                    <td>{{ $stk->keluar}}</td>
+                                    <td>{{ $stk->stock}}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>2020/06/08</td>
-                                    <td>20</td>
-                                    <td>20</td>
-                                    <td>18</td>
-                                </tr>
-                                <tr>
-                                    <td>2020/06/09</td>
-                                    <td>40</td>
-                                    <td>30</td>
-                                    <td>28</td>
-                                </tr>
-                                <tr>
-                                    <td>2020/06/10</td>
-                                    <td>2</td>
-                                    <td>0</td>
-                                    <td>30</td>
-                                </tr>
-                                                               
+                                @endforeach
                             </tbody>
+                            
                                 </table>
                             </div>
                         </div>
@@ -172,31 +157,15 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($stock1 as $stk1 ) 
                                 <tr>
-                                    <td>2020/06/07</td>
-                                    <td>45</td>
-                                    <td>50</td>
-                                    <td>18</td>
+                                    <td>{{ $stk1->TIMESTAMP}}</td>
+                                    <td>{{ $stk1->masuk}}</td>
+                                    <td>{{ $stk1->keluar}}</td>
+                                    <td>{{ $stk1->stock}}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>2020/06/08</td>
-                                    <td>20</td>
-                                    <td>20</td>
-                                    <td>18</td>
-                                </tr>
-                                <tr>
-                                    <td>2020/06/09</td>
-                                    <td>40</td>
-                                    <td>30</td>
-                                    <td>28</td>
-                                </tr>
-                                <tr>
-                                    <td>2020/06/10</td>
-                                    <td>2</td>
-                                    <td>0</td>
-                                    <td>30</td>
-                                </tr>
-                                                               
+                                @endforeach
                             </tbody>
                                 </table>
                             </div>
@@ -256,31 +225,15 @@ Soyuz - Datatable
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($stock2 as $stk2 ) 
                                 <tr>
-                                    <td>2020/06/07</td>
-                                    <td>60</td>
-                                    <td>50</td>
-                                    <td>25</td>
+                                    <td>{{ $stk2->TIMESTAMP}}</td>
+                                    <td>{{ $stk2->masuk}}</td>
+                                    <td>{{ $stk2->keluar}}</td>
+                                    <td>{{ $stk2->stock}}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>2020/06/08</td>
-                                    <td>20</td>
-                                    <td>20</td>
-                                    <td>25</td>
-                                </tr>
-                                <tr>
-                                    <td>2020/06/09</td>
-                                    <td>40</td>
-                                    <td>30</td>
-                                    <td>35</td>
-                                </tr>
-                                <tr>
-                                    <td>2020/06/10</td>
-                                    <td>20</td>
-                                    <td>20</td>
-                                    <td>25</td>
-                                </tr>
-                                                               
+                                @endforeach
                             </tbody>
                         </table>
                             </div>

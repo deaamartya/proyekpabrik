@@ -1,5 +1,5 @@
 @section('title') 
-Soyuz - Datatable
+Pembagian Bawang
 @endsection 
 @extends('gudangbawang.layouts.main')
 @section('style')
@@ -25,7 +25,7 @@ Soyuz - Datatable
             <h4 class="page-title text-left pl-5">Pembagian Bawang</h4>
         </div>
         <div class="col-4">
-            <h4 class="page-title text-right pr-5">10 Juni 2020</h4>           
+            <h4 class="page-title text-right pr-5">@php echo date("d F Y"); @endphp</h4>           
         </div>
     </div>
     <div class="row align-items-between">
