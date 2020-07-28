@@ -14,7 +14,7 @@
 			<img src="{{ asset('/managerproduksi/img/bg.svg') }}">
 		</div>
 		<div class="login-content">
-            <form action="{{ url('/manager-produksi') }}" method="GET">
+            <form action="{{ route('login') }}" method="GET">
                 @csrf
 
 				<img src="{{ asset('/managerproduksi/img/avatar.svg') }}">
@@ -25,7 +25,7 @@
            		   </div>
            		   <div class="div">
            		   		<h5>Username</h5>
-           		   		<input type="text" class="input">
+           		   		<input type="text" class="input" name="username">
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -34,7 +34,7 @@
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" class="input">
+           		    	<input type="password" class="input" name="password">
             	   </div>
             	</div>
             	<a href="#">Lupa Password?</a>

@@ -41,8 +41,12 @@ Home Gudang Bawang
             <div class="card m-b-30">
                 <div class="card-header">
 
+                    <h5 class="card-title">Order Kupas Bawang</h5>
+
+
                         <h5 class="card-title ml-3">Order Kupas Bawang</h5>
                       
+
                     
                 </div>
                 <div class="card-body">
@@ -59,6 +63,43 @@ Home Gudang Bawang
                           
                             </thead>
                             <tbody>
+
+                                <tr>
+                                    <td>09/06/2020</td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>
+                                        <div class="badge-list">
+                                            <span class="badge badge-secondary badge-font">Selesai</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                               
+                                <tr>
+                                    <td>10/06/2020</td>
+                                    <td>120</td>
+                                    <td style="color: #32CD32;">120</td>
+                                    <td>
+                                        <div class="badge-list">
+                                            <span class="badge badge-success badge-font">Ready</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                    
+                                
+
+                                 <tr>
+                                    <td>11/06/2020</td>
+                                    <td>100</td>
+                                    <td style="color: red;">30</td>
+                                    <td>
+                                        <div class="badge-list">
+                                            <span class="badge badge-danger badge-font">Belum</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
 
                                     @foreach($orderkupasbawang as $okb)
                                     <tr>
@@ -86,6 +127,7 @@ Home Gudang Bawang
                                     </tr>
                                     @endforeach  
 
+
                             </tbody>
                         </table>
                     </div>
@@ -102,9 +144,12 @@ Home Gudang Bawang
         <div class="col-lg-12">
             <div class="card m-b-30">
                 <div class="card-header">
-              
+
+                    <h5 class="card-title" >Order Masak</h5>
+      
                         <h5 class="card-title ml-3">Order Masak</h5>
                       
+
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -120,15 +165,21 @@ Home Gudang Bawang
                           
                             </thead>
                             <tbody>
-                                @foreach($ordermasak as $ord)
-                                    <tr>
-                                        <td>{{date_format($ord->tanggal_order_masak,'d/m/Y')}}</td>
-                                        <td>{{$ord->HC}}</td>
-                                        <td>{{$ord->SP}}</td>
-                                        <td>{{$ord->GS}}</td>
-                                    </tr>
-                                @endforeach 
-                           
+                                <tr>
+                                    <td>09/06/2020</td>
+                                    <td>-</td>
+                                    <td>50</td>
+                                    <td>30</td>
+                                </tr>
+                               
+                                <tr>
+                                    <td>10/06/2020</td>
+                                    <td>-</td>
+                                    <td>40</td>
+                                    <td>60</td>
+                                    
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>

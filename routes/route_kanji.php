@@ -10,19 +10,18 @@ Route::get('/dashboard-kanji', function () {
     return view('dashboardkanji.dashboardkanji');
 })->name('dashboard-kanji');
 
+
 //coba scan
 Route::get('/scand',function(){
     return view('scan');
 });
-
-
 
 //gudang bawang
 Route::get('/gudang-bawang/', function () {
     return redirect('/gudang-bawang/home-bawang');
 });
 
-Route::get('/gudang-bawang/home-bawang', 'gudangbawang\HomeController@index')->name('dashboard-kanji');
+Route::get('/gudang-bawang/home-bawang', 'gudangbawang\HomeController@index');
 
 //kerja harian
 
@@ -110,7 +109,11 @@ Route::get('/gudang-bumbu/home-bumbu','gudangbumbu\HomeController@index');
 //     return view('gudangbumbu.kerjaharianadonangula');
 // });
 
-Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
+
+
+
+// Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
+
 
 Route::get('/gudang-bumbu/bahan', function () {
     return view('gudangbumbu.bahan');
@@ -129,12 +132,24 @@ Route::get('/gudang-bumbu/adonangulagaram', function () {
     return view('gudangbumbu.adonangulagaram');
 });
 
-Route::post('/gudang-bumbu/input_data', 'KerjaharianadonangulaController@ganti');
-Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@tb');
+// Route::post('/gudang-bumbu/input_data', 'KerjaharianadonangulaController@ganti');
+// Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@tb');
 
 
 Route::get('/gudang-bumbu/bumbuready', function () {
     return view('gudangbumbu.bumbuready');
 });
 
+
+
+Route::post('/gudang-bumbu/input_data', 'KerjaharianadonangulaController@ganti');
+Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
+Route::get('/gudang-bumbu/kerjaharianadonangula/inputmasuk', 'KerjaharianadonangulaController@masuk');
+// Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@tb');
+
+
 });
+
+
+
+

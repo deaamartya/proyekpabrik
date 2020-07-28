@@ -37,7 +37,7 @@ class CreateOrderMasakTable extends Migration
                 ELSE
                     SET new.id_order_masak = CONCAT('ORM', @currentdate ,LPAD(1,4,'0'));
                 END IF;
-            SET NEW.status = 0;
+            SET NEW.status = 1;
             END");
 
 

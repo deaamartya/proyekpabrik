@@ -68,13 +68,13 @@ Surat Penerimaan Barang
                             </div>
 
                             <div class="card-body"> 
-                                <form id="penerimaan_supplier" method="post" action="" autocomplete="off">
+                                <form id="penerimaan_supplier" method="post" action="" >
                                     @csrf
 
                                     <!-- jenis penerimaan : dari supplier -->
                                     <input type="hidden" id="jenis_penerimaan" name="id_jenis_penerimaan" value="1">
 
-                                    <input type="hidden" id="kode_penerimaan" name="id_penerimaan" value="{{ $id_penerimaan }}">
+                                    <input type="hidden" class="kode_penerimaan" name="id_penerimaan" value="{{ $id_penerimaan }}">
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6" >
@@ -217,7 +217,7 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                                 <label for="inputNetto">Berat Netto/Aktual (Kg)</label>
-                                                <input type="number" class="form-control @error('berat_aktual') is-invalid @enderror" id="berat_netto" name="berat_aktual" placeholder="Masukkan Berat Netto" onkeyup="hitungSusut();" value="{{ old('berat_aktual') }}">
+                                                <input type="number" class="form-control @error('berat_aktual') is-invalid @enderror" id="berat_netto" name="berat_aktual" placeholder="Masukkan Berat Netto" oninput="hitungSusut();" value="{{ old('berat_aktual') }}">
                                                  @error('berat_aktual') 
                                                             <div class="invalid-feedback form-error font-error"> 
                                                                 {{ $message }}
@@ -254,12 +254,17 @@ Surat Penerimaan Barang
 
 
                                             <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" class="btn btn-primary">Cetak Barcode</a>
+
+
+
+                                            <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" class="btn btn-primary">Cetak Barcode</a>
                                         
                                             <!--
                                             
                                             <a onclick="cetakBarcode();" class="btn btn-primary" style="color: white;">Cetak Barcode</a>
                                             -->
                                        
+
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
                                         </div>                        
@@ -287,15 +292,19 @@ Surat Penerimaan Barang
                             </div>
                           
                             <div class="card-body">
-                                <form id="pemindahan_bahan" method="post" action="" autocomplete="off">
+                                <form id="pemindahan_bahan" method="post" action="" >
                                     @csrf
 
                                     <!-- jenis penerimaan : pemindahan bahan-->
                                     <input type="hidden" id="jenis_penerimaan2" name="id_jenis_penerimaan2" value="2">
 
+
+                                    <input type="hidden" class="kode_penerimaan" name="id_penerimaan" value="{{ $id_penerimaan }}">
+
                                     <input type="hidden" id="kode_pemindahanbahan" name="id_pemindahan_bahan" value="{{ $id_pemindahan_bahan }}">
 
                                      <input type="hidden" id="kode_penerimaan2" name="id_penerimaan2" value="{{ $id_penerimaan }}">
+
 
                                     <div class="form-row">
                                         
@@ -396,7 +405,7 @@ Surat Penerimaan Barang
                                             <div class="form-group col-md-8">
                                                 <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                                 <label for="berat_netto2">Berat Netto/Aktual (Kg)</label>
-                                                <input type="number" class="form-control @error('berat_aktual2') is-invalid @enderror" id="berat_netto2" name="berat_aktual2" placeholder="Masukkan Berat Netto" onkeyup="hitungSusut2();" value="{{ old('berat_aktual2') }}">
+                                                <input type="number" class="form-control @error('berat_aktual2') is-invalid @enderror" id="berat_netto2" name="berat_aktual2" placeholder="Masukkan Berat Netto" oninput="hitungSusut2();" value="{{ old('berat_aktual2') }}">
                                                  @error('berat_aktual2') 
                                                             <div class="invalid-feedback form-error font-error"> 
                                                                         {{ $message }}
@@ -431,11 +440,7 @@ Surat Penerimaan Barang
                                         
                                             <a onclick="submitPenerimaan2();" class="btn btn-primary" style="color: white;">Selesai</a>
 
-                                            
-
                                             <a href="/penerimaan/cetak_barcode/{{ $id_penerimaan }}" onclick="cetak_barcode();" class="btn btn-primary">Cetak Barcode</a>
-
-                                           
                                       
                                             <a href="{{url('/penerimaan/history_penerimaan')}}" class="btn btn-primary">Tutup</a>
                                         </div>                        
@@ -633,6 +638,8 @@ function cetakBarcode(){
 
 }
 
+
+
 */
 
 
@@ -682,13 +689,8 @@ $(document).ready(function(){
     var berat_suratjalan = document.getElementById("berat_suratjalan").value;
     var berat_netto = document.getElementById("berat_netto").value;
 
-    if (berat_suratjalan == "" || berat_netto == "") {
+    if (berat_suratjalan != "" && berat_netto != ""  ) {
 
-        document.getElementById('penyusutan').value = 0;
-        document.getElementById('percent_penyusutan').value = 0;
-
-    }
-    else {
         var s = berat_suratjalan - berat_netto;
         var susut = s.toFixed(2);
         var ps = (susut / berat_suratjalan)* 100;
@@ -696,11 +698,10 @@ $(document).ready(function(){
 
         document.getElementById('penyusutan').value = susut;
         document.getElementById('percent_penyusutan').value = percent_susut;
-    }
-        
-    
 
-    $(document).on('keyup', '#berat_suratjalan', function (e) {
+    }
+
+    $(document).on('input', '#berat_suratjalan', function (e) {
         hitungSusut();
     });
 
@@ -713,6 +714,11 @@ $(document).ready(function(){
     var berat_pindah = document.getElementById("berat_pindah").value;
     var berat_netto2 = document.getElementById("berat_netto2").value;
 
+
+    if (berat_suratjalan2 != "" && berat_netto2 != ""  ) {
+
+        var s2 = berat_suratjalan2 - berat_netto2;
+
     if (berat_pindah == "" || berat_netto2 == ""  ) {
 
         document.getElementById('penyusutan2').value = 0;
@@ -720,15 +726,20 @@ $(document).ready(function(){
 
     }else{
         var s2 = berat_pindah - berat_netto2;
+
         var susut2 = s2.toFixed(2);
         var ps2 = (susut2 / berat_pindah)* 100;
         var percent_susut2 = ps2.toFixed(2);
 
         document.getElementById('penyusutan2').value = susut2;
         document.getElementById('percent_penyusutan2').value = percent_susut2;
+
     }
 
+    $(document).on('input', '#berat_suratjalan2', function (e) {
+
     $(document).on('keyup', '#berat_pindah', function (e) {
+
         hitungSusut2();
     });
 

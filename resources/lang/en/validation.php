@@ -132,6 +132,8 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
+
         'id_transaksi' => [
             'required' => 'No. Surat Jalan Wajib Diisi. ',
             'max' => 'No. Surat Jalan Tidak Boleh Lebih dari :max Karakter '
@@ -189,6 +191,7 @@ return [
         'berat_pindah' => [
             'required' => 'Berat Pindah Wajib Diisi. ',
         ],
+
 
 
     ],

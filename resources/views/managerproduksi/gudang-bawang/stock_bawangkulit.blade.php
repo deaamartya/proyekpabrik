@@ -54,7 +54,7 @@ Stock Bawang Kulit
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                           </div>                             
-                                        <input type="text" id="date1" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1" autocomplete="off"/>   
+                                        <input type="text" id="date1" class="datepicker-here form-control" placeholder="Pilih Tanggal Awal" aria-describedby="basic-addon1"/>   
                                     </div>
                                
                             </div>
@@ -65,7 +65,7 @@ Stock Bawang Kulit
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2"><i class="feather icon-calendar"></i></span>
                                           </div>                             
-                                        <input type="text" id="date2" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2" autocomplete="off"/>  
+                                        <input type="text" id="date2" class="datepicker-here form-control" placeholder="Pilih Tanggal Akhir" aria-describedby="basic-addon2"/>  
                                     </div>
                             </div>
 
@@ -73,7 +73,7 @@ Stock Bawang Kulit
                             <div class="form-group col-md-4">
                                     <label for=""></label>
                                     <div class="input-group mt-2"> 
-                                        <button id="terapkan_tgl" class="btn btn-primary">Terapkan</button>
+                                        <button class="btn btn-primary">Terapkan</button>
                                     </div>
                             </div>
 
@@ -96,9 +96,23 @@ Stock Bawang Kulit
                           
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>09/06/2020</td>
+                                    <td>Merk 1 / 10 Mei 2020</td>
+                                    <td>-</td>
+                                    <td>50</td>
+                                    <td>0</td>
+                                </tr>
                                
-                               
-                                
+                                <tr>
+                                    <td>10/06/2020</td>
+                                    <td>Merk 2 / 09 Mei 2020</td>
+                                    <td>200</td>
+                                    <td>-</td>
+                                    <td>200</td>
+                                    
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -129,73 +143,14 @@ Stock Bawang Kulit
 
 <script>
 
-$(document).ready(function() {
-        var datatable1 = $('#datatable1').DataTable( {
+    $(document).ready(function() {
+        $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
 
-
-    $(document).on('click', '#terapkan_tgl', function (e) {
-    
-    var awal = document.getElementById('date1').value;
-    var tgl_awal = awal.split("/").reverse().join("-");
-
-    var akhir = document.getElementById('date2').value;
-    var tgl_akhir = akhir.split("/").reverse().join("-");
-
-
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
-
-      $.ajax({
-            type:"POST",
-            url:"/manpro-bawang/stock/bawangkulit/get_stock",
-            data:{
-              "tgl_awal":tgl_awal,
-              "tgl_akhir":tgl_akhir,
-
-              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
-            },
-            success : function(results) {
-            // console.log(JSON.stringify(results)); //print_r
-                 
-              
-              for(var i=0; i<results.stock_bawangkulit.length; i++){
-                    
-                    datatable1.row.add([
-
-                    results.stock_bawangkulit[i].tanggal,
-                    results.stock_bawangkulit[i].keterangan+" / "+results.stock_bawangkulit[i].tgl_terima,
-                    results.stock_bawangkulit[i].masuk,
-                    results.stock_bawangkulit[i].keluar,
-                    results.stock_bawangkulit[i].stock
-                       
-                    ]).draw();
-                 
-                }
-                 
-  
-    
-             
-            },
-            error: function(data) {
-                console.log(data);
-            }
-      });
-
     });
-
-
-});
-
-
-
-
 
      $(document).ready(function(){
         $('#date1').datepicker({
