@@ -12,6 +12,9 @@ use App\Models\Stock;
 use App\Models\GroupKerja;
 use App\Models\DetailTransaksi;
 use App\Models\DetailRekap;
+use App\Models\DetailRekapKerjaHarianGroup;
+use App\Models\RekapKerjaHarianGroup;
+use App\Models\KerjaHarianGroup;
 
 use DB;
 
@@ -182,6 +185,27 @@ class KerjaHariIniController extends Controller
                     'jumlah_personil' => $data[0]->pekerja,
                     'level' => 0,
                 ]);
+
+                $idgrupkerja = GroupKerja::select('id_group_kerja')->orderBy('id_gudang', 'desc')->first();
+
+                KerjaHarianGroup::insert([
+                    'id_group_kerja' => $idgrupkerja->id_group_kerja,
+                    'tanggal' => date('Y-m-d'),
+                    'id_pegawai' => 'null'
+                ]);
+
+                RekapKerjaHarianGroup::insert([
+                    'timestamp' => date('Y-m-d H:i:s')
+                ]);
+
+                $idrekapkerja = RekapKerjaHarianGroup::select('id_rekap_kerja_harian_group')->orderBy('timestamp', 'desc')->first();
+                $idkerjaharian = KerjaHarianGroup::select('id_kerja_harian_group')->orderBy('tanggal', 'desc')->first();
+
+                DetailRekapKerjaHarianGroup::insert([
+                    'id_kerja_harian_group' => $idkerjaharian->id_kerja_harian_group,
+                    'id_rekap_kerja_harian_group' => $idrekapkerja->id_rekap_kerja_harian_group
+                ]);
+
 
                 //Rekap
                 DetailTransaksi::insert([
