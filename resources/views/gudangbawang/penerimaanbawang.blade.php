@@ -19,7 +19,6 @@ Penerimaan Bawang
 </style>
 @endsection 
 @section('rightbar-content')
-
 <!-- Start Breadcrumbbar -->                    
 <div class="breadcrumbbar">
     <div class="row align-items-center">
