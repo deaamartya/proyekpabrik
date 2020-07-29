@@ -108,12 +108,23 @@
                              </tr>
                          </thead>
                          <tbody>
-                             <tr>
-                                 <td>30</td>
-                                 <td>0</td>
-                                 <td>10</td>
-                             </tr>
-                         </tbody>
+                            @foreach ($order_masak_2 as $order_masak_2)
+                               <tr>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak_2->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000001')->value('jumlah') }}
+                                   </td>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak_2->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000002')->value('jumlah') }}
+                                   </td>
+                                   <td>
+                                       {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak_2->id_order_masak)
+                                       ->where('id_bahan_product', 'PR00000000003')->value('jumlah') }}
+                                   </td>
+                               </tr>
+                            @endforeach
+                        </tbody>
                      </table>
                  </div>
 
