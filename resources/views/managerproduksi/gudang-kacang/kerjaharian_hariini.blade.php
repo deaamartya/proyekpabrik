@@ -45,6 +45,34 @@ Kerja Hari Ini
                     </div>
                 </div>
                 <div class="card-body">
+
+                    <br>
+
+                     <div class="form-row" style="margin-left: auto; margin-right: auto;">
+                             <div class="form-group col-md-4">
+                                   <div class="input-group" style="width: 58%"> 
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
+                                          </div>                             
+                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 2" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                    </div>
+                               
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                    <div class="input-group" style="width: 58%"> 
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
+                                          </div>                             
+                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : 12" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                    </div>
+                            </div>
+
+                           
+                    </div>
+
+                    <br><br>
+
                     <h5 class="card-title" style="font-size: 16px; padding-left: 5px;">Proses Sortir</h5>
                     <div class="table-responsive">
                         <table id="datatable1" class="display table table-bordered table-striped table-manpro-hover datatable" width="80%" >

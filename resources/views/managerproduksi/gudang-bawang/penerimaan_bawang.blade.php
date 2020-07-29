@@ -72,14 +72,17 @@ Penerimaan Bawang
                           
                             </thead>
                             <tbody>
-                                 @foreach($tenagakupas as $t)
-                                <tr>
-                                    <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif" id="nama{{$t->id_pegawai}}">{{$t->nama}}</td>
-                                    <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif" id="tb{{$t->id_pegawai}}" >{{$t->jumlah}}</td>
-                                    <td id="bk{{$t->id_pegawai}}" class="jmbawangkulit @if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->jumlahbawang}}</td>
-                                    <td id="kulit{{$t->id_pegawai}}" class="jmkulit @if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->jumlahkulit}}</td>
-                                </tr>
-                                @endforeach
+                                
+                                @if(!empty($tenagakupas))
+                                    @foreach($tenagakupas as $t)
+                                    <tr>
+                                        <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif" id="nama{{$t->id_pegawai}}">{{$t->nama}}</td>
+                                        <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif" id="tb{{$t->id_pegawai}}" >{{$t->jumlah}}</td>
+                                        <td id="bk{{$t->id_pegawai}}" class="jmbawangkulit @if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->jumlahbawang}}</td>
+                                        <td id="kulit{{$t->id_pegawai}}" class="jmkulit @if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->jumlahkulit}}</td>
+                                    </tr>
+                                    @endforeach
+                                @endif
 
                             </tbody>
                         </table>
