@@ -109,12 +109,14 @@ Stock Gudang Kacang
                                         </thead>
                                         <tbody>
                                              @foreach($kacang_ob as $ob)
+                                             <tr>
                                                  <td>{{ $ob->tanggal }}</td>
                                                  <td>{{ $ob->timestamp }}</td>
                                                  <td>{{ $ob->keterangan}}</td>
                                                  <td>{{ $ob->masuk}}</td>
                                                  <td>{{ $ob->keluar}}</td>
                                                  <td>{{ $ob->stock}}</td>
+                                            </tr>
                                              @endforeach
                                         </tbody>
                                         
@@ -176,12 +178,14 @@ Stock Gudang Kacang
                                         </thead>
                                          <tbody>
                                              @foreach($kacang_7ml as $kt)
+                                             <tr>
                                                  <td>{{ $kt->tanggal }}</td>
                                                  <td>{{ $kt->timestamp }}</td>
                                                  <td>{{ $kt->keterangan}}</td>
                                                  <td>{{ $kt->masuk}}</td>
                                                  <td>{{ $kt->keluar}}</td>
                                                  <td>{{ $kt->stock}}</td>
+                                            </tr>
                                              @endforeach
                                         </tbody>
                                     </table>
@@ -241,12 +245,14 @@ Stock Gudang Kacang
                                         </thead>
                                           <tbody>
                                              @foreach($kacang_8ml as $kd)
+                                             </tr>
                                                  <td>{{ $kd->tanggal }}</td>
                                                  <td>{{ $kd->timestamp }}</td>
                                                  <td>{{ $kd->keterangan}}</td>
                                                  <td>{{ $kd->masuk}}</td>
                                                  <td>{{ $kd->keluar}}</td>
                                                  <td>{{ $kd->stock}}</td>
+                                            </tr>
                                              @endforeach
                                         </tbody>
                                       
@@ -327,6 +333,10 @@ $(document).ready(function() {
             success : function(results) {
             // console.log(JSON.stringify(results)); //print_r
                  
+                while(datatable1.data().count())
+                {
+                    datatable1.row().remove().draw();
+                }
               
               for(var i=0; i<results.stock_ob.length; i++){
                     
@@ -382,7 +392,10 @@ $(document).ready(function() {
             },
             success : function(results2) {
             // console.log(JSON.stringify(results)); //print_r
-                 
+                 while(datatable2.data().count())
+                {
+                    datatable2.row().remove().draw();
+                }
               
               for(var i=0; i<results2.stock_7ml.length; i++){
                     
@@ -438,7 +451,11 @@ $(document).ready(function() {
             success : function(results3) {
             // console.log(JSON.stringify(results)); //print_r
                  
-              
+              while(datatable3.data().count())
+                {
+                    datatable3.row().remove().draw();
+                }
+
               for(var i=0; i<results3.stock_8ml.length; i++){
                     
                     datatable3.row.add([
