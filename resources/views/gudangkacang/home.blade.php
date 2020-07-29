@@ -48,17 +48,17 @@ Home
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
+                                    <table id="datatable1" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Penerimaan: activate to sort column descending">Tanggal Penerimaan Kacang</th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="Stock: activate to sort column ascending">Stock (karung)</th>
                                         </thead>
                                         <tbody>
-                                        @foreach($stock as $s)
+                                        @foreach($stockob as $s)
                                             <tr role="row" class="odd">
                                                 <td>{{$s->timestamp}}</td>
-                                                <td>{{$s->masuk}}</td>
+                                                <td>{{$s->stock}}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -68,14 +68,14 @@ Home
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
                                     <div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">
-                                        total {{$stock->total()}}
+                                        total {{$stockob->total()}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-sm-6">
                                     <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
                                         <ul class="pagination">
                                             <li class="paginate_button page-item active">
-                                                <?php echo str_replace('/?', '?', $stock->render()); ?>
+                                            {{ $stockob->links() }}
                                             </li>
                                         </ul>
                                     </div>
@@ -98,7 +98,7 @@ Home
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
+                                    <table id="datatable2" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Penerimaan: activate to sort column descending">Tanggal Penerimaan Kacang</th>
@@ -134,7 +134,7 @@ Home
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
+                                    <table id="datatable3" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Penerimaan: activate to sort column descending">Tanggal Penerimaan Kacang</th>
@@ -169,7 +169,7 @@ Home
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
+                            <table id="datatable4" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Stock: activate to sort column descending">Stock</th>
@@ -179,19 +179,12 @@ Home
                                         <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="Telor: activate to sort column ascending">Telor</th>
                                 </thead>
                                 <tbody>
-                                    <tr role="row" class="odd">
-                                        <td>Karung Full</td>
-                                        <td>5</td>
-                                        <td>10</td>
-                                        <td>7</td>
-                                        <td>13</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td>Tidak Full (kg)</td>
-                                        <td>25</td>
-                                        <td>-</td>
-                                        <td>17</td>
-                                        <td>-</td>
+                                    <tr role="row">
+                                        <td>Kilogram</td>
+                                        <td>{{$stockgs}}</td>
+                                        <td>{{$stocksp}}</td>
+                                        <td>{{$stockhc}}</td>
+                                        <td>{{$stocktelor}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -206,6 +199,7 @@ Home
 <!-- End Contentbar -->
 @endsection 
 @section('script')
+
 <!-- Apex js -->
 <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/apexcharts/irregular-data-series.js') }}"></script>
