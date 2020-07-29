@@ -71,12 +71,8 @@ Route::get('/gudang-bawang/penerimaanstockbawangkulit', function () {
     });
 Route::get('/gudang-bawang/penerimaanstock','gudangbawang\StockbawangkulitController@store');
 
-
-Route::get('/gudang-bawang/scan', function () {
-    return view('gudangbawang.scan');
-});
-
 Route::get('/gudang-bawang/tambahstock','gudangbawang\StockbawangkulitController@tambah');
+Route::post('/gudang-bawang/penerimaan','gudangbawang\StockbawangkulitController@terima');
 
 Route::get('/gudang-bawang/scan', function () {
     return view('gudangbawang.scan');
