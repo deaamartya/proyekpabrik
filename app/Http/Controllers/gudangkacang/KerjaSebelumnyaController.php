@@ -15,69 +15,73 @@ class KerjaSebelumnyaController extends Controller
     public function index()
     {
         $stockob = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000004')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000004')
                     ->get();
         
         $stockhc = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000005')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000005')
                     ->get();
 
         $stock8ml = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000006')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000006')
                     ->get();
 
         $hasilgs = Stock::select('stock.masuk')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000007')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000007')
                     ->get();
 
         $hasilsp = Stock::select('stock.masuk')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000008')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000008')
                     ->get();
 
         $hasilhc = Stock::select('stock.masuk')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000009')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000009')
                     ->get();
 
         $hasiltelor = Stock::select('stock.masuk')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000010')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000010')
                     ->get();
 
         $sortirgs = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000011')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000011')
                     ->get();
 
         $sortirsp = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000012')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000012')
                     ->get();
 
         $sortirhc = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000013')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000013')
                     ->get();
 
         $sortirtelor = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku' => 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang' => 'stock.id_gudang')
-                    ->where('stock.id_transaksi' => 'TR0000000000000014')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000014')
+                    ->get();
+
+        $grupkerja = GrupKerja::select('group_kerja.jumlah_personil', 'kerja_harian_group.tanggal')
+                    ->join('kerja_harian_group', 'group_kerja.id_group_kerja', '=', 'kerja_harian_group.id_group_kerja')
                     ->get();
 
         return view('gudangkacang.kerja_harian_sebelumnya')->with(compact('stockob', 'stockhc', 'stock8ml', 'hasilgs', 'hasilsp', 'hasilhc', 'hasiltelor', 'sortirgs', 'sortirsp', 'sortirhc', 'sortirtelor'));

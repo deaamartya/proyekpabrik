@@ -528,7 +528,7 @@ Kerja Harian
                 data : jsondata,
             },
                 success: function(result){
-                    $("#exampleModalLong").hide();
+                    $("#exampleModalLong").modal('hide');
                     swal({
                         title: 'Berhasil!',
                         text: 'Data Berhasil Disimpan',
