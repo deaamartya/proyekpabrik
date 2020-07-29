@@ -8,6 +8,8 @@ Pembagian Bawang
 <link href="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 <style>
     .hide{
         display: none !important;
@@ -19,6 +21,16 @@ Pembagian Bawang
 <link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection 
 @section('rightbar-content')
+@if(session('kupasbawang'))
+    <script>
+      swal({
+            title: 'Error!',
+            text: "{{ @session('kupasbawang')}}",
+            showConfirmButton: true,
+            type: 'error',
+        });
+    </script>
+@endif
 <!-- Start Breadcrumbbar -->                    
 <div class="breadcrumbbar">
     <div class="row align-items-center mb-5">
