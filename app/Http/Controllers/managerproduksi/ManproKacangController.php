@@ -41,30 +41,32 @@ class ManproKacangController extends Controller
                     ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 8 ml', 'gudang.nama' => 'Gudang Kacang'])
                     ->get();
 
-
-        $kacang_hc = Stock::select('stock.*')
-                    ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
-                    ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
-                    ->where(['detail_order_masak.id_bahan_product' => 'PR00000000001', 'stock.id_gudang' => '10', 'stock.id_bahan_baku' => 'BB000000010'])
-                    ->sum('stock.stock');           
-
-        $kacang_sp = Stock::select('stock.*')
-                    ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
-                    ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
-                    ->where(['detail_order_masak.id_bahan_product' => 'PR00000000002', 'stock.id_gudang' => '10', 'stock.id_bahan_baku' => 'BB000000010'])
+        $kacang_gs = Stock::select('stock.*')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang', 'stock.id_transaksi' => 'TR0000000000000007'])
                     ->sum('stock.stock'); 
 
-        $kacang_gs = Stock::select('stock.*')
-                    ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
-                    ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
-                    ->where(['detail_order_masak.id_bahan_product' => 'PR00000000003', 'stock.id_gudang' => '10', 'stock.id_bahan_baku' => 'BB000000010'])
-                    ->sum('stock.stock');    
+
+        $kacang_sp = Stock::select('stock.*')
+                   ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang', 'stock.id_transaksi' => 'TR0000000000000008'])
+                    ->sum('stock.stock'); 
+
+
+        $kacang_hc = Stock::select('stock.*')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang', 'stock.id_transaksi' => 'TR0000000000000009'])
+                    ->sum('stock.stock');         
+        
         
         $kacang_telor = Stock::select('stock.*')
-                    ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
-                    ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
-                    ->where(['detail_order_masak.id_bahan_product' => 'PR00000000004', 'stock.id_gudang' => '10', 'stock.id_bahan_baku' => 'BB000000010'])
-                    ->sum('stock.stock');  
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang', 'stock.id_transaksi' => 'TR0000000000000010'])
+                    ->sum('stock.stock');
 
 
         return view('managerproduksi.gudang-kacang.home_gudangkacang')->with(compact('kacang_ob', 'kacang_7ml', 'kacang_8ml', 'kacang_hc', 'kacang_gs', 'kacang_sp', 'kacang_telor'));
