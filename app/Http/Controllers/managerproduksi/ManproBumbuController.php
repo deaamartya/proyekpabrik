@@ -31,7 +31,8 @@ class ManproBumbuController extends Controller
             'stockgula' => $stockgula,
             'stockgaram' => $stockgaram,
             'stockbumbu' => $stockbumbu,
-            'order_masak' => $order_masak
+            'order_masak' => $order_masak,
+            'order_masak_2' => $order_masak
         ]);
     }
 
@@ -48,8 +49,15 @@ class ManproBumbuController extends Controller
     public function kerja_harian()
     {
         $order_masak = OrderMasak::all();
+
+        $stock3a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000009')->sum('masuk');
+        $stock3b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000009')->sum('keluar');
+        $stockbumbu = $stock3a - $stock3b;
+
         return view('managerproduksi/gudang-bumbu/gudangbumbu_kerjaharian', [
-            'order_masak' => $order_masak
+            'order_masak' => $order_masak,
+            'order_masak_2' => $order_masak,
+            'stockbumbu' => $stockbumbu
         ]);
     }
 }
