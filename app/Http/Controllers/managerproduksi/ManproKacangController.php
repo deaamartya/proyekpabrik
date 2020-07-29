@@ -248,13 +248,172 @@ class ManproKacangController extends Controller
 
     public function kerjahariini()
     {
-        return view('managerproduksi.gudang-kacang.kerjaharian_hariini');
+
+        $stockob = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000004', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+        
+         $stockhc = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000005', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $stock8ml = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000006', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $hasilgs = Stock::select('stock.masuk')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000007', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $hasilsp = Stock::select('stock.masuk')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000008', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $hasilhc = Stock::select('stock.masuk')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000009', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $hasiltelor = Stock::select('stock.masuk')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000010', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $sortirgs = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000011', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $sortirsp = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000012', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $sortirhc = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000013', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $sortirtelor = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000014', 'DATE(stock.timestamp)' => date('Y-m-d')])
+                    ->get();
+
+        $grupkerja = GrupKerja::select('group_kerja.jumlah_personil', 'kerja_harian_group.tanggal')
+                    ->join('kerja_harian_group', 'group_kerja.id_group_kerja', '=', 'kerja_harian_group.id_group_kerja')
+                    ->where('DATE(kerja_harian_group.tanggal)', '=', date('Y-m-d'))
+                    ->get();
+
+        return view('managerproduksi.gudang-kacang.kerjaharian_hariini')->with(compact('stockob', 'stockhc', 'stock8ml', 'hasilgs', 'hasilsp', 'hasilhc', 'hasiltelor', 'sortirgs', 'sortirsp', 'sortirhc', 'sortirtelor', 'grupkerja'));
+
+        
     }
 
     public function kerjaharisebelumnya()
     {
+
         return view('managerproduksi.gudang-kacang.kerjaharian_sebelumnya');
+
     }
+
+
+    public function cari_kerjasebelumnya(Request $request)
+    {
+      
+        $stockob = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000004', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+   
+    
+        $stockhc = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000005', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $stock8ml = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000006', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $hasilgs = Stock::select('stock.masuk')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000007', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $hasilsp = Stock::select('stock.masuk')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000008', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $hasilhc = Stock::select('stock.masuk')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                     ->where(['stock.id_transaksi' => 'TR0000000000000009', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $hasiltelor = Stock::select('stock.masuk')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000010', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $sortirgs = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000011', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $sortirsp = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000012', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $sortirhc = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000013', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $sortirtelor = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where(['stock.id_transaksi' => 'TR0000000000000014', 'DATE(stock.timestamp)' => $request->pilih_tanggal])
+                    ->get();
+
+        $grupkerja = GrupKerja::select('group_kerja.jumlah_personil', 'kerja_harian_group.tanggal')
+                    ->join('kerja_harian_group', 'group_kerja.id_group_kerja', '=', 'kerja_harian_group.id_group_kerja')
+                    ->where('DATE(kerja_harian_group.tanggal)', '=', $request->pilih_tanggal)
+                    ->get();
+
+       
+
+        return response()->json(['stockob'=>$stockob, 'stockhc'=>$stockhc, 'stock8ml'=>$stock8ml, 'hasilgs'=>$hasilgs, 'hasilsp'=>$hasilsp, 'hasilhc'=>$hasilhc, 'hasiltelor'=>$hasiltelor, 'sortirgs'=>$sortirgs, 'sortirsp'=>$sortirsp, 'sortirhc'=>$sortirhc, 'sortirtelor'=>$sortirtelor, 'grupkerja'=>$grupkerja]);
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.
