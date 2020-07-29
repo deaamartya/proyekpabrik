@@ -193,10 +193,10 @@ Home
                                 <tbody>
                                     <tr role="row">
                                         <td>Kilogram</td>
-                                        <td>{{$stockgs}}</td>
-                                        <td>{{$stocksp}}</td>
-                                        <td>{{$stockhc}}</td>
-                                        <td>{{$stocktelor}}</td>
+                                        <td>{{$stockgs->stock}}</td>
+                                        <td>{{$stocksp->stock}}</td>
+                                        <td>{{$stockhc->stock}}</td>
+                                        <td>{{$stocktelor->stock}}</td>
                                     </tr>
                                 </tbody>
                             </table>
