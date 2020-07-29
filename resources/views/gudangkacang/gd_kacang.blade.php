@@ -87,7 +87,7 @@ Stock
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button class="btn btn-primary" id="filterOB">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -110,12 +110,12 @@ Stock
                                         <tbody>
                                         @foreach($ob as $stockob)
                                             <tr>
-                                                <td>{{$stockob->stock.timestamp}}</td>
-                                                <td>{{$stockob->penerimaan.timestamp}}</td>
-                                                <td>{{$stockob->stock.keterangan}}</td>
-                                                <td>{{$stockob->stock.masuk}}</td>
-                                                <td>{{$stockob->stock.keluar}}</td>
-                                                <td>{{$stockob->stock.stock}}</td>
+                                                <td>{{$stockob->timestamp}}</td>
+                                                <td>{{$stockob->TIMESTAMP}}</td>
+                                                <td>{{$stockob->keterangan}}</td>
+                                                <td>{{$stockob->masuk}}</td>
+                                                <td>{{$stockob->keluar}}</td>
+                                                <td>{{$stockob->stock}}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -161,7 +161,7 @@ Stock
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button class="btn btn-primary" id="filter7ml">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -183,12 +183,12 @@ Stock
                                         <tbody>
                                         @foreach($tujuhML as $stock7ml)
                                             <tr>
-                                                <td>{{$stock7ml->stock.timestamp}}</td>
-                                                <td>{{$stock7ml->penerimaan.timestamp}}</td>
-                                                <td>{{$stock7ml->stock.keterangan}}</td>
-                                                <td>{{$stock7ml->stock.masuk}}</td>
-                                                <td>{{$stock7ml->stock.keluar}}</td>
-                                                <td>{{$stock7ml->stock.stock}}</td>
+                                                <td>{{$stock7ml->timestamp}}</td>
+                                                <td>{{$stock7ml->TIMESTAMP}}</td>
+                                                <td>{{$stock7ml->keterangan}}</td>
+                                                <td>{{$stock7ml->masuk}}</td>
+                                                <td>{{$stock7ml->keluar}}</td>
+                                                <td>{{$stock7ml->stock}}</td>
                                             </tr>
                                         @endforeach
 
@@ -234,7 +234,7 @@ Stock
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button class="btn btn-primary" id="filter8ml">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -256,12 +256,12 @@ Stock
                                         <tbody>
                                         @foreach($delapanML as $stock8ml)
                                             <tr>
-                                                <td>{{$stock8ml->stock.timestamp}}</td>
-                                                <td>{{$stock8ml->penerimaan.timestamp}}</td>
-                                                <td>{{$stock8ml->stock.keterangan}}</td>
-                                                <td>{{$stock8ml->stock.masuk}}</td>
-                                                <td>{{$stock8ml->stock.keluar}}</td>
-                                                <td>{{$stock8ml->stock.stock}}</td>
+                                                <td>{{$stock8ml->timestamp}}</td>
+                                                <td>{{$stock8ml->TIMESTAMP}}</td>
+                                                <td>{{$stock8ml->keterangan}}</td>
+                                                <td>{{$stock8ml->masuk}}</td>
+                                                <td>{{$stock8ml->keluar}}</td>
+                                                <td>{{$stock8ml->stock}}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -293,27 +293,24 @@ Stock
 
 <script>
     $(document).ready(function() {
-        $('#datatable1').DataTable( {
+        var table1 = $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
 
-        $('#datatable2').DataTable( {
+        var table2 = $('#datatable2').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
 
-         $('#datatable3').DataTable( {
+        var table3 = $('#datatable3').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,
             responsive: true
         });
-    });
 
-
-    $(document).ready(function(){
         $('#date1').datepicker({
             language: 'en',
             autoClose: true,
@@ -351,8 +348,106 @@ Stock
         });
 
 
-    });
+        $("#filterOB").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-kacang/filterDate') }}",
+                method: 'POST',
+                data: {
+                    jenis : "OB",
+                    dateMin : $("#date1").val(),
+                    dateMax : $("#date2").val(),
+                },
+                success: function(result){
+                    table1.clear();
+                    let stockob = result.stock;
+                    for(var i=0;i<stockob.length;i++){
+                        table1.row.add([
+                            stockob[i].timestamp,
+                            stockob[i].TIMESTAMP,
+                            stockob[i].keterangan,
+                            stockob[i].masuk,
+                            stockob[i].keluar,
+                            stockob[i].stock,
+                        ]);
+                        table1.draw(false);
+                    }
+                    console.log("button di klik");
+                }
+            });
+        });
 
+        $("#filter7ml").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-kacang/filterDate') }}",
+                method: 'POST',
+                data: {
+                    jenis : "7ml",
+                    dateMin : $("#date3").val(),
+                    dateMax : $("#date4").val(),
+                },
+                success: function(result){
+                    table2.clear();
+                    let stock7ml = result.stock;
+                    for(var i=0;i<stock7ml.length;i++){
+                        table2.row.add([
+                            stock7ml[i].timestamp,
+                            stock7ml[i].TIMESTAMP,
+                            stock7ml[i].keterangan,
+                            stock7ml[i].masuk,
+                            stock7ml[i].keluar,
+                            stock7ml[i].stock,
+                        ]);
+                        table2.draw(false);
+                    }
+                    console.log("button di klik");
+                }
+            });
+        });
+
+        $("#filter8ml").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-kacang/filterDate') }}",
+                method: 'POST',
+                data: {
+                    jenis : "8ml",
+                    dateMin : $("#date5").val(),
+                    dateMax : $("#date6").val(),
+                },
+                success: function(result){
+                    table3.clear();
+                    let stock8ml = result.stock;
+                    for(var i=0;i<stock8ml.length;i++){
+                        table3.row.add([
+                            stock8ml[i].timestamp,
+                            stock8ml[i].TIMESTAMP,
+                            stock8ml[i].keterangan,
+                            stock8ml[i].masuk,
+                            stock8ml[i].keluar,
+                            stock8ml[i].stock,
+                        ]);
+                        table3.draw(false);
+                    }
+                    console.log("button di klik");
+                }
+            });
+        });
+
+    });
   
 
 

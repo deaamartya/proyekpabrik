@@ -46,16 +46,18 @@ Gudang Kacang Sortir
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <form action="{{ url('/gudang-kacang/insertHC')}}" method="POST">
+                            @csrf
+                            <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h6 style="color: blue;">Berat Karung Diterima (Kg)</h6>
                                     <input type="number" class="form-control" name="berat_hc" min="0" style="width: 60%">
                                 </div>
                             </div>
-                            <br><button type="button" class="btn btn-primary" style="margin-right: 10px;">Simpan</button>
+                            <br><button type="submit" class="btn btn-primary" style="margin-right: 10px;">Simpan</button>
                         </div>
-                    </div>
+                    </form>                     
                 </div>
                 <!-- End col -->
             </div>
