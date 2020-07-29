@@ -10,6 +10,11 @@ Home
 <!-- Slick css -->
 <link href="{{ asset('assets/plugins/slick/slick.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/plugins/slick/slick-theme.css') }}" rel="stylesheet" type="text/css" />
+<!-- DataTables css -->
+<link href="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- Responsive Datatable css -->
+<link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection 
 @section('rightbar-content')
 
@@ -48,36 +53,29 @@ Home
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="datatable1" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Penerimaan: activate to sort column descending">Tanggal Penerimaan Kacang</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="Stock: activate to sort column ascending">Stock (karung)</th>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($stockob as $s)
-                                            <tr role="row" class="odd">
-                                                <td>{{$s->timestamp}}</td>
-                                                <td>{{$s->stock}}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">
-                                        total {{$stockob->total()}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-sm-6">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate">
-                                        <ul class="pagination">
-                                            <li class="paginate_button page-item active">
-                                            {{ $stockob->links() }}
-                                            </li>
-                                        </ul>
+                                    <div class="table-responsive">
+                                        <table id="default-datatable1" class="display table table-striped table-bordered">
+                                            <thead>
+                                                <tr>      
+                                                    <th>Tanggal Penerimaan Kacang</th>
+                                                    <th>Stock (Kg)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($stockob as $ob)
+                                                    <tr>
+                                                        <td>{{$ob->timestamp}}</td>
+                                                        <td>{{$ob->stock}}</td>
+                                                    </tr>
+                                                @endforeach 
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Tanggal Penerimaan Kacang</th>
+                                                    <th>Stock (Kg)</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +197,46 @@ Home
 <!-- End Contentbar -->
 @endsection 
 @section('script')
+<!-- Datatable js -->
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        /* -- Table - Datatable -- */
+        $('#default-datatable1').DataTable( {
+            "order": [[ 0, "asc" ]],
+            responsive: true
+        });
+    });
 
+    "use strict";
+    $(document).ready(function() {
+        /* -- Table - Datatable -- */
+        $('#default-datatable2').DataTable( {
+            "order": [[ 0, "asc" ]],
+            responsive: true
+        });
+    });
+
+    "use strict";
+    $(document).ready(function() {
+        /* -- Table - Datatable -- */
+        $('#default-datatable3').DataTable( {
+            "order": [[ 0, "asc" ]],
+            responsive: true
+        });
+    });
+
+    "use strict";
+    $(document).ready(function() {
+        /* -- Table - Datatable -- */
+        $('#default-datatable4').DataTable( {
+            "order": [[ 0, "asc" ]],
+            responsive: true
+        });
+    });
+
+</script>
 <!-- Apex js -->
 <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/apexcharts/irregular-data-series.js') }}"></script>
