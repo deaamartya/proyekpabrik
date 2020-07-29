@@ -53,7 +53,7 @@
                             @foreach ($order_masak as $order_masak)
                                <tr>
                                    <td>
-                                       {{ $order_masak->tanggal_order_masak }}
+                                        {{ date('d/m/Y', strtotime( $order_masak->tanggal_order_masak ) ) }}
                                    </td>
                                    <td>
                                        {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
