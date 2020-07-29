@@ -8,9 +8,9 @@
         <meta name="author" content="Themesbox17">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title> @yield('title') </title>
+        <title>Gudang Kacang - @yield('title') </title>
         <!-- Fevicon -->
-        <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('managerproduksi/favicon/favicon.ico') }}">
         <!-- Start CSS -->   
         @yield('style')
         <link href="{{ asset('assets/plugins/switchery/switchery.min.css') }}" rel="stylesheet" type="text/css">
@@ -24,7 +24,7 @@
         <!-- Start Infobar Setting Sidebar -->
         <div id="infobar-settings-sidebar" class="infobar-settings-sidebar">
             <div class="infobar-settings-sidebar-head d-flex w-100 justify-content-between">
-                <h4>Settings</h4><a href="javascript:void(0)" id="infobar-settings-close" class="infobar-settings-close"><img src="assets/images/svg-icon/close.svg" class="img-fluid menu-hamburger-close" alt="close"></a>
+                <h4>Settings</h4><a href="javascript:void(0)" id="infobar-settings-close" class="infobar-settings-close"><img src="{{asset('assets/images/svg-icon/close.svg')}}" class="img-fluid menu-hamburger-close" alt="close"></a>
             </div>
             <div class="infobar-settings-sidebar-body">
                 <div class="custom-mode-setting">
@@ -68,21 +68,21 @@
                         </div>
                         <div class="col-6">
                             <div class="account-box active">
-                                <img src="assets/images/users/boy.svg" class="img-fluid" alt="user">
+                                <img src="{{asset('assets/images/users/boy.svg')}}" class="img-fluid" alt="user">
                                 <h5>John</h5>
                                 <p>CEO</p>
                             </div>                        
                         </div>
                         <div class="col-6">
                             <div class="account-box">
-                                <img src="assets/images/users/women.svg" class="img-fluid" alt="user">
+                                <img src="{{asset('assets/images/users/women.svg')}}" class="img-fluid" alt="user">
                                 <h5>Kate</h5>
                                 <p>COO</p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="account-box">
-                                <img src="assets/images/users/men.svg" class="img-fluid" alt="user">
+                                <img src="{{asset('assets/images/users/men.svg')}}" class="img-fluid" alt="user">
                                 <h5>Mark</h5>
                                 <p>MD</p>
                             </div>                        
