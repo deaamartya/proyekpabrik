@@ -95,24 +95,31 @@ Home
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <table id="datatable2" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Penerimaan: activate to sort column descending">Tanggal Penerimaan Kacang</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="Stock: activate to sort column ascending">Stock (karung)</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr role="row" class="odd">
-                                                <td>10 Mei 2020</td>
-                                                <td>20</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td>12 Mei 2020</td>
-                                                <td>10</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table id="default-datatable2" class="display table table-striped table-bordered">
+                                            <thead>
+                                                <tr>      
+                                                    <th>Tanggal Penerimaan Kacang</th>
+                                                    <th>Stock (Kg)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($stock7ml as $x)
+                                                    <tr>
+                                                        <td>{{$x->timestamp}}</td>
+                                                        <td>{{$x->stock}}</td>
+                                                    </tr>
+                                                @endforeach 
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Tanggal Penerimaan Kacang</th>
+                                                    <th>Stock (Kg)</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -131,24 +138,31 @@ Home
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <table id="datatable3" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Penerimaan: activate to sort column descending">Tanggal Penerimaan Kacang</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="Stock: activate to sort column ascending">Stock (karung)</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr role="row" class="odd">
-                                                <td>10 Mei 2020</td>
-                                                <td>20</td>
-                                            </tr>
-                                            <tr role="row" class="even">
-                                                <td>12 Mei 2020</td>
-                                                <td>10</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table id="default-datatable3" class="display table table-striped table-bordered">
+                                            <thead>
+                                                <tr>      
+                                                    <th>Tanggal Penerimaan Kacang</th>
+                                                    <th>Stock (Kg)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($stock8ml as $y)
+                                                    <tr>
+                                                        <td>{{$y->timestamp}}</td>
+                                                        <td>{{$y->stock}}</td>
+                                                    </tr>
+                                                @endforeach 
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Tanggal Penerimaan Kacang</th>
+                                                    <th>Stock (Kg)</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
