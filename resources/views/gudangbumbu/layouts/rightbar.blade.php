@@ -101,16 +101,12 @@
                     <li class="dropdown">
                         <a href="{{url('/gudang-bumbu/home-bumbu')}}"><span>Home</span></a>
                     </li>
+
                     <li class="dropdown">
-                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><span>Stock</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{url('/gudang-bumbu/bahan')}}">Bahan</a></li>
-                            
-                            
-                            <li><a href="{{url('/gudang-bumbu/adonangulagaram')}}">Adonan Gula + Garam</a></li>
-                            
-                        </ul>
+                        <a href="{{url('/gudang-bumbu/bahan')}}"><span>Stock</span></a>
                     </li>
+
+                    
                     <li class="dropdown">
                         <a href="{{url('/gudang-bumbu/kerjaharianadonangula')}}"><span>Kerja Harian</span></a>
                     </li>
