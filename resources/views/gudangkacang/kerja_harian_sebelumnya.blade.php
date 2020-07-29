@@ -54,7 +54,7 @@ Kerja Hari Sebelumnya
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
                                           </div>                             
-                                        <input type="text" id="autoclose-date" class="datepicker-here form-control" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1"/>   
+                                        <input type="text" id="date" class="datepicker-here form-control" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1"/>   
                                     </div>
                                
                             </div>
@@ -62,7 +62,7 @@ Kerja Hari Sebelumnya
                             <div class="form-group col-md-4">
                                     <label for=""></label>
                                     <div class="input-group mt-2"> 
-                                        <button class="btn btn-primary">Terapkan</button>
+                                        <button class="btn btn-primary" id="terapkan">Terapkan</button>
                                     </div>
                             </div>
 
@@ -244,6 +244,55 @@ Kerja Hari Sebelumnya
         });
 
     });
+
+    $(document).on('click', '#terapkan', function (e) {
+    
+    var tanggal = document.getElementById('date').value;
+    var tgl = tanggal.split("/").reverse().join("-");
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/gudangKacang/KerjaHarianSebelumnya",
+            data:{
+              "tgl_kerja":tgl,
+
+              "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
+            },
+            success : function(results) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+              
+              for(var i=0; i<results.stock_.length; i++){
+                    
+                    datatable.row.add([
+
+                    results.stock[i].tanggal,
+                    results.stock[i].keterangan,
+                    results.stock[i].masuk,
+                    results.stock[i].keluar,
+                    results.stock.stock
+                       
+                    ]).draw();
+                 
+                }
+                 
+  
+    
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
+
 
  
    
