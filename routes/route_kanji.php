@@ -151,5 +151,6 @@ Route::post('/gudang-bumbu/input_data', 'KerjaharianadonangulaController@ganti')
 Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
 Route::get('/gudang-bumbu/kerjaharianadonangula/inputmasuk', 'KerjaharianadonangulaController@masuk');
 // Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@tb');
-
+Route::get('/gudang-bumbu/bahan','gudangbumbu\StockBumbuController@indexbahan');
+Route::post('/gudang-bumbu/bahan','gudangbumbu\StockBumbuController@caribahan');
 });
