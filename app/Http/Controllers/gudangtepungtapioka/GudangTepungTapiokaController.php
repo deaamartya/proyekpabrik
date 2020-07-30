@@ -40,8 +40,8 @@ class GudangTepungTapiokaController extends Controller
 
     public function stock()
     {
-        $stock1 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 1)->get();
-        $stock2 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000005')->where('id_satuan', '=', 2)->get();
+        $stock1 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->get();
+        $stock2 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 2)->get();
         return view('gudangtepungtapioka.stock', ['stock1' => $stock1, 'stock2' => $stock2]);
     }
 
@@ -110,6 +110,13 @@ class GudangTepungTapiokaController extends Controller
     ]);
     // alihkan halaman ke halaman kategori
     return redirect('gudang-tepung-tapioka/kerjaharian');
+    }
+
+    public function caristock(Request $request)
+    {
+        $stock1 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->whereBetween('TIMESTAMP', array($request->awalDate, $request->akhirDate))->get();
+        $stock2 = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 2)->whereBetween('TIMESTAMP', array($request->awalDate, $request->akhirDate))->get();
+        return view('gudangtepungtapioka.stock', ['stock1' => $stock1, 'stock2' => $stock2]);
     }
 
     
