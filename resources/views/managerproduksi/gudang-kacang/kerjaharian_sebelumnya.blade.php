@@ -317,16 +317,16 @@ Kerja Hari Sebelumnya
                     datatable1.row.add([
 
                     "Kg",
-                    results.stockob,
-                    results.stockhc,
-                    results.stock8ml
+                    results.stockob[0].keluar,
+                    results.stockhc[0].keluar,
+                    results.stock8ml[0].keluar
                        
                     ]).draw();
 
                     datatable2.row.add([
 
                     "BS (Kg)",
-                    results.kacangbs,
+                    results.kacangbs[0].berat_bs,
                     "",
                     "",
                     ""
@@ -337,10 +337,10 @@ Kerja Hari Sebelumnya
                     datatable2.row.add([
 
                     "Total (Kg)",
-                    results.hasilgs,
-                    results.hasilsp,
-                    results.hasilhc,
-                    results.hasiltelor
+                    results.hasilgs[0].masuk,
+                    results.hasilsp[0].masuk,
+                    results.hasilhc[0].masuk,
+                    results.hasiltelor[0].masuk
                     
                     ]).draw();
 
@@ -348,10 +348,10 @@ Kerja Hari Sebelumnya
                     datatable3.row.add([
 
                     "Kg",
-                    results.sortirgs,
-                    results.sortirsp,
-                    results.sortirhc,
-                    results.sortirtelor
+                    results.sortirgs[0].keluar,
+                    results.sortirsp[0].keluar,
+                    results.sortirhc[0].keluar,
+                    results.sortirtelor[0].keluar
                     
                     ]).draw();
                  
