@@ -59,11 +59,7 @@ Stock
                                 <h5 class="card-title" style="padding-left: 5px;">Kacang GS</h5>
                             </div>
                             <div class="card-body">
-                                <div class="form-group col-md-12">
-                                    <div class="button-list">
-                                        <a href="{{url('/stock_gudang_kacang_sortir_penerimaan_gs')}}"><button type="button" class="btn btn-warning btn-lg btn-block">Penerimaan</button></a>
-                                    </div>
-                                </div>
+                                
                                 <div class="form-row" style="margin-left: 4.5em;">
                                     <div class="form-group col-md-4">
                                             <label for="date1">Awal</label>
@@ -130,11 +126,7 @@ Stock
                                 <h5 class="card-title" style=" padding-left: 5px;">Kacang SP</h5>
                             </div>
                             <div class="card-body">
-                                <div class="form-group col-md-12">
-                                    <div class="button-list">
-                                        <a href="{{url('/stock_gudang_kacang_sortir_penerimaan_sp')}}"><button type="button" class="btn btn-warning btn-lg btn-block">Penerimaan</button></a>
-                                    </div>
-                                </div>
+                                
                                 <div class="form-row" style="margin-left: 4.5em;">
                                     <div class="form-group col-md-4">
                                             <label for="date3">Awal</label>
@@ -200,11 +192,7 @@ Stock
                                 <h5 class="card-title" style="padding-left: 5px;">Kacang HC</h5>
                             </div>
                             <div class="card-body">
-                                <div class="form-group col-md-12">
-                                    <div class="button-list">
-                                        <a href="{{url('/stock_gudang_kacang_sortir_penerimaan_hc')}}"><button type="button" class="btn btn-warning btn-lg btn-block">Penerimaan</button></a>
-                                    </div>
-                                </div>
+                                
                                 <div class="form-row" style="margin-left: 4.5em;">
                                     <div class="form-group col-md-4">
                                             <label for="date5">Awal</label>
@@ -270,11 +258,7 @@ Stock
                                 <h5 class="card-title" style="padding-left: 5px;">Kacang Telor</h5>
                             </div>
                             <div class="card-body">
-                                <div class="form-group col-md-12">
-                                    <div class="button-list">
-                                        <a href="{{url('/stock_gudang_kacang_sortir_penerimaan_telor')}}"><button type="button" class="btn btn-warning btn-lg btn-block">Penerimaan</button></a>
-                                    </div>
-                                </div>
+                                
                                 <div class="form-row" style="margin-left: 4.5em;">
                                     <div class="form-group col-md-4">
                                             <label for="date7">Awal</label>
