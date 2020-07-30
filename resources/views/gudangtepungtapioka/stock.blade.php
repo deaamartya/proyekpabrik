@@ -39,37 +39,20 @@ Soyuz - Datatable
                                     <h4 class="page-title text-left">Karung</h4>
                                 </div>
                             </div>
-                            <div class="row">
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <div class="card m-b-30">
-                                        <div class="card-body">
-                                            <h5>Awal</h5>
-                                            <div class="form-group mb-0">
-                                                <input type="date" class="form-control" name="inputDate" id="inputDate">
-                                            </div>
-                                        </div>
+                            <form action="{{ url('/gudang-tepung-tapioka/cari-stock') }}" method="post">
+                                    @csrf
+                                <div class="row"  style="margin: 10px 0px">
+                                    <div class="column" style="width : 35%">
+                                        <h4> Awal</h4>
+                                        <input type="datetime-local" class="form-control" name="awalDate" id="inputDate" placeholder="date picker">
                                     </div>
-                                </div>
-                                <!-- End col -->
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <div class="card m-b-30">
-                                        <div class="card-body">
-                                            <h5>Akhir</h5>
-                                            <div class="form-group mb-0">
-                                                <input type="date" class="form-control" name="inputDate" id="inputDate">
-                                            </div>
-                                        </div>
+                                    <div class="column" style="width : 35%">
+                                        <h4>Akhir</h4>
+                                        <input type="datetime-local" class="form-control" name="akhirDate" id="inputDate" placeholder="date picker">
                                     </div>
+                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" style="width: 30% ; height:50px;margin: 5px 0px"> Terapkan </button>
                                 </div>
-                                <!-- End col -->
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-secondary btn-lg btn-block">Terapkan</button>
-                                </div>
-                                <!-- End col -->
-                            </div>
+                            </form>
                             <div class="table-responsive">
                         <table id="default-datatable1" class="display table table-striped table-bordered">
                             <thead>
@@ -107,37 +90,20 @@ Soyuz - Datatable
                                     <h4 class="page-title text-left">Masakan</h4>
                                 </div>
                             </div>
-                            <div class="row">
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <div class="card m-b-30">
-                                        <div class="card-body">
-                                            <h5>Awal</h5>
-                                            <div class="form-group mb-0">
-                                                <input type="date" class="form-control" name="inputDate" id="inputDate">
-                                            </div>
-                                        </div>
+                            <form action="{{ url('/gudang-tepung-tapioka/cari-stock') }}" method="post">
+                                    @csrf
+                                <div class="row"  style="margin: 10px 0px">
+                                    <div class="column" style="width : 35%">
+                                        <h4> Awal</h4>
+                                        <input type="datetime-local" class="form-control" name="awalDate" id="inputDate" placeholder="date picker">
                                     </div>
-                                </div>
-                                <!-- End col -->
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <div class="card m-b-30">
-                                        <div class="card-body">
-                                            <h5>Akhir</h5>
-                                            <div class="form-group mb-0">
-                                                <input type="date" class="form-control" name="inputDate" id="inputDate">
-                                            </div>
-                                        </div>
+                                    <div class="column" style="width : 35%">
+                                        <h4>Akhir</h4>
+                                        <input type="datetime-local" class="form-control" name="akhirDate" id="inputDate" placeholder="date picker">
                                     </div>
+                                    <button type="submit" class="btn btn-secondary btn-lg btn-block" style="width: 30% ; height:50px;margin: 5px 0px"> Terapkan </button>
                                 </div>
-                                <!-- End col -->
-                                <!-- Start col -->
-                                <div class="col-md-4">
-                                    <button type="button" class="btn btn-secondary btn-lg btn-block">Terapkan</button>
-                                </div>
-                                <!-- End col -->
-                            </div>
+                            </form>
                             <div class="table-responsive">
                         <table id="default-datatable1" class="display table table-striped table-bordered">
                             <thead>
