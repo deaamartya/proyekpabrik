@@ -64,15 +64,16 @@ canvas.drawing, canvas.drawingBuffer {
                                 <button type="button" class="btn btn-primary" id="btnScan">Scan Barcode</button>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="date" class="form-control" name="tanggal_penerimaan_kacang" id="tanggal_penerimaan_kacang" placeholder="Input Tanggal Penerimaan Kacang" required>
+                                <input type="text" class="form-control" name="tanggal_penerimaan_kacang" id="tanggal_penerimaan_kacang" placeholder="Input Tanggal Penerimaan Kacang" readonly required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="tanggal">Jumlah Karung Diterima</label>
-                                <input type="text" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Karung Diterima" required>
+                                <input type="text" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Karung Diterima"  readonly required>
                             </div>
                         </div>
+                        <input type="text" name="id_gudang_asal" id="id_gudang_asal" hidden>
                         <div class="form-row">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
@@ -107,6 +108,27 @@ $(document).ready(function () {
             $("#btnScan").text("Stop");
             $("#scanner-container").show();
         }
+    });
+
+    $(document).on("input","#hdnBarcode",function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{ url('/gudang-kacang/ambilPenerimaan') }}",
+            method: 'POST',
+            data: {
+                id_penerimaan : $("#hdnBarcode").val(),
+            },
+            success: function(result){
+                let data_p = result.penerimaan; 
+                $("#tanggal_penerimaan_kacang").val(data_p.tgl);
+                $("#jumlah").val(data_p.jumlah);
+                $("#id_gudang_asal").val(data_p.id_gudang_asal);
+            }
+        });
     });
 });
 
