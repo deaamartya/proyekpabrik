@@ -71,7 +71,7 @@
                              @foreach ($order_masak as $order_masak)
                                 <tr>
                                     <td>
-                                        {{ $order_masak->tanggal_order_masak }}
+                                        {{ date('d/m/Y', strtotime( $order_masak->tanggal_order_masak ) ) }}
                                     </td>
                                     <td>
                                         {{ App\Models\DetailOrderMasak::where('id_order_masak', $order_masak->id_order_masak)
@@ -209,8 +209,7 @@
 <script src="{{ asset('/assets/plugins/datepicker/i18n/datepicker.en.js') }}"></script>
 <script src="{{ asset('/assets/js/custom/custom-form-datepicker.js') }}"></script>
 
-{{-- Modal Script --}}
+{{-- Additional Script --}}
 <script src="{{ asset('/managerproduksi/js/ordermasak.js') }}"></script>
-<script src="{{ asset('/managerproduksi/js/ordermasak_tabel.js') }}"></script>
 <script src="{{ asset('/managerproduksi/js/ordermasak_modal.js') }}"></script>
 @endsection

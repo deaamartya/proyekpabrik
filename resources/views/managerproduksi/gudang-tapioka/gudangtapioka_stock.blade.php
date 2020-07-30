@@ -54,7 +54,7 @@
                              @foreach ($stock_tapioka_karung as $stock_tapioka_karung)
                                 <tr>
                                     <td>
-                                        {{ $stock_tapioka_karung->TIMESTAMP }}
+                                        {{ date('d/m/Y', strtotime( $stock_tapioka_karung->TIMESTAMP )) }}
                                     </td>
                                     <td>
                                         {{ $stock_tapioka_karung->keterangan }}
@@ -100,6 +100,7 @@
                             <tr>
                                 <td>
                                     {{ $stock_tapioka_plastik->TIMESTAMP }}
+                                    {{ date('d/m/Y', strtotime($stock_tapioka_plastik->TIMESTAMP)) }}
                                 </td>
                                 <td>
                                     {{ $stock_tapioka_plastik->keterangan }}
