@@ -33,6 +33,96 @@
      <!-- Start col -->
      <div class="col-lg-12">
 
+        {{-- Start Gula --}}
+         <div class="card m-b-30">
+             <div class="card-header">
+                <h5 class="card-title">Stock Gula</h5>
+             </div>
+             <div class="card-body">
+                 <div class="table-responsive">
+                     <table id="default-datatable-4" class="display table table-striped table-bordered multi-datatable">
+                         <thead>
+                             <tr>
+                                 <th>Tanggal</th>
+                                 <th>Keterangan</th>
+                                 <th>Masuk (Kg)</th>
+                                 <th>Keluar (Kg)</th>
+                                 <th>Stock (Kg)</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             @foreach ($stock_gula as $stock_gula)
+                                 <tr>
+                                     <td>
+                                         {{ date('d/m/Y', strtotime($stock_gula->TIMESTAMP) ) }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_gula->keterangan }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_gula->masuk }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_gula->keluar }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_gula->stock }}
+                                     </td>
+                                 </tr>
+                             @endforeach
+                         </tbody>
+                     </table>
+                 </div>
+
+             </div>
+         </div>
+         {{-- End Gula--}}
+
+        {{-- Start Garam --}}
+         <div class="card m-b-30">
+             <div class="card-header">
+                <h5 class="card-title">Stock Garam</h5>
+             </div>
+             <div class="card-body">
+                 <div class="table-responsive">
+                     <table id="default-datatable-4" class="display table table-striped table-bordered multi-datatable">
+                         <thead>
+                             <tr>
+                                 <th>Tanggal</th>
+                                 <th>Keterangan</th>
+                                 <th>Masuk (Kg)</th>
+                                 <th>Keluar (Kg)</th>
+                                 <th>Stock (Kg)</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             @foreach ($stock_garam as $stock_garam)
+                                 <tr>
+                                     <td>
+                                        {{ date('d/m/Y', strtotime($stock_garam->TIMESTAMP) ) }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_garam->keterangan }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_garam->masuk }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_garam->keluar }}
+                                     </td>
+                                     <td>
+                                         {{ $stock_garam->stock }}
+                                     </td>
+                                 </tr>
+                             @endforeach
+                         </tbody>
+                     </table>
+                 </div>
+
+             </div>
+         </div>
+         {{-- End Garam--}}
+
         {{-- Start Bumbu --}}
          <div class="card m-b-30">
              <div class="card-header">
@@ -54,7 +144,7 @@
                              @foreach ($stock_bumbu as $stock_bumbu)
                                  <tr>
                                      <td>
-                                         {{ $stock_bumbu->TIMESTAMP }}
+                                        {{ date('d/m/Y', strtotime($stock_bumbu->TIMESTAMP) ) }}
                                      </td>
                                      <td>
                                          {{ $stock_bumbu->keterangan }}

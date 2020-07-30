@@ -13,10 +13,7 @@ Route::middleware(['auth', 'kacang'])->group(function () {
 //stock
 Route::get('/gd_kacang', 'gudangkacang\StockGdKacangController@select');
 
-Route::get('/gd_kacang_sortir', function () {
-    return view('gudangkacang.gd_kacang_sortir');
-});
-
+Route::get('/gd_kacang_sortir','gudangkacang\StockGdKacangController@selectSortir');
 Route::get('/stock_gudang_kacang_penerimaan_ob', function () {
     return view('gudangkacang.penerimaan_ob');
 });
@@ -27,25 +24,34 @@ Route::get('/stock_gudang_kacang_penerimaan_7ml', function () {
     return view('gudangkacang.penerimaan_7ml');
 });
 
+Route::post('/gudang-kacang/insert7ml','gudangkacang\StockGdKacangController@insert7ml');
+
 Route::get('/stock_gudang_kacang_penerimaan_8ml', function () {
     return view('gudangkacang.penerimaan_8ml');
 });
+
+Route::post('/gudang-kacang/insert8ml','gudangkacang\StockGdKacangController@insert8ml');
 
 Route::get('/stock_gudang_kacang_sortir_penerimaan_gs', function () {
     return view('gudangkacang.penerimaan_gs');
 });
 
+Route::post('/gudang-kacang/insertGS','gudangkacang\StockGdKacangController@insertGS');
+
 Route::get('/stock_gudang_kacang_sortir_penerimaan_sp', function () {
     return view('gudangkacang.penerimaan_sp');
 });
+Route::post('/gudang-kacang/insertSP','gudangkacang\StockGdKacangController@insertSP');
 
 Route::get('/stock_gudang_kacang_sortir_penerimaan_hc', function () {
     return view('gudangkacang.penerimaan_hc');
 });
+Route::post('/gudang-kacang/insertHC','gudangkacang\StockGdKacangController@insertHC');
 
 Route::get('/stock_gudang_kacang_sortir_penerimaan_telor', function () {
     return view('gudangkacang.penerimaan_telor');
 });
+Route::post('/gudang-kacang/insertTelor','gudangkacang\StockGdKacangController@insertTelor');
 
 //kerja harian
 Route::get('/hari_ini', function () {
@@ -61,5 +67,7 @@ Route::post('/kerjaharian/simpanhasil', 'gudangkacang\KerjaHariIniController@sto
 Route::get('/tutup', function () {
     return view('gudangkacang.review_harian');
 });
+
+Route::post('/gudang-kacang/filterDate','gudangkacang\StockGdKacangController@filterDate');
 
 });

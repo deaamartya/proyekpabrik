@@ -105,7 +105,6 @@ $(document).ready(function () {
             $("#scanner-container").show();
         }
     });
-    LoadPage();
 });
 
 function closeModal() {

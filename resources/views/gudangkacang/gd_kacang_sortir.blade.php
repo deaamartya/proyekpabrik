@@ -90,7 +90,7 @@ Stock
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button class="btn btn-primary" id="filterGS">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -109,38 +109,15 @@ Stock
                                       
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>Dari Proses Sortir</td>
-                                                <td>10</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                            </tr>
-                                           
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Sisa Dari Inter</td>
-                                                <td>[20]</td>
-                                                <td>-</td>
-                                                <td>20<br>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>7<br>[20]</td>
-                                                <td>3</td>
-                                            </tr>
-
+                                            @foreach($gs as $stock)
+                                                <tr>
+                                                    <td>{{$stock->timestamp}}</td>
+                                                    <td>{{$stock->keterangan}}</td>
+                                                    <td>{{$stock->masuk}}</td>
+                                                    <td>{{$stock->keluar}}</td>
+                                                    <td>{{$stock->stock}}</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -184,7 +161,7 @@ Stock
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button class="btn btn-primary" id="filterSP">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -203,30 +180,15 @@ Stock
                                       
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Sisa Dari Inter</td>
-                                                <td>[20]</td>
-                                                <td>-</td>
-                                                <td>20<br>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>7<br>[20]</td>
-                                                <td>3</td>
-                                            </tr>
-
+                                            @foreach($sp as $stock)
+                                                <tr>
+                                                    <td>{{$stock->timestamp}}</td>
+                                                    <td>{{$stock->keterangan}}</td>
+                                                    <td>{{$stock->masuk}}</td>
+                                                    <td>{{$stock->keluar}}</td>
+                                                    <td>{{$stock->stock}}</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -269,7 +231,7 @@ Stock
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button class="btn btn-primary" id="filterHC">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -288,22 +250,15 @@ Stock
                                       
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Sisa Dari Inter</td>
-                                                <td>[20]</td>
-                                                <td>-</td>
-                                                <td>20<br> 10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>7<br>[20]</td>
-                                                <td>3</td>
-                                            </tr>
-
+                                            @foreach($hc as $stock)
+                                                <tr>
+                                                    <td>{{$stock->timestamp}}</td>
+                                                    <td>{{$stock->keterangan}}</td>
+                                                    <td>{{$stock->masuk}}</td>
+                                                    <td>{{$stock->keluar}}</td>
+                                                    <td>{{$stock->stock}}</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -346,7 +301,7 @@ Stock
                                     <div class="form-group col-md-4">
                                             <label for=""></label>
                                             <div class="input-group mt-2"> 
-                                                <button class="btn btn-primary">Terapkan</button>
+                                                <button class="btn btn-primary" id="filterTelor">Terapkan</button>
                                             </div>
                                     </div>
                                 </div>
@@ -365,33 +320,21 @@ Stock
                                       
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Sisa Dari Inter</td>
-                                                <td>[20]</td>
-                                                <td>-</td>
-                                                <td>20<br> 10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>Inter</td>
-                                                <td>-</td>
-                                                <td>7<br>[20]</td>
-                                                <td>3</td>
-                                            </tr>
-
+                                            @foreach($telor as $stock)
+                                                <tr>
+                                                    <td>{{$stock->timestamp}}</td>
+                                                    <td>{{$stock->keterangan}}</td>
+                                                    <td>{{$stock->masuk}}</td>
+                                                    <td>{{$stock->keluar}}</td>
+                                                    <td>{{$stock->stock}}</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-
-                         
-
                     </div>
-
-                
             </div>
         </div>
         <!-- End col -->
@@ -412,34 +355,31 @@ Stock
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
 <script>
-    $(document).ready(function() {
-        $('#datatable1').DataTable( {
-            //"order": [[ 0, "asc" ]],
-            "searching" : false,
-            responsive: true
-        });
-
-        $('#datatable2').DataTable( {
-            //"order": [[ 0, "asc" ]],
-            "searching" : false,
-            responsive: true
-        });
-
-         $('#datatable3').DataTable( {
-            //"order": [[ 0, "asc" ]],
-            "searching" : false,
-            responsive: true
-        });
-
-         $('#datatable4').DataTable( {
-            //"order": [[ 0, "asc" ]],
-            "searching" : false,
-            responsive: true
-        });
-    });
-
-
     $(document).ready(function(){
+        var table1 = $('#datatable1').DataTable({
+            //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
+
+        var table2 = $('#datatable2').DataTable({
+            //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
+
+        var table3 = $('#datatable3').DataTable({
+            //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
+
+        var table4 = $('#datatable4').DataTable({
+            //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
+
         $('#date1').datepicker({
             language: 'en',
             autoClose: true,
@@ -488,11 +428,139 @@ Stock
             dateFormat: 'dd/mm/yyyy',
         });
 
+        $("#filterHC").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-kacang/filterDate') }}",
+                method: 'POST',
+                data: {
+                    jenis : "HC",
+                    dateMin : $("#date1").val(),
+                    dateMax : $("#date2").val(),
+                },
+                success: function(result){
+                    table1.clear();
+                    let stockHC = result.stock;
+                    for(var i=0;i<stockHC.length;i++){
+                        table1.row.add([
+                            stockHC[i].timestamp,
+                            stockHC[i].TIMESTAMP,
+                            stockHC[i].keterangan,
+                            stockHC[i].masuk,
+                            stockHC[i].keluar,
+                            stockHC[i].stock,
+                        ]);
+                        table1.draw(false);
+                    }
+                    console.log("button di klik");
+                }
+            });
+        });
+
+        $("#filterGS").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-kacang/filterDate') }}",
+                method: 'POST',
+                data: {
+                    jenis : "GS",
+                    dateMin : $("#date3").val(),
+                    dateMax : $("#date4").val(),
+                },
+                success: function(result){
+                    table2.clear();
+                    let stockGS = result.stock;
+                    for(var i=0;i<stockGS.length;i++){
+                        table2.row.add([
+                            stockGS[i].timestamp,
+                            stockGS[i].TIMESTAMP,
+                            stockGS[i].keterangan,
+                            stockGS[i].masuk,
+                            stockGS[i].keluar,
+                            stockGS[i].stock,
+                        ]);
+                        table2.draw(false);
+                    }
+                    console.log("button di klik");
+                }
+            });
+        });
+
+        $("#filterSP").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-kacang/filterDate') }}",
+                method: 'POST',
+                data: {
+                    jenis : "SP",
+                    dateMin : $("#date5").val(),
+                    dateMax : $("#date6").val(),
+                },
+                success: function(result){
+                    table3.clear();
+                    let stockSP = result.stock;
+                    for(var i=0;i<stockSP.length;i++){
+                        table3.row.add([
+                            stockSP[i].timestamp,
+                            stockSP[i].TIMESTAMP,
+                            stockSP[i].keterangan,
+                            stockSP[i].masuk,
+                            stockSP[i].keluar,
+                            stockSP[i].stock,
+                        ]);
+                        table3.draw(false);
+                    }
+                    console.log("button di klik");
+                }
+            });
+        });
+
+        $("#filterTelor").click(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ url('/gudang-kacang/filterDate') }}",
+                method: 'POST',
+                data: {
+                    jenis : "Telor",
+                    dateMin : $("#date7").val(),
+                    dateMax : $("#date8").val(),
+                },
+                success: function(result){
+                    table4.clear();
+                    let stockTelor = result.stock;
+                    for(var i=0;i<stockTelor.length;i++){
+                        table4.row.add([
+                            stockTelor[i].timestamp,
+                            stockTelor[i].TIMESTAMP,
+                            stockTelor[i].keterangan,
+                            stockTelor[i].masuk,
+                            stockTelor[i].keluar,
+                            stockTelor[i].stock,
+                        ]);
+                        table4.draw(false);
+                    }
+                    console.log("button di klik");
+                }
+            });
+        });
+
     });
-
-
- 
-
 </script>
 
 @endsection 

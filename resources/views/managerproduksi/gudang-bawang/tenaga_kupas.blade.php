@@ -54,6 +54,8 @@ Tenaga Kupas
                             </thead>
                             <tbody>
                               
+                            @if(!empty($tenagakupas))
+
                                @foreach($tenagakupas as $t)
                                 <tr>
                                     <td>{{ $t->nama }}</td>
@@ -70,7 +72,9 @@ Tenaga Kupas
                                     </td>
                                 </tr>
                                 @endforeach
-
+        
+                            
+                            @endif
                           
                             </tbody>
                         </table>
@@ -91,6 +95,16 @@ Tenaga Kupas
 <script>
     //"use strict";
     $(document).ready(function() {
+
+
+
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+
+
         $('#default-datatable').DataTable( {
             //"order": [[ 0, "asc" ]],
             "searching" : false,

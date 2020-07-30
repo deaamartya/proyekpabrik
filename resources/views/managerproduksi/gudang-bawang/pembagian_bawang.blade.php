@@ -61,6 +61,7 @@ Pembagian Bawang
                             </thead>
                             <tbody>
 
+                            @if(!empty($tenagakupas))
                                 @php $i=0; @endphp
                                 @foreach($tenagakupas as $t)
 
@@ -72,6 +73,7 @@ Pembagian Bawang
                                     @endif
                                 @php $i++; @endphp
                                 @endforeach
+                            @endif
                         
 
                             </tbody>

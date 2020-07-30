@@ -93,7 +93,21 @@ Stock Bawang Kulit
                                         <th>Stock <h5 style="font-size: 11px;">(Kg)</h5></th>
                                         
                                     </tr>
-                          
+                                    
+                                     @foreach($bawangkulit as $b)
+                                        <tr>
+                                            <td>{{ $b->tanggal }}</td>
+                                            <td>{{ $b->keterangan }} 
+                                                @if($b->id_tanggal != "")
+                                                    / {{ $b->tgl_terima }}
+                                                @else
+                                                @endif
+                                            </td>
+                                            <td>{{ $b->masuk}}</td>
+                                            <td>{{ $b->keluar}}</td>
+                                            <td>{{ $b->stock}}</td>
+                                        </tr>
+                                    @endforeach
                             </thead>
                             <tbody>
                                
@@ -164,6 +178,10 @@ $(document).ready(function() {
             success : function(results) {
             // console.log(JSON.stringify(results)); //print_r
                  
+                  while(datatable1.data().count())
+                {
+                    datatable1.row().remove().draw();
+                }
               
               for(var i=0; i<results.stock_bawangkulit.length; i++){
                     
