@@ -94,6 +94,8 @@ Route::post('/ambiltepung','gudangtepungtapioka\GudangTepungTapiokaController@st
 
 Route::post('/tambahpacking','gudangtepungtapioka\GudangTepungTapiokaController@store2');
 
+Route::post('/gudang-tepung-tapioka/cari-stock','gudangtepungtapioka\GudangTepungTapiokaController@caristock');
+
 //gudang bumbu
 
 Route::get('/gudang-bumbu/', function () {

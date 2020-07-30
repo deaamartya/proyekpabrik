@@ -29,7 +29,7 @@ class HomeController extends Controller
         //->where('tanggal_order_masak','>=',date('Y-m-d'))
         ->get();
         
-        $ordermasak2 = OrderMasak::select('order_masak.*','dom.jumlah AS jumlah')
+        $ordermasak2 = OrderMasak::select('order_masak.*','dom.jumlah AS jumlah', 'dom.presentase_status AS presentase_status')
         ->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
                  ->where('dom.id_bahan_product', '=', 'BB000000008');
