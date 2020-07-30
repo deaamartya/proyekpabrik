@@ -58,7 +58,7 @@ Kerja Hari Ini
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
                                           </div>                             
-                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 2" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 1" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
                                     </div>
                                
                             </div>
@@ -68,7 +68,7 @@ Kerja Hari Ini
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
                                           </div>                             
-                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : 12" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : {{ $grupkerja }}" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
                                     </div>
                             </div>
 
@@ -128,7 +128,7 @@ Kerja Hari Ini
 
                                 <tr>
                                     <td>BS (Kg)</td>
-                                    <td colspan="4" class="border-blue">0</td>
+                                    <td colspan="4" class="border-blue">{{ $kacangbs }}</td>
                                     <td style="display: none"></td>
                                     <td style="display: none"></td>
                                     <td style="display: none"></td>
@@ -185,18 +185,24 @@ Kerja Hari Ini
     $(document).ready(function() {
         $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
+             "paging" : false,
+            "info" : false,
             "searching" : false,
             responsive: true
         });
 
          $('#datatable2').DataTable( {
-            "order": [[ 0, "desc" ]],
+            //"order": [[ 0, "desc" ]],
+             "paging" : false,
+            "info" : false,
             "searching" : false,
             responsive: true
         });
 
          $('#datatable3').DataTable( {
             //"order": [[ 0, "asc" ]],
+             "paging" : false,
+            "info" : false,
             "searching" : false,
             responsive: true
         });

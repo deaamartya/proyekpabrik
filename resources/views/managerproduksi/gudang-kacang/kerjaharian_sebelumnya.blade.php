@@ -92,7 +92,7 @@ Kerja Hari Sebelumnya
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
                                           </div>                             
-                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 2" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 1" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
                                     </div>
                                
                             </div>
@@ -102,7 +102,7 @@ Kerja Hari Sebelumnya
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
                                           </div>                             
-                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : 12" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : " class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
                                     </div>
                             </div>
 
@@ -289,6 +289,12 @@ Kerja Hari Sebelumnya
             },
             success : function(results) {
             // console.log(JSON.stringify(results)); //print_r
+
+                if (results.grupkerja) {
+                    $('#jumlah_pekerja').val("Jumlah Pekerja : "+results.grupkerja);
+                }
+
+                
                  
                 while(datatable1.data().count())
                 {
@@ -320,7 +326,7 @@ Kerja Hari Sebelumnya
                     datatable2.row.add([
 
                     "BS (Kg)",
-                    "0",
+                    results.kacangbs,
                     "",
                     "",
                     ""
