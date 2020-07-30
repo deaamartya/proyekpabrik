@@ -1,16 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-//coba scan
-Route::get('/scand',function(){
-    return view('scan2');
-});
-
-Route::get('/scan', function () {
-    return view('gudangbawang.scan');
-});
-
 Route::middleware(['auth', 'kanji'])->group(function () {
 
 //Dashboard Kanji
@@ -45,26 +35,10 @@ Route::post('/gudang-bawang/statusordermasak','gudangbawang\KerjaHarianControlle
 
 
 //stock
-
-
-
-Route::get('/gudang-bawang/stockbawangkulit', function () {
-    return view('gudangbawang.stockbawangkulit');
-});
-Route::get('/gudang-bawang/stockbawangkupas', function () {
-    return view('gudangbawang.stockbawangkupas');
-});
-
-
-// Route::get('/gudang-bawang/stockbawangkulit', function () {
-//     return view('gudangbawang.stockbawangkulit');
-// });
-// Route::get('/gudang-bawang/stockbawangkupas', function () {
-//     return view('gudangbawang.stockbawangkupas');
-// });
 Route::get('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@index');
-
 Route::get('/gudang-bawang/stockbawangkupas','gudangbawang\StockbawangkulitController@indexkupas');
+Route::post('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@carikulit');
+Route::post('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@carikupas');
 
 Route::get('/gudang-bawang/penerimaanstockbawangkulit', function () {
         return view('gudangbawang.penerimaanstock');

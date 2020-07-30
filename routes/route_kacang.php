@@ -69,5 +69,6 @@ Route::get('/tutup', function () {
 });
 
 Route::post('/gudang-kacang/filterDate','gudangkacang\StockGdKacangController@filterDate');
+Route::post('/gudang-kacang/ambilPenerimaan','gudangkacang\StockGdKacangController@ambilPenerimaan');
 
 });
