@@ -53,6 +53,9 @@ Route::get('/stock_gudang_kacang_sortir_penerimaan_telor', function () {
 });
 Route::post('/gudang-kacang/insertTelor','gudangkacang\StockGdKacangController@insertTelor');
 
+Route::post('/gudang-kacang/filterDate','gudangkacang\StockGdKacangController@filterDate');
+Route::post('/gudang-kacang/ambilPenerimaan','gudangkacang\StockGdKacangController@ambilPenerimaan');
+
 //kerja harian
 Route::get('/hari_ini', function () {
     return view('gudangkacang.kerja_harian');
@@ -68,7 +71,6 @@ Route::get('/tutup', function () {
     return view('gudangkacang.review_harian');
 });
 
-Route::post('/gudang-kacang/filterDate','gudangkacang\StockGdKacangController@filterDate');
-Route::post('/gudang-kacang/ambilPenerimaan','gudangkacang\StockGdKacangController@ambilPenerimaan');
+Route::post('/kerjaharian/sebelumnya', 'gudangkacang\KerjaSebelumnyaController@index');
 
 });
