@@ -9,7 +9,11 @@ Kerja Hari Ini
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
-
+<style type="text/css">
+    .border-blue{
+        border: blue 1px solid !important;
+    }
+</style>
 
 @endsection 
 @section('rightbar-content')
@@ -88,9 +92,9 @@ Kerja Hari Ini
                             <tbody>
                                 <tr>
                                     <td>Kg</td>
-                                    <td>10</td>
-                                    <td>7</td>
-                                    <td>0</td>
+                                    <td>{{ $stockob }}</td>
+                                    <td>{{ $stockhc }}</td>
+                                    <td>{{ $stock8ml }}</td>
                                 </tr>
                                
 
@@ -116,15 +120,15 @@ Kerja Hari Ini
 
                                 <tr>
                                     <td>Total (Kg)</td>
-                                    <td>215</td>
-                                    <td>308</td>
-                                    <td>313</td>
-                                    <td>-</td>
+                                    <td>{{ $hasilgs }}</td>
+                                    <td>{{ $hasilsp }}</td>
+                                    <td>{{ $hasilhc }}</td>
+                                    <td>{{ $hasiltelor }}</td>
                                 </tr>
 
                                 <tr>
                                     <td>BS (Kg)</td>
-                                    <td colspan="4" style="border: 2px solid #4682B4;">5</td>
+                                    <td colspan="4" class="border-blue">0</td>
                                     <td style="display: none"></td>
                                     <td style="display: none"></td>
                                     <td style="display: none"></td>
@@ -153,10 +157,10 @@ Kerja Hari Ini
                             <tbody>
                                 <tr >
                                     <td>Kg</td>
-                                    <td>4</td>
-                                    <td>6</td>
-                                    <td>6</td>
-                                    <td>-</td>
+                                    <td>{{ $sortirgs }}</td>
+                                    <td>{{ $sortirsp }}</td>
+                                    <td>{{ $sortirhc }}</td>
+                                    <td>{{ $sortirtelor }}</td>
                                 </tr>
                                
 

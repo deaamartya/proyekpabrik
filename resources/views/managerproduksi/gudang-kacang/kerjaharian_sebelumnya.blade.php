@@ -17,7 +17,11 @@ Kerja Hari Sebelumnya
 <!-- Datepicker css -->
 <link href="{{ asset('assets/plugins/datepicker/datepicker.min.css') }}" rel="stylesheet" type="text/css">
 
-
+<style type="text/css">
+    .border-blue{
+        border: blue 1px solid !important;
+    }
+</style>
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -235,13 +239,19 @@ Kerja Hari Sebelumnya
             "searching" : false,
             responsive: true,
             createdRow: function(row, data, dataIndex){
-                
+                 if(data[0] === 'BS (Kg)'){
                     $('td:eq(1)', row).attr('colspan', 4);
                     $('td:eq(1)', row).attr('align', 'center');
 
                     $('td:eq(2)', row).css('display', 'none');
                     $('td:eq(3)', row).css('display', 'none');
                     $('td:eq(4)', row).css('display', 'none');
+
+                    $('td', row).eq(1).addClass('border-blue');
+                    
+
+                   
+                }
 
                 
             }
@@ -261,7 +271,7 @@ Kerja Hari Sebelumnya
     $(document).on('click', '#terapkan_date', function (e) {
     
     var tgl = document.getElementById('autoclose-date').value;
-    var cari_tgl = tgl.split("/").reverse().join("-");
+    var date = tgl.split("/").reverse().join("-");
 
 
       $.ajaxSetup({
@@ -274,7 +284,7 @@ Kerja Hari Sebelumnya
             type:"POST",
             url:"/manpro-kacang/kerjaharian/sebelumnya/cari_tgl",
             data:{
-              "cari_tgl":cari_tgl,
+              "date":date,
               "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
             },
             success : function(results) {
@@ -296,28 +306,16 @@ Kerja Hari Sebelumnya
                 }
               
               //for(var i=0; i<results.stockob.length; i++){
+
                     
                     datatable1.row.add([
 
                     "Kg",
-                    results.stockob[0].keluar,
-                    results.stockhc[0].keluar,
-                    results.stock8ml[0].keluar
+                    results.stockob,
+                    results.stockhc,
+                    results.stock8ml
                        
                     ]).draw();
-
-                                  
-                    datatable2.row.add([
-
-                    "Total (Kg)",
-                    results.hasilgs[0].masuk,
-                    results.hasilsp[0].masuk,
-                    results.hasilhc[0].masuk,
-                    results.hasiltelor[0].masuk,
-                    
-                    ]).draw();
-
-
 
                     datatable2.row.add([
 
@@ -329,13 +327,25 @@ Kerja Hari Sebelumnya
                     
                     ]).draw();
 
+                                  
+                    datatable2.row.add([
+
+                    "Total (Kg)",
+                    results.hasilgs,
+                    results.hasilsp,
+                    results.hasilhc,
+                    results.hasiltelor
+                    
+                    ]).draw();
+
+
                     datatable3.row.add([
 
                     "Kg",
-                    results.sortirgs[0].keluar,
-                    results.sortirsp[0].keluar,
-                    results.sortirhc[0].keluar,
-                    results.sortirtelor[0].keluar,
+                    results.sortirgs,
+                    results.sortirsp,
+                    results.sortirhc,
+                    results.sortirtelor
                     
                     ]).draw();
                  
