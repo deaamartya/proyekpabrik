@@ -23,13 +23,13 @@ class HomeController extends Controller
         $stockob = Stock::select('stock.timestamp' , 'stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang OB', 'gudang.nama' => 'Gudang Kacang'])
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang OB'])
                     ->get();
 
         $stock7ml = Stock::select('stock.timestamp' , 'stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 7 ml', 'gudang.nama' => 'Gudang Kacang'])
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 7 ml'])
                     ->get();
 
         $stock8ml = Stock::select('stock.timestamp' , 'stock.stock')
@@ -41,7 +41,6 @@ class HomeController extends Controller
         $stockgs = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang Sortir'])
                     ->where('stock.keterangan','like', '%GS%')
                     ->orderBy('stock.timestamp','desc')
                     ->first();
@@ -49,7 +48,6 @@ class HomeController extends Controller
         $stocksp = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang Sortir'])
                     ->where('stock.keterangan','like', '%SP%')
                     ->orderBy('stock.timestamp','desc')
                     ->first();
@@ -57,7 +55,6 @@ class HomeController extends Controller
         $stockhc = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang Sortir'])
                     ->where('stock.keterangan','like', '%HC%')
                     ->orderBy('stock.timestamp','desc')
                     ->first();
@@ -65,7 +62,6 @@ class HomeController extends Controller
         $stocktelor = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang Sortir'])
                     ->where('stock.keterangan','like', '%Telor%')
                     ->orderBy('stock.timestamp','desc')
                     ->first();

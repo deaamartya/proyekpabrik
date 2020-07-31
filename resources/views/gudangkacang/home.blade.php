@@ -62,10 +62,10 @@ Home
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($stockob as $ob)
+                                                @foreach($stockob as $z)
                                                     <tr>
-                                                        <td>{{$ob->timestamp}}</td>
-                                                        <td>{{$ob->stock}}</td>
+                                                        <td>{{$z->timestamp}}</td>
+                                                        <td>{{$z->stock}}</td>
                                                     </tr>
                                                 @endforeach 
                                             </tbody>
@@ -193,10 +193,10 @@ Home
                                 <tbody>
                                     <tr role="row">
                                         <td>Kilogram</td>
-                                        <td>{{$stockgs->stock}}</td>
-                                        <td>{{$stocksp->stock}}</td>
-                                        <td>{{$stockhc->stock}}</td>
-                                        <td>{{$stocktelor->stock}}</td>
+                                        <td>{{$stockgs}}</td>
+                                        <td>{{$stocksp}}</td>
+                                        <td>{{$stockhc}}</td>
+                                        <td>{{$stocktelor}}</td>
                                     </tr>
                                 </tbody>
                             </table>

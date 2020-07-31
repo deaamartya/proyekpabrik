@@ -4,11 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'kacang'])->group(function () {
 
-    //Dashboard Kanji
-    Route::get('/home', 'gudangkacang\HomeController@index')->name('dashboard-kacang');
-
-//home
-
+//Dashboard Kacang
+Route::get('/home', 'gudangkacang\HomeController@index')->name('dashboard-kacang');
 
 //stock
 Route::get('/gd_kacang', 'gudangkacang\StockGdKacangController@select');
