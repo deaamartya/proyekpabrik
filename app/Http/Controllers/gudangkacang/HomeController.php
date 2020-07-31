@@ -24,18 +24,21 @@ class HomeController extends Controller
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
                     ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang OB'])
+                    ->orderBy('stock.timestamp','desc')
                     ->get();
 
         $stock7ml = Stock::select('stock.timestamp' , 'stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
                     ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 7 ml'])
+                    ->orderBy('stock.timestamp','desc')
                     ->get();
 
         $stock8ml = Stock::select('stock.timestamp' , 'stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
                     ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 8 ml', 'gudang.nama' => 'Gudang Kacang'])
+                    ->orderBy('stock.timestamp','desc')
                     ->get();
 
         $stockgs = Stock::select('stock.stock')
@@ -66,6 +69,18 @@ class HomeController extends Controller
                     ->orderBy('stock.timestamp','desc')
                     ->first();
 
+        if($stockgs=="" || $stockgs=="0"){
+            $stockgs = 0;
+        }
+        if($stocksp=="" || $stocksp=="0"){
+            $stocksp = 0;
+        }
+        if($stockhc=="" || $stockhc=="0"){
+            $stockhc = 0;
+        }
+        if($stocktelor=="" || $stocktelor=="0"){
+            $stocktelor = 0;
+        }
         // $stockhc = Stock::select('stock.*')
         //             ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
         //             ->join('detail_order_masak', 'order_masak.id_order_masak', '=', 'detail_order_masak.id_order_masak')
