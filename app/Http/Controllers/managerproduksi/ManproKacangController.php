@@ -485,8 +485,9 @@ class ManproKacangController extends Controller
 
     public function cari_kerjasebelumnya(Request $request)
     {
+
       
-         $stockob = Stock::select('stock.keluar')
+        $stockob = Stock::select('stock.keluar')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
                     ->where('stock.id_transaksi', '=', 'TR0000000000000004')
@@ -574,7 +575,11 @@ class ManproKacangController extends Controller
                     ->whereDate('kerja_harian_group.tanggal', $request->date)
                     ->get();
 
+        //echo $stockob;
+        //var_dump($stockob);
+
         return response()->json(['stockob'=>$stockob, 'stockhc'=>$stockhc, 'stock8ml'=>$stock8ml, 'hasilgs'=>$hasilgs, 'hasilsp'=>$hasilsp, 'hasilhc'=>$hasilhc, 'hasiltelor'=>$hasiltelor, 'sortirgs'=>$sortirgs, 'sortirsp'=>$sortirsp, 'sortirhc'=>$sortirhc, 'sortirtelor'=>$sortirtelor, 'grupkerja'=>$grupkerja, 'kacangbs'=>$kacangbs]);
+        
 
        
     }
