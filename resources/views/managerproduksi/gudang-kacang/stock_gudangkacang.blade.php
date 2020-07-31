@@ -12,6 +12,9 @@ Stock Gudang Kacang
 <!-- Datepicker css -->
 <link href="{{ asset('assets/plugins/datepicker/datepicker.min.css') }}" rel="stylesheet" type="text/css">
 
+<!-- sweet alert  -->
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -314,6 +317,16 @@ $(document).ready(function() {
     var akhir_ob = document.getElementById('date2').value;
     var tgl_akhir_ob = akhir_ob.split("/").reverse().join("-");
 
+    if(awal_ob == "" || akhir_ob == ""){
+
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
 
       $.ajaxSetup({
         headers: {
@@ -333,6 +346,18 @@ $(document).ready(function() {
             success : function(results) {
             // console.log(JSON.stringify(results)); //print_r
                  
+
+            if(results.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
+
                 while(datatable1.data().count())
                 {
                     datatable1.row().remove().draw();
@@ -352,6 +377,8 @@ $(document).ready(function() {
                     ]).draw();
                  
                 }
+
+            }
                  
   
     
@@ -362,7 +389,11 @@ $(document).ready(function() {
             }
       });
 
-    });
+    }
+
+});
+
+
 
 
 
@@ -374,7 +405,16 @@ $(document).ready(function() {
     var akhir_7ml = document.getElementById('date4').value;
     var tgl_akhir_7ml = akhir_7ml.split("/").reverse().join("-");
 
+    if(awal_7ml == "" || akhir_7ml == ""){
 
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -392,6 +432,18 @@ $(document).ready(function() {
             },
             success : function(results2) {
             // console.log(JSON.stringify(results)); //print_r
+
+             if(results2.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
+
                  while(datatable2.data().count())
                 {
                     datatable2.row().remove().draw();
@@ -411,6 +463,7 @@ $(document).ready(function() {
                     ]).draw();
                  
                 }
+            }
                  
   
     
@@ -420,6 +473,8 @@ $(document).ready(function() {
                 console.log(data);
             }
       });
+
+  }
 
     });
    
@@ -432,6 +487,17 @@ $(document).ready(function() {
     var akhir_8ml = document.getElementById('date6').value;
     var tgl_akhir_8ml = akhir_8ml.split("/").reverse().join("-");
 
+
+    if(awal_8ml == "" || akhir_8ml == ""){
+
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
 
       $.ajaxSetup({
         headers: {
@@ -450,6 +516,17 @@ $(document).ready(function() {
             },
             success : function(results3) {
             // console.log(JSON.stringify(results)); //print_r
+
+             if(results3.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
                  
               while(datatable3.data().count())
                 {
@@ -470,6 +547,8 @@ $(document).ready(function() {
                     ]).draw();
                  
                 }
+
+            }
                  
   
     
@@ -479,6 +558,8 @@ $(document).ready(function() {
                 console.log(data);
             }
       });
+
+  }
 
     });
 

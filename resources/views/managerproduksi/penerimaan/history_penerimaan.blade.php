@@ -9,6 +9,9 @@ Penerimaan Barang
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
+<!-- sweet alert  -->
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 
 <style type="text/css">
     tr {
@@ -18,6 +21,52 @@ Penerimaan Barang
 
 @endsection 
 @section('rightbar-content')
+
+@if(session('alert_simpan'))
+    <script>
+      swal({
+            title: 'Berhasil !',
+            text: "{{ @session('alert_simpan')}}",
+            showConfirmButton: true,
+            type: 'success',
+        });
+    </script>
+@endif
+
+@if(session('alert_simpan2'))
+    <script>
+      swal({
+            title: 'Berhasil !',
+            text: "{{ @session('alert_simpan2')}}",
+            showConfirmButton: true,
+            type: 'success',
+        });
+    </script>
+@endif
+
+@if(session('alert_update'))
+    <script>
+      swal({
+            title: 'Berhasil !',
+            text: "{{ @session('alert_update')}}",
+            showConfirmButton: true,
+            type: 'success',
+        });
+    </script>
+@endif
+
+@if(session('alert_update2'))
+    <script>
+      swal({
+            title: 'Berhasil !',
+            text: "{{ @session('alert_update2')}}",
+            showConfirmButton: true,
+            type: 'success',
+        });
+    </script>
+@endif
+
+
 <!-- Start Breadcrumbbar -->                    
 <div class="breadcrumbbar">
     <div class="row align-items-center">
@@ -119,31 +168,6 @@ Penerimaan Barang
 
 //"use strict";
 $(document).ready(function() {
-
-    var msg = '{{Session::get('alert_simpan')}}';
-    var exist = '{{Session::has('alert_simpan')}}';
-    if(exist){
-      alert(msg);
-    }
-
-    var msg2 = '{{Session::get('alert_simpan2')}}';
-    var exist2 = '{{Session::has('alert_simpan2')}}';
-    if(exist2){
-      alert(msg2);
-    }
-
-    var msg3 = '{{Session::get('alert_update')}}';
-    var exist3 = '{{Session::has('alert_update')}}';
-    if(exist3){
-      alert(msg3);
-    }
-
-    var msg4 = '{{Session::get('alert_update2')}}';
-    var exist4 = '{{Session::has('alert_update2')}}';
-    if(exist4){
-      alert(msg4);
-    }
-
 
         $('#datatable').DataTable( {
             //"order": [[ 0, "asc" ]],

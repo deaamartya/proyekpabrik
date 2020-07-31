@@ -134,16 +134,31 @@ class ManproKacangController extends Controller
                     ->get();
          */
 
-         $stock_ob = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+        $stock_ob = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
                   ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
                   ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
                   ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
                   ->where(['bahan_baku.nama' => 'Kacang OB','stock.id_gudang' => '9'])
                   ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'), array($req->tgl_awal_ob, $req->tgl_akhir_ob))
-                  ->orderBy('stock.timestamp','asc')->get();
+                  ->exists();
+
+        if($stock_ob){
+
+           $stock_ob = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                    ->where(['bahan_baku.nama' => 'Kacang OB','stock.id_gudang' => '9'])
+                    ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'), array($req->tgl_awal_ob, $req->tgl_akhir_ob))
+                    ->orderBy('stock.timestamp','asc')->get();
 
 
-        return response()->json(['stock_ob'=>$stock_ob]);
+          return response()->json(['error'=>false,'stock_ob'=>$stock_ob]);
+
+        }else{
+
+          return response()->json(['error'=>true]);
+        }
 
         
     }
@@ -161,6 +176,16 @@ class ManproKacangController extends Controller
 
         */
 
+        $stock_7ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                  ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                  ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
+                  ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                  ->where(['bahan_baku.nama' => 'Kacang 7 ml','stock.id_gudang' => '9'])
+                  ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'), array($req->tgl_awal_7ml, $req->tgl_akhir_7ml))
+                  ->exists();
+
+        if($stock_7ml){
+
            $stock_7ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
                   ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
                   ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
@@ -170,7 +195,12 @@ class ManproKacangController extends Controller
                   ->orderBy('stock.timestamp','asc')->get();
                     
 
-        return response()->json(['stock_7ml'=>$stock_7ml]);
+          return response()->json(['error'=>false , 'stock_7ml'=>$stock_7ml]);
+
+      }else{
+
+        return response()->json(['error'=>true]);
+      }
 
         
     }
@@ -187,16 +217,33 @@ class ManproKacangController extends Controller
                     ->get();
       */
 
-        $stock_8ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+       $stock_8ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                  ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                  ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
+                  ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                  ->where(['bahan_baku.nama' => 'Kacang 8 ml','stock.id_gudang' => '9'])
+                  ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'), array($req->tgl_awal_8ml, $req->tgl_akhir_8ml))
+                  ->exists();
+
+         if($stock_8ml){         
+
+          $stock_8ml = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d/%m/%Y") AS timestamp') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
                   ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
                   ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
                   ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
                   ->where(['bahan_baku.nama' => 'Kacang 8 ml','stock.id_gudang' => '9'])
                   ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'), array($req->tgl_awal_8ml, $req->tgl_akhir_8ml))
                   ->orderBy('stock.timestamp','asc')->get();
-                    
 
-        return response()->json(['stock_8ml'=>$stock_8ml]);
+
+                  
+        return response()->json(['error'=>false ,'stock_8ml'=>$stock_8ml]);
+
+
+        }else{
+
+        return response()->json(['error'=>true]);
+      }
 
         
     }
@@ -279,6 +326,7 @@ class ManproKacangController extends Controller
                     ->get();
                     
   */
+
         $stock_gs = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
@@ -286,10 +334,26 @@ class ManproKacangController extends Controller
               ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
               ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
               ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_gs, $req->tgl_akhir_gs))
-              ->orderBy('stock.timestamp','asc')->get();
+              ->exists();
+
+        if($stock_gs){
+
+          $stock_gs = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
+                ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
+                ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
+                ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_gs, $req->tgl_akhir_gs))
+                ->orderBy('stock.timestamp','asc')->get();
 
 
-        return response()->json(['stock_gs'=>$stock_gs]);
+          return response()->json(['error'=>false ,'stock_gs'=>$stock_gs]);
+
+         }else{
+
+        return response()->json(['error'=>true]);
+      }
 
         
     }
@@ -306,17 +370,33 @@ class ManproKacangController extends Controller
                     ->get();
            */
 
-           $stock_sp = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+            $stock_sp = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
                     ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
                     ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
                     ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
                     ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
                     ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_sp, $req->tgl_akhir_sp))
-                    ->orderBy('stock.timestamp','asc')->get();
+                    ->exists();
+
+          if($stock_sp){
+
+             $stock_sp = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                      ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                      ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
+                      ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                      ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
+                      ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
+                      ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_sp, $req->tgl_akhir_sp))
+                      ->orderBy('stock.timestamp','asc')->get();
 
 
-        return response()->json(['stock_sp'=>$stock_sp]);
+            return response()->json(['error'=>false , 'stock_sp'=>$stock_sp]);
+
+         }else{
+
+          return response()->json(['error'=>true]);
+      }
 
         
     }
@@ -333,17 +413,35 @@ class ManproKacangController extends Controller
                     ->get();
           */
 
-         $stock_hc = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
-                    ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
-                    ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
-                    ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
-                    ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
-                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_hc, $req->tgl_akhir_hc))
-                    ->orderBy('stock.timestamp','asc')->get();
+
+          $stock_hc = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                      ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                      ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
+                      ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                      ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
+                      ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
+                      ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_hc, $req->tgl_akhir_hc))
+                      ->exists();
+
+          if($stock_hc){
+
+           $stock_hc = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                      ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                      ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
+                      ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                      ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
+                      ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
+                      ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_hc, $req->tgl_akhir_hc))
+                      ->orderBy('stock.timestamp','asc')->get();
 
 
-        return response()->json(['stock_hc'=>$stock_hc]);
+          return response()->json(['error'=>false, 'stock_hc'=>$stock_hc]);
+
+
+         }else{
+
+          return response()->json(['error'=>true]);
+      }
 
         
     }
@@ -360,6 +458,17 @@ class ManproKacangController extends Controller
                     ->get();
 
           */
+
+          $stock_telor = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                    ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                    ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
+                    ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
+                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_telor, $req->tgl_akhir_telor))
+                    ->exists();
+
+          if($stock_telor){
                 
            $stock_telor = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
                     ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
@@ -370,124 +479,57 @@ class ManproKacangController extends Controller
                     ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal_telor, $req->tgl_akhir_telor))
                     ->orderBy('stock.timestamp','asc')->get();    
 
-        return response()->json(['stock_telor'=>$stock_telor]);
+        return response()->json(['error'=>false ,'stock_telor'=>$stock_telor]);
+
+        }else{
+
+          return response()->json(['error'=>true]);
+      }
 
         
     }
 
 
-    public function kerjahariini()
-    {
-        
 
-        $stockob = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000004')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-        
-        $stockhc = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000005')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
+    
 
-        $stock8ml = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000006')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $hasilgs = Stock::select('stock.masuk')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000007')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $hasilsp = Stock::select('stock.masuk')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000008')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $hasilhc = Stock::select('stock.masuk')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000009')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $hasiltelor = Stock::select('stock.masuk')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000010')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $sortirgs = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000011')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $sortirsp = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000012')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $sortirhc = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000013')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $sortirtelor = Stock::select('stock.keluar')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000014')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-        
-        $kacangbs = DetailRekap::select('detail_rekap.berat_bs')
-                    ->join('detail_transaksi', 'detail_rekap.id_detail_transaksi', '=', 'detail_transaksi.id_detail_transaksi')
-                    ->where('id_jenis_transaksi', '=', '5')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-        $grupkerja = GroupKerja::select('group_kerja.jumlah_personil')
-                    ->join('kerja_harian_group', 'group_kerja.id_group_kerja', '=', 'kerja_harian_group.id_group_kerja')
-                    ->whereDate('stock.timestamp', date('Y-m-d'))
-                    ->get();
-
-       
-
-        return view('managerproduksi.gudang-kacang.kerjaharian_hariini')->with(compact('stockob', 'stockhc', 'stock8ml', 'hasilgs', 'hasilsp', 'hasilhc', 'hasiltelor', 'sortirgs', 'sortirsp', 'sortirhc', 'sortirtelor','kacangbs' , 'grupkerja'));
-
-        
-    }
-
-    public function kerjaharisebelumnya()
+    public function kerjaharian()
     {
 
-        return view('managerproduksi.gudang-kacang.kerjaharian_sebelumnya');
+        return view('managerproduksi.gudang-kacang.kerjaharian');
 
     }
 
 
-    public function cari_kerjasebelumnya(Request $request)
+    public function cari_kerjaharian(Request $request)
     {
 
       
-        $stockob = Stock::select('stock.keluar')
+
+       $stockob = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000004')
+                    ->whereDate('stock.timestamp', $request->date)
+                    ->exists();
+
+      $stockhc = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000005')
+                    ->whereDate('stock.timestamp', $request->date)
+                    ->exists();
+
+      $stock8ml = Stock::select('stock.keluar')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_transaksi', '=', 'TR0000000000000006')
+                    ->whereDate('stock.timestamp', $request->date)
+                    ->exists();
+
+      if($stockob || $stockhc || $stock8ml){ 
+      
+       $stockob = Stock::select('stock.keluar')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
                     ->where('stock.id_transaksi', '=', 'TR0000000000000004')
@@ -510,29 +552,29 @@ class ManproKacangController extends Controller
 
         $hasilgs = Stock::select('stock.masuk')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000007')
+                    ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->where('stock.keterangan','like', '%GS%')
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();
 
         $hasilsp = Stock::select('stock.masuk')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000008')
+                    ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->where('stock.keterangan','like', '%SP%')
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();
 
         $hasilhc = Stock::select('stock.masuk')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000009')
+                    ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->where('stock.keterangan','like', '%HC%')
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();
 
         $hasiltelor = Stock::select('stock.masuk')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where('stock.id_transaksi', '=', 'TR0000000000000010')
+                    ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->where('stock.keterangan','like', '%Telor%')
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();
 
@@ -575,10 +617,13 @@ class ManproKacangController extends Controller
                     ->whereDate('kerja_harian_group.tanggal', $request->date)
                     ->get();
 
-        //echo $stockob;
-        //var_dump($stockob);
+        return response()->json(['error' => false , 'stockob'=>$stockob, 'stockhc'=>$stockhc, 'stock8ml'=>$stock8ml, 'hasilgs'=>$hasilgs, 'hasilsp'=>$hasilsp, 'hasilhc'=>$hasilhc, 'hasiltelor'=>$hasiltelor, 'sortirgs'=>$sortirgs, 'sortirsp'=>$sortirsp, 'sortirhc'=>$sortirhc, 'sortirtelor'=>$sortirtelor, 'grupkerja'=>$grupkerja, 'kacangbs'=>$kacangbs]);
 
-        return response()->json(['stockob'=>$stockob, 'stockhc'=>$stockhc, 'stock8ml'=>$stock8ml, 'hasilgs'=>$hasilgs, 'hasilsp'=>$hasilsp, 'hasilhc'=>$hasilhc, 'hasiltelor'=>$hasiltelor, 'sortirgs'=>$sortirgs, 'sortirsp'=>$sortirsp, 'sortirhc'=>$sortirhc, 'sortirtelor'=>$sortirtelor, 'grupkerja'=>$grupkerja, 'kacangbs'=>$kacangbs]);
+      }else{
+
+        return response()->json(['error' => true]);
+      
+      }
         
 
        
