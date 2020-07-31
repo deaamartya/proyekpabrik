@@ -92,7 +92,14 @@ Stock Bawang Kupas
                           
                             </thead>
                             <tbody>
-                               
+                                @foreach($bawangkupas as $b)
+                                        <tr>
+                                            <td>{{ $b->tanggal }}</td>
+                                            <td>{{ $b->masuk}}</td>
+                                            <td>{{ $b->keluar}}</td>
+                                            <td>{{ $b->stock}}</td>
+                                        </tr>
+                                    @endforeach
 
                             </tbody>
                         </table>
@@ -161,6 +168,10 @@ Stock Bawang Kupas
             success : function(results) {
             // console.log(JSON.stringify(results)); //print_r
                  
+                  while(datatable1.data().count())
+                {
+                    datatable1.row().remove().draw();
+                }
               
               for(var i=0; i<results.stock_bawangkupas.length; i++){
                     

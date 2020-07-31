@@ -168,7 +168,7 @@ class StockGdKacangController extends Controller
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang OB','stock.id_gudang' => '9'])
-              ->whereBetween(DB::raw('DATE(penerimaan.TIMESTAMP)'),[$dateMin,$dateMax])
+              ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'),[$dateMin,$dateMax])
               ->orderBy('stock.timestamp','asc')->get();
             return response()->json(['success' => true,'stock' => $ob]);
         }
@@ -179,7 +179,7 @@ class StockGdKacangController extends Controller
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang 7 ml','stock.id_gudang' => '9'])
-              ->whereBetween(DB::raw('DATE(penerimaan.TIMESTAMP)'),[$dateMin,$dateMax])
+              ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'),[$dateMin,$dateMax])
               ->orderBy('stock.timestamp','asc')->get();
               return response()->json(['success' => true,'stock' => $tujuhML]);
         }
@@ -189,8 +189,8 @@ class StockGdKacangController extends Controller
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
-              ->where(['bahan_baku.nama' => 'Kacang 8ml','stock.id_gudang' => '9'])
-              ->whereBetween(DB::raw('DATE(penerimaan.TIMESTAMP)'),[$dateMin,$dateMax])
+              ->where(['bahan_baku.nama' => 'Kacang 8 ml','stock.id_gudang' => '9'])
+              ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'),[$dateMin,$dateMax])
               ->orderBy('stock.timestamp','asc')->get();
               return response()->json(['success' => true,'stock' => $delapanML]);
         }
@@ -200,9 +200,9 @@ class StockGdKacangController extends Controller
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
-              ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '9'])
+              ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
               ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
-              ->whereBetween(DB::raw('DATE(penerimaan.TIMESTAMP)'),[$dateMin,$dateMax])
+              ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'),[$dateMin,$dateMax])
               ->orderBy('stock.timestamp','asc')->get();
               return response()->json(['success' => true,'stock' => $ks]);
         }        

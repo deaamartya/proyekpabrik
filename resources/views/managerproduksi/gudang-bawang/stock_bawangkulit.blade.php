@@ -94,7 +94,10 @@ Stock Bawang Kulit
                                         
                                     </tr>
                                     
-                                     @foreach($bawangkulit as $b)
+                            </thead>
+                            <tbody>
+                               
+                                 @foreach($bawangkulit as $b)
                                         <tr>
                                             <td>{{ $b->tanggal }}</td>
                                             <td>{{ $b->keterangan }} 
@@ -108,10 +111,6 @@ Stock Bawang Kulit
                                             <td>{{ $b->stock}}</td>
                                         </tr>
                                     @endforeach
-                            </thead>
-                            <tbody>
-                               
-                               
                                 
                             </tbody>
                         </table>
