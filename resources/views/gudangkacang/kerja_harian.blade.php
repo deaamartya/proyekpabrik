@@ -529,7 +529,7 @@ Kerja Harian
             },
                 success: function(result){
                     // $("#exampleModalLong").modal('hide');
-                    windows.location.reload();
+                    location.reload();
                     swal({
                         title: 'Berhasil!',
                         text: 'Data Berhasil Disimpan',
