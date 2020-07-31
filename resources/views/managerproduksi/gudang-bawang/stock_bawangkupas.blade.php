@@ -12,6 +12,9 @@ Stock Bawang Kupas
 <!-- Datepicker css -->
 <link href="{{ asset('assets/plugins/datepicker/datepicker.min.css') }}" rel="stylesheet" type="text/css">
 
+<!-- sweet alert  -->
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 
 @endsection 
 @section('rightbar-content')
@@ -149,6 +152,16 @@ Stock Bawang Kupas
     var akhir = document.getElementById('date2').value;
     var tgl_akhir = akhir.split("/").reverse().join("-");
 
+    if(awal == "" || akhir == ""){
+
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
 
       $.ajaxSetup({
         headers: {
@@ -167,6 +180,17 @@ Stock Bawang Kupas
             },
             success : function(results) {
             // console.log(JSON.stringify(results)); //print_r
+
+            if(results.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
                  
                   while(datatable1.data().count())
                 {
@@ -185,7 +209,7 @@ Stock Bawang Kupas
                     ]).draw();
                  
                 }
-                 
+            }
   
     
              
@@ -195,6 +219,8 @@ Stock Bawang Kupas
             }
       });
 
+    }
+    
     });
 
     });

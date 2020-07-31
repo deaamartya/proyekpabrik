@@ -70,14 +70,26 @@ class ManproBawangController extends Controller
      public function get_stock_bawangkulit(Request $req)
     {
 
-        $stock_bawangkulit = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d %M %Y") AS tgl_terima') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
-                    ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
-                    ->where('keterangan','kulit')
-                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
-                    ->get();
-                    
+         $stock_bawangkulit = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d %M %Y") AS tgl_terima') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                        ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                        ->where('keterangan','kulit')
+                        ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
+                        ->exists();
 
-        return response()->json(['stock_bawangkulit'=>$stock_bawangkulit]);
+        if($stock_bawangkulit){
+            $stock_bawangkulit = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d %M %Y") AS tgl_terima') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                        ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
+                        ->where('keterangan','kulit')
+                        ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
+                        ->get();
+                        
+
+            return response()->json(['error'=>false , 'stock_bawangkulit'=>$stock_bawangkulit]);
+
+         }else{
+
+          return response()->json(['error'=>true]);
+      }
 
         
     }
@@ -94,13 +106,24 @@ class ManproBawangController extends Controller
       public function get_stock_bawangkupas(Request $req)
     {
 
-       $stock_bawangkupas = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.masuk', 'stock.keluar' , 'stock.stock')
-                    ->where('keterangan','kupas')
-                    ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
-                    ->get();
-                    
+         $stock_bawangkupas = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                        ->where('keterangan','kupas')
+                        ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
+                        ->exists();
 
-        return response()->json(['stock_bawangkupas'=>$stock_bawangkupas]);
+        if($stock_bawangkupas){
+           $stock_bawangkupas = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.masuk', 'stock.keluar' , 'stock.stock')
+                        ->where('keterangan','kupas')
+                        ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
+                        ->get();
+                        
+
+            return response()->json(['error'=>false ,'stock_bawangkupas'=>$stock_bawangkupas]);
+
+        }else{
+
+          return response()->json(['error'=>true]);
+      }
 
         
     }

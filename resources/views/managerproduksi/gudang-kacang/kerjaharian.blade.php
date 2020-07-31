@@ -9,6 +9,9 @@ Kerja Hari Sebelumnya
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
+<!-- sweet alert  -->
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 
 <!-- Datedropper css 
 <link href="{{ asset('managerproduksi/css/datedropper.css') }}" rel="stylesheet" type="text/css" />
@@ -24,18 +27,18 @@ Kerja Hari Sebelumnya
 </style>
 @endsection 
 @section('rightbar-content')
+
 <!-- Start Breadcrumbbar -->                    
 <div class="breadcrumbbar">
     <div class="row align-items-center">
         <div class="col-md-8 col-lg-8">
-            <h4 class="page-title">Data Kerja Hari Sebelumnya</h4>
+            <h4 class="page-title">Data Kerja Harian Gudang Kacang</h4>
             <div class="breadcrumb-list">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Data Produksi</a></li>
                     <li class="breadcrumb-item"><a href="#">Gudang Kacang</a></li>
                     <li class="breadcrumb-item"><a href="#">Kerja Harian</a></li>
-                    <li class="breadcrumb-item"><a href="#">Sebelumnya</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data Kerja Hari Sebelumnya</li>
+                    <li class="breadcrumb-item active" aria-current="page">Data Kerja Harian Gudang Kacang</li>
                 </ol>
             </div>
         </div>
@@ -224,6 +227,7 @@ Kerja Hari Sebelumnya
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
     $(document).ready(function() {
+
         var datatable1 = $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
             "paging" : false,
@@ -273,6 +277,16 @@ Kerja Hari Sebelumnya
     var tgl = document.getElementById('autoclose-date').value;
     var date = tgl.split("/").reverse().join("-");
 
+    if(tgl == ""){
+
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
 
       $.ajaxSetup({
         headers: {
@@ -282,80 +296,94 @@ Kerja Hari Sebelumnya
 
       $.ajax({
             type:"POST",
-            url:"/manpro-kacang/kerjaharian/sebelumnya/cari_tgl",
+            url:"/manpro-kacang/kerjaharian/cari_tgl",
             data:{
               "date":date,
               "_token": "{{ csrf_token() }}",//harus ada ini jika menggunakan metode POST
             },
             success : function(results) {
-            // console.log(JSON.stringify(results)); //print_r
+             //console.log(JSON.stringify(results)); //print_r
+             //console.log(results);
 
-                if (results.grupkerja) {
-                    $('#jumlah_pekerja').val("Jumlah Pekerja : "+results.grupkerja);
-                }
+                if(results.error){
+
+                    swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data kerja harian pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+                   
 
                 
-                 
-                while(datatable1.data().count())
-                {
-                    datatable1.row().remove().draw();
-                }
-
-                while(datatable2.data().count())
-                {
-                    datatable2.row().remove().draw();
-                }
-
-                while(datatable3.data().count())
-                {
-                    datatable3.row().remove().draw();
-                }
-              
-              //for(var i=0; i<results.stockob.length; i++){
+                 }else{
+                    var jml_pekerja = results.grupkerja[0].jumlah_personil;
+                    var a = "Jumlah Pekerja";
+                    var pekerja = a.concat(" : ",jml_pekerja)
+                    $('#jumlah_pekerja').value(pekerja);
+                   
 
                     
-                    datatable1.row.add([
+                     
+                    while(datatable1.data().count())
+                    {
+                        datatable1.row().remove().draw();
+                    }
 
-                    "Kg",
-                    results.stockob[0].keluar,
-                    results.stockhc[0].keluar,
-                    results.stock8ml[0].keluar
-                       
-                    ]).draw();
+                    while(datatable2.data().count())
+                    {
+                        datatable2.row().remove().draw();
+                    }
 
-                    datatable2.row.add([
+                    while(datatable3.data().count())
+                    {
+                        datatable3.row().remove().draw();
+                    }
+                  
+                  
 
-                    "BS (Kg)",
-                    results.kacangbs[0].berat_bs,
-                    "",
-                    "",
-                    ""
-                    
-                    ]).draw();
+                         datatable1.row.add([
 
-                                  
-                    datatable2.row.add([
+                        "Kg",
+                        results.stockob[0].keluar,
+                        results.stockhc[0].keluar,
+                        results.stock8ml[0].keluar
+                           
+                        ]).draw();
+           
+                        datatable2.row.add([
 
-                    "Total (Kg)",
-                    results.hasilgs[0].masuk,
-                    results.hasilsp[0].masuk,
-                    results.hasilhc[0].masuk,
-                    results.hasiltelor[0].masuk
-                    
-                    ]).draw();
+                        "Total (Kg)",
+                        results.hasilgs[0].masuk,
+                        results.hasilsp[0].masuk,
+                        results.hasilhc[0].masuk,
+                        results.hasiltelor[0].masuk
+                        
+                        ]).draw();
+
+                        datatable2.row.add([
+
+                        "BS (Kg)",
+                        results.kacangbs[0].berat_bs,
+                        "",
+                        "",
+                        ""
+
+                        ]).draw();
 
 
-                    datatable3.row.add([
+                        datatable3.row.add([
 
-                    "Kg",
-                    results.sortirgs[0].keluar,
-                    results.sortirsp[0].keluar,
-                    results.sortirhc[0].keluar,
-                    results.sortirtelor[0].keluar
-                    
-                    ]).draw();
-                 
-               // }
+                        "Kg",
+                        results.sortirgs[0].keluar,
+                        results.sortirsp[0].keluar,
+                        results.sortirhc[0].keluar,
+                        results.sortirtelor[0].keluar
+                        
+                        ]).draw();
+                 }    
+                
                  
   
     
@@ -363,12 +391,17 @@ Kerja Hari Sebelumnya
             },
             error: function(data) {
                 console.log(data);
+
+                 
+
             }
       });
 
-    });
+    }  
 
     });
+
+});
 
  
    

@@ -9,6 +9,11 @@ Kerja Hari Ini
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
+<!-- sweet alert  -->
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
+
+
 <style type="text/css">
     .border-blue{
         border: blue 1px solid !important;
@@ -17,6 +22,9 @@ Kerja Hari Ini
 
 @endsection 
 @section('rightbar-content')
+
+
+
 <!-- Start Breadcrumbbar -->                    
 <div class="breadcrumbbar">
     <div class="row align-items-center">
@@ -67,8 +75,13 @@ Kerja Hari Ini
                                     <div class="input-group" style="width: 58%"> 
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
-                                          </div>                             
-                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : {{ $grupkerja }}" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                          </div>     
+
+                                        
+
+                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : @if($sukses) {{ $grupkerja }} @endif" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                       
+
                                     </div>
                             </div>
 
@@ -92,9 +105,9 @@ Kerja Hari Ini
                             <tbody>
                                 <tr>
                                     <td>Kg</td>
-                                    <td>{{ $stockob }}</td>
-                                    <td>{{ $stockhc }}</td>
-                                    <td>{{ $stock8ml }}</td>
+                                    <td>@if($sukses) {{ $stockob }} @endif</td>
+                                    <td>@if($sukses) {{ $stockhc }} @endif</td>
+                                    <td>@if($sukses) {{ $stock8ml }} @endif</td>
                                 </tr>
                                
 
@@ -120,15 +133,15 @@ Kerja Hari Ini
 
                                 <tr>
                                     <td>Total (Kg)</td>
-                                    <td>{{ $hasilgs }}</td>
-                                    <td>{{ $hasilsp }}</td>
-                                    <td>{{ $hasilhc }}</td>
-                                    <td>{{ $hasiltelor }}</td>
+                                    <td>@if($sukses) {{ $hasilgs }} @endif</td>
+                                    <td>@if($sukses) {{ $hasilsp }} @endif</td>
+                                    <td>@if($sukses) {{ $hasilhc }} @endif</td>
+                                    <td>@if($sukses){{ $hasiltelor }} @endif</td>
                                 </tr>
 
                                 <tr>
                                     <td>BS (Kg)</td>
-                                    <td colspan="4" class="border-blue">{{ $kacangbs }}</td>
+                                    <td colspan="4" class="border-blue">@if($sukses) {{ $kacangbs }} @endif</td>
                                     <td style="display: none"></td>
                                     <td style="display: none"></td>
                                     <td style="display: none"></td>
@@ -157,10 +170,10 @@ Kerja Hari Ini
                             <tbody>
                                 <tr >
                                     <td>Kg</td>
-                                    <td>{{ $sortirgs }}</td>
-                                    <td>{{ $sortirsp }}</td>
-                                    <td>{{ $sortirhc }}</td>
-                                    <td>{{ $sortirtelor }}</td>
+                                    <td>@if($sukses) {{ $sortirgs }} @endif</td>
+                                    <td>@if($sukses) {{ $sortirsp }} @endif</td>
+                                    <td>@if($sukses) {{ $sortirhc }} @endif</td>
+                                    <td>@if($sukses) {{ $sortirtelor }} @endif</td>
                                 </tr>
                                
 
@@ -183,6 +196,7 @@ Kerja Hari Ini
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
     $(document).ready(function() {
+
         $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
              "paging" : false,
