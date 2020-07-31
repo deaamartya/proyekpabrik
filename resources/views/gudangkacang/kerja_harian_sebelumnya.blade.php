@@ -85,7 +85,7 @@ Kerja Hari Sebelumnya
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
                                           </div>                             
-                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 2" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 1" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
                                     </div>
                                
                             </div>
@@ -95,7 +95,7 @@ Kerja Hari Sebelumnya
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
                                           </div>                             
-                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : 12" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : " class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
                                     </div>
                             </div>
 
@@ -305,18 +305,7 @@ Kerja Hari Sebelumnya
                     results.stock8ml[0].keluar
                        
                     ]).draw();
-
-                    datatable2.row.add([
-
-                    "BS (Kg)",
-                    results.kacangbs[0].berat_bs,
-                    "",
-                    "",
-                    ""
-                    
-                    ]).draw();
-
-                                  
+       
                     datatable2.row.add([
 
                     "Total (Kg)",
@@ -325,6 +314,16 @@ Kerja Hari Sebelumnya
                     results.hasilhc[0].masuk,
                     results.hasiltelor[0].masuk
                     
+                    ]).draw();
+
+                    datatable2.row.add([
+
+                    "BS (Kg)",
+                    results.kacangbs[0].berat_bs,
+                    "",
+                    "",
+                    ""
+
                     ]).draw();
 
 
@@ -337,11 +336,13 @@ Kerja Hari Sebelumnya
                     results.sortirtelor[0].keluar
                     
                     ]).draw();
+
+                    var jml_pekerja = results.grupkerja[0].jumlah_personil;
+                    var a = "Jumlah Pekerja";
+                    var pekerja = a.concat(" : ",jml_pekerja)
+                    $('#jumlah_pekerja').value(pekerja);
                  
                // }
-                 
-  
-    
              
             },
             error: function(data) {
