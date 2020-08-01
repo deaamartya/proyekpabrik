@@ -270,7 +270,7 @@ class KerjaHariIniController extends Controller
                 ]);
 
                 //Select
-                $id = DetailTransaksi::select('id_detail_transaksi')->orderBy('timestamp', 'desc')->first();
+                $id = DetailTransaksi::select('id_detail_transaksi')->where('id_jenis_transaksi', '=', '5')->orderBy('timestamp', 'desc')->first();
 
                 DetailRekap::insert([
                     'id_detail_transaksi' => $id->id_detail_transaksi,
