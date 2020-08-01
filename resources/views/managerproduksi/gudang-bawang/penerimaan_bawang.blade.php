@@ -36,6 +36,12 @@ Penerimaan Bawang
         </div>
     </div>          
 </div>
+
+@if (session('alert_datakosong'))
+                <div class="alert alert-danger">
+                      {{ session('alert_datakosong') }}
+                 </div>
+ @endif
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->    
 <div class="contentbar">                
@@ -70,7 +76,7 @@ Penerimaan Bawang
                             </thead>
                             <tbody>
                                 
-                                @if(!empty($tenagakupas))
+                                @if(!$datakosong)
                                     @foreach($tenagakupas as $t)
                                     <tr>
                                         <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->nama}}</td>

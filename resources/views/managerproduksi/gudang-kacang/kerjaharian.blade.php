@@ -237,7 +237,7 @@ Kerja Hari Sebelumnya
         });
 
         var datatable2 = $('#datatable2').DataTable( {
-            //"order": [[ 0, "desc" ]],
+            "order": [[ 0, "desc" ]],
             "paging" : false,
             "info" : false,
             "searching" : false,
@@ -345,43 +345,43 @@ Kerja Hari Sebelumnya
 
                          datatable1.row.add([
 
-                        "Kg",
-                        results.stockob[0].keluar,
-                        results.stockhc[0].keluar,
-                        results.stock8ml[0].keluar
-                           
-                        ]).draw();
-           
-                        datatable2.row.add([
+                    "Kg",
+                    results.stockob[0].keluar,
+                    results.stockhc[0].keluar,
+                    results.stock8ml[0].keluar
+                       
+                    ]).draw();
 
-                        "Total (Kg)",
-                        results.hasilgs[0].masuk,
-                        results.hasilsp[0].masuk,
-                        results.hasilhc[0].masuk,
-                        results.hasiltelor[0].masuk
-                        
-                        ]).draw();
+                    datatable2.row.add([
 
-                        datatable2.row.add([
+                    "BS (Kg)",
+                    results.kacangbs[0].berat_bs,
+                    "",
+                    "",
+                    ""
 
-                        "BS (Kg)",
-                        results.kacangbs[0].berat_bs,
-                        "",
-                        "",
-                        ""
+                    ]).draw();
+       
+                    datatable2.row.add([
 
-                        ]).draw();
+                    "Total (Kg)",
+                    results.hasilgs[0].masuk,
+                    results.hasilsp[0].masuk,
+                    results.hasilhc[0].masuk,
+                    results.hasiltelor[0].masuk
+                    
+                    ]).draw();
 
+                    datatable3.row.add([
 
-                        datatable3.row.add([
+                    "Kg",
+                    results.sortirgs[0].keluar,
+                    results.sortirsp[0].keluar,
+                    results.sortirhc[0].keluar,
+                    results.sortirtelor[0].keluar
+                    
+                    ]).draw();
 
-                        "Kg",
-                        results.sortirgs[0].keluar,
-                        results.sortirsp[0].keluar,
-                        results.sortirhc[0].keluar,
-                        results.sortirtelor[0].keluar
-                        
-                        ]).draw();
                  }    
                 
                  

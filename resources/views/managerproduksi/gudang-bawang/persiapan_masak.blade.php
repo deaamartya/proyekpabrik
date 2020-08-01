@@ -30,6 +30,11 @@ Persiapan Masak Kanji
         </div>
     </div>          
 </div>
+@if (session('alert_datakosong'))
+                <div class="alert alert-danger">
+                      {{ session('alert_datakosong') }}
+                 </div>
+ @endif
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->    
 <div class="contentbar">                
@@ -61,6 +66,8 @@ Persiapan Masak Kanji
                             </thead>
                             <tbody>
 
+                            @if(!$datakosong)
+
                                   @foreach($ordermasak as $or)
                                     <tr>
                                         <td>{{date_format($or->tanggal_order_masak,'d/m/Y')}}</td>
@@ -81,6 +88,8 @@ Persiapan Masak Kanji
                                         </td>
                                     </tr>
                                 @endforeach
+
+                            @endif
 
 
                             </tbody>
