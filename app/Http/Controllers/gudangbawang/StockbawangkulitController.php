@@ -171,21 +171,7 @@ class StockbawangkulitController extends Controller
     }
 
 
-        }
-        else {
-            $stock = DB::table('stock')->where('keterangan','=','kupas')->sum('masuk');
-            DB::table('stock')->insert([
-                'masuk' => $request->jumlah,
-                'id_transaksi' => $request->id_pb,
-                'id_bahan_baku' => 'BB000000008',
-                'keterangan' => 'kupas',
-                'id_satuan' => 1,
-                'keluar' => 0,
-                'stock' => 0,
-            ]);
-        }
-        return redirect('/gudang-bawang/stockbawangkulit');
-    }
+      
 
 
 }
