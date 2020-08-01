@@ -161,12 +161,12 @@ class ManproBawangController extends Controller
 
         $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->exists();
 
-         $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
+        /* $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
                     ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
                     ->where('id_pegawai','=',$t->id_pegawai)
                     ->exists();
-
-        if($tenagakupas && $id_det){ 
+*/
+        if($tenagakupas){ 
 
              $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
                 $tenagakupas = json_decode($tenagakupas->id_pegawai);
@@ -205,12 +205,12 @@ class ManproBawangController extends Controller
 
       $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->exists();
 
-       $id_det = DetailKupasBawang::select('dt.id_detail_transaksi','kulit')
+      /* $id_det = DetailKupasBawang::select('dt.id_detail_transaksi','kulit')
                     ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
                     ->where('id_pegawai','=',$t->id_pegawai)
                     ->exists();
-
-        if($tenagakupas && $id_det){ 
+*/
+        if($tenagakupas){ 
             $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
                 
             $tenagakupas = json_decode($tenagakupas->id_pegawai);
