@@ -210,13 +210,7 @@
                                                     <li><a href="{{url('/manpro-kacang/stock/gks')}}">Gudang Kacang Sortir</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="dropdown">
-                                                <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown">Kerja Harian</a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="{{url('/manpro-kacang/kerjaharian/hariini')}}">Hari Ini</a></li>
-                                                    <li><a href="{{url('/manpro-kacang/kerjaharian/sebelumnya')}}">Sebelumnya</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="{{ url('/manpro-kacang/kerjaharian') }}">Kerja Harian</a></li>
                                         </ul>
                                     </li>
 

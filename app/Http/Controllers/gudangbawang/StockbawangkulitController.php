@@ -18,7 +18,9 @@ class StockbawangkulitController extends Controller
     public function index()
     {
         // $stock= \App\Models\Stock::all();
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kulit')->get();
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))->where('id_bahan_baku','BB000000006')->get();
+        $stock1 = DB::table('stock')->where('id_bahan_baku','BB000000006')->sum('masuk');
+        $stock2 = DB::table('stock')->where('id_bahan_baku','BB000000006')->sum('masuk');
      return view('gudangbawang.stockbawangkulit', ['stock' => $stock]);
     
     }
@@ -26,7 +28,7 @@ class StockbawangkulitController extends Controller
     public function indexkupas()
     {
         // $stock= \App\Models\Stock::all();
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kupas')->get();
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))->where('id_bahan_baku','BB000000008')->get();
      return view('gudangbawang.stockbawangkupas', ['stock' => $stock]);
     }
     /**
@@ -99,14 +101,14 @@ class StockbawangkulitController extends Controller
     public function carikulit(Request $request)
     {
         // Stock::create($request->all());
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kulit')
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('id_bahan_baku','BB000000006')
         ->whereBetween('TIMESTAMP', array($request->awalDate, $request->akhirDate))->get();
         return view('gudangbawang.stockbawangkulit', ['stock' => $stock]);
     }
     
     public function carikupas(Request $request)
     {
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kupas')
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('id_bahan_baku','BB000000008')
         ->whereBetween('TIMESTAMP', array($request->awalDate, $request->akhirDate))->get();
         return view('gudangbawang.stockbawangkupas', ['stock' => $stock]);
     }
@@ -153,6 +155,7 @@ class StockbawangkulitController extends Controller
                 'stock' => 0,
             ]);
 
+
         }
         else {
             $stock = DB::table('stock')->where('keterangan','=','kupas')->sum('masuk');
@@ -168,5 +171,9 @@ class StockbawangkulitController extends Controller
         }
         return redirect('/gudang-bawang/stockbawangkulit');
     }
+
+
+      
+
 
 }

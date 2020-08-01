@@ -54,9 +54,7 @@ Persiapan Masak Kanji
                             <thead>
                                     <tr>
                                         <th>Tanggal</th>
-                                        <th>HC</th>
-                                        <th>SP</th>
-                                        <th>GS</th>
+                                        <th>Jumlah</th>
                                         <th>Status</th>
                                     </tr>
                           

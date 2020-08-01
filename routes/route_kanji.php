@@ -38,7 +38,7 @@ Route::post('/gudang-bawang/statusordermasak','gudangbawang\KerjaHarianControlle
 Route::get('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@index');
 Route::get('/gudang-bawang/stockbawangkupas','gudangbawang\StockbawangkulitController@indexkupas');
 Route::post('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@carikulit');
-Route::post('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@carikupas');
+Route::post('/gudang-bawang/stockbawangkupas','gudangbawang\StockbawangkulitController@carikupas');
 
 Route::get('/gudang-bawang/penerimaanstockbawangkulit', function () {
         return view('gudangbawang.penerimaanstock');
