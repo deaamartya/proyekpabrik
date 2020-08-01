@@ -30,7 +30,7 @@ Soyuz - Datatable
         <div class="col-8">
             <h2 class="page-title text-left pl-5">Penerimaan Bawang kulit</h2>
 
-            <input  class="form-control" type="button" id="btn" value="Start/Stop the scanner" />
+            {{-- <input  class="form-control" type="button" id="btn" value="Start/Stop the scanner" /> --}}
 
             
 
@@ -49,7 +49,7 @@ Soyuz - Datatable
                 <form action="/gudang-bawang/penerimaan" method="post">
                     @csrf
                     <div class="form-group my-4">
-                        <input type="text" class="form-control" name="id_pb" id="hdnBarcode" readonly placeholder="Scan Barcode">
+                        <input type="text" class="form-control" name="id_pb" id="hdnBarcode"  placeholder="Scan Barcode">
                     </div>
                     <div class="form-group mb-4">
                       <label for="validationCustom01">Keterangan/Merek Bawang</label>

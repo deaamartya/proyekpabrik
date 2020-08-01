@@ -153,6 +153,7 @@ class StockbawangkulitController extends Controller
                 'id_satuan' => 1,
                 'keluar' => 0,
                 'stock' => 0,
+                "id_gudang"=>1
             ]);
 
 
@@ -167,6 +168,7 @@ class StockbawangkulitController extends Controller
                 'id_satuan' => 1,
                 'keluar' => 0,
                 'stock' => 0,
+                "id_gudang"=>1
             ]);
         }
         return redirect('/gudang-bawang/stockbawangkulit');
