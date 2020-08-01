@@ -161,7 +161,12 @@ class ManproBawangController extends Controller
 
         $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->exists();
 
-        if($tenagakupas){ 
+         $id_det = DetailKupasBawang::select('dt.id_detail_transaksi')
+                    ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
+                    ->where('id_pegawai','=',$t->id_pegawai)
+                    ->exists();
+
+        if($tenagakupas && $id_det){ 
 
              $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
                 $tenagakupas = json_decode($tenagakupas->id_pegawai);
@@ -200,7 +205,12 @@ class ManproBawangController extends Controller
 
       $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->exists();
 
-        if($tenagakupas){ 
+       $id_det = DetailKupasBawang::select('dt.id_detail_transaksi','kulit')
+                    ->join('detail_transaksi AS dt','dt.id_detail_transaksi','=','detail_kupas_bawang.id_detail_transaksi')
+                    ->where('id_pegawai','=',$t->id_pegawai)
+                    ->exists();
+
+        if($tenagakupas && $id_det){ 
             $tenagakupas = KerjaHarianGroup::select('id_pegawai')->where(['id_group_kerja' => 'G0000000001','tanggal' => date('Y-m-d')])->first();
                 
             $tenagakupas = json_decode($tenagakupas->id_pegawai);
@@ -246,14 +256,30 @@ class ManproBawangController extends Controller
 
     public function persiapan_masak()
     {
+
         $ordermasak = OrderMasak::select('order_masak.*','dom.*')
         ->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
                  ->where('dom.id_bahan_product', '=', 'BB000000008');
         })
         ->where('tanggal_order_masak','>=',date('Y-m-d'))
-        ->get();
-        return view('managerproduksi.gudang-bawang.persiapan_masak')->with(compact('ordermasak'));
+        ->exists();
+
+        if($ordermasak){
+
+            $ordermasak = OrderMasak::select('order_masak.*','dom.*')
+            ->join('detail_order_masak AS dom', function ($join) {
+                $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
+                     ->where('dom.id_bahan_product', '=', 'BB000000008');
+            })
+            ->where('tanggal_order_masak','>=',date('Y-m-d'))
+            ->get();
+
+            return view('managerproduksi.gudang-bawang.persiapan_masak')->with(compact('ordermasak'));
+
+        }else{
+             return view('managerproduksi.gudang-bawang.persiapan_masak');
+        }
     }
 
     /**
