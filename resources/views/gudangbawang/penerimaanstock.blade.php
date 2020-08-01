@@ -29,11 +29,11 @@ Soyuz - Datatable
     <div class="row align-items-center">
         <div class="col-8">
             <h2 class="page-title text-left pl-5">Penerimaan Bawang kulit</h2>
-<<<<<<< HEAD
+
             <input  class="form-control" type="button" id="btn" value="Start/Stop the scanner" />
-=======
+
             
->>>>>>> 5b8aa32202fac8cdf8ba2e3aa05a7f806cd7a02a
+
         </div>
         <div class="col-4">
             <div class="widgetbar">
@@ -41,7 +41,7 @@ Soyuz - Datatable
             </div>                        
         </div>
     </div>
-<<<<<<< HEAD
+
     <div class="row align-items-center">
         <div class="col-8 pl-5">
             <form action="/gudang-bawang/penerimaan" method="post">
@@ -60,7 +60,7 @@ Soyuz - Datatable
                           <div class="valid-feedback">
                             Looks good!
                           </div>
-=======
+
     <div class="row align-items-top">
         <div class="col-8 px-5">
                 <form action="/gudang-bawang/penerimaan" method="post">
@@ -87,7 +87,7 @@ Soyuz - Datatable
                         <input type="date" class="form-control" name="tgl" id="tgl" required placeholder="Tanggal Penerimaan Bawang">
                         <div class="valid-feedback">
                           Looks good!
->>>>>>> 5b8aa32202fac8cdf8ba2e3aa05a7f806cd7a02a
+
                         </div>
                     </div>
                     <div class="form-group mb-4">

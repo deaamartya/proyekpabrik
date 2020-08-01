@@ -152,7 +152,7 @@ class StockbawangkulitController extends Controller
                 'keluar' => 0,
                 'stock' => 0,
             ]);
-<<<<<<< HEAD
+
 
         }
         else {
@@ -169,8 +169,7 @@ class StockbawangkulitController extends Controller
         }
         return redirect('/gudang-bawang/stockbawangkulit');
     }
-=======
->>>>>>> 5b8aa32202fac8cdf8ba2e3aa05a7f806cd7a02a
+
 
         }
         else {
@@ -187,5 +186,6 @@ class StockbawangkulitController extends Controller
         }
         return redirect('/gudang-bawang/stockbawangkulit');
     }
+
 
 }
