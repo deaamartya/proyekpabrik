@@ -69,8 +69,8 @@ canvas.drawing, canvas.drawingBuffer {
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="tanggal">Jumlah Karung Diterima</label>
-                                <input type="text" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Karung Diterima"  readonly required>
+                                <label for="tanggal">Jumlah Kilogram Diterima</label>
+                                <input type="text" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Kilogram Diterima"  readonly required>
                             </div>
                         </div>
                         <input type="text" name="id_gudang_asal" id="id_gudang_asal" hidden>

@@ -29,7 +29,11 @@ Soyuz - Datatable
     <div class="row align-items-center">
         <div class="col-8">
             <h2 class="page-title text-left pl-5">Penerimaan Bawang kulit</h2>
+
+            <input  class="form-control" type="button" id="btn" value="Start/Stop the scanner" />
+
             
+
         </div>
         <div class="col-4">
             <div class="widgetbar">
@@ -37,19 +41,15 @@ Soyuz - Datatable
             </div>                        
         </div>
     </div>
+
+   
+
     <div class="row align-items-top">
         <div class="col-8 px-5">
                 <form action="/gudang-bawang/penerimaan" method="post">
                     @csrf
                     <div class="form-group my-4">
                         <input type="text" class="form-control" name="id_pb" id="hdnBarcode" readonly placeholder="Scan Barcode">
-                    </div>
-                    <div class="form-group mb-4">
-                      <label for="validationCustom01">Berat Bawang Kupas (Kg)</label>
-                      <input type="text" class="form-control" name="barcode" id="barcode" placeholder="sbk001">
-                      <div class="valid-feedback">
-                        Looks good!
-                      </div>
                     </div>
                     <div class="form-group mb-4">
                       <label for="validationCustom01">Keterangan/Merek Bawang</label>
@@ -63,6 +63,7 @@ Soyuz - Datatable
                         <input type="date" class="form-control" name="tgl" id="tgl" required placeholder="Tanggal Penerimaan Bawang">
                         <div class="valid-feedback">
                           Looks good!
+
                         </div>
                     </div>
                     <div class="form-group mb-4">

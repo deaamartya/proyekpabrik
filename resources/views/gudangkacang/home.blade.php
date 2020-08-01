@@ -62,10 +62,10 @@ Home
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($stockob as $ob)
+                                                @foreach($stockob as $z)
                                                     <tr>
-                                                        <td>{{$ob->timestamp}}</td>
-                                                        <td>{{$ob->stock}}</td>
+                                                        <td>{{$z->timestamp}}</td>
+                                                        <td>{{$z->stock}}</td>
                                                     </tr>
                                                 @endforeach 
                                             </tbody>

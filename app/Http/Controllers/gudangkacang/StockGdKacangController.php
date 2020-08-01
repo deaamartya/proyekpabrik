@@ -4,7 +4,7 @@ namespace App\Http\Controllers\gudangkacang;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\stock;
+use App\Models\Stock;
 use App\Models\DetailTransaksi;
 use App\Models\Penerimaan;
 use DB;
@@ -21,21 +21,21 @@ class StockGdKacangController extends Controller
 
     public function select()
     {
-        $ob = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+        $ob = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang OB','stock.id_gudang' => '9'])
               ->orderBy('stock.timestamp','asc')->paginate(10);
 
-        $tujuhML = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+        $tujuhML = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang 7 ml','stock.id_gudang' => '9'])
               ->orderBy('stock.timestamp','asc')->paginate(10);
         
-        $delapanML = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+        $delapanML = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
@@ -46,28 +46,28 @@ class StockGdKacangController extends Controller
     }
 
     public function selectSortir(){
-        $gs = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+        $gs = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
               ->where('stock.keterangan', 'LIKE', '%'.'GS'.'%')
               ->orderBy('stock.timestamp','asc')->paginate(10);
-        $sp = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+        $sp = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
               ->where('stock.keterangan', 'LIKE', '%'.'SP'.'%')
               ->orderBy('stock.timestamp','asc')->paginate(10);
-        $hc = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+        $hc = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
               ->where('stock.keterangan', 'LIKE', '%'.'HC'.'%')
               ->orderBy('stock.timestamp','asc')->paginate(10);
-        $telor = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+        $telor = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
@@ -83,7 +83,7 @@ class StockGdKacangController extends Controller
     public function insertOB(Request $request)
     {
      
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $request->barcode,
             'id_bahan_baku' => 'BB000000003',
@@ -93,7 +93,7 @@ class StockGdKacangController extends Controller
             'id_gudang' => 9
         ]);
 
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $request->barcode,
             'id_bahan_baku' => 'BB000000003',
@@ -108,7 +108,7 @@ class StockGdKacangController extends Controller
 
     public function insert7ml(Request $request)
     {
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $request->barcode,
             'id_bahan_baku' => 'BB000000004',
@@ -118,7 +118,7 @@ class StockGdKacangController extends Controller
             'id_gudang' => 9
         ]);
 
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $request->barcode,
             'id_bahan_baku' => 'BB000000004',
@@ -133,7 +133,7 @@ class StockGdKacangController extends Controller
 
     public function insert8ml(Request $request)
     {
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $request->barcode,
             'id_bahan_baku' => 'BB000000005',
@@ -143,7 +143,7 @@ class StockGdKacangController extends Controller
             'id_gudang' => 9
         ]);
 
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $request->barcode,
             'id_bahan_baku' => 'BB000000005',
@@ -163,7 +163,7 @@ class StockGdKacangController extends Controller
         $dateMax = date("Y-m-d",strtotime($dateMax));
 
         if($req->jenis == "OB"){
-            $ob = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+            $ob = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
@@ -174,7 +174,7 @@ class StockGdKacangController extends Controller
         }
 
         if($req->jenis == "7ml"){
-            $tujuhML = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+            $tujuhML = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
@@ -185,7 +185,7 @@ class StockGdKacangController extends Controller
         }
 
         if($req->jenis == "8ml"){
-            $delapanML = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+            $delapanML = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
@@ -196,7 +196,7 @@ class StockGdKacangController extends Controller
         }
 
         if($req->jenis == "GS" || $req->jenis == "SP" || $req->jenis == "HC" || $req->jenis == "Telor"){
-            $ks = stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
+            $ks = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
               ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
               ->join('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
@@ -226,7 +226,7 @@ class StockGdKacangController extends Controller
             'status_simpan' => 2,
         ]);
 
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $id_pb->id_pemindahan_bahan,
             'id_bahan_baku' => 'BB000000010',
@@ -265,7 +265,7 @@ class StockGdKacangController extends Controller
             'status_simpan' => 2,
         ]);
 
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $id_pb->id_pemindahan_bahan,
             'id_bahan_baku' => 'BB000000010',
@@ -304,7 +304,7 @@ class StockGdKacangController extends Controller
             'status_simpan' => 2,
         ]);
 
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $id_pb->id_pemindahan_bahan,
             'id_bahan_baku' => 'BB000000010',
@@ -343,7 +343,7 @@ class StockGdKacangController extends Controller
             'status_simpan' => 2,
         ]);
 
-        stock::insert([
+        Stock::insert([
             'id_satuan' => 1,
             'id_transaksi' => $id_pb->id_pemindahan_bahan,
             'id_bahan_baku' => 'BB000000010',

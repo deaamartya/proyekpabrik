@@ -158,7 +158,6 @@ Tenaga Kupas
 
         });
         $(document).on("click",".status", function () {
-            e.preventDefault();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -171,32 +170,30 @@ Tenaga Kupas
                     id: $(this).attr('id').substr(6)
                 },
                 success: function(result){
-                    if(result.pegawai.status != status){
-                        if(result.pegawai.status){
-                            $("#status"+result.pegawai.id_pegawai).removeClass('btn-danger');
-                            $("#status"+result.pegawai.id_pegawai).addClass('btn-success');
-                            $("#status"+result.pegawai.id_pegawai).html("Aktif");
-                        }
-                        else{
-                            $("#status"+result.pegawai.id_pegawai).removeClass('btn-success');
-                            $("#status"+result.pegawai.id_pegawai).addClass('btn-danger');
-                            $("#status"+result.pegawai.id_pegawai).html("Tidak Aktif");
-                        }
-                        swal({
-                            title: 'Berhasil!',
-                            text: 'Data berhasil diubah',
-                            timer: 2000,
-                            showConfirmButton: false,
-                            type: 'success',
-                        }).then(
-                        function () {
-                        },
-                        function (dismiss) {
-                            if (dismiss === 'timer') {
-                            }
-                        }
-                        );
+                    if(result.pegawai.status == true){
+                        $("#status"+result.pegawai.id_pegawai).removeClass('btn-danger');
+                        $("#status"+result.pegawai.id_pegawai).addClass('btn-success');
+                        $("#status"+result.pegawai.id_pegawai).html("Aktif");
                     }
+                    else{
+                        $("#status"+result.pegawai.id_pegawai).removeClass('btn-success');
+                        $("#status"+result.pegawai.id_pegawai).addClass('btn-danger');
+                        $("#status"+result.pegawai.id_pegawai).html("Tidak Aktif");
+                    }
+                    swal({
+                        title: 'Berhasil!',
+                        text: 'Data berhasil diubah',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        type: 'success',
+                    }).then(
+                    function () {
+                    },
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                        }
+                    }
+                    );
                 }
             });
         });
