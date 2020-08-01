@@ -81,7 +81,7 @@ Soyuz - Datatable
                                     <td>{{ $stk->keterangan}}</td>
                                     <td>{{ $stk->masuk}}</td>
                                     <td>{{ $stk->keluar}}</td>
-                                    <td>{{ $stk->stock}}</td>
+                                    <td>{{ $stk->stocks}}</td>
                                     
                                 </tr>
                                 @endforeach

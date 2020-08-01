@@ -18,7 +18,9 @@ class StockbawangkulitController extends Controller
     public function index()
     {
         // $stock= \App\Models\Stock::all();
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('id_bahan_baku','BB000000006')->get();
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))->where('id_bahan_baku','BB000000006')->get();
+        $stock1 = DB::table('stock')->where('id_bahan_baku','BB000000006')->sum('masuk');
+        $stock2 = DB::table('stock')->where('id_bahan_baku','BB000000006')->sum('masuk');
      return view('gudangbawang.stockbawangkulit', ['stock' => $stock]);
     
     }
