@@ -25,53 +25,87 @@ class ManproKacangController extends Controller
      */
     public function home()
     {
-         $kacang_ob = Stock::select('stock.timestamp' , 'stock.stock')
+         $stockob = Stock::select('stock.timestamp' , 'stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang OB', 'gudang.nama' => 'Gudang Kacang'])
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang OB'])
+                    ->orderBy('stock.timestamp','desc')
                     ->get();
 
-        $kacang_7ml = Stock::select('stock.timestamp' , 'stock.stock')
+        $stock7ml = Stock::select('stock.timestamp' , 'stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 7 ml', 'gudang.nama' => 'Gudang Kacang'])
+                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 7 ml'])
+                    ->orderBy('stock.timestamp','desc')
                     ->get();
 
-        $kacang_8ml = Stock::select('stock.timestamp' , 'stock.stock')
+        $stock8ml = Stock::select('stock.timestamp' , 'stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
                     ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang 8 ml', 'gudang.nama' => 'Gudang Kacang'])
+                    ->orderBy('stock.timestamp','desc')
                     ->get();
 
-        $kacang_gs = Stock::select('stock.*')
+        $stockgs = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang', 'stock.id_transaksi' => 'TR0000000000000007'])
-                    ->sum('stock.stock'); 
+                    ->where('stock.id_gudang', '=', '10')
+                    ->where('stock.keterangan','like', '%GS%')
+                    ->orderBy('stock.timestamp','desc')
+                    ->first();
 
-
-        $kacang_sp = Stock::select('stock.*')
-                   ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang', 'stock.id_transaksi' => 'TR0000000000000008'])
-                    ->sum('stock.stock'); 
-
-
-        $kacang_hc = Stock::select('stock.*')
+        $stocksp = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang', 'stock.id_transaksi' => 'TR0000000000000009'])
-                    ->sum('stock.stock');         
+                    ->where('stock.id_gudang', '=', '10')
+                    ->where('stock.keterangan','like', '%SP%')
+                    ->orderBy('stock.timestamp','desc')
+                    ->first();
+
+        $stockhc = Stock::select('stock.stock')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_gudang', '=', '10')
+                    ->where('stock.keterangan','like', '%HC%')
+                    ->orderBy('stock.timestamp','desc')
+                    ->first();
+
+        $stocktelor = Stock::select('stock.stock')
+                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
+                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_gudang', '=', '10')
+                    ->where('stock.keterangan','like', '%Telor%')
+                    ->orderBy('stock.timestamp','desc')
+                    ->first();
+
+       
+        if($stockgs=="" || $stockgs=="0"){
+            $stockgs = "0";
+        }else{
+            $stockgs = $stockgs->stock;
+        }
+        if($stocksp=="" || $stocksp=="0"){
+            $stocksp = "0";
+        }else{
+            $stocksp = $stocksp->stock;
+        }
+        if($stockhc=="" || $stockhc=="0"){
+            $stockhc = "0";
+        }else{
+            $stockhc = $stockhc->stock;
+        }
+        if($stocktelor=="" || $stocktelor=="0"){
+            $stocktelor = "0";
+        }else{
+            $stocktelor = $stocktelor->stock;
+        }
+
+
+
+          return view('managerproduksi.gudang-kacang.home_gudangkacang')->with(compact('stockob', 'stock7ml', 'stock8ml', 'stockgs', 'stocksp', 'stockhc', 'stocktelor'));
+
+
         
-        
-        $kacang_telor = Stock::select('stock.*')
-                    ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
-                    ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
-                    ->where(['stock.id_satuan' => 1,'bahan_baku.nama' => 'Kacang Sortir', 'gudang.nama' => 'Gudang Kacang', 'stock.id_transaksi' => 'TR0000000000000010'])
-                    ->sum('stock.stock');
-
-
-        return view('managerproduksi.gudang-kacang.home_gudangkacang')->with(compact('kacang_ob', 'kacang_7ml', 'kacang_8ml', 'kacang_hc', 'kacang_gs', 'kacang_sp', 'kacang_telor'));
     }
 
     
