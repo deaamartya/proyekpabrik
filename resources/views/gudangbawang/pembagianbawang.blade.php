@@ -287,7 +287,7 @@ Pembagian Bawang
         //cek pegawai ada atau enggak di modal tambah penerimaan
         if($("#check"+id).length){
             //show dari pilihan
-            $("#check"+id).show();
+            $("#check"+id).removeClass("hide");
         }
         //kalau tidak ada, bikin pilihan baru
         else{
