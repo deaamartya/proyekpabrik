@@ -170,7 +170,7 @@ Home Gudang Kacang
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="display table table-bordered table-striped table-manpro-hover">
+                        <table id="datatable4" class="display table table-bordered table-striped table-manpro-hover datatable">
                            <thead>
                                     <tr>
                                         <th>Stock</th>
@@ -232,6 +232,14 @@ Home Gudang Kacang
 
          $('#datatable3').DataTable( {
             //"order": [[ 0, "asc" ]],
+            "searching" : false,
+            responsive: true
+        });
+
+          $('#datatable4').DataTable( {
+            //"order": [[ 0, "asc" ]],
+            "paging" : false,
+            "info" : false,
             "searching" : false,
             responsive: true
         });

@@ -46,15 +46,18 @@ Gudang Kacang Sortir
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h6 style="color: blue;">Berat Karung Diterima (Kg)</h6>
-                                    <input type="number" class="form-control" name="berat_gs" min="0" style="width: 60%">
+                        <form action="{{ url('/gudang-kacang/insertGS')}}" method="POST">
+                            @csrf
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h6 style="color: blue;">Berat Karung Diterima (Kg)</h6>
+                                        <input type="number" class="form-control" name="berat_gs" min="0" style="width: 60%">
+                                    </div>
                                 </div>
+                                <br><button type="submit" class="btn btn-primary" style="margin-right: 10px;">Simpan</button>
                             </div>
-                            <br><button type="button" class="btn btn-primary" style="margin-right: 10px;">Simpan</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!-- End col -->

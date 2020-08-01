@@ -13,7 +13,9 @@ Stock Bawang Kulit
 <link href="{{ asset('assets/plugins/datepicker/datepicker.min.css') }}" rel="stylesheet" type="text/css">
 
 
-
+<!-- sweet alert  -->
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
 
 @endsection 
 @section('rightbar-content')
@@ -93,11 +95,24 @@ Stock Bawang Kulit
                                         <th>Stock <h5 style="font-size: 11px;">(Kg)</h5></th>
                                         
                                     </tr>
-                          
+                                    
                             </thead>
                             <tbody>
                                
-                               
+                                 @foreach($bawangkulit as $b)
+                                        <tr>
+                                            <td>{{ $b->tanggal }}</td>
+                                            <td>{{ $b->keterangan }} 
+                                                @if($b->id_tanggal != "")
+                                                    / {{ $b->tgl_terima }}
+                                                @else
+                                                @endif
+                                            </td>
+                                            <td>{{ $b->masuk}}</td>
+                                            <td>{{ $b->keluar}}</td>
+                                            <td>{{ $b->stock}}</td>
+                                        </tr>
+                                    @endforeach
                                 
                             </tbody>
                         </table>
@@ -145,6 +160,16 @@ $(document).ready(function() {
     var akhir = document.getElementById('date2').value;
     var tgl_akhir = akhir.split("/").reverse().join("-");
 
+    if(awal == "" || akhir == ""){
+
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
 
       $.ajaxSetup({
         headers: {
@@ -163,7 +188,22 @@ $(document).ready(function() {
             },
             success : function(results) {
             // console.log(JSON.stringify(results)); //print_r
+
+            if(results.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
                  
+                  while(datatable1.data().count())
+                {
+                    datatable1.row().remove().draw();
+                }
               
               for(var i=0; i<results.stock_bawangkulit.length; i++){
                     
@@ -178,6 +218,7 @@ $(document).ready(function() {
                     ]).draw();
                  
                 }
+            }
                  
   
     
@@ -187,6 +228,8 @@ $(document).ready(function() {
                 console.log(data);
             }
       });
+
+  }
 
     });
 

@@ -18,7 +18,7 @@ class StockbawangkulitController extends Controller
     public function index()
     {
         // $stock= \App\Models\Stock::all();
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kulit')->get();
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('id_bahan_baku','BB000000006')->get();
      return view('gudangbawang.stockbawangkulit', ['stock' => $stock]);
     
     }
@@ -26,7 +26,7 @@ class StockbawangkulitController extends Controller
     public function indexkupas()
     {
         // $stock= \App\Models\Stock::all();
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kupas')->get();
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('id_bahan_baku','BB000000008')->get();
      return view('gudangbawang.stockbawangkupas', ['stock' => $stock]);
     }
     /**
@@ -99,14 +99,14 @@ class StockbawangkulitController extends Controller
     public function carikulit(Request $request)
     {
         // Stock::create($request->all());
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kulit')
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('id_bahan_baku','BB000000006')
         ->whereBetween('TIMESTAMP', array($request->awalDate, $request->akhirDate))->get();
         return view('gudangbawang.stockbawangkulit', ['stock' => $stock]);
     }
     
     public function carikupas(Request $request)
     {
-        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('keterangan','kupas')
+        $stock = DB::table('stock')->select('TIMESTAMP','keterangan','masuk','keluar','stock')->where('id_bahan_baku','BB000000008')
         ->whereBetween('TIMESTAMP', array($request->awalDate, $request->akhirDate))->get();
         return view('gudangbawang.stockbawangkupas', ['stock' => $stock]);
     }
@@ -114,32 +114,78 @@ class StockbawangkulitController extends Controller
 
 
 
-    public function tambah($id)
-    {
-        $detailordermasak= \App\Models\DetailOrderMasak::all();
-        $substring= substr($id,22);
-        switch ($substring) {
-            case 0:
-              echo "Your favorite color is red!";
-              break;
-            case 1:
-              echo "Your favorite color is blue!";
-              break;
-            case 2:
-              echo "Your favorite color is green!";
-              break;
-            default:
-              echo "Your favorite color is neither red, blue, nor green!";
-          }
-        $jumlah = DB::table('detail_order_masak')->select('jumlah')->where('id',$id);
-        $jumlah1 =$jumlah+1;
-        $jumlah->jumlah = $jumlah1;
-        $jumlah->save();
-        // $tambah=DB::table('detailordermasak')->where('id', $id) ->update(['jumlah' => $jumlah]);
-        return response()->json(['success' => true  ]);
-    //  return view('gudangbawang.stockbawangkulit', ['detailordermasak' => $detailordermasak]);
-    }
+    // public function tambah($id)
+    // {
+    //     $detailordermasak= \App\Models\DetailOrderMasak::all();
+    //     $substring= substr($id,22);
+    //     switch ($substring) {
+    //         case 0:
+    //           echo "Your favorite color is red!";
+    //           break;
+    //         case 1:
+    //           echo "Your favorite color is blue!";
+    //           break;
+    //         case 2:
+    //           echo "Your favorite color is green!";
+    //           break;
+    //         default:
+    //           echo "Your favorite color is neither red, blue, nor green!";
+    //       }
+    //     $jumlah = DB::table('detail_order_masak')->select('jumlah')->where('id',$id);
+    //     $jumlah1 =$jumlah+1;
+    //     $jumlah->jumlah = $jumlah1;
+    //     $jumlah->save();
+    //     // $tambah=DB::table('detailordermasak')->where('id', $id) ->update(['jumlah' => $jumlah]);
+    //     return response()->json(['success' => true  ]);
+    // //  return view('gudangbawang.stockbawangkulit', ['detailordermasak' => $detailordermasak]);
+    // }
     
+    public function terima(Request $request)
+    {   if($request->merek == 'kulit'){
+        $stock = DB::table('stock')->where('keterangan','=','kulit')->sum('masuk');
+            DB::table('stock')->insert([
+                'masuk'=> $request->jumlah,
+                'id_transaksi' => $request->id_pb,
+                'id_bahan_baku' => 'BB000000006',
+                'keterangan' => 'kulit',
+                'id_satuan' => 1,
+                'keluar' => 0,
+                'stock' => 0,
+            ]);
+<<<<<<< HEAD
 
+        }
+        else {
+            $stock = DB::table('stock')->where('keterangan','=','kupas')->sum('masuk');
+            DB::table('stock')->insert([
+                'masuk' => $request->jumlah,
+                'id_transaksi' => $request->id_pb,
+                'id_bahan_baku' => 'BB000000008',
+                'keterangan' => 'kupas',
+                'id_satuan' => 1,
+                'keluar' => 0,
+                'stock' => 0,
+            ]);
+        }
+        return redirect('/gudang-bawang/stockbawangkulit');
+    }
+=======
+>>>>>>> 5b8aa32202fac8cdf8ba2e3aa05a7f806cd7a02a
+
+        }
+        else {
+            $stock = DB::table('stock')->where('keterangan','=','kupas')->sum('masuk');
+            DB::table('stock')->insert([
+                'masuk' => $request->jumlah,
+                'id_transaksi' => $request->id_pb,
+                'id_bahan_baku' => 'BB000000008',
+                'keterangan' => 'kupas',
+                'id_satuan' => 1,
+                'keluar' => 0,
+                'stock' => 0,
+            ]);
+        }
+        return redirect('/gudang-bawang/stockbawangkulit');
+    }
 
 }

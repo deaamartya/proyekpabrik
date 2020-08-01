@@ -1,16 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-//coba scan
-Route::get('/scand',function(){
-    return view('scan2');
-});
-
-Route::get('/scan', function () {
-    return view('gudangbawang.scan');
-});
-
 Route::middleware(['auth', 'kanji'])->group(function () {
 
 //Dashboard Kanji
@@ -45,38 +35,22 @@ Route::post('/gudang-bawang/statusordermasak','gudangbawang\KerjaHarianControlle
 
 
 //stock
-
-
-
-Route::get('/gudang-bawang/stockbawangkulit', function () {
-    return view('gudangbawang.stockbawangkulit');
-});
-Route::get('/gudang-bawang/stockbawangkupas', function () {
-    return view('gudangbawang.stockbawangkupas');
-});
-
-
-// Route::get('/gudang-bawang/stockbawangkulit', function () {
-//     return view('gudangbawang.stockbawangkulit');
-// });
-// Route::get('/gudang-bawang/stockbawangkupas', function () {
-//     return view('gudangbawang.stockbawangkupas');
-// });
 Route::get('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@index');
-
 Route::get('/gudang-bawang/stockbawangkupas','gudangbawang\StockbawangkulitController@indexkupas');
+Route::post('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@carikulit');
+<<<<<<< HEAD
+Route::post('/gudang-bawang/stockbawangkupas','gudangbawang\StockbawangkulitController@carikupas');
+=======
+Route::post('/gudang-bawang/stockbawangkulit','gudangbawang\StockbawangkulitController@carikupas');
+>>>>>>> 5b8aa32202fac8cdf8ba2e3aa05a7f806cd7a02a
 
 Route::get('/gudang-bawang/penerimaanstockbawangkulit', function () {
         return view('gudangbawang.penerimaanstock');
     });
 Route::get('/gudang-bawang/penerimaanstock','gudangbawang\StockbawangkulitController@store');
 
-
-Route::get('/gudang-bawang/scan', function () {
-    return view('gudangbawang.scan');
-});
-
 Route::get('/gudang-bawang/tambahstock','gudangbawang\StockbawangkulitController@tambah');
+Route::post('/gudang-bawang/penerimaan','gudangbawang\StockbawangkulitController@terima');
 
 Route::get('/gudang-bawang/scan', function () {
     return view('gudangbawang.scan');
@@ -97,6 +71,8 @@ Route::get('/gudang-tepung-tapioka/kerjaharian', 'gudangtepungtapioka\GudangTepu
 Route::post('/ambiltepung','gudangtepungtapioka\GudangTepungTapiokaController@store');
 
 Route::post('/tambahpacking','gudangtepungtapioka\GudangTepungTapiokaController@store2');
+
+Route::post('/gudang-tepung-tapioka/cari-stock','gudangtepungtapioka\GudangTepungTapiokaController@caristock');
 
 //gudang bumbu
 
@@ -155,5 +131,6 @@ Route::post('/gudang-bumbu/input_data', 'KerjaharianadonangulaController@ganti')
 Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@index');
 Route::get('/gudang-bumbu/kerjaharianadonangula/inputmasuk', 'KerjaharianadonangulaController@masuk');
 // Route::get('/gudang-bumbu/kerjaharianadonangula', 'KerjaharianadonangulaController@tb');
-
+Route::get('/gudang-bumbu/bahan','gudangbumbu\StockBumbuController@indexbahan');
+Route::post('/gudang-bumbu/bahan','gudangbumbu\StockBumbuController@caribahan');
 });

@@ -12,7 +12,11 @@ Kerja Hari Sebelumnya
 <!-- Datepicker css -->
 <link href="{{ asset('assets/plugins/datepicker/datepicker.min.css') }}" rel="stylesheet" type="text/css">
 
-
+<style type="text/css">
+    .border-blue{
+        border: blue 1px solid !important;
+    }
+</style>
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -23,7 +27,7 @@ Kerja Hari Sebelumnya
             <div class="breadcrumb-list">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Kerja Harian</a></li>
-                    <li class="breadcrumb-item"><a href="{{url('/hari_sebelumnya')}}">Sebelumnya</a></li>
+                    <li class="breadcrumb-item"><a href="#">Sebelumnya</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Data Kerja Hari Sebelumnya</li>
                 </ol>
             </div>
@@ -47,14 +51,17 @@ Kerja Hari Sebelumnya
                         <button class="btn btn-primary">Terapkan</button>
                     </div>
                     -->
+                    
                     <div class="form-row" style="margin-left: auto; margin-right: auto;">
                              <div class="form-group col-md-4">
                                     <label for="date1">Pilih Tanggal</label>
                                     <div class="input-group" style="width: 90%"> 
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon1"><i class="feather icon-calendar"></i></span>
-                                          </div>                             
-                                        <input type="text" id="autoclose-date" class="datepicker-here form-control" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1"/>   
+                                          </div> 
+                                                                    
+                                        <input type="text" id="autoclose-date" class="datepicker-here form-control" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1" value="" />  
+
                                     </div>
                                
                             </div>
@@ -62,12 +69,14 @@ Kerja Hari Sebelumnya
                             <div class="form-group col-md-4">
                                     <label for=""></label>
                                     <div class="input-group mt-2"> 
-                                        <button class="btn btn-primary">Terapkan</button>
+                                        <button id="terapkan_date" class="btn btn-primary">Terapkan</button>
                                     </div>
                             </div>
 
                            
                     </div>
+
+                  
                     <br>
 
                      <div class="form-row" style="margin-left: auto; margin-right: auto;">
@@ -76,7 +85,7 @@ Kerja Hari Sebelumnya
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
                                           </div>                             
-                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 2" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                        <input type="text" id="jumlah_grup" value="Jumlah Grup : 1" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
                                     </div>
                                
                             </div>
@@ -86,7 +95,7 @@ Kerja Hari Sebelumnya
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2" style="background-color:  #8ca5e8 ; color: white; border: none; "><i class="feather icon-users" ></i></span>
                                           </div>                             
-                                        <input type="text" id="jumlah_grup" value="Jumlah Pekerja : 12" class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
+                                        <input type="text" id="jumlah_pekerja" value="Jumlah Pekerja : " class="form-control" aria-describedby="basic-addon2" readonly style="background-color:#a1b5ec; color: white; border:none; text-align: center;" />   
                                     </div>
                             </div>
 
@@ -108,12 +117,7 @@ Kerja Hari Sebelumnya
                           
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Karung</td>
-                                    <td>10</td>
-                                    <td>7</td>
-                                    <td>0</td>
-                                </tr>
+                                
                                
 
                             </tbody>
@@ -135,22 +139,7 @@ Kerja Hari Sebelumnya
                           
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Karung Full</td>
-                                    <td>4</td>
-                                    <td>6</td>
-                                    <td>6</td>
-                                    <td>-</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Tidak Full (Kg)</td>
-                                    <td>15</td>
-                                    <td>8</td>
-                                    <td>13</td>
-                                    <td>-</td>
-                                </tr>
-
+                                <!--
                                 <tr>
                                     <td>Total (Kg)</td>
                                     <td>215</td>
@@ -166,6 +155,7 @@ Kerja Hari Sebelumnya
                                     <td style="display: none"></td>
                                     <td style="display: none"></td>
                                 </tr>
+                            -->
                                
 
                             </tbody>
@@ -188,13 +178,15 @@ Kerja Hari Sebelumnya
                           
                             </thead>
                             <tbody>
+                                <!--
                                 <tr >
-                                    <td>Karung</td>
+                                    <td>Kg</td>
                                     <td>4</td>
                                     <td>6</td>
                                     <td>6</td>
                                     <td>-</td>
                                 </tr>
+                            -->
                                
 
                             </tbody>
@@ -211,10 +203,6 @@ Kerja Hari Sebelumnya
 @endsection 
 @section('script')
 
-<!-- Datadropper js 
-<script src="{{ asset('managerproduksi/js/datedropper.js') }}"></script>
--->
-
 <!-- Datepicker JS -->
 <script src="{{ asset('assets/plugins/datepicker/datepicker.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/datepicker/i18n/datepicker.en.js') }}"></script>
@@ -225,23 +213,144 @@ Kerja Hari Sebelumnya
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-        $('#datatable1').DataTable( {
+        var datatable1 = $('#datatable1').DataTable( {
             //"order": [[ 0, "asc" ]],
+            "paging" : false,
+            "info" : false,
             "searching" : false,
             responsive: true
         });
 
-         $('#datatable2').DataTable( {
-            "order": [[ 0, "desc" ]],
+        var datatable2 = $('#datatable2').DataTable( {
+            //"order": [[ 0, "desc" ]],
+            "paging" : false,
+            "info" : false,
+            "searching" : false,
+            responsive: true,
+            createdRow: function(row, data, dataIndex){
+                 if(data[0] === 'BS (Kg)'){
+                    $('td:eq(1)', row).attr('colspan', 4);
+                    $('td:eq(1)', row).attr('align', 'center');
+
+                    $('td:eq(2)', row).css('display', 'none');
+                    $('td:eq(3)', row).css('display', 'none');
+                    $('td:eq(4)', row).css('display', 'none');
+
+                    $('td', row).eq(1).addClass('border-blue');
+                    
+
+                   
+                }
+
+                
+            }
+        });
+
+        var datatable3 = $('#datatable3').DataTable( {
+            //"order": [[ 0, "asc" ]],
+            "paging" : false,
+            "info" : false,
             "searching" : false,
             responsive: true
         });
 
-         $('#datatable3').DataTable( {
-            //"order": [[ 0, "asc" ]],
-            "searching" : false,
-            responsive: true
-        });
+
+
+
+    $(document).on('click', '#terapkan_date', function (e) {
+    
+    var tgl = document.getElementById('autoclose-date').value;
+    var date = tgl.split("/").reverse().join("-");
+
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+            type:"POST",
+            url:"/kerjaharian/sebelumnya",
+            data:{
+              "date":date,
+              "_token": "{{ csrf_token() }}",
+            },
+            success : function(results) {
+            // console.log(JSON.stringify(results)); //print_r
+                 
+                while(datatable1.data().count())
+                {
+                    datatable1.row().remove().draw();
+                }
+
+                while(datatable2.data().count())
+                {
+                    datatable2.row().remove().draw();
+                }
+
+                while(datatable3.data().count())
+                {
+                    datatable3.row().remove().draw();
+                }
+              
+              //for(var i=0; i<results.stockob.length; i++){
+
+                    
+                    datatable1.row.add([
+
+                    "Kg",
+                    results.stockob[0].keluar,
+                    results.stockhc[0].keluar,
+                    results.stock8ml[0].keluar
+                       
+                    ]).draw();
+       
+                    datatable2.row.add([
+
+                    "Total (Kg)",
+                    results.hasilgs[0].masuk,
+                    results.hasilsp[0].masuk,
+                    results.hasilhc[0].masuk,
+                    results.hasiltelor[0].masuk
+                    
+                    ]).draw();
+
+                    datatable2.row.add([
+
+                    "BS (Kg)",
+                    results.kacangbs[0].berat_bs,
+                    "",
+                    "",
+                    ""
+
+                    ]).draw();
+
+
+                    datatable3.row.add([
+
+                    "Kg",
+                    results.sortirgs[0].keluar,
+                    results.sortirsp[0].keluar,
+                    results.sortirhc[0].keluar,
+                    results.sortirtelor[0].keluar
+                    
+                    ]).draw();
+
+                    var jml_pekerja = results.grupkerja[0].jumlah_personil;
+                    var a = "Jumlah Pekerja";
+                    var pekerja = a.concat(" : ",jml_pekerja)
+                    $('#jumlah_pekerja').value(pekerja);
+                 
+               // }
+             
+            },
+            error: function(data) {
+                console.log(data);
+            }
+      });
+
+    });
 
     });
 

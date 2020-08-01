@@ -38,15 +38,47 @@ class CreateStockTable extends Migration
                 END IF;
             END");
 
-        DB::unprepared("CREATE TRIGGER `auto_count_stock` BEFORE INSERT ON `stock`
-                FOR EACH ROW BEGIN
-                SELECT `stock` INTO @last FROM stock WHERE id_bahan_baku = new.id_bahan_baku AND id_gudang = new.id_gudang ORDER BY `TIMESTAMP` DESC LIMIT 1;
-                    IF (@last >= 0) THEN
-                        SET new.stock = @last+new.masuk-new.keluar;
-                    ELSE
-                        SET new.stock = new.masuk-new.keluar;
-                    END IF;
-            END");
+        DB::unprepared('CREATE TRIGGER `auto_count_stock` BEFORE INSERT ON `stock`
+                         FOR EACH ROW BEGIN
+                             SELECT `stock` INTO @last FROM stock WHERE id_bahan_baku = new.id_bahan_baku AND id_gudang = new.id_gudang ORDER BY `TIMESTAMP` DESC LIMIT 1;
+                            IF (@last >= 0) THEN
+                                SET new.stock = @last+new.masuk-new.keluar;
+                            ELSE
+                                SET new.stock = new.masuk-new.keluar;
+                            END IF;
+                            IF (new.`keterangan` LIKE "%GS%") THEN
+                            SELECT `stock` INTO @stokgs FROM stock WHERE (`id_gudang` = 10 AND `id_bahan_baku` = "BB000000010") AND `keterangan` LIKE "%GS%" ORDER BY `TIMESTAMP` DESC LIMIT 1;
+                            IF (@stokgs >= 0) THEN
+                                SET new.stock = @stokgs+new.masuk-new.keluar;
+                            ELSE
+                                SET new.stock = new.masuk-new.keluar;
+                            END IF;
+                            END IF;
+                            IF (new.`keterangan` LIKE "%SP%") THEN
+                            SELECT `stock` INTO @stokgs FROM stock WHERE (`id_gudang` = 10 AND `id_bahan_baku` = "BB000000010") AND `keterangan` LIKE "%SP%" ORDER BY `TIMESTAMP` DESC LIMIT 1;
+                            IF (@stokgs >= 0) THEN
+                                SET new.stock = @stokgs+new.masuk-new.keluar;
+                            ELSE
+                                SET new.stock = new.masuk-new.keluar;
+                            END IF;
+                            END IF;
+                            IF (new.`keterangan` LIKE "%HC%") THEN
+                            SELECT `stock` INTO @stokgs FROM stock WHERE (`id_gudang` = 10 AND `id_bahan_baku` = "BB000000010") AND `keterangan` LIKE "%HC%" ORDER BY `TIMESTAMP` DESC LIMIT 1;
+                            IF (@stokgs >= 0) THEN
+                                SET new.stock = @stokgs+new.masuk-new.keluar;
+                            ELSE
+                                SET new.stock = new.masuk-new.keluar;
+                            END IF;
+                            END IF;
+                            IF (new.`keterangan` LIKE "%Telor%") THEN
+                            SELECT `stock` INTO @stokgs FROM stock WHERE (`id_gudang` = 10 AND `id_bahan_baku` = "BB000000010") AND `keterangan` LIKE "%Telor%" ORDER BY `TIMESTAMP` DESC LIMIT 1;
+                            IF (@stokgs >= 0) THEN
+                                SET new.stock = @stokgs+new.masuk-new.keluar;
+                            ELSE
+                                SET new.stock = new.masuk-new.keluar;
+                            END IF;
+                            END IF;
+                        END');
     }
 
     /**

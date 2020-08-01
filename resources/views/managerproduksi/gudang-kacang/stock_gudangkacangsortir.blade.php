@@ -12,6 +12,10 @@ Stock Gudang Kacang Sortir
 <!-- Datepicker css -->
 <link href="{{ asset('assets/plugins/datepicker/datepicker.min.css') }}" rel="stylesheet" type="text/css">
 
+<!-- sweet alert  -->
+<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.js') }}"></script>
+
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -109,11 +113,13 @@ Stock Gudang Kacang Sortir
                                        
                                         <tbody>
                                              @foreach($kacang_gs as $gs)
+                                             <tr>
                                                  <td>{{ $gs->tanggal }}</td>
                                                  <td>{{ $gs->keterangan}}</td>
                                                  <td>{{ $gs->masuk}}</td>
                                                  <td>{{ $gs->keluar}}</td>
                                                  <td>{{ $gs->stock}}</td>
+                                             </tr>
                                              @endforeach
                                         </tbody>
                                     </table>
@@ -173,11 +179,13 @@ Stock Gudang Kacang Sortir
                                         </thead>
                                          <tbody>
                                              @foreach($kacang_sp as $sp)
+                                             <tr>
                                                  <td>{{ $sp->tanggal }}</td>
                                                  <td>{{ $sp->keterangan}}</td>
                                                  <td>{{ $sp->masuk}}</td>
                                                  <td>{{ $sp->keluar}}</td>
                                                  <td>{{ $sp->stock}}</td>
+                                             </tr>
                                              @endforeach
                                         </tbody>
                                       
@@ -237,11 +245,13 @@ Stock Gudang Kacang Sortir
                                         </thead>
                                          <tbody>
                                              @foreach($kacang_hc as $hc)
+                                             <tr>
                                                  <td>{{ $hc->tanggal }}</td>
                                                  <td>{{ $hc->keterangan}}</td>
                                                  <td>{{ $hc->masuk}}</td>
                                                  <td>{{ $hc->keluar}}</td>
                                                  <td>{{ $hc->stock}}</td>
+                                             </tr>
                                              @endforeach
                                         </tbody>
                                     </table>
@@ -300,11 +310,13 @@ Stock Gudang Kacang Sortir
                                         </thead>
                                          <tbody>
                                              @foreach($kacang_telor as $telor)
+                                             <tr>
                                                  <td>{{ $telor->tanggal }}</td>
                                                  <td>{{ $telor->keterangan}}</td>
                                                  <td>{{ $telor->masuk}}</td>
                                                  <td>{{ $telor->keluar}}</td>
                                                  <td>{{ $telor->stock}}</td>
+                                             </tr>
                                              @endforeach
                                         </tbody>
                                     </table>
@@ -372,7 +384,16 @@ Stock Gudang Kacang Sortir
     var akhir_gs = document.getElementById('date2').value;
     var tgl_akhir_gs = akhir_gs.split("/").reverse().join("-");
 
+    if(awal_gs == "" || akhir_gs == ""){
 
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -390,8 +411,23 @@ Stock Gudang Kacang Sortir
             },
             success : function(results) {
             // console.log(JSON.stringify(results)); //print_r
+
+            if(results.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
                  
-              
+              while(datatable1.data().count())
+                {
+                    datatable1.row().remove().draw();
+                }
+
               for(var i=0; i<results.stock_gs.length; i++){
                     
                     datatable1.row.add([
@@ -405,7 +441,7 @@ Stock Gudang Kacang Sortir
                     ]).draw();
                  
                 }
-                 
+            }
   
     
              
@@ -414,6 +450,8 @@ Stock Gudang Kacang Sortir
                 console.log(data);
             }
       });
+
+  }
 
     });
 
@@ -427,6 +465,16 @@ Stock Gudang Kacang Sortir
     var akhir_sp = document.getElementById('date4').value;
     var tgl_akhir_sp = akhir_sp.split("/").reverse().join("-");
 
+    if(awal_sp == "" || akhir_sp == ""){
+
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
 
       $.ajaxSetup({
         headers: {
@@ -445,8 +493,23 @@ Stock Gudang Kacang Sortir
             },
             success : function(results2) {
             // console.log(JSON.stringify(results)); //print_r
-                 
-              
+            
+            if(results2.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
+
+              while(datatable2.data().count())
+                {
+                    datatable2.row().remove().draw();
+                }
+
               for(var i=0; i<results2.stock_sp.length; i++){
                     
                     datatable2.row.add([
@@ -460,6 +523,7 @@ Stock Gudang Kacang Sortir
                     ]).draw();
                  
                 }
+            }
                  
   
     
@@ -469,6 +533,8 @@ Stock Gudang Kacang Sortir
                 console.log(data);
             }
       });
+
+  }
 
     });
 
@@ -482,6 +548,16 @@ Stock Gudang Kacang Sortir
     var akhir_hc = document.getElementById('date6').value;
     var tgl_akhir_hc = akhir_hc.split("/").reverse().join("-");
 
+    if(awal_hc == "" || akhir_hc == ""){
+
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
 
       $.ajaxSetup({
         headers: {
@@ -501,7 +577,21 @@ Stock Gudang Kacang Sortir
             success : function(results3) {
             // console.log(JSON.stringify(results)); //print_r
                  
-              
+            if(results3.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
+
+              while(datatable3.data().count())
+                {
+                    datatable3.row().remove().draw();
+                }
               for(var i=0; i<results3.stock_hc.length; i++){
                     
                     datatable3.row.add([
@@ -515,6 +605,7 @@ Stock Gudang Kacang Sortir
                     ]).draw();
                  
                 }
+            }
                  
   
     
@@ -524,6 +615,9 @@ Stock Gudang Kacang Sortir
                 console.log(data);
             }
       });
+
+
+    }
 
     });
 
@@ -537,6 +631,17 @@ Stock Gudang Kacang Sortir
     var akhir_telor = document.getElementById('date8').value;
     var tgl_akhir_telor = akhir_telor.split("/").reverse().join("-");
 
+
+    if(awal_telor == "" || akhir_telor == ""){
+
+        swal({
+            title: 'Terjadi Kesalahan.',
+            text: "Tanggal belum dipilih. Silahkan pilih tanggal awal dan tanggal akhir terlebih dahulu.",
+            showConfirmButton: true,
+            type: 'error',
+        });
+
+    }else{
 
       $.ajaxSetup({
         headers: {
@@ -556,6 +661,21 @@ Stock Gudang Kacang Sortir
             success : function(results4) {
             // console.log(JSON.stringify(results)); //print_r
                  
+            if(results4.error){
+
+               swal({
+                        title: 'Terjadi Kesalahan.',
+                        text: "Data stock pada tanggal tersebut belum tersedia.",
+                        showConfirmButton: true,
+                        type: 'error',
+                    });
+
+            }else{
+
+                 while(datatable4.data().count())
+                {
+                    datatable4.row().remove().draw();
+                }
               
               for(var i=0; i<results4.stock_telor.length; i++){
                     
@@ -570,6 +690,7 @@ Stock Gudang Kacang Sortir
                     ]).draw();
                  
                 }
+            }
                  
   
     
@@ -579,6 +700,8 @@ Stock Gudang Kacang Sortir
                 console.log(data);
             }
       });
+
+  }
 
     });
 

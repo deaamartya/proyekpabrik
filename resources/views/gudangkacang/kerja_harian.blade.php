@@ -61,7 +61,7 @@ Kerja Harian
                             </ul>
                             <div class="tab-content" id="defaultTabJustifiedContent">
                                 <div class="tab-pane fade show active text-center" id="home-justified" role="tabpanel" aria-labelledby="home-tab-justified">
-                                    <button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="show()">Tambah Grup</button>
+                                    <button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="show()">Tambah Group</button>
                                     <button type="button" class="btn btn-warning" onclick="y()" id="tutuphari" style="margin-left: 10px;" data-toggle="modal" data-target="#exampleModalLong">Tutup Hari</button>
                                     <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-12">
@@ -200,7 +200,7 @@ Kerja Harian
                                     <div class="modal-dialog modal-sm">
                                         <div class="modal-content">
                                             <div class="modal-body text-center">
-                                                <h4>Grup I</h4>
+                                                <h4>Group I</h4>
                                                 <h5>Tambah Hasil GS</h5>
                                                 <h6 style="color: blue;">Berat (Kg)</h6>
                                                 <input type="number" id="brtgs" name="beratgs" min="0">
@@ -217,7 +217,7 @@ Kerja Harian
                                     <div class="modal-dialog modal-sm">
                                         <div class="modal-content">
                                             <div class="modal-body text-center">
-                                                <h4>Grup I</h4>
+                                                <h4>Group I</h4>
                                                 <h5>Tambah Hasil SP</h5>
                                                 <h6 style="color: blue;">Berat (Kg)</h6>
                                                 <input type="number" id="brtsp" name="beratsp" min="0">
@@ -234,7 +234,7 @@ Kerja Harian
                                     <div class="modal-dialog modal-sm">
                                         <div class="modal-content">
                                             <div class="modal-body text-center">
-                                                <h4>Grup I</h4>
+                                                <h4>Group I</h4>
                                                 <h5>Tambah Hasil HC</h5>
                                                 <h6 style="color: blue;">Berat (Kg)</h6>
                                                 <input type="number" id="brthc" name="berathc" min="0">
@@ -251,7 +251,7 @@ Kerja Harian
                                     <div class="modal-dialog modal-sm">
                                         <div class="modal-content">
                                             <div class="modal-body text-center">
-                                                <h4>Grup I</h4>
+                                                <h4>Group I</h4>
                                                 <h5>Tambah Hasil Telor</h5>
                                                 <h6 style="color: blue;">Berat (Kg)</h6>
                                                 <input type="number" id="brttelor" name="berattelor" min="0">
@@ -279,7 +279,7 @@ Kerja Harian
                                             <table class="table table-borderless">
                                                 <thead>
                                                     <tr>
-                                                        <th>Grup I<br>Penerimaan</th>
+                                                        <th>Group I<br>Penerimaan</th>
                                                         <th>Berisi <input type="number" id="jml_pekerja" name="org_dlm_grup" style="width: 25%"> Orang</th>
                                                     </tr>
                                                 </thead>
@@ -528,7 +528,8 @@ Kerja Harian
                 data : jsondata,
             },
                 success: function(result){
-                    $("#exampleModalLong").hide();
+                    // $("#exampleModalLong").modal('hide');
+                    location.reload();
                     swal({
                         title: 'Berhasil!',
                         text: 'Data Berhasil Disimpan',
