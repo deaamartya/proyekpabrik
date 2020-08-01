@@ -222,7 +222,7 @@ Kerja Hari Sebelumnya
         });
 
         var datatable2 = $('#datatable2').DataTable( {
-            //"order": [[ 0, "desc" ]],
+            "order": [[ 0, "desc" ]],
             "paging" : false,
             "info" : false,
             "searching" : false,
@@ -305,16 +305,6 @@ Kerja Hari Sebelumnya
                     results.stock8ml[0].keluar
                        
                     ]).draw();
-       
-                    datatable2.row.add([
-
-                    "Total (Kg)",
-                    results.hasilgs[0].masuk,
-                    results.hasilsp[0].masuk,
-                    results.hasilhc[0].masuk,
-                    results.hasiltelor[0].masuk
-                    
-                    ]).draw();
 
                     datatable2.row.add([
 
@@ -325,7 +315,16 @@ Kerja Hari Sebelumnya
                     ""
 
                     ]).draw();
+       
+                    datatable2.row.add([
 
+                    "Total (Kg)",
+                    results.hasilgs[0].masuk,
+                    results.hasilsp[0].masuk,
+                    results.hasilhc[0].masuk,
+                    results.hasiltelor[0].masuk
+                    
+                    ]).draw();
 
                     datatable3.row.add([
 

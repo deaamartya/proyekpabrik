@@ -43,6 +43,7 @@ class KerjaSebelumnyaController extends Controller
         $hasilgs = Stock::select('stock.masuk')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->where('detail_transaksi.id_jenis_transaksi', '=', '4')
                     ->where('stock.keterangan','like', '%GS%')
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();
@@ -50,6 +51,7 @@ class KerjaSebelumnyaController extends Controller
         $hasilsp = Stock::select('stock.masuk')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->where('detail_transaksi.id_jenis_transaksi', '=', '4')
                     ->where('stock.keterangan','like', '%SP%')
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();
@@ -57,6 +59,7 @@ class KerjaSebelumnyaController extends Controller
         $hasilhc = Stock::select('stock.masuk')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->where('detail_transaksi.id_jenis_transaksi', '=', '4')
                     ->where('stock.keterangan','like', '%HC%')
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();
@@ -64,6 +67,7 @@ class KerjaSebelumnyaController extends Controller
         $hasiltelor = Stock::select('stock.masuk')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+                    ->where('detail_transaksi.id_jenis_transaksi', '=', '4')
                     ->where('stock.keterangan','like', '%Telor%')
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();

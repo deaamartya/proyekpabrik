@@ -44,6 +44,7 @@ class HomeController extends Controller
         $stockgs = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_gudang', '=', '10')
                     ->where('stock.keterangan','like', '%GS%')
                     ->orderBy('stock.timestamp','desc')
                     ->first();
@@ -51,6 +52,7 @@ class HomeController extends Controller
         $stocksp = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_gudang', '=', '10')
                     ->where('stock.keterangan','like', '%SP%')
                     ->orderBy('stock.timestamp','desc')
                     ->first();
@@ -58,6 +60,7 @@ class HomeController extends Controller
         $stockhc = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_gudang', '=', '10')
                     ->where('stock.keterangan','like', '%HC%')
                     ->orderBy('stock.timestamp','desc')
                     ->first();
@@ -65,21 +68,30 @@ class HomeController extends Controller
         $stocktelor = Stock::select('stock.stock')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
+                    ->where('stock.id_gudang', '=', '10')
                     ->where('stock.keterangan','like', '%Telor%')
                     ->orderBy('stock.timestamp','desc')
                     ->first();
 
         if($stockgs=="" || $stockgs=="0"){
-            $stockgs = 0;
+            $stockgs = "0";
+        }else{
+            $stockgs = $stockgs->stock;
         }
         if($stocksp=="" || $stocksp=="0"){
-            $stocksp = 0;
+            $stocksp = "0";
+        }else{
+            $stocksp = $stocksp->stock;
         }
         if($stockhc=="" || $stockhc=="0"){
-            $stockhc = 0;
+            $stockhc = "0";
+        }else{
+            $stockhc = $stockhc->stock;
         }
         if($stocktelor=="" || $stocktelor=="0"){
-            $stocktelor = 0;
+            $stocktelor = "0";
+        }else{
+            $stocktelor = $stocktelor->stock;
         }
         // $stockhc = Stock::select('stock.*')
         //             ->join('order_masak','stock.id_transaksi' ,'=', 'order_masak.id_order_masak')
