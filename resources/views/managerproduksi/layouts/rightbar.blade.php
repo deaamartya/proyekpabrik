@@ -58,7 +58,7 @@
                                                   <h5>{{ App\Models\Pegawai::where('id_jabatan', 3)->value('nama') }}</h5>
                                                 </div>
                                             </div>
-                                            <div class="userbox">
+                                            <div class="userbox pr-4">
                                                 <ul class="list-unstyled mb-0">
                                                     <li class="media dropdown-item">
                                                         <a href="{{ url('/change-password') }}" class="profile-icon">
