@@ -235,7 +235,7 @@ Kerja Hari Sebelumnya
         });
 
         var datatable2 = $('#datatable2').DataTable( {
-            //"order": [[ 0, "desc" ]],
+            "order": [[ 0, "desc" ]],
             "paging" : false,
             "info" : false,
             "searching" : false,
@@ -318,12 +318,9 @@ Kerja Hari Sebelumnya
                  }else{
                     var jml_pekerja = results.grupkerja[0].jumlah_personil;
                     var a = "Jumlah Pekerja";
-                    var pekerja = a.concat(" : ",jml_pekerja)
-                    $('#jumlah_pekerja').value(pekerja);
-                   
+                    var pekerja = a.concat(" : ",jml_pekerja);
+                    document.getElementById('jumlah_pekerja').value = pekerja;
 
-                    
-                     
                     while(datatable1.data().count())
                     {
                         datatable1.row().remove().draw();
