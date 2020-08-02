@@ -33,11 +33,7 @@ Pembagian Bawang
     </div>          
 </div>
 
- @if (session('alert_datakosong'))
-                <div class="alert alert-danger">
-                      {{ session('alert_datakosong') }}
-                 </div>
- @endif
+
 
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->    
@@ -46,6 +42,15 @@ Pembagian Bawang
     <div class="row">
         <!-- Start col -->
         <div class="col-lg-12">
+
+            @if (!empty( $alert_datakosong ))
+                        <div class="alert alert-danger alert-dismissible fade show text-dark">
+                            {{ $alert_datakosong }}
+                            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+            @endif
             <div class="card m-b-30">
                 <div class="card-header">
                         
@@ -66,11 +71,11 @@ Pembagian Bawang
                                     <div class="form-row align-items-center">
                                         <div class="form-group col-sm-6">
                                             <label for="orderbesok" class="text-left">Order Besok</label>
-                                            <input type="text" class="form-control" readonly name="orderbesok" id="orderbesok" placeholder="100" value="@if(!$datakosong)  {{$orderbesok->jumlah}} @endif">
+                                            <input type="text" class="form-control" readonly name="orderbesok" id="orderbesok" placeholder="" value="@if(!$datakosong)  {{$orderbesok->jumlah}} @endif">
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="stockbebas">Stock Bebas</label>
-                                            <input type="text" class="form-control" name="stockbebas" id="stockbebas" placeholder="10" value="@if(!$datakosong) {{$stockbebas}} @endif" readonly>
+                                            <input type="text" class="form-control" name="stockbebas" id="stockbebas" placeholder="" value="@if(!$datakosong) {{$stockbebas}} @endif" readonly>
                                         </div>
                                     </div>
                                     <div class="form-row align-items-center">
@@ -84,7 +89,7 @@ Pembagian Bawang
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label for="proseshariini">Proses Hari Ini</label>
-                                            <input type="text" class="form-control" name="proseshariini" id="proseshariini" placeholder="77" value="@if(!$datakosong) {{$totalproses->keluar}} @endif" readonly="">
+                                            <input type="text" class="form-control" name="proseshariini" id="proseshariini" placeholder="" value="@if(!$datakosong) {{$totalproses->keluar}} @endif" readonly="">
                                         </div>
                                     </div>
                                 </form>

@@ -145,11 +145,11 @@ class ManproBawangController extends Controller
                 $i++;
             }
 
-          return view('managerproduksi.gudang-bawang.tenaga_kupas', ['tenagakupas' => $arrtenaga]);
+          return view('managerproduksi.gudang-bawang.tenaga_kupas', ['tenagakupas' => $arrtenaga, 'datakosong'=>false]);
 
         }else{
 
-            return view('managerproduksi.gudang-bawang.tenaga_kupas')->with('alert_datakosong', 'Data tenaga kupas untuk hari ini belum tersedia.');;
+            return view('managerproduksi.gudang-bawang.tenaga_kupas', ['datakosong'=>true])->with('alert_datakosong', 'Data tenaga kupas untuk hari ini belum tersedia.');;
         }   
 
 
@@ -518,7 +518,7 @@ class ManproBawangController extends Controller
             ->where('tanggal_order_masak','>=',date('Y-m-d'))
             ->get();
 
-            return view('managerproduksi.gudang-bawang.persiapan_masak')->with(compact('ordermasak'));
+            return view('managerproduksi.gudang-bawang.persiapan_masak', ['datakosong'=>false])->with(compact('ordermasak'));
 
         }else{
              return view('managerproduksi.gudang-bawang.persiapan_masak', ['datakosong'=>true])->with('alert_datakosong', 'Data persiapan masak kanji untuk hari ini belum tersedia.');

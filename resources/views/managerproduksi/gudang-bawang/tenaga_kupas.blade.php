@@ -9,7 +9,7 @@ Tenaga Kupas
 <!-- Responsive Datatable css -->
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
 
 
@@ -33,11 +33,7 @@ Tenaga Kupas
     </div>          
 </div>
 
-@if (session('alert_datakosong'))
-                <div class="alert alert-danger">
-                      {{ session('alert_datakosong') }}
-                 </div>
- @endif
+
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->    
 <div class="contentbar">                
@@ -45,6 +41,14 @@ Tenaga Kupas
     <div class="row">
         <!-- Start col -->
         <div class="col-lg-12">
+            @if (!empty( $alert_datakosong ))
+                        <div class="alert alert-danger alert-dismissible fade show text-dark">
+                            {{ $alert_datakosong }}
+                            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+            @endif
             <div class="card m-b-30">
                 <div class="card-header">
                      <div class="row">
@@ -63,7 +67,7 @@ Tenaga Kupas
                             </thead>
                             <tbody>
                               
-                            @if(!empty($tenagakupas))
+                            @if(!$datakosong)
 
                                @foreach($tenagakupas as $t)
                                 <tr>
