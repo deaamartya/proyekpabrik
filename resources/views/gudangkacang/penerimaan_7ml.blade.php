@@ -63,7 +63,7 @@ canvas.drawing, canvas.drawingBuffer {
                                 <label for="tanggal">Tanggal Penerimaan Kacang</label>
                             </div>
                             <div class="form-group col-md-5">
-                                <input type="text" class="form-control" name="barcode" id="hdnBarcode" placeholder="Input Nomor Barcode" readonly required>
+                                <input type="text" class="form-control" name="barcode" id="hdnBarcode" placeholder="Input Nomor Barcode" required>
                             </div>
                             <div class="form-group col-md-7">
                                 <button type="button" class="btn btn-primary" id="btnScan">Scan Barcode</button>
@@ -78,6 +78,7 @@ canvas.drawing, canvas.drawingBuffer {
                                 <input type="text" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Kilogram Diterima" readonly required>
                             </div>
                         </div>
+                        <input type="text" name="id_gudang_asal" hidden id="id_gudang_asal">
                         <div class="form-row">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
