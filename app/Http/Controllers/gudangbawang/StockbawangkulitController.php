@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Stock;
+use App\Models\Penerimaan;
 use App\Models\DetailOrderMasak;
 
 class StockbawangkulitController extends Controller
