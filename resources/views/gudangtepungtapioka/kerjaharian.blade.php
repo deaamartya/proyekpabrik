@@ -1,5 +1,5 @@
 @section('title') 
-Soyuz - Datatable
+Kerja Harian
 @endsection 
 @extends('gudangtepungtapioka.layouts.main')
 @section('style')
