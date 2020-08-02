@@ -121,7 +121,7 @@ Kerja Hari Sebelumnya
                                     <tr>
                                         <th>Penerimaan</th>
                                         <th>OB</th>
-                                        <th>HC</th>
+                                        <th>7ML</th>
                                         <th>8ML</th>
                                     </tr>
                           
@@ -347,7 +347,7 @@ Kerja Hari Sebelumnya
 
                     "Kg",
                     results.stockob[0].keluar,
-                    results.stockhc[0].keluar,
+                    results.stock7ml[0].keluar,
                     results.stock8ml[0].keluar
                        
                     ]).draw();
