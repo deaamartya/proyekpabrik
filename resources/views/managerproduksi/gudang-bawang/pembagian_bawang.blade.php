@@ -32,6 +32,9 @@ Pembagian Bawang
         </div>
     </div>          
 </div>
+
+
+
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->    
 <div class="contentbar">                
@@ -39,6 +42,15 @@ Pembagian Bawang
     <div class="row">
         <!-- Start col -->
         <div class="col-lg-12">
+
+            @if (!empty( $alert_datakosong ))
+                        <div class="alert alert-danger alert-dismissible fade show text-dark">
+                            {{ $alert_datakosong }}
+                            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+            @endif
             <div class="card m-b-30">
                 <div class="card-header">
                         
@@ -50,6 +62,41 @@ Pembagian Bawang
                 
                 </div>
                 <div class="card-body">
+
+
+                    <div class="row align-items-center px-5 py-3">
+                        <div class="col">
+                            <div class="widgetbar">
+                                <form>
+                                    <div class="form-row align-items-center">
+                                        <div class="form-group col-sm-6">
+                                            <label for="orderbesok" class="text-left">Order Besok</label>
+                                            <input type="text" class="form-control" readonly name="orderbesok" id="orderbesok" placeholder="" value="@if(!$datakosong)  {{$orderbesok->jumlah}} @endif">
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="stockbebas">Stock Bebas</label>
+                                            <input type="text" class="form-control" name="stockbebas" id="stockbebas" placeholder="" value="@if(!$datakosong) {{$stockbebas}} @endif" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-row align-items-center">
+                                        <div class="form-group col-sm-4">
+                                            <label for="ratasusut">Rata2 Susut</label>
+                                            <input type="text" class="form-control disable" name="ratasusut" id="ratasusut" value="@if(!$datakosong) {{$ratasusut}}% @endif" readonly>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="targetkupas">Target Kupas (Kg)</label>
+                                            <input type="text" class="form-control disable" name="targetkupas" id="targetkupas" value="@if(!$datakosong) {{$targetkupas->jumlah}} @endif" readonly>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="proseshariini">Proses Hari Ini</label>
+                                            <input type="text" class="form-control" name="proseshariini" id="proseshariini" placeholder="" value="@if(!$datakosong) {{$totalproses->keluar}} @endif" readonly="">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> 
+                        </div>  
+                    </div>
+
                     <div class="table-responsive">
                         <table id="datatable1" class="display table table-bordered table-striped table-manpro-hover datatable" width="80%" >
                             <thead>
@@ -61,18 +108,21 @@ Pembagian Bawang
                             </thead>
                             <tbody>
 
-                            @if(!empty($tenagakupas))
-                                @php $i=0; @endphp
-                                @foreach($tenagakupas as $t)
+                            @if(!$datakosong)
+                                @if(!empty($tenagakupas))
+                                    @php $i=0; @endphp
+                                    @foreach($tenagakupas as $t)
 
-                                    @if($t->status)
-                                    <tr>
-                                        <td>{{$t->nama}}</td>
-                                        <td>{{$jumlah[$i]->jumlah}}</td>
-                                    </tr>
-                                    @endif
-                                @php $i++; @endphp
-                                @endforeach
+                                        @if($t->status)
+                                        <tr>
+                                            <td>{{$t->nama}}</td>
+                                            <td>{{$jumlah[$i]->jumlah}}</td>
+                                        </tr>
+                                        @endif
+                                    @php $i++; @endphp
+                                    @endforeach
+                                @endif
+
                             @endif
                         
 

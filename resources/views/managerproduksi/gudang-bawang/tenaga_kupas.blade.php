@@ -10,6 +10,9 @@ Tenaga Kupas
 <link href="{{ asset('assets/plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
 
+
+
+
 @endsection 
 @section('rightbar-content')
 <!-- Start Breadcrumbbar -->                    
@@ -29,6 +32,8 @@ Tenaga Kupas
         </div>
     </div>          
 </div>
+
+
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->    
 <div class="contentbar">                
@@ -36,6 +41,14 @@ Tenaga Kupas
     <div class="row">
         <!-- Start col -->
         <div class="col-lg-12">
+            @if (!empty( $alert_datakosong ))
+                        <div class="alert alert-danger alert-dismissible fade show text-dark">
+                            {{ $alert_datakosong }}
+                            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+            @endif
             <div class="card m-b-30">
                 <div class="card-header">
                      <div class="row">
@@ -54,7 +67,7 @@ Tenaga Kupas
                             </thead>
                             <tbody>
                               
-                            @if(!empty($tenagakupas))
+                            @if(!$datakosong)
 
                                @foreach($tenagakupas as $t)
                                 <tr>

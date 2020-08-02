@@ -36,6 +36,8 @@ Penerimaan Bawang
         </div>
     </div>          
 </div>
+
+
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->    
 <div class="contentbar">                
@@ -43,6 +45,14 @@ Penerimaan Bawang
     <div class="row">
         <!-- Start col -->
         <div class="col-lg-12">
+            @if (!empty( $alert_datakosong ))
+                        <div class="alert alert-danger alert-dismissible fade show text-dark">
+                            {{ $alert_datakosong }}
+                            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+            @endif
             <div class="card m-b-30">
                 <div class="card-header">
 
@@ -70,7 +80,7 @@ Penerimaan Bawang
                             </thead>
                             <tbody>
                                 
-                                @if(!empty($tenagakupas))
+                                @if(!$datakosong)
                                     @foreach($tenagakupas as $t)
                                     <tr>
                                         <td class="@if ($t->jumlah > intval($t->jumlahbawang+$t->jumlahkulit)) redclass @endif">{{$t->nama}}</td>

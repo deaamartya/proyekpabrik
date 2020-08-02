@@ -143,8 +143,8 @@ class StockbawangkulitController extends Controller
     // }
     
     public function terima(Request $request)
-    {   if($request->merek == 'kulit'){
-        $stock = DB::table('stock')->where('keterangan','=','kulit')->sum('masuk');
+    {   
+        $stock = DB::table('stock')->where('id_bahan_baku','BB000000006')->sum('masuk');
             DB::table('stock')->insert([
                 'masuk'=> $request->jumlah,
                 'id_transaksi' => $request->id_pb,
@@ -153,26 +153,38 @@ class StockbawangkulitController extends Controller
                 'id_satuan' => 1,
                 'keluar' => 0,
                 'stock' => 0,
+                "id_gudang"=>7
             ]);
 
 
-        }
-        else {
-            $stock = DB::table('stock')->where('keterangan','=','kupas')->sum('masuk');
-            DB::table('stock')->insert([
-                'masuk' => $request->jumlah,
-                'id_transaksi' => $request->id_pb,
-                'id_bahan_baku' => 'BB000000008',
-                'keterangan' => 'kupas',
-                'id_satuan' => 1,
-                'keluar' => 0,
-                'stock' => 0,
-            ]);
-        }
+        //     if($request->merek == 'kulit'){  }
+        // else {
+        //     $stock = DB::table('stock')->where('keterangan','=','kupas')->sum('masuk');
+        //     DB::table('stock')->insert([
+        //         'masuk' => $request->jumlah,
+        //         'id_transaksi' => $request->id_pb,
+        //         'id_bahan_baku' => 'BB000000008',
+        //         'keterangan' => 'kupas',
+        //         'id_satuan' => 1,
+        //         'keluar' => 0,
+        //         'stock' => 0,
+        //         "id_gudang"=>7
+        //     ]);
+        // }
         return redirect('/gudang-bawang/stockbawangkulit');
     }
 
 
+    public function ambilPenerimaan(Request $request){
+
+        $penerimaan = Penerimaan::select(DB::raw('DATE(penerimaan.timestamp) AS tgl') ,'dt.jumlah','pb.id_gudang_asal')
+        ->join('detail_transaksi AS dt','dt.id_transaksi','=','penerimaan.id_penerimaan')
+        ->join('pemindahan_bahan AS pb','pb.id_pemindahan_bahan','=','penerimaan.id_transaksi')
+        ->where(['id_penerimaan' => $request->id_penerimaan])->first();
+        return response()->json(['success' => true,'penerimaan' => $penerimaan]);
+  
+  
+      }
       
 
 

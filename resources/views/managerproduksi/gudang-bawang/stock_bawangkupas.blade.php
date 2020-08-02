@@ -100,7 +100,7 @@ Stock Bawang Kupas
                                             <td>{{ $b->tanggal }}</td>
                                             <td>{{ $b->masuk}}</td>
                                             <td>{{ $b->keluar}}</td>
-                                            <td>{{ $b->stock}}</td>
+                                            <td>{{ $b->stocks}}</td>
                                         </tr>
                                     @endforeach
 
@@ -204,7 +204,7 @@ Stock Bawang Kupas
                     results.stock_bawangkupas[i].tanggal,
                     results.stock_bawangkupas[i].masuk,
                     results.stock_bawangkupas[i].keluar,
-                    results.stock_bawangkupas[i].stock
+                    results.stock_bawangkupas[i].stocks
                        
                     ]).draw();
                  

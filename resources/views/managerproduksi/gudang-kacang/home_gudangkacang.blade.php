@@ -89,7 +89,7 @@ Home Gudang Kacang
                           
                             </thead>
                             <tbody>      
-                                @foreach($kacang_ob as $ob)
+                                @foreach($stockob as $ob)
                                 <tr>
                                     
 
@@ -116,7 +116,7 @@ Home Gudang Kacang
                           
                             </thead>
                             <tbody>
-                                 @foreach($kacang_7ml as $k)
+                                 @foreach($stock7ml as $k)
                                 <tr>
                                      <td>{{ tgl_indo(date('Y-m-d' , strtotime($k->timestamp))) }}</td>
                                     <td>{{ $k->stock }}</td>
@@ -141,7 +141,7 @@ Home Gudang Kacang
                           
                             </thead>
                             <tbody>
-                                @foreach($kacang_8ml as $c)
+                                @foreach($stock8ml as $c)
                                 <tr>
                                      <td>{{ tgl_indo(date('Y-m-d' , strtotime($c->timestamp))) }}</td>
                                     <td>{{ $c->stock }}</td>
@@ -187,10 +187,10 @@ Home Gudang Kacang
 
                                 <tr>
                                     <td>Kg</td>
-                                    <td>{{ $kacang_hc}}</td>
-                                    <td>{{ $kacang_sp }}</td>
-                                    <td>{{ $kacang_gs }}</td>
-                                    <td>{{ $kacang_telor}}</td>
+                                    <td>{{ $stockhc}}</td>
+                                    <td>{{ $stocksp }}</td>
+                                    <td>{{ $stockgs }}</td>
+                                    <td>{{ $stocktelor}}</td>
 
                                 </tr>
 

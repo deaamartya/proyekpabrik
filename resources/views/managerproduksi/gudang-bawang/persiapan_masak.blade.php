@@ -30,6 +30,7 @@ Persiapan Masak Kanji
         </div>
     </div>          
 </div>
+
 <!-- End Breadcrumbbar -->
 <!-- Start Contentbar -->    
 <div class="contentbar">                
@@ -37,6 +38,14 @@ Persiapan Masak Kanji
     <div class="row">
         <!-- Start col -->
         <div class="col-lg-12">
+            @if (!empty( $alert_datakosong ))
+                        <div class="alert alert-danger alert-dismissible fade show text-dark">
+                            {{ $alert_datakosong }}
+                            <button type="button" class="close text-dark" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+            @endif
             <div class="card m-b-30">
                 <div class="card-header">
 
@@ -61,6 +70,8 @@ Persiapan Masak Kanji
                             </thead>
                             <tbody>
 
+                            @if(!$datakosong)
+
                                   @foreach($ordermasak as $or)
                                     <tr>
                                         <td>{{date_format($or->tanggal_order_masak,'d/m/Y')}}</td>
@@ -81,6 +92,8 @@ Persiapan Masak Kanji
                                         </td>
                                     </tr>
                                 @endforeach
+
+                            @endif
 
 
                             </tbody>

@@ -30,7 +30,7 @@ Soyuz - Datatable
         <div class="col-8">
             <h2 class="page-title text-left pl-5">Penerimaan Bawang kulit</h2>
 
-            <input  class="form-control" type="button" id="btn" value="Start/Stop the scanner" />
+            {{-- <input  class="form-control" type="button" id="btn" value="Start/Stop the scanner" /> --}}
 
             
 
@@ -49,7 +49,7 @@ Soyuz - Datatable
                 <form action="/gudang-bawang/penerimaan" method="post">
                     @csrf
                     <div class="form-group my-4">
-                        <input type="text" class="form-control" name="id_pb" id="hdnBarcode" readonly placeholder="Scan Barcode">
+                        <input type="text" class="form-control" name="id_pb" id="hdnBarcode"  placeholder="Scan Barcode">
                     </div>
                     <div class="form-group mb-4">
                       <label for="validationCustom01">Keterangan/Merek Bawang</label>
@@ -73,6 +73,7 @@ Soyuz - Datatable
                           Looks good!
                         </div>
                     </div>
+                        <input type="text" name="id_gudang_asal" id="id_gudang_asal" hidden>
                     
                         <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
@@ -105,6 +106,27 @@ $(document).ready(function () {
             $("#btnScan").text("Stop");
             $("#scanner-container").show();
         }
+    });
+
+    $(document).on("input","#hdnBarcode",function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: "{{ url('/gudang-bawang/ambilPenerimaan') }}",
+            method: 'POST',
+            data: {
+                id_penerimaan : $("#hdnBarcode").val(),
+            },
+            success: function(result){
+                let data_p = result.penerimaan; 
+                $("#tgl").val(data_p.tgl);
+                $("#jumlah").val(data_p.jumlah);
+                $("#id_gudang_asal").val(data_p.id_gudang_asal);
+            }
+        });
     });
 });
 
