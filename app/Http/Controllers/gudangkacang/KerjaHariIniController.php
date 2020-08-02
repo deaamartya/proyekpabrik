@@ -89,11 +89,11 @@ class KerjaHariIniController extends Controller
 
                 Stock::insert([
                     'id_satuan' => '1',
-                    'id_bahan_baku' => 'BB000000010',
+                    'id_bahan_baku' => 'BB000000004',
                     'id_transaksi' => 'TR0000000000000005',
-                    'keterangan' => 'Kacang HC Keluar',
+                    'keterangan' => 'Kacang 7 ML Keluar',
                     'masuk' => 0,
-                    'keluar' => $data[0]->penerimaan_hc,
+                    'keluar' => $data[0]->penerimaan_7ml,
                     'stock' => 0,
                     'id_gudang' => '9'
                 ]);

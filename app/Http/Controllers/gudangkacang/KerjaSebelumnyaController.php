@@ -26,7 +26,7 @@ class KerjaSebelumnyaController extends Controller
                     ->whereDate('stock.timestamp', $request->date)
                     ->get();
         
-        $stockhc = Stock::select('stock.keluar')
+        $stock7ml = Stock::select('stock.keluar')
                     ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku' )
                     ->join('gudang', 'gudang.id_gudang', '=', 'stock.id_gudang')
                     ->where('stock.id_transaksi', '=', 'TR0000000000000005')
@@ -111,7 +111,7 @@ class KerjaSebelumnyaController extends Controller
                     ->whereDate('kerja_harian_group.tanggal', $request->date)
                     ->get();
 
-                    return response()->json(['stockob'=>$stockob, 'stockhc'=>$stockhc, 'stock8ml'=>$stock8ml, 'hasilgs'=>$hasilgs, 'hasilsp'=>$hasilsp, 'hasilhc'=>$hasilhc, 'hasiltelor'=>$hasiltelor, 'sortirgs'=>$sortirgs, 'sortirsp'=>$sortirsp, 'sortirhc'=>$sortirhc, 'sortirtelor'=>$sortirtelor, 'grupkerja'=>$grupkerja, 'kacangbs'=>$kacangbs]);
+                    return response()->json(['stockob'=>$stockob, 'stockhc'=>$stock7ml, 'stock8ml'=>$stock8ml, 'hasilgs'=>$hasilgs, 'hasilsp'=>$hasilsp, 'hasilhc'=>$hasilhc, 'hasiltelor'=>$hasiltelor, 'sortirgs'=>$sortirgs, 'sortirsp'=>$sortirsp, 'sortirhc'=>$sortirhc, 'sortirtelor'=>$sortirtelor, 'grupkerja'=>$grupkerja, 'kacangbs'=>$kacangbs]);
     }
 
     /**

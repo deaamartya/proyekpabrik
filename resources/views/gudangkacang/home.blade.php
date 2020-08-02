@@ -181,14 +181,16 @@ Home
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
+                        <div class="table-responsive">
                             <table id="datatable4" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Stock: activate to sort column descending">Stock</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="GS: activate to sort column ascending">GS</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="SP: activate to sort column ascending">SP</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="HC: activate to sort column ascending">HC</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="Telor: activate to sort column ascending">Telor</th>
+                                        <th>Stock</th>
+                                        <th>GS</th>
+                                        <th>SP</th>
+                                        <th>HC</th>
+                                        <th>Telor</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr role="row">
@@ -201,6 +203,7 @@ Home
                                 </tbody>
                             </table>
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,6 +211,7 @@ Home
     </div>
     <!-- End row -->
 </div>
+
 <!-- End Contentbar -->
 @endsection 
 @section('script')

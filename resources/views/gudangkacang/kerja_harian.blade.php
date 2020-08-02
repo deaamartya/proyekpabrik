@@ -129,7 +129,7 @@ Kerja Harian
                                                                 <tr role="row">
                                                                     <td>Kilogram</td>
                                                                     <td id="p_ob">-</td>
-                                                                    <td id="p_hc">-</td>
+                                                                    <td id="p_7ml">-</td>
                                                                     <td id="p_8ml">-</td>
                                                                 </tr>
                                                             </tbody>
@@ -363,7 +363,7 @@ Kerja Harian
                                                                         <th scope="col">Jenis Kacang<br>
                                                                             <select name="jenis_kc" id="jns_kcg">
                                                                                 <option value="OB">OB</option>
-                                                                                <option value="HC">HC</option>
+                                                                                <option value="7ML">7ML</option>
                                                                                 <option value="8ML">8ML</option>
                                                                             </select>
                                                                         </th>
@@ -457,8 +457,8 @@ Kerja Harian
             cell_2.innerHTML = jml.value;
             if(select.value=="OB"){
                 document.getElementById('p_ob').innerHTML = jml.value;
-            }else if(select.value=="HC"){
-                document.getElementById('p_hc').innerHTML = jml.value;
+            }else if(select.value=="7ML"){
+                document.getElementById('p_7ml').innerHTML = jml.value;
             }else if(select.value=="8ML"){
                 document.getElementById('p_8ml').innerHTML = jml.value;
             }
@@ -494,7 +494,7 @@ Kerja Harian
             pekerja : Number(document.getElementById('jml_pekerja').value),
 
             penerimaan_ob : document.getElementById('p_ob').innerHTML,
-            penerimaan_hc : document.getElementById('p_hc').innerHTML,
+            penerimaan_7ml : document.getElementById('p_7ml').innerHTML,
             penerimaan_8ml : document.getElementById('p_8ml').innerHTML,
 
             hasil_gs : $('#jmlgs').val(),
