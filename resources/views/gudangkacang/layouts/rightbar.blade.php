@@ -105,17 +105,17 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                   <ul class="horizontal-menu">
                     <li class="scroll dropdown">
-                        <a href="{{url('/home')}}"><img src="{{asset('assets/images/svg-icon/frontend.svg')}}" class="img-fluid">HOME</a>
+                        <a href="{{url('/home')}}"><img src="{{asset('assets/images/svg-icon/frontend.svg')}}" class="img-fluid">Home</a>
                     </li>
                     <li class="dropdown">
-                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/basic.svg')}}" class="img-fluid">STOCK</a>
+                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/basic.svg')}}" class="img-fluid">Stock</a>
                         <ul class="dropdown-menu">
                             <li><a href="{{url('/gd_kacang')}}">Gd. Kacang</a></li>
                             <li><a href="{{url('/gd_kacang_sortir')}}">Gd. Kacang Sortir</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/backend.svg')}}" class="img-fluid">KERJA HARIAN</a>
+                        <a href="javaScript:void();" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('assets/images/svg-icon/backend.svg')}}" class="img-fluid">Kerja Harian</a>
                         <ul class="dropdown-menu">
                             <li><a href="{{url('/hari_ini')}}">Hari Ini</a></li>
                             <li><a href="{{url('/hari_sebelumnya')}}">Sebelumnya</a></li>
