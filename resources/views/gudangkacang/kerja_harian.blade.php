@@ -122,7 +122,7 @@ Kerja Harian
                                                                 <tr role="row">
                                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Penerimaan: activate to sort column descending">Penerimaan</th>
                                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="OB: activate to sort column ascending">OB</th>
-                                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="HC: activate to sort column ascending">HC</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="7ML: activate to sort column ascending">7 ML</th>
                                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="8ML: activate to sort column ascending">8 ML</th>
                                                             </thead>
                                                             <tbody>
