@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\managerproduksi;
 
-use App\Models\OrderMasak;
-use App\Models\Stock;
-use App\Models\KerjaHarianGroup;
+
 use App\Models\Pegawai;
+use App\Models\OrderMasak;
 use App\Models\DetailOrderMasak;
+use App\Models\KerjaHarianGroup;
+use App\Models\RekapKerjaHarianGroup;
+use App\Models\DetailRekapKerjaHarianGroup;
+use App\Models\Stock;
 use App\Models\KupasBawang;
 use App\Models\DetailTransaksi;
 use App\Models\DetailKupasBawang;
+use App\Models\RekapTransaksiHarianGudang;
+use App\Models\SusutDlmProse;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -26,7 +31,7 @@ class ManproBawangController extends Controller
     public function home()
     {
 
-        $ordermasak = OrderMasak::select('order_masak.*','dom.jumlah AS HC','dom1.jumlah AS SP','dom2.jumlah AS GS')
+       $ordermasak = OrderMasak::select('order_masak.*','dom.jumlah AS HC','dom1.jumlah AS SP','dom2.jumlah AS GS')
         ->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
                  ->where('dom.id_bahan_product', '=', 'PR00000000001');
@@ -42,10 +47,10 @@ class ManproBawangController extends Controller
         //->where('tanggal_order_masak','>=',date('Y-m-d'))
         ->get();
         
-        $orderkupasbawang = OrderMasak::select('order_masak.*','dom.jumlah AS jumlah')
+        $orderkupasbawang = OrderMasak::select('order_masak.*','dom.jumlah AS jumlah', 'dom.presentase_status AS presentase_status')
         ->join('detail_order_masak AS dom', function ($join) {
             $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
-                 ->where('dom.id_bahan_product', '=', 'PR00000000005');
+                 ->where('dom.id_bahan_product', '=', 'BB000000008');
         })
         ->get();
 
@@ -59,29 +64,39 @@ class ManproBawangController extends Controller
 
     public function stock_bawangkulit()
     {
-
+/*
         $bawangkulit = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d %M %Y") AS tgl_terima') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
                     ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
                     ->where('keterangan','kulit')
                     ->get();
+*/
+        $bawangkulit = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') , 'keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))->where('id_bahan_baku','BB000000006')->get();
+
+
         return view('managerproduksi.gudang-bawang.stock_bawangkulit')->with(compact('bawangkulit'));
     }
 
      public function get_stock_bawangkulit(Request $req)
     {
+        /*
 
          $stock_bawangkulit = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d %M %Y") AS tgl_terima') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
                         ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
                         ->where('keterangan','kulit')
                         ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
                         ->exists();
+*/
+                        
+        $stock_bawangkulit  =  Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') , 'keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))
+                            ->where('id_bahan_baku','BB000000006')
+                            ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
+                            ->exists();           
 
         if($stock_bawangkulit){
-            $stock_bawangkulit = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') ,DB::raw('DATE_FORMAT(penerimaan.timestamp, "%d %M %Y") AS tgl_terima') , 'stock.keterangan', 'stock.masuk', 'stock.keluar' , 'stock.stock')
-                        ->join('penerimaan','stock.id_transaksi' ,'=', 'penerimaan.id_penerimaan')
-                        ->where('keterangan','kulit')
-                        ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
-                        ->get();
+           $stock_bawangkulit  =Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') , 'keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))
+                            ->where('id_bahan_baku','BB000000006')
+                            ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
+                            ->get();
                         
 
             return response()->json(['error'=>false , 'stock_bawangkulit'=>$stock_bawangkulit]);
@@ -96,9 +111,15 @@ class ManproBawangController extends Controller
 
     public function stock_bawangkupas()
     {
+        /*
         $bawangkupas = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.masuk', 'stock.keluar' , 'stock.stock')
                     ->where('keterangan','kupas')
                     ->get();
+*/
+       
+
+        $bawangkupas = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') , 'keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))->where('id_bahan_baku','BB000000008')->get();
+        
         return view('managerproduksi.gudang-bawang.stock_bawangkupas')->with(compact('bawangkupas'));
     }
 
@@ -106,14 +127,14 @@ class ManproBawangController extends Controller
       public function get_stock_bawangkupas(Request $req)
     {
 
-         $stock_bawangkupas = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.masuk', 'stock.keluar' , 'stock.stock')
-                        ->where('keterangan','kupas')
+         $stock_bawangkupas =Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') , 'keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))
+                        ->where('id_bahan_baku','BB000000008')
                         ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
                         ->exists();
 
         if($stock_bawangkupas){
-           $stock_bawangkupas = Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal'), 'stock.masuk', 'stock.keluar' , 'stock.stock')
-                        ->where('keterangan','kupas')
+          $stock_bawangkupas =Stock::select(DB::raw('DATE_FORMAT(stock.timestamp, "%d/%m/%Y") AS tanggal') , 'keterangan','masuk','keluar',DB::raw('masuk - keluar as stocks'))
+                        ->where('id_bahan_baku','BB000000008')
                         ->whereBetween(DB::raw('DATE(stock.timestamp)'), array($req->tgl_awal, $req->tgl_akhir))
                         ->get();
                         

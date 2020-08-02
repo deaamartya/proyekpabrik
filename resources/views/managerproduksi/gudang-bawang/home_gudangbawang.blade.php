@@ -53,7 +53,7 @@ Home Gudang Bawang
                                         <th>Tanggal</th>
                                         <th>Target Kupas <h5 style="font-size: 11px;">(Kg)</h5></th>
                                         <th>Stock <h5 style="font-size: 11px;">(Kg)</h5></th>
-                                        <th>Status</th>
+                                        <th>Status %</th>
                                         
                                     </tr>
                           
@@ -65,26 +65,10 @@ Home Gudang Bawang
                                         <td>{{date_format($okb->tanggal_order_masak,'d/m/Y')}}</td>
                                         <td>{{$okb->jumlah}}</td>   
                                         <td>{{$stock1c}}</td>
-                                        <td>
-                                            @if($okb->status == 0)
-                                                <div class="badge-list">
-                                                    <span class="badge badge-danger badge-font">Belum</span>
-                                                </div>
-
-                                            @elseif($okb->status == 1)
-                                                 <div class="badge-list">
-                                                    <span class="badge badge-success badge-font">Ready</span>
-                                                </div>
-                                            @else
-                                                <div class="badge-list">
-                                                    <span class="badge badge-secondary badge-font">Selesai</span>
-                                                </div>
-                                            @endif
-
-
-                                        </td>
+                                        <td>{{$okb->presentase_status}}</td>
                                     </tr>
                                     @endforeach  
+
 
                             </tbody>
                         </table>

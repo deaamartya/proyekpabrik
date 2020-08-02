@@ -89,7 +89,7 @@ Stock Bawang Kulit
                             <thead>
                                     <tr>
                                         <th>Tanggal</th>
-                                        <th>Merk/Tanggal Terima</th>
+                                        <th>Keterangan</th>
                                         <th>Masuk <h5 style="font-size: 11px;">(Kg)</h5></th>
                                         <th>Keluar <h5 style="font-size: 11px;">(Kg)</h5></th>
                                         <th>Stock <h5 style="font-size: 11px;">(Kg)</h5></th>
@@ -102,15 +102,10 @@ Stock Bawang Kulit
                                  @foreach($bawangkulit as $b)
                                         <tr>
                                             <td>{{ $b->tanggal }}</td>
-                                            <td>{{ $b->keterangan }} 
-                                                @if($b->id_tanggal != "")
-                                                    / {{ $b->tgl_terima }}
-                                                @else
-                                                @endif
-                                            </td>
+                                            <td>{{ $b->keterangan }}</td>
                                             <td>{{ $b->masuk}}</td>
                                             <td>{{ $b->keluar}}</td>
-                                            <td>{{ $b->stock}}</td>
+                                            <td>{{ $b->stocks}}</td>
                                         </tr>
                                     @endforeach
                                 
@@ -210,10 +205,11 @@ $(document).ready(function() {
                     datatable1.row.add([
 
                     results.stock_bawangkulit[i].tanggal,
-                    results.stock_bawangkulit[i].keterangan+" / "+results.stock_bawangkulit[i].tgl_terima,
+                    //results.stock_bawangkulit[i].keterangan+" / "+results.stock_bawangkulit[i].tgl_terima,
+                    results.stock_bawangkulit[i].keterangan,
                     results.stock_bawangkulit[i].masuk,
                     results.stock_bawangkulit[i].keluar,
-                    results.stock_bawangkulit[i].stock
+                    results.stock_bawangkulit[i].stocks
                        
                     ]).draw();
                  
