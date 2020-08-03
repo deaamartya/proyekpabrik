@@ -321,8 +321,7 @@ Kerja Hari Sebelumnya
                     var jml_pekerja = results.grupkerja[0].jumlah_personil;
                     var a = "Jumlah Pekerja";
                     var pekerja = a.concat(" : ",jml_pekerja)
-                    $('#jumlah_pekerja').value(pekerja);
-                   
+                    document.getElementById('jumlah_pekerja').value = pekerja;
 
                     
                      
