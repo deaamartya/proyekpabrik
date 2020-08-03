@@ -374,9 +374,8 @@ Stock
                             stockob[i].keluar,
                             stockob[i].stock,
                         ]);
-                        table1.draw(false);
                     }
-                    console.log("button di klik");
+                    table1.draw();
                 }
             });
         });
@@ -407,9 +406,8 @@ Stock
                             stock7ml[i].keluar,
                             stock7ml[i].stock,
                         ]);
-                        table2.draw(false);
                     }
-                    console.log("button di klik");
+                    table2.draw();
                 }
             });
         });
@@ -440,9 +438,8 @@ Stock
                             stock8ml[i].keluar,
                             stock8ml[i].stock,
                         ]);
-                        table3.draw(false);
                     }
-                    console.log("button di klik");
+                    table3.draw();
                 }
             });
         });
