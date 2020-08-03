@@ -28,11 +28,12 @@ class GudangTepungTapiokaController extends Controller
     	//->where('tanggal_order_masak','>=',date('Y-m-d'))
         ->get();
 
-        $stock1a = DB::table('stock')->where('id_satuan', '=', 1)->sum('masuk');
-        $stock1b = DB::table('stock')->where('id_satuan', '=', 1)->sum('keluar');
+        $id_tapioka = 'BB000000007';
+        $stock1a = DB::table('stock')->where('id_bahan_baku', $id_tapioka)->where('id_satuan', '=', 1)->sum('masuk');
+        $stock1b = DB::table('stock')->where('id_bahan_baku', $id_tapioka)->where('id_satuan', '=', 1)->sum('keluar');
         $stock1c = $stock1a - $stock1b;
-        $stock2a = DB::table('stock')->where('id_satuan', '=', 2)->sum('masuk');
-        $stock2b = DB::table('stock')->where('id_satuan', '=', 2)->sum('keluar');
+        $stock2a = DB::table('stock')->where('id_bahan_baku', $id_tapioka)->where('id_satuan', '=', 2)->sum('masuk');
+        $stock2b = DB::table('stock')->where('id_bahan_baku', $id_tapioka)->where('id_satuan', '=', 2)->sum('keluar');
         $stock2c = $stock2a - $stock2b;       
         
         return view('gudangtepungtapioka.home', ['stock1c' => $stock1c, 'stock2c' => $stock2c, 'ordermasak' => $ordermasak]);
