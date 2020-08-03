@@ -163,8 +163,8 @@ class StockGdKacangController extends Controller
 
         if($req->jenis == "OB"){
             $ob = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
-              ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
-              ->join('penerimaan', 'penerimaan.id_transaksi', '=', 'stock.id_transaksi')
+              // ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+              ->leftJoin('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang OB','stock.id_gudang' => '9'])
               ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'),[$dateMin,$dateMax])
@@ -174,8 +174,8 @@ class StockGdKacangController extends Controller
 
         if($req->jenis == "7ml"){
             $tujuhML = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
-              ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
-              ->join('penerimaan', 'penerimaan.id_transaksi', '=', 'stock.id_transaksi')
+              // ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+              ->leftJoin('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang 7 ml','stock.id_gudang' => '9'])
               ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'),[$dateMin,$dateMax])
@@ -185,8 +185,8 @@ class StockGdKacangController extends Controller
 
         if($req->jenis == "8ml"){
             $delapanML = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
-              ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
-              ->join('penerimaan', 'penerimaan.id_transaksi', '=', 'stock.id_transaksi')
+              // ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
+              ->leftJoin('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang 8 ml','stock.id_gudang' => '9'])
               ->whereBetween(DB::raw('DATE(stock.TIMESTAMP)'),[$dateMin,$dateMax])
@@ -197,7 +197,7 @@ class StockGdKacangController extends Controller
         if($req->jenis == "GS" || $req->jenis == "SP" || $req->jenis == "HC" || $req->jenis == "Telor"){
             $ks = Stock::select('stock.timestamp', 'penerimaan.TIMESTAMP', 'stock.keterangan', 'stock.masuk', 'stock.keluar', 'stock.stock')
             //   ->join('detail_transaksi', 'detail_transaksi.id_transaksi', '=', 'stock.id_transaksi')
-              ->join('penerimaan', 'penerimaan.id_transaksi', '=', 'stock.id_transaksi')
+              ->leftJoin('penerimaan', 'penerimaan.id_penerimaan', '=', 'stock.id_transaksi')
               ->join('bahan_baku', 'bahan_baku.id_bahan_baku', '=', 'stock.id_bahan_baku')
               ->where(['bahan_baku.nama' => 'Kacang Sortir','stock.id_gudang' => '10'])
               ->where('stock.keterangan', 'LIKE', '%'.$req->jenis.'%')
